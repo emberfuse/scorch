@@ -2,16 +2,16 @@
 
 namespace Citadel\Tests;
 
-use Citadel\Project;
+use Citadel\Auth;
 use PHPUnit\Framework\TestCase;
 
 class AuthTest extends TestCase
 {
     public function testBasic()
     {
-        $project = new Project('Example Project');
+        $auth = new Auth('Example Auth');
 
-        $this->assertInstanceOf(Project::class, $project);
-        $this->assertEquals('Example Project', $project->name());
+        $this->assertInstanceOf(Auth::class, $auth);
+        $this->assertEquals('Example Auth', $auth->name());
     }
 }
