@@ -1,6 +1,6 @@
 {
     "name": "thavarshan/citadel",
-    "type": "project",
+    "type": "library",
     "description": "A frontend agnostic authentication backend for Laravel applications.",
     "keywords": [
         "php",
@@ -15,19 +15,23 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4|^8.0"
+        "php": "^7.4|^8.0",
+        "bacon/bacon-qr-code": "^2.0",
+        "jenssegers/agent": "^2.6",
+        "pragmarx/google2fa": "^8.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
-        "mockery/mockery": "^1.4.2",
-        "phpunit/phpunit": "^9.4",
         "friendsofphp/php-cs-fixer": "^2.16.3",
+        "mockery/mockery": "^1.4.2",
+        "orchestra/testbench": "^6.7",
         "phpstan/phpstan": "^0.12.48",
+        "phpunit/phpunit": "^9.4",
         "symfony/var-dumper": "^5.2.1"
     },
     "autoload": {
         "psr-4": {
-            "Citadel\\": "src/Citadel"
+            "Citadel\\": "src/"
         }
     },
     "autoload-dev": {
