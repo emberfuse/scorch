@@ -2,6 +2,7 @@
 
 namespace Citadel\Actions;
 
+use Citadel\Auth\Config;
 use Illuminate\Support\Arr;
 use Citadel\Contracts\AuthenticatesUsers;
 use Illuminate\Contracts\Auth\StatefulGuard;
@@ -58,6 +59,6 @@ class AuthenticateUser implements AuthenticatesUsers
      */
     public function username(): string
     {
-        return config('citadel.username', 'email');
+        return Config::username(['email']);
     }
 }

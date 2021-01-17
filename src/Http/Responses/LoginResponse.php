@@ -2,11 +2,11 @@
 
 namespace Citadel\Http\Responses;
 
-use Citadel\Http\Responses\Response;
+use Citadel\Auth\Config;
 use Citadel\Limiters\LoginRateLimiter;
 use Illuminate\Contracts\Support\Responsable;
 
-class LoginResponse extends Response implements Responsable
+class LoginResponse implements Responsable
 {
     /**
      * The login rate limiter instance.
@@ -39,7 +39,7 @@ class LoginResponse extends Response implements Responsable
         $this->limiter->clear($request);
 
         return $request->expectsJson()
-            ? $this->json(['two_factor' => false])
-            : $this->redirectToIntended($this->home(), 302);
+            ? response()->json(['two_factor' => false])
+            : redirect()->intended(Config::home(), 302);
     }
 }

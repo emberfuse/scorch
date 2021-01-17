@@ -2,6 +2,7 @@
 
 namespace Citadel\Auth;
 
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
 
 class Config
@@ -55,6 +56,8 @@ class Config
      */
     public static function __callStatic(string $name, $arguments)
     {
-        return (new static(app('config')))->get($name, ...$arguments);
+        $instance = (new static(app('config')));
+
+        return $instance->get(Str::snake($name), ...$arguments);
     }
 }

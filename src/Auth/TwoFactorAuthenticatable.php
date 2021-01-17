@@ -3,13 +3,12 @@
 namespace Citadel\Auth;
 
 use BaconQrCode\Writer;
-use App\Codes\RecoveryCode;
+use Citadel\Auth\RecoveryCode;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use App\Contracts\Auth\TwoFactorAuthenticationProvider;
 
 trait TwoFactorAuthenticatable
 {

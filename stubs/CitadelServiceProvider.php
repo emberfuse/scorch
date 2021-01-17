@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use Citadel\Actions\AuthenticateUser;
+use Citadel\Contracts\AuthenticatesUsers;
+use Citadel\Http\Middleware\EnsureLoginIsNotThrottled;
+use Citadel\Http\Middleware\RedirectIfTwoFactorAuthenticatable;
 use Illuminate\Support\ServiceProvider;
 
 class CitadelServiceProvider extends ServiceProvider
