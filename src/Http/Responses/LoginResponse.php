@@ -2,11 +2,12 @@
 
 namespace Citadel\Http\Responses;
 
-use Citadel\Auth\Config;
+use Illuminate\Routing\Redirector;
 use Citadel\Limiters\LoginRateLimiter;
+use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Contracts\Support\Responsable;
 
-class LoginResponse implements Responsable
+class LoginResponse extends Response implements Responsable
 {
     /**
      * The login rate limiter instance.
@@ -18,11 +19,15 @@ class LoginResponse implements Responsable
     /**
      * Create a new class instance.
      *
+     * @param  \Illuminate\Contracts\View\Factory  $view
+     * @param  \Illuminate\Routing\Redirector  $redirector
      * @param  \Citadel\Limiters\LoginRateLimiter  $limiter
      * @return void
      */
-    public function __construct(LoginRateLimiter $limiter)
+    public function __construct(ViewFactory $view, Redirector $redirector, LoginRateLimiter $limiter)
     {
+        parent::__construct($view, $redirector);
+
         $this->limiter = $limiter;
     }
 
@@ -39,7 +44,7 @@ class LoginResponse implements Responsable
         $this->limiter->clear($request);
 
         return $request->expectsJson()
-            ? response()->json(['two_factor' => false])
-            : redirect()->intended(Config::home(), 302);
+            ? $this->json(['two_factor' => false])
+            : $this->redirectToIntended($this->home(), 302);
     }
 }

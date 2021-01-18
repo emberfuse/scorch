@@ -6,9 +6,8 @@ use Citadel\Auth\Config;
 use Citadel\Tests\TestCase;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
-use Citadel\Contracts\AuthenticatesUsers;
+use Illuminate\Routing\ResponseFactory;
 use Citadel\Providers\CitadelServiceProvider;
-use Illuminate\Contracts\Routing\ResponseFactory;
 
 class AuthenticationTest extends TestCase
 {
@@ -28,7 +27,7 @@ class AuthenticationTest extends TestCase
                 'password' => 'citadelrocks',
             ]);
 
-        $response->assertRedirect('/home');
+        $response->assertRedirect(Config::home());
     }
 
     protected function getPackageProviders($app)
