@@ -56,8 +56,6 @@ class Config
      */
     public static function __callStatic(string $name, $arguments)
     {
-        $instance = (new static(app('config')));
-
-        return $instance->get(Str::snake($name), ...$arguments);
+        return (new static(app('config')))->get(Str::snake($name), ...$arguments);
     }
 }

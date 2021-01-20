@@ -36,8 +36,7 @@ class AuthenticateUser implements AuthenticatesUsers
     public function authenticate(array $data): bool
     {
         return $this->guard->attempt(
-            $this->credentials($data),
-            isset($data['remember'])
+            $this->credentials($data), isset($data['remember'])
         );
     }
 

@@ -8,4 +8,5 @@ Route::group([
     'middleware' => Config::middleware(['web'])
 ], function () {
     Route::post('/login', [AuthenticationController::class, 'store']);
+    Route::post('/logout', [AuthenticationController::class, 'destroy']);
 });

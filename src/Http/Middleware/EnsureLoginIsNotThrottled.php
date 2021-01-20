@@ -5,7 +5,7 @@ namespace Citadel\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Lockout;
-use App\Http\Responses\LockoutResponse;
+use Citadel\Http\Responses\LockoutResponse;
 
 class EnsureLoginIsNotThrottled extends Authenticate
 {
