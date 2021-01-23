@@ -6,7 +6,7 @@ use Citadel\Events\Traits\HasUser;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Events\Dispatchable;
 
-abstract class TwoFactorAuthenticationEvent
+class RecoveryCodesGenerated
 {
     use Dispatchable;
     use HasUser;

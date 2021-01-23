@@ -71,19 +71,26 @@ class CitadelServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '../../stubs/citadel.php' => config_path('citadel.php'),
+                __DIR__ . '/../../stubs/citadel.php' => config_path('citadel.php'),
             ], 'citadel-config');
 
             $this->publishes([
-                __DIR__ . '../../stubs/rules.php' => config_path('rules.php'),
+                __DIR__ . '/../../stubs/rules.php' => config_path('rules.php'),
             ], 'rules-config');
 
             $this->publishes([
-                __DIR__ . '../../stubs/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
+                __DIR__ . '/../../stubs/AuthenticateUser.php' => app_path('Actions/Citadel/AuthenticateUser.php'),
+                __DIR__ . '/../../stubs/CreateNewUser.php' => app_path('Actions/Citadel/CreateNewUser.php'),
+                __DIR__ . '/../../stubs/DeleteUser.php' => app_path('Actions/Citadel/DeleteUser.php'),
+                __DIR__ . '/../../stubs/ResetPassword.php' => app_path('Actions/Citadel/ResetPassword.php'),
+                __DIR__ . '/../../stubs/UpdateUserPassword.php' => app_path('Actions/Citadel/UpdateUserPassword.php'),
+                __DIR__ . '/../../stubs/UpdateUserProfile.php' => app_path('Actions/Citadel/UpdateUserProfile.php'),
+                __DIR__ . '/../../stubs/PasswordUpdater.php' => app_path('Actions/Citadel/Traits/PasswordUpdater.php'),
+                __DIR__ . '/../../stubs/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
             ], 'citadel-support');
 
             $this->publishes([
-                __DIR__ . '../../database/migrations' => database_path('migrations'),
+                __DIR__ . '/../../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
             ], 'citadel-migrations');
         }
     }
