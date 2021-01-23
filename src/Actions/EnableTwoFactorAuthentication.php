@@ -2,7 +2,7 @@
 
 namespace Citadel\Actions;
 
-use Citadel\Auth\RecoveryCode;
+use Citadel\Codes\RecoveryCode;
 use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\User;
 use Citadel\Events\TwoFactorAuthenticationEnabled;
@@ -10,6 +10,13 @@ use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider;
 
 class EnableTwoFactorAuthentication
 {
+    /**
+     * Default number of recovery codes to be generated.
+     *
+     * @var int
+     */
+    protected $numberOfCodes = 8;
+
     /**
      * The two factor authentication provider.
      *
@@ -40,11 +47,24 @@ class EnableTwoFactorAuthentication
     {
         $user->forceFill([
             'two_factor_secret' => encrypt($this->provider->generateSecretKey()),
-            'two_factor_recovery_codes' => encrypt(json_encode(Collection::times(8, function () {
-                return RecoveryCode::generate();
-            })->all())),
+            'two_factor_recovery_codes' => $this->generateRecoveryCode(),
         ])->save();
 
         TwoFactorAuthenticationEnabled::dispatch($user);
+    }
+
+    /**
+     * Generate new recovery codes for user.
+     *
+     * @return string
+     */
+    protected function generateRecoveryCode(): string
+    {
+        return encrypt(json_encode(
+            Collection::times(
+                $this->numberOfCodes,
+                fn () => RecoveryCode::generate()
+            )->all()
+        ));
     }
 }

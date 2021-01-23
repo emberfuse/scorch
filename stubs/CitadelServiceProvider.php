@@ -2,16 +2,12 @@
 
 namespace App\Providers;
 
-use Citadel\Auth\AttemptToAuthenticate;
 use Illuminate\Support\ServiceProvider;
-use Citadel\Auth\EnsureLoginIsNotThrottled;
-use Citadel\Auth\PrepareAuthenticatedSession;
-use Citadel\Auth\RedirectIfTwoFactorAuthenticatable;
 
 class CitadelServiceProvider extends ServiceProvider
 {
     /**
-     * The authentication pipeline classes.
+     * The citadel action classes.
      *
      * @var array
      */
