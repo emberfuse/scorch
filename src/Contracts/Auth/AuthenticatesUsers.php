@@ -11,7 +11,7 @@ interface AuthenticatesUsers
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return mixed
+     * @return bool
      */
     public function authenticate(Request $request): bool;
 }

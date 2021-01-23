@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
 use Citadel\Limiters\LoginRateLimiter;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Citadel\Contracts\Auth\AuthenticatesUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Validation\ValidationException;
 
@@ -51,6 +52,10 @@ abstract class Authenticate
      */
     public function attempt(Request $request): bool
     {
+        if (app()->has(AuthenticatesUsers::class)) {
+            return app(AuthenticatesUsers::class)->authenticate($request);
+        }
+
         return $this->guard->attempt(
             $request->only($this->username(), 'password'),
             $request->filled('remember')
