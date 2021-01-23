@@ -2,7 +2,7 @@
 
 namespace Citadel\Providers;
 
-use Citadel\Auth\Config;
+use Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -17,11 +17,11 @@ class CitadelServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../../config/citadel.php', 'citadel');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/citadel.php', 'citadel');
 
         $this->registerResponseBindings();
+
         $this->registerAuthGuard();
-        $this->registerActions();
     }
 
     /**
@@ -50,19 +50,6 @@ class CitadelServiceProvider extends ServiceProvider
 
     protected function registerResponseBindings(): void
     {
-        //
-    }
-
-    /**
-     * Register citadel action action classes.
-     *
-     * @return void
-     */
-    protected function registerActions(): void
-    {
-        collect(Config::actions())->each(
-            fn ($action, $contract) => $this->app->singleton($contract, $action)
-        );
     }
 
     /**
@@ -74,15 +61,15 @@ class CitadelServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../stubs/citadel.php' => config_path('citadel.php'),
+                __DIR__ . '../../config/citadel.php' => config_path('citadel.php'),
             ], 'citadel-config');
 
             $this->publishes([
-                __DIR__.'/../../stubs/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
+                __DIR__ . '../../stubs/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
             ], 'citadel-support');
 
             $this->publishes([
-                __DIR__.'/../database/migrations' => database_path('migrations'),
+                __DIR__ . '../../database/migrations' => database_path('migrations'),
             ], 'citadel-migrations');
         }
     }
@@ -99,7 +86,7 @@ class CitadelServiceProvider extends ServiceProvider
             'domain' => Config::domain([null]),
             'prefix' => Config::prefix(),
         ], function (): void {
-            $this->loadRoutesFrom(__DIR__.'/../../routes/routes.php');
+            $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
         });
     }
 }

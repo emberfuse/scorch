@@ -2,21 +2,17 @@
 
 namespace Citadel\Citadel;
 
-use Citadel\Auth\Config;
-
 class Features
 {
-    public function hasFeature(string $key): bool
+    /**
+     * Determine if the given feature is enabled.
+     *
+     * @param string $feature
+     *
+     * @return bool
+     */
+    public static function enabled(string $feature): bool
     {
-        if (! is_null($this->getFeature($key))) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function getFeature(string $key)
-    {
-        return Config::features()[$key];
+        return in_array($feature, Config::features([[]]));
     }
 }
