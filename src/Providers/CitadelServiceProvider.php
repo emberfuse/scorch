@@ -75,6 +75,10 @@ class CitadelServiceProvider extends ServiceProvider
             ], 'citadel-config');
 
             $this->publishes([
+                __DIR__ . '../../stubs/rules.php' => config_path('rules.php'),
+            ], 'rules-config');
+
+            $this->publishes([
                 __DIR__ . '../../stubs/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
             ], 'citadel-support');
 
