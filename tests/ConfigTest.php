@@ -1,24 +1,25 @@
 
 <?php
 
-use Citadel\Auth\Config;
+use Citadel\Citadel\Config;
 use Citadel\Tests\TestCase;
-use Citadel\Providers\CitadelServiceProvider;
 
 class ConfigTest extends TestCase
 {
-    public function test_gets_all_citadel_configs()
+    public function testGetsAllCitadelConfigs()
     {
         $this->assertEquals(config('citadel'), $this->getConfigurations()->all());
     }
 
-    protected function getConfigurations(): Config
+    public function testDynamicallyGetSpecificConfig()
     {
-        return (new Config($this->app['config']));
+        config()->set('citadel.foo', 'bar');
+
+        $this->assertEquals('bar', Config::foo());
     }
 
-    protected function getPackageProviders($app)
+    protected function getConfigurations(): Config
     {
-        return [CitadelServiceProvider::class];
+        return new Config($this->app['config']);
     }
 }
