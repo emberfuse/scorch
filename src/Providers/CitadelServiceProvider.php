@@ -58,7 +58,7 @@ class CitadelServiceProvider extends ServiceProvider
     {
         $this->app->singleton(
             TwoFactorAuthenticationProviderContract::class,
-            TwoFactorAuthenticationProviderContract::class
+            TwoFactorAuthenticationProvider::class
         );
     }
 

@@ -2,53 +2,66 @@
 
 namespace Citadel\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Citadel\Actions\EnableTwoFactorAuthentication;
-use Citadel\Actions\DisableTwoFactorAuthentication;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Contracts\Support\Responsable;
+use Citadel\Http\Requests\TwoFactorLoginRequest;
+use Citadel\Http\Responses\TwoFactorLoginResponse;
+use Citadel\Http\Responses\FailedTwoFactorLoginResponse;
 
 class TwoFactorAuthenticationController extends Controller
 {
     /**
-     * Enable two factor authentication for the user.
+     * The guard implementation.
      *
-     * @param \Illuminate\Http\Request                       $request
-     * @param \Citadel\Actions\EnableTwoFactorAuthentication $enable
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @var \Illuminate\Contracts\Auth\StatefulGuard
      */
-    public function store(Request $request, EnableTwoFactorAuthentication $enable): Response
-    {
-        $enable($request->user());
+    protected $guard;
 
-        return $this->response($request, 'two-factor-authentication-enabled');
+    /**
+     * Create a new controller instance.
+     *
+     * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
+     *
+     * @return void
+     */
+    public function __construct(StatefulGuard $guard)
+    {
+        $this->guard = $guard;
     }
 
     /**
-     * Disable two factor authentication for the user.
-     *
-     * @param \Illuminate\Http\Request                        $request
-     * @param \Citadel\Actions\DisableTwoFactorAuthentication $disable
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function destroy(Request $request, DisableTwoFactorAuthentication $disable): Response
-    {
-        $disable($request->user());
-
-        return $this->response($request, 'two-factor-authentication-disabled');
-    }
-
-    /**
-     * Send appropriate response to action performed.
+     * Show the two factor authentication challenge view.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string                   $status
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Support\Responsable
      */
-    protected function response(Request $request, string $status): Response
+    public function create(): Responsable
     {
-        return $request->wantsJson() ? response()->json() : back()->with('status', $status);
+        return app(TwoFactorChallengeViewResponse::class);
+    }
+
+    /**
+     * Attempt to authenticate a new session using the two factor authentication code.
+     *
+     * @param \Citadel\Http\Requests\TwoFactorLoginRequest $request
+     *
+     * @return \Illuminate\Contracts\Support\Responsable
+     */
+    public function store(TwoFactorLoginRequest $request): Responsable
+    {
+        $user = $request->challengedUser();
+
+        if ($code = $request->validRecoveryCode()) {
+            $user->replaceRecoveryCode($code);
+        } elseif (! $request->hasValidCode()) {
+            return app(FailedTwoFactorLoginResponse::class);
+        }
+
+        $this->guard->login($user, $request->remember());
+
+        $request->session()->regenerate();
+
+        return app(TwoFactorLoginResponse::class);
     }
 }

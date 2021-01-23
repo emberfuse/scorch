@@ -4,6 +4,7 @@ use Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Route;
 use Citadel\Http\Controllers\AuthenticationController;
 use Citadel\Http\Controllers\TwoFactorAuthenticationController;
+use Citadel\Http\Controllers\TwoFactorAuthenticationStatusController;
 
 Route::group([
     'middleware' => Config::middleware(['web']),
@@ -13,11 +14,15 @@ Route::group([
         Route::post('/login', [AuthenticationController::class, 'store']);
 
         Route::get('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'create'])->name('two-factor.login');
+        Route::post('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'store']);
     });
 
     Route::group(['middleware' => ['auth']], function (): void {
         Route::post('/logout', [AuthenticationController::class, 'destroy']);
 
-        Route::post('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'store']);
+        Route::group(['prefix' => 'user'], function (): void {
+            Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store']);
+            Route::delete('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'destroy']);
+        });
     });
 });

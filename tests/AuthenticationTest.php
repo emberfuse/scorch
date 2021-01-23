@@ -3,13 +3,16 @@
 namespace Citadel\Tests;
 
 use Citadel\Citadel\Config;
+use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Citadel\Actions\AuthenticateUser;
 use Citadel\Limiters\LoginRateLimiter;
+use Illuminate\Support\Facades\Schema;
 use Citadel\Contracts\Actions\AuthenticatesUsers;
 use Citadel\Contracts\Responses\LoginViewResponse;
 use Citadel\Tests\Fixtures\TestAuthenticationUser;
+use Citadel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class AuthenticationTest extends TestCase
 {
@@ -104,17 +107,114 @@ class AuthenticationTest extends TestCase
         $this->assertNull(Auth::guard()->getUser());
     }
 
+    public function testUserIsRedirectedToChallengeWhenUsingTwoFactorAuthentication()
+    {
+        app('config')->set('auth.providers.users.model', TestTwoFactorAuthenticationUser::class);
+
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+
+        Schema::table('users', function ($table) {
+            $table->text('two_factor_secret')->nullable();
+        });
+
+        TestTwoFactorAuthenticationUser::forceCreate(
+            $this->userDetails(['two_factor_secret' => 'test-secret'])
+        );
+
+        $response = $this->withoutExceptionHandling()->post('/login', [
+            'email' => 'james.silverman@monster.com',
+            'password' => 'cthuluEmployee',
+        ]);
+
+        $response->assertRedirect('/two-factor-challenge');
+    }
+
+    public function testTwoFactorChallengeCanBePassedViaCode()
+    {
+        app('config')->set(
+            'auth.providers.users.model',
+            TestTwoFactorAuthenticationUser::class
+        );
+
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->artisan('migrate', ['--database' => 'testbench'])->run();
+
+        $tfaEngine = app(Google2FA::class);
+        $userSecret = $tfaEngine->generateSecretKey();
+        $validOtp = $tfaEngine->getCurrentOtp($userSecret);
+
+        $user = TestTwoFactorAuthenticationUser::forceCreate(
+            $this->userDetails(['two_factor_secret' => encrypt($userSecret)])
+        );
+
+        $response = $this->withSession([
+            'login.id' => $user->id,
+            'login.remember' => false,
+        ])->withoutExceptionHandling()->post('/two-factor-challenge', [
+            'code' => $validOtp,
+        ]);
+
+        $response->assertRedirect(Config::home());
+    }
+
+    public function testTwoFactorChallengeCanBePassedViaRecoveryCode()
+    {
+        app('config')->set('auth.providers.users.model', TestTwoFactorAuthenticationUser::class);
+
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->artisan('migrate', ['--database' => 'testbench'])->run();
+
+        $user = TestTwoFactorAuthenticationUser::forceCreate(
+            $this->userDetails(['two_factor_recovery_codes' => encrypt(json_encode(['invalid-code', 'valid-code']))])
+        );
+
+        $response = $this->withSession([
+            'login.id' => $user->id,
+            'login.remember' => false,
+        ])->withoutExceptionHandling()->post('/two-factor-challenge', [
+            'recovery_code' => 'valid-code',
+        ]);
+
+        $response->assertRedirect(Config::home());
+        $this->assertNotNull(Auth::getUser());
+        $this->assertNotContains('valid-code', json_decode(decrypt($user->fresh()->two_factor_recovery_codes), true));
+    }
+
+    public function testTwoFactorChallengeCanFailViaRecoveryCode()
+    {
+        app('config')->set('auth.providers.users.model', TestTwoFactorAuthenticationUser::class);
+
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->artisan('migrate', ['--database' => 'testbench'])->run();
+
+        $user = TestTwoFactorAuthenticationUser::forceCreate(
+            $this->userDetails(['two_factor_recovery_codes' => encrypt(json_encode(['invalid-code', 'valid-code']))])
+        );
+
+        $response = $this->withSession([
+            'login.id' => $user->id,
+            'login.remember' => false,
+        ])->withoutExceptionHandling()->post('/two-factor-challenge', [
+            'recovery_code' => 'missing-code',
+        ]);
+
+        $response->assertRedirect('/login');
+        $this->assertNull(Auth::getUser());
+    }
+
     /**
      * Array of faker user details.
      *
+     * @param array[] $overrides
+     *
      * @return array
      */
-    protected function userDetails(): array
+    protected function userDetails(array $overrides = []): array
     {
-        return [
+        return array_merge([
             'name' => 'James Silverman',
             'email' => 'james.silverman@monster.com',
             'password' => Hash::make('cthuluEmployee'),
-        ];
+        ], $overrides);
     }
 }
