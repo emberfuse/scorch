@@ -1,7 +1,7 @@
 /.idea
 /.vscode
 composer.lock
-/vendor/
+/vendor
 coverage.xml
 .phpunit.result.cache
 .php_cs.cache
