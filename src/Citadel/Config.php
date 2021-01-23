@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Auth;
+namespace Citadel\Citadel;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
@@ -18,6 +18,7 @@ class Config
      * Create new instance of citadel configuration repository.
      *
      * @param \Illuminate\Contracts\Config\Repository $config
+     *
      * @return void
      */
     public function __construct(ConfigContract $config)
@@ -39,7 +40,8 @@ class Config
      * Get specified citadel configuration.
      *
      * @param string $key
-     * @param mixed $default
+     * @param mixed  $default
+     *
      * @return void
      */
     public function get(string $key, $default = null)
@@ -51,7 +53,8 @@ class Config
      * Get specified citadel configuration dynamically.
      *
      * @param string $name
-     * @param mixed $arguments
+     * @param mixed  $arguments
+     *
      * @return void
      */
     public static function __callStatic(string $name, $arguments)
