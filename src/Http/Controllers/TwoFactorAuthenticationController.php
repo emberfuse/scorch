@@ -17,7 +17,7 @@ class TwoFactorAuthenticationController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function store(Request $request, EnableTwoFactorAuthentication $enable)
+    public function store(Request $request, EnableTwoFactorAuthentication $enable): Response
     {
         $enable($request->user());
 
@@ -32,7 +32,7 @@ class TwoFactorAuthenticationController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function destroy(Request $request, DisableTwoFactorAuthentication $disable)
+    public function destroy(Request $request, DisableTwoFactorAuthentication $disable): Response
     {
         $disable($request->user());
 
