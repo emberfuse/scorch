@@ -2,6 +2,7 @@
 
 namespace Citadel\Events;
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Events\Dispatchable;
 
 abstract class TwoFactorAuthenticationEvent
@@ -11,19 +12,29 @@ abstract class TwoFactorAuthenticationEvent
     /**
      * The user instance.
      *
-     * @var \App\Models\User
+     * @var \Illuminate\Foundation\Auth\User
      */
-    public $user;
+    protected $user;
 
     /**
      * Create a new event instance.
      *
-     * @param \App\Models\User $user
+     * @param \Illuminate\Foundation\Auth\User $user
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * Get the user instance.
+     *
+     * @return \Illuminate\Foundation\Auth\User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
     }
 }
