@@ -71,7 +71,7 @@ class CitadelServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '../../config/citadel.php' => config_path('citadel.php'),
+                __DIR__ . '../../stubs/citadel.php' => config_path('citadel.php'),
             ], 'citadel-config');
 
             $this->publishes([
