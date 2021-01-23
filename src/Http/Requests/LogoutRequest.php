@@ -2,11 +2,10 @@
 
 namespace Citadel\Http\Requests;
 
-use Citadel\Citadel\Config;
 use Illuminate\Foundation\Http\FormRequest;
 use Citadel\Http\Requests\Concerns\AuthorizesRequests;
 
-class LoginRequest extends FormRequest
+class LogoutRequest extends FormRequest
 {
     use AuthorizesRequests;
 
@@ -17,7 +16,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->isGuest();
+        return $this->isAuthenticated();
     }
 
     /**
@@ -27,16 +26,6 @@ class LoginRequest extends FormRequest
      */
     public function rules()
     {
-        $username = Config::username();
-
-        return [
-            $username => [
-                'required',
-                'string',
-                $username === 'email' ? 'email' : null,
-            ],
-            'password' => ['required', 'string'],
-            'remember' => ['nullable'],
-        ];
+        return [];
     }
 }

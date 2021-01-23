@@ -19,9 +19,10 @@ class LoginResponse extends Response implements Responsable
     /**
      * Create a new class instance.
      *
-     * @param  \Illuminate\Contracts\View\Factory  $view
-     * @param  \Illuminate\Routing\Redirector  $redirector
-     * @param  \Citadel\Limiters\LoginRateLimiter  $limiter
+     * @param \Illuminate\Contracts\View\Factory $view
+     * @param \Illuminate\Routing\Redirector     $redirector
+     * @param \Citadel\Limiters\LoginRateLimiter $limiter
+     *
      * @return void
      */
     public function __construct(ViewFactory $view, Redirector $redirector, LoginRateLimiter $limiter)
@@ -35,14 +36,11 @@ class LoginResponse extends Response implements Responsable
      * Create an HTTP response that represents the object.
      *
      * @param \Illuminate\Http\Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function toResponse($request)
     {
-        $request->session()->regenerate();
-
-        $this->limiter->clear($request);
-
         return $request->expectsJson()
             ? $this->json(['two_factor' => false])
             : $this->redirectToIntended($this->home(), 302);

@@ -2,7 +2,7 @@
 
 namespace Citadel\Http\Responses;
 
-use Citadel\Auth\Config;
+use Citadel\Citadel\Config;
 use Citadel\Limiters\LoginRateLimiter;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Validation\ValidationException;

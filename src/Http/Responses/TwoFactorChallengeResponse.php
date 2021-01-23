@@ -4,7 +4,7 @@ namespace Citadel\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 
-class LogoutResponse extends Response implements Responsable
+class TwoFactorChallengeResponse extends Response implements Responsable
 {
     /**
      * Create an HTTP response that represents the object.
@@ -15,6 +15,8 @@ class LogoutResponse extends Response implements Responsable
      */
     public function toResponse($request)
     {
-        return $request->wantsJson() ? $this->json('', 204) : $this->redirectTo('/');
+        return $request->wantsJson()
+            ? $this->json(['two_factor' => true])
+            : $this->redirectToRoute('two-factor.login');
     }
 }

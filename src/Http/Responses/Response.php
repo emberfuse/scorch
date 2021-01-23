@@ -2,7 +2,7 @@
 
 namespace Citadel\Http\Responses;
 
-use Citadel\Auth\Config;
+use Citadel\Citadel\Config;
 use Illuminate\Routing\Redirector;
 use Illuminate\Routing\ResponseFactory;
 
