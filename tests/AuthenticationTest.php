@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Citadel\Actions\AuthenticateUser;
 use Citadel\Limiters\LoginRateLimiter;
-use Illuminate\Support\Facades\Schema;
 use Citadel\Contracts\Actions\AuthenticatesUsers;
 use Citadel\Contracts\Responses\LoginViewResponse;
 use Citadel\Tests\Fixtures\TestAuthenticationUser;
@@ -36,7 +35,7 @@ class AuthenticationTest extends TestCase
 
     public function testUserCanAuthenticate()
     {
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->migrate();
 
         TestAuthenticationUser::forceCreate($this->userDetails());
 
@@ -50,7 +49,7 @@ class AuthenticationTest extends TestCase
 
     public function testValidationExceptionReturnedOnFailure()
     {
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->migrate();
 
         TestAuthenticationUser::forceCreate($this->userDetails());
 
@@ -81,7 +80,7 @@ class AuthenticationTest extends TestCase
 
     public function testTheUserCanLogoutOfTheApplication()
     {
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->migrate();
 
         Auth::guard()->setUser(
             $user = TestAuthenticationUser::forceCreate($this->userDetails())
@@ -95,7 +94,7 @@ class AuthenticationTest extends TestCase
 
     public function testTheUserCanLogoutOfTheApplicationUsingJsonRequest()
     {
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->migrate();
 
         Auth::guard()->setUser(
             $user = TestAuthenticationUser::forceCreate($this->userDetails())
@@ -111,11 +110,7 @@ class AuthenticationTest extends TestCase
     {
         app('config')->set('auth.providers.users.model', TestTwoFactorAuthenticationUser::class);
 
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
-
-        Schema::table('users', function ($table) {
-            $table->text('two_factor_secret')->nullable();
-        });
+        $this->migrate();
 
         TestTwoFactorAuthenticationUser::forceCreate(
             $this->userDetails(['two_factor_secret' => 'test-secret'])
@@ -136,8 +131,7 @@ class AuthenticationTest extends TestCase
             TestTwoFactorAuthenticationUser::class
         );
 
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
+        $this->migrate();
 
         $tfaEngine = app(Google2FA::class);
         $userSecret = $tfaEngine->generateSecretKey();
@@ -161,8 +155,7 @@ class AuthenticationTest extends TestCase
     {
         app('config')->set('auth.providers.users.model', TestTwoFactorAuthenticationUser::class);
 
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
+        $this->migrate();
 
         $user = TestTwoFactorAuthenticationUser::forceCreate(
             $this->userDetails(['two_factor_recovery_codes' => encrypt(json_encode(['invalid-code', 'valid-code']))])
@@ -184,8 +177,7 @@ class AuthenticationTest extends TestCase
     {
         app('config')->set('auth.providers.users.model', TestTwoFactorAuthenticationUser::class);
 
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
+        $this->migrate();
 
         $user = TestTwoFactorAuthenticationUser::forceCreate(
             $this->userDetails(['two_factor_recovery_codes' => encrypt(json_encode(['invalid-code', 'valid-code']))])
@@ -213,6 +205,7 @@ class AuthenticationTest extends TestCase
     {
         return array_merge([
             'name' => 'James Silverman',
+            'username' => 'SilverJames',
             'email' => 'james.silverman@monster.com',
             'password' => Hash::make('cthuluEmployee'),
         ], $overrides);

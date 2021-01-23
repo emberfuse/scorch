@@ -14,11 +14,25 @@ abstract class TestCase extends BaseTestCase
         m::close();
     }
 
+    /**
+     * Get package providers.
+     *
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
+     */
     protected function getPackageProviders($app)
     {
         return [CitadelServiceProvider::class];
     }
 
+    /**
+     * Define environment setup.
+     *
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return void
+     */
     protected function getEnvironmentSetUp($app)
     {
         $app['migrator']->path(__DIR__ . '/../database/migrations');
@@ -32,5 +46,17 @@ abstract class TestCase extends BaseTestCase
             'database' => ':memory:',
             'prefix' => '',
         ]);
+    }
+
+    /**
+     * Load migrations and create database.
+     *
+     * @return void
+     */
+    protected function migrate(): void
+    {
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+
+        $this->artisan('migrate:fresh', ['--database' => 'testbench'])->run();
     }
 }
