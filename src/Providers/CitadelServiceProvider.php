@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
 
 class CitadelServiceProvider extends ServiceProvider
 {
@@ -19,9 +20,9 @@ class CitadelServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/citadel.php', 'citadel');
 
-        $this->registerResponseBindings();
-
         $this->registerAuthGuard();
+
+        $this->registerTwoFactorAuthProvider();
     }
 
     /**
@@ -48,8 +49,17 @@ class CitadelServiceProvider extends ServiceProvider
         );
     }
 
-    protected function registerResponseBindings(): void
+    /**
+     * Register two factor authentication provider.
+     *
+     * @return void
+     */
+    protected function registerTwoFactorAuthProvider(): void
     {
+        $this->app->singleton(
+            TwoFactorAuthenticationProviderContract::class,
+            TwoFactorAuthenticationProviderContract::class
+        );
     }
 
     /**
