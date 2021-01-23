@@ -2,32 +2,45 @@
 
 namespace Citadel\Tests;
 
-use Mockery;
-use Citadel\Auth\Config;
-use Illuminate\Foundation\Auth\User;
+use Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Citadel\Actions\AuthenticateUser;
 use Citadel\Limiters\LoginRateLimiter;
-use Citadel\Providers\CitadelServiceProvider;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Citadel\Contracts\Actions\AuthenticatesUsers;
+use Citadel\Contracts\Responses\LoginViewResponse;
+use Citadel\Tests\Fixtures\TestAuthenticationUser;
 
 class AuthenticationTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->singleton(AuthenticatesUsers::class, AuthenticateUser::class);
+    }
+
+    public function testLoginViewResponseIsReturned()
+    {
+        $this->mock(LoginViewResponse::class)
+            ->shouldReceive('toResponse')
+            ->andReturn(response('login view'));
+
+        $response = $this->withoutExceptionHandling()->get(route('login'));
+
+        $response->assertStatus(200)->assertSeeText('login view');
+    }
+
     public function testUserCanAuthenticate()
     {
         $this->loadLaravelMigrations(['--database' => 'testbench']);
 
-        TestAuthenticationSessionUser::forceCreate([
-            'name' => 'Thavarshan Thayananthajothy',
-            'email' => 'thavarshan@citadel.com',
-            'password' => Hash::make('citadelrocks'),
-        ]);
+        TestAuthenticationUser::forceCreate($this->userDetails());
 
-        $response = $this->withoutExceptionHandling()
-            ->post('/login', [
-                'email' => 'thavarshan@citadel.com',
-                'password' => 'citadelrocks',
-            ]);
+        $response = $this->withoutExceptionHandling()->post('/login', [
+            'email' => 'james.silverman@monster.com',
+            'password' => 'cthuluEmployee',
+        ]);
 
         $response->assertRedirect(Config::home());
     }
@@ -36,15 +49,11 @@ class AuthenticationTest extends TestCase
     {
         $this->loadLaravelMigrations(['--database' => 'testbench']);
 
-        TestAuthenticationSessionUser::forceCreate([
-            'name' => 'Thavarshan Thayananthajothy',
-            'email' => 'thavarshan@citadel.com',
-            'password' => Hash::make('citadelrocks'),
-        ]);
+        TestAuthenticationUser::forceCreate($this->userDetails());
 
         $response = $this->post('/login', [
-            'email' => 'thavarshan@citadel.com',
-            'password' => 'citadeldoesnotrock',
+            'email' => 'james.silverman@monster.com',
+            'password' => 'cthuluHimself',
         ]);
 
         $response->assertStatus(302);
@@ -59,8 +68,8 @@ class AuthenticationTest extends TestCase
         });
 
         $response = $this->postJson('/login', [
-            'email' => 'thavarshan@citadel.com',
-            'password' => 'citadeldoesnotrock',
+            'email' => 'james.silverman@monster.com',
+            'password' => 'cthuluEmployee',
         ]);
 
         $response->assertStatus(429);
@@ -69,11 +78,13 @@ class AuthenticationTest extends TestCase
 
     public function testTheUserCanLogoutOfTheApplication()
     {
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+
         Auth::guard()->setUser(
-            Mockery::mock(Authenticatable::class)->shouldIgnoreMissing()
+            $user = TestAuthenticationUser::forceCreate($this->userDetails())
         );
 
-        $response = $this->post('/logout');
+        $response = $this->actingAs($user)->post('/logout');
 
         $response->assertRedirect('/');
         $this->assertNull(Auth::guard()->getUser());
@@ -81,38 +92,29 @@ class AuthenticationTest extends TestCase
 
     public function testTheUserCanLogoutOfTheApplicationUsingJsonRequest()
     {
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+
         Auth::guard()->setUser(
-            Mockery::mock(Authenticatable::class)->shouldIgnoreMissing()
+            $user = TestAuthenticationUser::forceCreate($this->userDetails())
         );
 
-        $response = $this->postJson('/logout');
+        $response = $this->actingAs($user)->postJson('/logout');
 
         $response->assertStatus(204);
         $this->assertNull(Auth::guard()->getUser());
     }
 
-    protected function getPackageProviders($app)
+    /**
+     * Array of faker user details.
+     *
+     * @return array
+     */
+    protected function userDetails(): array
     {
-        return [CitadelServiceProvider::class];
+        return [
+            'name' => 'James Silverman',
+            'email' => 'james.silverman@monster.com',
+            'password' => Hash::make('cthuluEmployee'),
+        ];
     }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        $app['migrator']->path(__DIR__ . '/../database/migrations');
-
-        $app['config']->set('auth.providers.users.model', TestAuthenticationSessionUser::class);
-
-        $app['config']->set('database.default', 'testbench');
-
-        $app['config']->set('database.connections.testbench', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
-    }
-}
-
-class TestAuthenticationSessionUser extends User
-{
-    protected $table = 'users';
 }

@@ -2,88 +2,76 @@
 
 namespace Citadel\Http\Controllers;
 
-use Citadel\Auth\Config;
-use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
-use Illuminate\Routing\Controller;
+use Illuminate\Session\Store;
+use Citadel\Auth\AttemptToAuthenticate;
 use Citadel\Http\Requests\LoginRequest;
-use Citadel\Contracts\AuthenticatesUsers;
+use Citadel\Http\Requests\LogoutRequest;
 use Citadel\Http\Responses\LoginResponse;
 use Citadel\Http\Responses\LogoutResponse;
+use Citadel\Auth\EnsureLoginIsNotThrottled;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Citadel\Auth\PrepareAuthenticatedSession;
 use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Contracts\Pipeline\Pipeline as PipelineContract;
+use Citadel\Contracts\Responses\LoginViewResponse;
+use Citadel\Auth\RedirectIfTwoFactorAuthenticatable;
 
 class AuthenticationController extends Controller
 {
     /**
-     * The guard implementation.
+     * The list of classes (pipes) to be used for the authentication pipeline.
      *
-     * @var \Illuminate\Contracts\Auth\StatefulGuard
+     * @var array
      */
-    protected $guard;
+    protected static $loginPipeline = [
+        EnsureLoginIsNotThrottled::class,
+        RedirectIfTwoFactorAuthenticatable::class,
+        AttemptToAuthenticate::class,
+        PrepareAuthenticatedSession::class,
+    ];
 
     /**
-     * Create a new controller instance.
+     * Show the login view.
      *
-     * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
-     *
-     * @return void
+     * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function __construct(StatefulGuard $guard)
+    public function create(): Responsable
     {
-        $this->guard = $guard;
+        return $this->app(LoginViewResponse::class);
     }
 
     /**
      * Attempt to authenticate a new session.
      *
-     * @param \Citadel\Http\Requests\LoginRequest   $request
-     * @param \Citadel\Contracts\AuthenticatesUsers $authenticator
+     * @param \Citadel\Http\Requests\LoginRequest $request
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function store(LoginRequest $request, AuthenticatesUsers $authenticator): Responsable
+    public function store(LoginRequest $request): Responsable
     {
-        return $this->sendThroughLoginPipeline($request)
-            ->then(function ($request) use ($authenticator) {
-                $authenticator->authenticate($request->validated());
-
-                return app(LoginResponse::class);
-            });
-    }
-
-    /**
-     * Get the authentication pipeline instance.
-     *
-     * @param \Citadel\Http\Requests\LoginRequest $request
-     *
-     * @return \Illuminate\Contracts\Pipeline\Pipeline
-     */
-    protected function sendThroughLoginPipeline(LoginRequest $request): PipelineContract
-    {
-        return (new Pipeline(app()))->send($request)->through(
-            array_filter(Config::loginPipeline())
-        );
+        return $this->pipeline()
+            ->send($request)
+            ->through(array_filter(static::$loginPipeline))
+            ->then(fn ($request) => $this->app(LoginResponse::class));
     }
 
     /**
      * Destroy an authenticated session.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Citadel\Http\Requests\LogoutRequest     $request
+     * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
      *
-     * @return \Citadel\Http\Responses\LogoutResponse
+     * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function destroy(Request $request): LogoutResponse
+    public function destroy(LogoutRequest $request, StatefulGuard $guard): Responsable
     {
-        $this->guard->logout();
+        $guard->logout();
 
-        tap($request, function (Request $request): void {
-            $request->session()->invalidate();
+        tap($request->session(), function (Store $session): void {
+            $session->invalidate();
 
-            $request->session()->regenerateToken();
+            $session->regenerateToken();
         });
 
-        return app(LogoutResponse::class);
+        return $this->app(LogoutResponse::class);
     }
 }

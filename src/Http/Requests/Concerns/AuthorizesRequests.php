@@ -2,6 +2,7 @@
 
 namespace Citadel\Http\Requests\Concerns;
 
+use Citadel\Citadel\Config;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -52,7 +53,7 @@ trait AuthorizesRequests
      */
     public function isUser(): bool
     {
-        $field = config('auth.credentials.email');
+        $field = Config::username();
 
         return User::where($field, $this->input($field))->exists();
     }

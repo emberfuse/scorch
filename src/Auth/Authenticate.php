@@ -1,9 +1,8 @@
 <?php
 
-namespace Citadel\Http\Middleware;
+namespace Citadel\Auth;
 
-use Closure;
-use Citadel\Auth\Config;
+use Citadel\Citadel\Config;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Foundation\Auth\User;
@@ -30,17 +29,10 @@ abstract class Authenticate
     protected $limiter;
 
     /**
-     * Callback that will be executed after a user has been authenticated.
-     *
-     * @var \Closure|null
-     */
-    protected static $authenticated;
-
-    /**
      * Create a new controller instance.
      *
      * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
-     * @param \Citadel\Limiters\LoginRateLimiter        $limiter
+     * @param \Citadel\Limiters\LoginRateLimiter       $limiter
      *
      * @return void
      */
@@ -51,19 +43,32 @@ abstract class Authenticate
     }
 
     /**
+     * Make an attempt to authenticate user making request.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return bool
+     */
+    public function attempt(Request $request): bool
+    {
+        return $this->guard->attempt(
+            $request->only($this->username(), 'password'),
+            $request->filled('remember')
+        );
+    }
+
+    /**
      * Attempt to validate the incoming credentials.
      *
      * @param \Illuminate\Http\Request $request
      *
      * @return mixed
-     *
-     * @throws \Illuminate\Validation\ValidationException
      */
     protected function validateCredentials(Request $request)
     {
         return tap(
             $this->getAttemptingUser($request),
-            function (?User $user = null) use ($request) {
+            function (?Authenticatable $user = null) use ($request) {
                 if (! $user || ! Hash::check($request->password, $user->password)) {
                     $this->fireFailedEvent($request, $user);
 
@@ -74,13 +79,13 @@ abstract class Authenticate
     }
 
     /**
-     * Get instance of user model attempting authentication.
+     * Get instance of authenticatable user.
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \App\Models\User|null
+     * @return \Illuminate\Foundation\Auth\User
      */
-    protected function getAttemptingUser(Request $request): ?User
+    protected function getAttemptingUser(Request $request): User
     {
         return ($this->getAuthModel())::where(
             $this->username(),
@@ -89,7 +94,7 @@ abstract class Authenticate
     }
 
     /**
-     * Get user model being used for authentication purposes.
+     * Get default authenticatable user model.
      *
      * @return string
      */
@@ -107,7 +112,7 @@ abstract class Authenticate
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function throwFailedAuthenticationException(Request $request): void
+    protected function throwFailedAuthenticationException(Request $request)
     {
         $this->limiter->increment($request);
 
@@ -117,38 +122,26 @@ abstract class Authenticate
     /**
      * Fire the failed authentication attempt event with the given arguments.
      *
-     * @param \Illuminate\Http\Request                        $request
-     * @param \Illuminate\Contracts\Auth\Authenticatable|null $user
+     * @param \Illuminate\Http\Request              $request
+     * @param \Illuminate\Auth\Authenticatable|null $user
      *
      * @return void
      */
-    protected function fireFailedEvent(Request $request, ?Authenticatable $user = null): void
+    protected function fireFailedEvent(Request $request, ?Authenticatable $user = null)
     {
-        event(new Failed(config('auth.defaults.guard'), $user, [
+        event(new Failed(Config::guard(), $user, [
             $this->username() => $request->{$this->username()},
             'password' => $request->password,
         ]));
     }
 
     /**
-     * Get the username used for authentication.
+     * Get default user attribute treated as username.
      *
      * @return string
      */
-    public function username(): string
+    protected function username(): string
     {
-        return Config::username();
-    }
-
-    /**
-     * Register a callback that will be executed after a user has been authenticated.
-     *
-     * @param \Closure|null $callback
-     *
-     * @return void
-     */
-    public static function afterAuthentication(?Closure $callback = null): void
-    {
-        static::$authenticated = $callback;
+        return Config::username(['email']);
     }
 }

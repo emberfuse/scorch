@@ -1,23 +1,21 @@
 <?php
 
-namespace Citadel\Http\Middleware;
+namespace Citadel\Auth;
 
-use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Lockout;
 use Citadel\Http\Responses\LockoutResponse;
 
 class EnsureLoginIsNotThrottled extends Authenticate
 {
     /**
-     * Handle an incoming request.
+     * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param callable                 $next
      *
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, $next)
     {
         if (! $this->limiter->tooManyAttempts($request)) {
             return $next($request);
