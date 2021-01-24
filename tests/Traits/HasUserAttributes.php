@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Tests\Fixtures\Traits;
+namespace Citadel\Tests\Traits;
 
 use Illuminate\Support\Facades\Hash;
 

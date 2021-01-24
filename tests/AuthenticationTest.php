@@ -7,10 +7,10 @@ use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Auth;
 use Citadel\Actions\AuthenticateUser;
 use Citadel\Limiters\LoginRateLimiter;
+use Citadel\Tests\Traits\HasUserAttributes;
 use Citadel\Contracts\Actions\AuthenticatesUsers;
 use Citadel\Contracts\Responses\LoginViewResponse;
 use Citadel\Tests\Fixtures\TestAuthenticationUser;
-use Citadel\Tests\Fixtures\Traits\HasUserAttributes;
 use Citadel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class AuthenticationTest extends TestCase

@@ -3,8 +3,8 @@
 namespace Citadel;
 
 use Citadel\Tests\TestCase;
+use Citadel\Tests\Traits\HasUserAttributes;
 use Citadel\Tests\Fixtures\TestConfirmPasswordUser;
-use Citadel\Tests\Fixtures\Traits\HasUserAttributes;
 use Citadel\Contracts\Responses\ConfirmPasswordViewResponse;
 
 class ConfirmPasswordTest extends TestCase

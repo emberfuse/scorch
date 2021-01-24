@@ -3,9 +3,9 @@
 namespace Citadel\Tests;
 
 use Illuminate\Support\Facades\Event;
+use Citadel\Tests\Traits\HasUserAttributes;
 use Citadel\Events\TwoFactorAuthenticationEnabled;
 use Citadel\Events\TwoFactorAuthenticationDisabled;
-use Citadel\Tests\Fixtures\Traits\HasUserAttributes;
 use Citadel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class TwoFactorAuthenticationTest extends TestCase
