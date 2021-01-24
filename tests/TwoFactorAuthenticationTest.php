@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\Event;
 use Citadel\Tests\Traits\HasUserAttributes;
 use Citadel\Events\TwoFactorAuthenticationEnabled;
 use Citadel\Events\TwoFactorAuthenticationDisabled;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Citadel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class TwoFactorAuthenticationTest extends TestCase
 {
     use HasUserAttributes;
+    use WithoutMiddleware;
 
     public function testTwoFactorAuthenticationCanBeEnabled()
     {

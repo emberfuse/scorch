@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 use Citadel\Http\Controllers\PasswordController;
 use Citadel\Http\Controllers\UserProfileController;
 use Citadel\Http\Controllers\VerifyEmailController;
+use Citadel\Http\Controllers\RecoveryCodeController;
 use Citadel\Http\Controllers\RegisterUserController;
 use Citadel\Http\Controllers\PasswordResetController;
 use Citadel\Http\Controllers\AuthenticationController;
 use Citadel\Http\Controllers\ConfirmPasswordController;
+use Citadel\Http\Controllers\TwoFactorQrCodeController;
 use Citadel\Http\Controllers\PasswordResetLinkController;
 use Citadel\Http\Controllers\ConfirmPasswordStatusController;
 use Citadel\Http\Controllers\EmailVerificationPromptController;
@@ -39,9 +41,6 @@ Route::group([
         Route::post('/logout', [AuthenticationController::class, 'destroy']);
 
         Route::group(['prefix' => 'user'], function (): void {
-            Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store']);
-            Route::delete('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'destroy']);
-
             Route::get('/confirm-password', [ConfirmPasswordController::class, 'show'])->name('password.confirm');
             Route::get('/confirmed-password-status', [ConfirmPasswordStatusController::class, '__invoke'])->name('password.confirmation');
             Route::post('/confirm-password', [ConfirmPasswordController::class, 'store']);
@@ -51,6 +50,14 @@ Route::group([
             Route::get('/profile', [UserProfileController::class, 'show'])->name('user.show');
             Route::put('/profile', [UserProfileController::class, 'update'])->name('user.update');
             Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('user.destroy');
+
+            Route::group(['middleware' => 'password.confirm'], function (): void {
+                Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store']);
+                Route::delete('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'destroy']);
+                Route::get('/two-factor-qr-code', [TwoFactorQrCodeController::class, '__invoke']);
+                Route::get('/two-factor-recovery-codes', [RecoveryCodeController::class, 'index']);
+                Route::post('/two-factor-recovery-codes', [RecoveryCodeController::class, 'store']);
+            });
         });
 
         Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
