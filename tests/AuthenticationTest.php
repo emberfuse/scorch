@@ -5,16 +5,18 @@ namespace Citadel\Tests;
 use Citadel\Citadel\Config;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Citadel\Actions\AuthenticateUser;
 use Citadel\Limiters\LoginRateLimiter;
 use Citadel\Contracts\Actions\AuthenticatesUsers;
 use Citadel\Contracts\Responses\LoginViewResponse;
 use Citadel\Tests\Fixtures\TestAuthenticationUser;
+use Citadel\Tests\Fixtures\Traits\HasUserAttributes;
 use Citadel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class AuthenticationTest extends TestCase
 {
+    use HasUserAttributes;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -192,22 +194,5 @@ class AuthenticationTest extends TestCase
 
         $response->assertRedirect('/login');
         $this->assertNull(Auth::getUser());
-    }
-
-    /**
-     * Array of faker user details.
-     *
-     * @param array[] $overrides
-     *
-     * @return array
-     */
-    protected function userDetails(array $overrides = []): array
-    {
-        return array_merge([
-            'name' => 'James Silverman',
-            'username' => 'SilverJames',
-            'email' => 'james.silverman@monster.com',
-            'password' => Hash::make('cthuluEmployee'),
-        ], $overrides);
     }
 }

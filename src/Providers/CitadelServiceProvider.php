@@ -3,10 +3,12 @@
 namespace Citadel\Providers;
 
 use Citadel\Citadel\Config;
+use Citadel\Actions\ConfirmPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Citadel\Contracts\Actions\ConfirmsPasswords;
 use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
 
 class CitadelServiceProvider extends ServiceProvider
@@ -21,8 +23,8 @@ class CitadelServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../config/citadel.php', 'citadel');
 
         $this->registerAuthGuard();
-
         $this->registerTwoFactorAuthProvider();
+        $this->registerInternalActions();
     }
 
     /**
@@ -60,6 +62,16 @@ class CitadelServiceProvider extends ServiceProvider
             TwoFactorAuthenticationProviderContract::class,
             TwoFactorAuthenticationProvider::class
         );
+    }
+
+    /**
+     * Register all citadel internal action classes.
+     *
+     * @return void
+     */
+    protected function registerInternalActions(): void
+    {
+        $this->app->singleton(ConfirmsPasswords::class, ConfirmPassword::class);
     }
 
     /**

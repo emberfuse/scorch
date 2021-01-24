@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Citadel\Actions\ConfirmPassword;
 use Illuminate\Support\ServiceProvider;
+use Citadel\Contracts\Actions\ConfirmsPasswords;
 
 class CitadelServiceProvider extends ServiceProvider
 {

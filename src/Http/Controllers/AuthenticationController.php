@@ -2,6 +2,7 @@
 
 namespace Citadel\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Citadel\Auth\AttemptToAuthenticate;
 use Citadel\Http\Requests\LoginRequest;
@@ -12,6 +13,7 @@ use Citadel\Auth\EnsureLoginIsNotThrottled;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Citadel\Auth\PrepareAuthenticatedSession;
 use Illuminate\Contracts\Support\Responsable;
+use Symfony\Component\HttpFoundation\Response;
 use Citadel\Contracts\Responses\LoginViewResponse;
 use Citadel\Auth\RedirectIfTwoFactorAuthenticatable;
 
@@ -32,11 +34,13 @@ class AuthenticationController extends Controller
     /**
      * Show the login view.
      *
-     * @return \Illuminate\Contracts\Support\Responsable
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(): Responsable
+    public function create(Request $request, LoginViewResponse $response): Response
     {
-        return $this->app(LoginViewResponse::class);
+        return $response->toResponse($request);
     }
 
     /**
