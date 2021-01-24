@@ -4,6 +4,7 @@ use Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Route;
 use Citadel\Http\Controllers\PasswordController;
 use Citadel\Http\Controllers\VerifyEmailController;
+use Citadel\Http\Controllers\RegisterUserController;
 use Citadel\Http\Controllers\PasswordResetController;
 use Citadel\Http\Controllers\AuthenticationController;
 use Citadel\Http\Controllers\ConfirmPasswordController;
@@ -18,6 +19,9 @@ Route::group([
     'middleware' => Config::middleware(['web']),
 ], function (): void {
     Route::group(['middleware' => ['guest']], function (): void {
+        Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
+        Route::post('/register', [RegisterUserController::class, 'store']);
+
         Route::get('/login', [AuthenticationController::class, 'create'])->name('login');
         Route::post('/login', [AuthenticationController::class, 'store']);
 

@@ -2,7 +2,7 @@
 
 namespace Citadel\Contracts\Actions;
 
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Contracts\Auth\Authenticatable as User;
 
 interface CreatesNewUsers
 {
@@ -11,7 +11,7 @@ interface CreatesNewUsers
      *
      * @param array $data
      *
-     * @return \Illuminate\Foundation\Auth\User
+     * @return \Illuminate\Contracts\Auth\Authenticatable
      */
     public function create(array $data): User;
 }
