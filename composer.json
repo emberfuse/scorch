@@ -16,9 +16,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
+        "ext-json": "*",
         "bacon/bacon-qr-code": "^2.0",
         "jenssegers/agent": "^2.6",
         "laravel/sanctum": "^2.8",
+        "illuminate/support": "^8.0",
         "pragmarx/google2fa": "^8.0"
     },
     "require-dev": {
@@ -36,6 +38,16 @@
     "autoload-dev": {
         "psr-4": {
             "Citadel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Citadel\\Providers\\CitadelServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
