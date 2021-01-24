@@ -3,6 +3,7 @@
 use Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Route;
 use Citadel\Http\Controllers\PasswordController;
+use Citadel\Http\Controllers\UserProfileController;
 use Citadel\Http\Controllers\VerifyEmailController;
 use Citadel\Http\Controllers\RegisterUserController;
 use Citadel\Http\Controllers\PasswordResetController;
@@ -46,6 +47,10 @@ Route::group([
             Route::post('/confirm-password', [ConfirmPasswordController::class, 'store']);
 
             Route::put('/password', [PasswordController::class, '__invoke'])->name('user-password.update');
+
+            Route::get('/profile', [UserProfileController::class, 'show'])->name('user.show');
+            Route::put('/profile', [UserProfileController::class, 'update'])->name('user.update');
+            Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('user.destroy');
         });
 
         Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');

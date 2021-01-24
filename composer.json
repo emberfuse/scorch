@@ -32,7 +32,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Citadel\\": "src/"
+            "Citadel\\": "src/",
+            "App\\": "stubs/app/"
         }
     },
     "autoload-dev": {
