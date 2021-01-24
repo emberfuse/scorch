@@ -96,7 +96,7 @@ class CitadelServiceProvider extends ServiceProvider
                 __DIR__ . '/../../stubs/AuthenticateUser.php' => app_path('Actions/Citadel/AuthenticateUser.php'),
                 __DIR__ . '/../../stubs/CreateNewUser.php' => app_path('Actions/Citadel/CreateNewUser.php'),
                 __DIR__ . '/../../stubs/DeleteUser.php' => app_path('Actions/Citadel/DeleteUser.php'),
-                __DIR__ . '/../../stubs/ResetPassword.php' => app_path('Actions/Citadel/ResetPassword.php'),
+                __DIR__ . '/../../stubs/ResetUserPassword.php' => app_path('Actions/Citadel/ResetUserPassword.php'),
                 __DIR__ . '/../../stubs/UpdateUserPassword.php' => app_path('Actions/Citadel/UpdateUserPassword.php'),
                 __DIR__ . '/../../stubs/UpdateUserProfile.php' => app_path('Actions/Citadel/UpdateUserProfile.php'),
                 __DIR__ . '/../../stubs/PasswordUpdater.php' => app_path('Actions/Citadel/Traits/PasswordUpdater.php'),
