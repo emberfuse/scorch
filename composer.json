@@ -1,5 +1,5 @@
 {
-    "name": "thavarshan/citadel",
+    "name": "cratespace/citadel",
     "type": "library",
     "description": "A frontend agnostic authentication backend for Laravel applications.",
     "keywords": [
