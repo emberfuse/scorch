@@ -3,7 +3,6 @@
 namespace App\Actions\Citadel;
 
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\PasswordBroker;
@@ -45,46 +44,29 @@ class ResetUserPassword implements ResetsUserPasswords
     /**
      * Validate and reset the user's forgotten password.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param array $data
      *
      * @return mixed
      */
-    public function reset(Request $request)
+    public function reset(array $data)
     {
         return $this->broker->reset(
-            $this->getInput($request),
-            $this->resetPasswordCallback($request),
-        );
-    }
-
-    /**
-     * Get only the neccessary input values.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return array
-     */
-    protected function getInput(Request $request): array
-    {
-        return $request->only(
-            'email',
-            'password',
-            'password_confirmation',
-            'token'
+            $data,
+            $this->resetPasswordCallback($data['password']),
         );
     }
 
     /**
      * Get callback used to actually reset the given user's password.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param string $password
      *
      * @return \Closure
      */
-    protected function resetPasswordCallback(Request $request): Closure
+    protected function resetPasswordCallback(string $password): Closure
     {
-        return function ($user) use ($request) {
-            $this->updatePassword($user, $request->input('password'));
+        return function ($user) use ($password) {
+            $this->updatePassword($user, $password);
 
             event(new PasswordReset($user));
 

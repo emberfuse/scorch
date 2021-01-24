@@ -1,8 +1,7 @@
 <?php
 
-namespace Citadel;
+namespace Citadel\Tests;
 
-use Citadel\Tests\TestCase;
 use Illuminate\Support\Facades\Event;
 use Citadel\Events\TwoFactorAuthenticationEnabled;
 use Citadel\Events\TwoFactorAuthenticationDisabled;

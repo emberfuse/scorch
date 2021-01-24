@@ -1,8 +1,8 @@
-
 <?php
 
+namespace Citadel\Tests;
+
 use Citadel\Citadel\Config;
-use Citadel\Tests\TestCase;
 
 class ConfigTest extends TestCase
 {

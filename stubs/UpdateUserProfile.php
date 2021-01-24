@@ -2,9 +2,9 @@
 
 namespace App\Actions\Citadel;
 
-use App\Contracts\Auth\UpdatesUserProfiles;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Citadel\Contracts\Actions\UpdatesUserProfiles;
 
 class UpdateUserProfile implements UpdatesUserProfiles
 {

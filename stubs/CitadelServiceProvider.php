@@ -2,9 +2,19 @@
 
 namespace App\Providers;
 
-use Citadel\Actions\ConfirmPassword;
+use App\Actions\Citadel\DeleteUser;
+use App\Actions\Citadel\CreateNewUser;
 use Illuminate\Support\ServiceProvider;
-use Citadel\Contracts\Actions\ConfirmsPasswords;
+use App\Actions\Citadel\AuthenticateUser;
+use App\Actions\Citadel\ResetUserPassword;
+use App\Actions\Citadel\UpdateUserProfile;
+use App\Actions\Citadel\UpdateUserPassword;
+use Citadel\Contracts\Actions\DeletesUsers;
+use Citadel\Contracts\Actions\CreatesNewUsers;
+use Citadel\Contracts\Auth\AuthenticatesUsers;
+use Citadel\Contracts\Actions\ResetsUserPasswords;
+use Citadel\Contracts\Actions\UpdatesUserProfiles;
+use Citadel\Contracts\Actions\UpdatesUserPasswords;
 
 class CitadelServiceProvider extends ServiceProvider
 {
@@ -13,7 +23,14 @@ class CitadelServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected static $actions = [];
+    protected static $actions = [
+        AuthenticatesUsers::class => AuthenticateUser::class,
+        CreatesNewUsers::class => CreateNewUser::class,
+        ResetsUserPasswords::class => ResetUserPassword::class,
+        UpdatesUserPasswords::class => UpdateUserPassword::class,
+        UpdatesUserProfiles::class => UpdateUserProfile::class,
+        DeletesUsers::class => DeleteUser::class,
+    ];
 
     /**
      * Register any application services.

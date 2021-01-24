@@ -2,8 +2,10 @@
 
 use Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Route;
+use Citadel\Http\Controllers\PasswordResetController;
 use Citadel\Http\Controllers\AuthenticationController;
 use Citadel\Http\Controllers\ConfirmPasswordController;
+use Citadel\Http\Controllers\PasswordResetLinkController;
 use Citadel\Http\Controllers\ConfirmPasswordStatusController;
 use Citadel\Http\Controllers\TwoFactorAuthenticationController;
 use Citadel\Http\Controllers\TwoFactorAuthenticationStatusController;
@@ -17,6 +19,11 @@ Route::group([
 
         Route::get('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'create'])->name('two-factor.login');
         Route::post('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'store']);
+
+        Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+        Route::get('/reset-password/{token}', [PasswordResetController::class, 'create'])->name('password.reset');
+        Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+        Route::post('/reset-password', [PasswordResetController::class, 'store'])->name('password.update');
     });
 
     Route::group(['middleware' => ['auth']], function (): void {
