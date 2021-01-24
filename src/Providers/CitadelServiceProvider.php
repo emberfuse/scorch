@@ -3,11 +3,11 @@
 namespace Citadel\Providers;
 
 use Citadel\Citadel\Config;
+use Citadel\Console\InstallCommand;
 use Citadel\Actions\ConfirmPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Citadel\Console\InstallCitadelCommand;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Citadel\Contracts\Actions\ConfirmsPasswords;
 use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
@@ -101,6 +101,9 @@ class CitadelServiceProvider extends ServiceProvider
                 __DIR__ . '/../../stubs/UpdateUserProfile.php' => app_path('Actions/Citadel/UpdateUserProfile.php'),
                 __DIR__ . '/../../stubs/PasswordUpdater.php' => app_path('Actions/Citadel/Traits/PasswordUpdater.php'),
                 __DIR__ . '/../../stubs/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
+                __DIR__ . '/../../stubs/AuthServiceProvider.php' => app_path('Providers/AuthServiceProvider.php'),
+                __DIR__ . '/../../stubs/UserPolicy.php' => app_path('Policies/UserPolicy.php'),
+                __DIR__ . '/../../stubs/User.php' => app_path('Models/User.php'),
             ], 'citadel-support');
 
             $this->publishes([
@@ -120,7 +123,7 @@ class CitadelServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->commands([InstallCitadelCommand::class]);
+        $this->commands([InstallCommand::class]);
     }
 
     /**
