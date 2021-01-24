@@ -7,6 +7,7 @@ use Citadel\Actions\ConfirmPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Citadel\Console\InstallCitadelCommand;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Citadel\Contracts\Actions\ConfirmsPasswords;
 use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
@@ -36,6 +37,7 @@ class CitadelServiceProvider extends ServiceProvider
     {
         $this->configurePublishing();
         $this->configureRoutes();
+        $this->configureCommands();
     }
 
     /**
@@ -105,6 +107,20 @@ class CitadelServiceProvider extends ServiceProvider
                 __DIR__ . '/../../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
             ], 'citadel-migrations');
         }
+    }
+
+    /**
+     * Configure the commands offered by the application.
+     *
+     * @return void
+     */
+    protected function configureCommands()
+    {
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
+        $this->commands([InstallCitadelCommand::class]);
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace Citadel\Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User;
-use Citadel\Auth\TwoFactorAuthenticatable;
+use Citadel\Models\Traits\TwoFactorAuthenticatable;
 
 class TestTwoFactorAuthenticationUser extends User
 {

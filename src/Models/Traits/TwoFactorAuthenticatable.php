@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Auth;
+namespace Citadel\Models\Traits;
 
 use BaconQrCode\Writer;
 use Citadel\Codes\RecoveryCode;

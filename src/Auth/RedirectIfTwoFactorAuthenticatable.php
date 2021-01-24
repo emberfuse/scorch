@@ -3,6 +3,7 @@
 namespace Citadel\Auth;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Citadel\Models\Traits\TwoFactorAuthenticatable;
 use Citadel\Http\Responses\TwoFactorChallengeResponse;
 
 class RedirectIfTwoFactorAuthenticatable extends Authenticate
