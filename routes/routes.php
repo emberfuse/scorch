@@ -3,12 +3,15 @@
 use Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Route;
 use Citadel\Http\Controllers\PasswordController;
+use Citadel\Http\Controllers\VerifyEmailController;
 use Citadel\Http\Controllers\PasswordResetController;
 use Citadel\Http\Controllers\AuthenticationController;
 use Citadel\Http\Controllers\ConfirmPasswordController;
 use Citadel\Http\Controllers\PasswordResetLinkController;
 use Citadel\Http\Controllers\ConfirmPasswordStatusController;
+use Citadel\Http\Controllers\EmailVerificationPromptController;
 use Citadel\Http\Controllers\TwoFactorAuthenticationController;
+use Citadel\Http\Controllers\EmailVerificationNotificationController;
 use Citadel\Http\Controllers\TwoFactorAuthenticationStatusController;
 
 Route::group([
@@ -40,5 +43,13 @@ Route::group([
 
             Route::put('/password', [PasswordController::class, '__invoke'])->name('user-password.update');
         });
+
+        Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
+        Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+            ->middleware(['signed', 'throttle:6,1'])
+            ->name('verification.verify');
+        Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, '__invoke'])
+            ->middleware(['throttle:6,1'])
+            ->name('verification.send');
     });
 });
