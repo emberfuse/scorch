@@ -18,7 +18,7 @@ class PasswordResetRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->isGuest();
+        return $this->isGuest() && $this->has('token');
     }
 
     /**

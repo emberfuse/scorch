@@ -2,6 +2,7 @@
 
 use Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Route;
+use Citadel\Http\Controllers\PasswordController;
 use Citadel\Http\Controllers\PasswordResetController;
 use Citadel\Http\Controllers\AuthenticationController;
 use Citadel\Http\Controllers\ConfirmPasswordController;
@@ -36,6 +37,8 @@ Route::group([
             Route::get('/confirm-password', [ConfirmPasswordController::class, 'show'])->name('password.confirm');
             Route::get('/confirmed-password-status', [ConfirmPasswordStatusController::class, '__invoke'])->name('password.confirmation');
             Route::post('/confirm-password', [ConfirmPasswordController::class, 'store']);
+
+            Route::put('/password', [PasswordController::class, '__invoke'])->name('user-password.update');
         });
     });
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Http\Requests\Concerns;
+namespace Citadel\Http\Requests\Traits;
 
 use Citadel\Rules\PasswordRule;
 use Illuminate\Support\Facades\Config;
