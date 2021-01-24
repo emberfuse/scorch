@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\PasswordBroker;
-use App\Citadel\Actions\Traits\PasswordUpdater;
+use App\Actions\Citadel\Traits\PasswordUpdater;
 use Citadel\Contracts\Actions\ResetsUserPasswords;
 
 class ResetUserPassword implements ResetsUserPasswords
