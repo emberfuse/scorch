@@ -2,9 +2,8 @@
 
 namespace Cratespace\Citadel\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Contracts\Support\Responsable;
 use Cratespace\Citadel\Contracts\Actions\ConfirmsPasswords;
 use Cratespace\Citadel\Http\Requests\ConfirmPasswordRequest;
 use Cratespace\Citadel\Http\Responses\PasswordConfirmedResponse;
@@ -38,11 +37,11 @@ class ConfirmPasswordController extends Controller
      * @param \Illuminate\Http\Request                                 $request
      * @param \Citadel\Contracts\Responses\ConfirmPasswordViewResponse $response
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function show(Request $request, ConfirmPasswordViewResponse $response): Response
+    public function show(): Responsable
     {
-        return $response->toResponse($request);
+        return $this->app(ConfirmPasswordViewResponse::class);
     }
 
     /**
