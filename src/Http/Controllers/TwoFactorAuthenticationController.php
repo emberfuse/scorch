@@ -7,6 +7,7 @@ use Illuminate\Contracts\Support\Responsable;
 use Cratespace\Citadel\Http\Requests\TwoFactorLoginRequest;
 use Cratespace\Citadel\Http\Responses\TwoFactorLoginResponse;
 use Cratespace\Citadel\Http\Responses\FailedTwoFactorLoginResponse;
+use Cratespace\Citadel\Http\Responses\TwoFactorChallengeViewResponse;
 
 class TwoFactorAuthenticationController extends Controller
 {
@@ -38,7 +39,7 @@ class TwoFactorAuthenticationController extends Controller
      */
     public function create(): Responsable
     {
-        return app(TwoFactorChallengeViewResponse::class);
+        return $this->app(TwoFactorChallengeViewResponse::class);
     }
 
     /**

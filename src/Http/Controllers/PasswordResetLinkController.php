@@ -2,12 +2,11 @@
 
 namespace Cratespace\Citadel\Http\Controllers;
 
-use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Http\Request;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
-use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Citadel\Http\Requests\PasswordResetLinkRequest;
 use Cratespace\Citadel\Http\Responses\FailedPasswordResetLinkRequestResponse;
 use Cratespace\Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
@@ -39,11 +38,11 @@ class PasswordResetLinkController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function create(Request $request, RequestPasswordResetLinkViewResponse $response): Response
+    public function create(): Responsable
     {
-        return $response->toResponse($request);
+        return $this->app(RequestPasswordResetLinkViewResponse::class);
     }
 
     /**

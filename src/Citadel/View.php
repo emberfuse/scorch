@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View as ViewContract;
 use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
 use Cratespace\Citadel\Contracts\Responses\RegisterViewResponse;
 use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
+use Cratespace\Citadel\Http\Responses\TwoFactorChallengeViewResponse;
 use Cratespace\Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 
 class View
@@ -23,6 +24,18 @@ class View
     public static function login($view): void
     {
         static::registerView(LoginViewResponse::class, $view);
+    }
+
+    /**
+     * Specify which view should be used as the two-factor auth challenge view.
+     *
+     * @param \Closure|string $view
+     *
+     * @return void
+     */
+    public static function twoFactorChallenge($view): void
+    {
+        static::registerView(TwoFactorChallengeViewResponse::class, $view);
     }
 
     /**

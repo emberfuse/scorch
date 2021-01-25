@@ -10,6 +10,8 @@ class EmailVerificationPromptTest extends TestCase
 {
     public function testTheEmailVerificationPromptViewIsReturned()
     {
+        $this->withoutExceptionHandling();
+
         $this->mock(VerifyEmailViewResponse::class)
             ->shouldReceive('toResponse')
             ->andReturn(response('hello world'));
