@@ -3,11 +3,11 @@
 namespace Citadel\Providers;
 
 use Citadel\Citadel\Config;
+use Citadel\Console\InstallCommand;
 use Citadel\Actions\ConfirmPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Citadel\Console\InstallCitadelCommand;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Citadel\Contracts\Actions\ConfirmsPasswords;
 use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
@@ -85,22 +85,25 @@ class CitadelServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../../stubs/citadel.php' => config_path('citadel.php'),
+                __DIR__ . '/../../stubs/config/citadel.php' => config_path('citadel.php'),
             ], 'citadel-config');
 
             $this->publishes([
-                __DIR__ . '/../../stubs/rules.php' => config_path('rules.php'),
+                __DIR__ . '/../../stubs/config/rules.php' => config_path('rules.php'),
             ], 'rules-config');
 
             $this->publishes([
-                __DIR__ . '/../../stubs/AuthenticateUser.php' => app_path('Actions/Citadel/AuthenticateUser.php'),
-                __DIR__ . '/../../stubs/CreateNewUser.php' => app_path('Actions/Citadel/CreateNewUser.php'),
-                __DIR__ . '/../../stubs/DeleteUser.php' => app_path('Actions/Citadel/DeleteUser.php'),
-                __DIR__ . '/../../stubs/ResetPassword.php' => app_path('Actions/Citadel/ResetPassword.php'),
-                __DIR__ . '/../../stubs/UpdateUserPassword.php' => app_path('Actions/Citadel/UpdateUserPassword.php'),
-                __DIR__ . '/../../stubs/UpdateUserProfile.php' => app_path('Actions/Citadel/UpdateUserProfile.php'),
-                __DIR__ . '/../../stubs/PasswordUpdater.php' => app_path('Actions/Citadel/Traits/PasswordUpdater.php'),
-                __DIR__ . '/../../stubs/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
+                __DIR__ . '/../../stubs/app/Actions/Citadel/AuthenticateUser.php' => app_path('Actions/Citadel/AuthenticateUser.php'),
+                __DIR__ . '/../../stubs/app/Actions/Citadel/CreateNewUser.php' => app_path('Actions/Citadel/CreateNewUser.php'),
+                __DIR__ . '/../../stubs/app/Actions/Citadel/DeleteUser.php' => app_path('Actions/Citadel/DeleteUser.php'),
+                __DIR__ . '/../../stubs/app/Actions/Citadel/ResetUserPassword.php' => app_path('Actions/Citadel/ResetUserPassword.php'),
+                __DIR__ . '/../../stubs/app/Actions/Citadel/UpdateUserPassword.php' => app_path('Actions/Citadel/UpdateUserPassword.php'),
+                __DIR__ . '/../../stubs/app/Actions/Citadel/UpdateUserProfile.php' => app_path('Actions/Citadel/UpdateUserProfile.php'),
+                __DIR__ . '/../../stubs/app/Actions/Citadel/Traits/PasswordUpdater.php' => app_path('Actions/Citadel/Traits/PasswordUpdater.php'),
+                __DIR__ . '/../../stubs/app/Providers/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
+                __DIR__ . '/../../stubs/app/Providers/AuthServiceProvider.php' => app_path('Providers/AuthServiceProvider.php'),
+                __DIR__ . '/../../stubs/app/Policies/UserPolicy.php' => app_path('Policies/UserPolicy.php'),
+                __DIR__ . '/../../stubs/app/Models/User.php' => app_path('Models/User.php'),
             ], 'citadel-support');
 
             $this->publishes([
@@ -120,7 +123,7 @@ class CitadelServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->commands([InstallCitadelCommand::class]);
+        $this->commands([InstallCommand::class]);
     }
 
     /**
