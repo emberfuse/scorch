@@ -1,11 +1,11 @@
 <?php
 
-namespace Citadel\Actions;
+namespace Cratespace\Citadel\Actions;
 
-use Citadel\Citadel\Config;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Citadel\Contracts\Actions\ConfirmsPasswords;
+use Cratespace\Citadel\Contracts\Actions\ConfirmsPasswords;
 
 class ConfirmPassword implements ConfirmsPasswords
 {

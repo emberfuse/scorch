@@ -1,16 +1,16 @@
 <?php
 
-namespace Citadel\Providers;
+namespace Cratespace\Citadel\Providers;
 
-use Citadel\Citadel\Config;
-use Citadel\Console\InstallCommand;
-use Citadel\Actions\ConfirmPassword;
+use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Citadel\Console\InstallCommand;
+use Cratespace\Citadel\Actions\ConfirmPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Citadel\Contracts\Actions\ConfirmsPasswords;
-use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
+use Cratespace\Citadel\Contracts\Actions\ConfirmsPasswords;
+use Cratespace\Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
 
 class CitadelServiceProvider extends ServiceProvider
 {

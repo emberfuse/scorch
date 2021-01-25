@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Citadel;
+namespace Cratespace\Citadel\Citadel;
 
 class Features
 {

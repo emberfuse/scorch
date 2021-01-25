@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use Citadel\Http\Responses\Response;
+use Cratespace\Citadel\Http\Responses\Response;
 use Illuminate\Contracts\Support\Responsable;
 
 class {{ class }} extends Response implements Responsable

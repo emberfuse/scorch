@@ -1,15 +1,15 @@
 <?php
 
-namespace Citadel\Models\Traits;
+namespace Cratespace\Citadel\Models\Traits;
 
 use BaconQrCode\Writer;
-use Citadel\Codes\RecoveryCode;
+use Cratespace\Citadel\Codes\RecoveryCode;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider;
+use Cratespace\Citadel\Contracts\Providers\TwoFactorAuthenticationProvider;
 
 trait TwoFactorAuthenticatable
 {

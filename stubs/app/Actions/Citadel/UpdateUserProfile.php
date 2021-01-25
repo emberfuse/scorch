@@ -4,7 +4,7 @@ namespace App\Actions\Citadel;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Citadel\Contracts\Actions\UpdatesUserProfiles;
+use Cratespace\Citadel\Contracts\Actions\UpdatesUserProfiles;
 
 class UpdateUserProfile implements UpdatesUserProfiles
 {

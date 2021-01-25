@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
 use Mockery as m;
 use Illuminate\Support\Facades\Config;
@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Citadel\Contracts\Actions\ResetsUserPasswords;
-use Citadel\Contracts\Responses\ResetPasswordViewResponse;
+use Cratespace\Citadel\Contracts\Actions\ResetsUserPasswords;
+use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
 
 class ResetPasswordTest extends TestCase
 {

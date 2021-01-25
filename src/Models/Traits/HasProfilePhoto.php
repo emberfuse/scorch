@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Models\Traits;
+namespace Cratespace\Citadel\Models\Traits;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Citadel\Http\Requests;
+namespace Cratespace\Citadel\Http\Requests;
 
-use Citadel\Citadel\Config;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Foundation\Http\FormRequest;
-use Citadel\Http\Requests\Concerns\AuthorizesRequests;
+use Cratespace\Citadel\Http\Requests\Concerns\AuthorizesRequests;
 
 class PasswordResetLinkRequest extends FormRequest
 {

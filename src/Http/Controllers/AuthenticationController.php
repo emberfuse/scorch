@@ -1,19 +1,19 @@
 <?php
 
-namespace Citadel\Http\Controllers;
+namespace Cratespace\Citadel\Http\Controllers;
 
 use Illuminate\Session\Store;
-use Citadel\Auth\AttemptToAuthenticate;
-use Citadel\Http\Requests\LoginRequest;
-use Citadel\Http\Requests\LogoutRequest;
-use Citadel\Http\Responses\LoginResponse;
-use Citadel\Http\Responses\LogoutResponse;
-use Citadel\Auth\EnsureLoginIsNotThrottled;
+use Cratespace\Citadel\Auth\AttemptToAuthenticate;
+use Cratespace\Citadel\Http\Requests\LoginRequest;
+use Cratespace\Citadel\Http\Requests\LogoutRequest;
+use Cratespace\Citadel\Http\Responses\LoginResponse;
+use Cratespace\Citadel\Http\Responses\LogoutResponse;
+use Cratespace\Citadel\Auth\EnsureLoginIsNotThrottled;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Citadel\Auth\PrepareAuthenticatedSession;
+use Cratespace\Citadel\Auth\PrepareAuthenticatedSession;
 use Illuminate\Contracts\Support\Responsable;
-use Citadel\Contracts\Responses\LoginViewResponse;
-use Citadel\Auth\RedirectIfTwoFactorAuthenticatable;
+use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
+use Cratespace\Citadel\Auth\RedirectIfTwoFactorAuthenticatable;
 
 class AuthenticationController extends Controller
 {

@@ -9,12 +9,12 @@ use App\Actions\Citadel\AuthenticateUser;
 use App\Actions\Citadel\ResetUserPassword;
 use App\Actions\Citadel\UpdateUserProfile;
 use App\Actions\Citadel\UpdateUserPassword;
-use Citadel\Contracts\Actions\DeletesUsers;
-use Citadel\Contracts\Actions\CreatesNewUsers;
-use Citadel\Contracts\Auth\AuthenticatesUsers;
-use Citadel\Contracts\Actions\ResetsUserPasswords;
-use Citadel\Contracts\Actions\UpdatesUserProfiles;
-use Citadel\Contracts\Actions\UpdatesUserPasswords;
+use Cratespace\Citadel\Contracts\Actions\DeletesUsers;
+use Cratespace\Citadel\Contracts\Actions\CreatesNewUsers;
+use Cratespace\Citadel\Contracts\Auth\AuthenticatesUsers;
+use Cratespace\Citadel\Contracts\Actions\ResetsUserPasswords;
+use Cratespace\Citadel\Contracts\Actions\UpdatesUserProfiles;
+use Cratespace\Citadel\Contracts\Actions\UpdatesUserPasswords;
 
 class CitadelServiceProvider extends ServiceProvider
 {

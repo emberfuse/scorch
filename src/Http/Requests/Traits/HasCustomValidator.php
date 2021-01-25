@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Http\Requests\Traits;
+namespace Cratespace\Citadel\Http\Requests\Traits;
 
 use Closure;
 use Illuminate\Support\Facades\Hash;

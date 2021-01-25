@@ -43,7 +43,7 @@ To get started, we need to instruct Citadel how to return our `login` view. Reme
 All of the authentication view's rendering logic may be customized using the appropriate methods available via the `Citadel\Citadel\View` class. Typically, you should call this method from the `boot` method of your `CitadelServiceProvider`:
 
 ```php
-use Citadel\Citadel\View;
+use Cratespace\Citadel\Citadel\View;
 
 View::login('auth.login');
 ```
@@ -67,7 +67,7 @@ To begin implementing registration functionality, we need to instruct Citadel ho
 All of the authentication view's rendering logic may be customized using the appropriate methods available via the `Citadel\Citadel\View` class. Typically, you should call this method from the `boot` method of your `CitadelServiceProvider`:
 
 ```php
-use Citadel\Citadel\View;
+use Cratespace\Citadel\Citadel\View;
 
 View::register('auth.register');
 ```
@@ -91,7 +91,7 @@ To begin implementing password reset functionality, we need to instruct Citadel 
 All of the authentication view's rendering logic may be customized using the appropriate methods available via the `Citadel\Citadel\View` class. Typically, you should call this method from the `boot` method of your `CitadelServiceProvider`:
 
 ```php
-use Citadel\Citadel\View;
+use Cratespace\Citadel\Citadel\View;
 
 View::requestPasswordReset('auth.forgot-password);
 ```
@@ -119,7 +119,7 @@ To finish implementing password reset functionality, we need to instruct Citadel
 All of the authentication view's rendering logic may be customized using the appropriate methods available via the `Citadel\Citadel\View` class. Typically, you should call this method from the `boot` method of your `CitadelServiceProvider`:
 
 ```php
-use Citadel\Citadel\View;
+use Cratespace\Citadel\Citadel\View;
 
 View::resetPassword('auth.reset-password', ['request' => $request]);
 ```
@@ -151,7 +151,7 @@ After registration, you may wish for users to verify their email address before 
 Once these two setup steps have been completed, newly registered users will receive an email prompting them to verify their email address ownership. However, we need to inform Citadel how to display the email verification screen which informs the user that they need to go click the verification link in the email.
 
 ```php
-use Citadel\Citadel\View;
+use Cratespace\Citadel\Citadel\View;
 
 View::verifyEmail('auth.verify-email');
 ```
@@ -195,7 +195,7 @@ Therefore, any customizations you wish to make to your application's management 
 All of the user profile view rendering logic may be customized using the appropriate methods available via the `Citadel\Citadel\View` class. Typically, you should call this method from the `boot` method of your `CitadelServiceProvider`:
 
 ```php
-use Citadel\Citadel\View;
+use Cratespace\Citadel\Citadel\View;
 
 View::userProfile('users.show');
 ```
@@ -231,7 +231,7 @@ The `App\Actions\Citadel\UpdateUserPassword` class will be invoked when the user
 Citadel utilizes a custom `Citadel\Rules\PasswordRule` validation rule object. This object allows you to easily customize the password requirements for your application. By default, the rule requires a password that is at least eight characters in length. However, you may use the following methods to customize the password's requirements:
 
 ```php
-use Citadel\Rules\PasswordRule;
+use Cratespace\Citadel\Rules\PasswordRule;
 
 // Require at least 10 characters...
 (new PasswordRule())->length(10);
@@ -259,7 +259,7 @@ While building your application, you may occasionally have actions that should r
 To begin implementing password confirmation functionality, we need to instruct Citadel how to return our application's "password confirmation" view.
 
 ```php
-use Citadel\Citadel\View;
+use Cratespace\Citadel\Citadel\View;
 
 /**
  * Bootstrap any application services.

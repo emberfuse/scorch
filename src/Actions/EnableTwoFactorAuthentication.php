@@ -1,12 +1,12 @@
 <?php
 
-namespace Citadel\Actions;
+namespace Cratespace\Citadel\Actions;
 
-use Citadel\Codes\RecoveryCode;
+use Cratespace\Citadel\Codes\RecoveryCode;
 use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\User;
-use Citadel\Events\TwoFactorAuthenticationEnabled;
-use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider;
+use Cratespace\Citadel\Events\TwoFactorAuthenticationEnabled;
+use Cratespace\Citadel\Contracts\Providers\TwoFactorAuthenticationProvider;
 
 class EnableTwoFactorAuthentication
 {

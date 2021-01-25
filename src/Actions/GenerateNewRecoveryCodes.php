@@ -1,10 +1,10 @@
 <?php
 
-namespace Citadel\Actions;
+namespace Cratespace\Citadel\Actions;
 
-use Citadel\Codes\RecoveryCode;
+use Cratespace\Citadel\Codes\RecoveryCode;
 use Illuminate\Support\Collection;
-use Citadel\Events\RecoveryCodesGenerated;
+use Cratespace\Citadel\Events\RecoveryCodesGenerated;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class GenerateNewRecoveryCodes

@@ -1,9 +1,9 @@
 <?php
 
-namespace Citadel\Http\Responses;
+namespace Cratespace\Citadel\Http\Responses;
 
 use Illuminate\Routing\Redirector;
-use Citadel\Limiters\LoginRateLimiter;
+use Cratespace\Citadel\Limiters\LoginRateLimiter;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Contracts\Support\Responsable;
 

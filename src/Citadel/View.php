@@ -1,15 +1,15 @@
 <?php
 
-namespace Citadel\Citadel;
+namespace Cratespace\Citadel\Citadel;
 
 use Closure;
-use Citadel\Http\Responses\ViewResponse;
+use Cratespace\Citadel\Http\Responses\ViewResponse;
 use Illuminate\Contracts\Foundation\Application;
-use Citadel\Contracts\Responses\LoginViewResponse;
+use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
 use Illuminate\Contracts\View\View as ViewContract;
-use Citadel\Contracts\Responses\RegisterViewResponse;
-use Citadel\Contracts\Responses\ResetPasswordViewResponse;
-use Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
+use Cratespace\Citadel\Contracts\Responses\RegisterViewResponse;
+use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
+use Cratespace\Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 
 class View
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Citadel\Http\Responses;
+namespace Cratespace\Citadel\Http\Responses;
 
-use Citadel\Citadel\Config;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Routing\Redirector;
 use Illuminate\Routing\ResponseFactory;
 
