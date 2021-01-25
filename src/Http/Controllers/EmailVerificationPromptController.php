@@ -2,11 +2,9 @@
 
 namespace Cratespace\Citadel\Http\Controllers;
 
-use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Cratespace\Citadel\Citadel\Config;
 use Cratespace\Citadel\Contracts\Responses\VerifyEmailViewResponse;
-use Illuminate\Contracts\Support\Responsable;
 
 class EmailVerificationPromptController extends Controller
 {
@@ -22,6 +20,6 @@ class EmailVerificationPromptController extends Controller
     {
         return $request->user()->hasVerifiedEmail()
             ? redirect()->intended(Config::home())
-            : $this->app(VerifyEmailViewResponse::class)
+            : $this->app(VerifyEmailViewResponse::class);
     }
 }
