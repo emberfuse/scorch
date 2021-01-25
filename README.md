@@ -11,7 +11,7 @@ Citadel essentially takes the routes and controllers of Cratespace UI and offers
 To get started, install Citadel using the Composer package manager:
 
 ```bash
-composer require thavarshan/citadel
+composer require cratespace/citadel
 ```
 
 Next, publish Citadel's resources using the `citadel:install` command:
@@ -162,6 +162,20 @@ Your `verify-email` template should include an informational message instructing
 
 If the request to resend the verification link email was successful, Citadel will redirect back to the `/email/verify` endpoint with a `status` session variable, allowing you to display an informational message to the user informing them the operation was successful. If the request was an XHR request, a `202` HTTP response will be returned.
 
+##### Resending Email Verification Links
+
+If you wish, you may add a button to your application's `verify-email` template that triggers a POST request to the `/email/verification-notification` endpoint. When this endpoint receives a request, a new verification email link will be emailed to the user, allowing the user to get a new verification link if the previous one was accidentally deleted or lost.
+
+If the request to resend the verification link email was successful, Citadel will redirect the user back to the `/email/verify` endpoint with a `status` session variable, allowing you to display an informational message to the user informing them the operation was successful. If the request was an XHR request, a 202 HTTP response will be returned:
+
+```html
+@if (session('status') == 'verification-link-sent')
+    <div class="mb-4 font-medium text-sm text-green-600">
+        A new email verification link has been emailed to you!
+    </div>
+@endif
+```
+
 #### Protecting Routes
 
 To specify that a route or group of routes requires that the user has previously verified their email address, you should attach Cratespace's built-in `verified` middleware to the route:
@@ -171,6 +185,108 @@ Route::get('/home', function () {
     // ...
 })->middleware(['verified']);
 ```
+
+### User Profile
+
+The logic executed to satisfy profile update requests can be found in an action class within your application. Specifically, the `App\Actions\Citadel\UpdateUserProfile` class will be invoked when the user updates their profile. This action is responsible for validating the input and updating the user's profile information.
+
+Therefore, any customizations you wish to make to your application's management of this information should be made in this class. When invoked, the action receives the currently authenticated `$user` and an array of `$data` that contains all of the input from the incoming request, including the updated profile photo if applicable.
+
+All of the user profile view rendering logic may be customized using the appropriate methods available via the `Citadel\Citadel\View` class. Typically, you should call this method from the `boot` method of your `CitadelServiceProvider`:
+
+```php
+use Citadel\Citadel\View;
+
+View::userProfile('users.show');
+```
+
+Citadel will take care of generating the `/user/profile` route that returns this view. Your `user profile` template should include a form that makes a PUT request to `/user/profile`. The `/user/profile` endpoint expects a string `email` field. The name of this field / database column should match the `email` value of the `citadel` configuration file.
+
+If the update request was successful, Citadel will redirect back to the `/user/profile` route. If the request was an XHR request, a `204` HTTP response will be returned.
+
+If the request was not successful, the user will be redirect back to the user profile screen and the validation errors will be available to you via the shared `$errors` Blade template variable. Or, in the case of an XHR request, the validation errors will be returned with the `422` HTTP response.
+
+#### Customizing User Profile Update Action
+
+The user profile update process may be customized by modifying the `App\Actions\Citadel\UpdateUserProfile` action.
+
+### Profile Photos
+
+Citadel's profile photo functionality is supported by the `Citadel\Models\Traits\HasProfilePhoto` trait that is automatically attached to your `App\Models\User` class during Citadel's installation.
+
+This trait contains methods such as `updateProfilePhoto`, `getProfilePhotoUrlAttribute`, `defaultProfilePhotoUrl`, and `profilePhotoDisk` which may all be overwritten by your own `App\Models\User` class if you need to customize their behavior. You are encouraged to read through the source code of this trait so that you have a full understanding of the features it is providing to your application.
+
+The `updateProfilePhoto` method is the primary method used to store profile photos and is called by your application's `App\Actions\Citadel\UpdateUserProfile` action class.
+
+### Account Deletion
+
+The profile management screen can also include an action panel that allows the user to delete their application account. When the user chooses to delete their account, the `App\Actions\Citadel\DeleteUser` action class will be invoked. You are free to customize your application's account deletion logic within this class.
+
+### Password Update
+
+Like most of Citadel's features, the underlying logic used to implement the feature may be customized by modifying a corresponding action class.
+
+The `App\Actions\Citadel\UpdateUserPassword` class will be invoked when the user updates their password. This action is responsible for validating the input and updating the user's password.
+
+Citadel utilizes a custom `Citadel\Rules\PasswordRule` validation rule object. This object allows you to easily customize the password requirements for your application. By default, the rule requires a password that is at least eight characters in length. However, you may use the following methods to customize the password's requirements:
+
+```php
+use Citadel\Rules\PasswordRule;
+
+// Require at least 10 characters...
+(new PasswordRule())->length(10);
+
+// Require at least one uppercase character...
+(new PasswordRule())->requireUppercase();
+
+// Require at least one numeric character...
+(new PasswordRule())->requireNumeric();
+
+// Require at least one special character...
+(new PasswordRule())->requireSpecialCharacter();
+```
+
+Of course, these methods may be chained to define the password validation rules for your application:
+
+```php
+(new PasswordRule())->length(10)->requireSpecialCharacter();
+```
+
+### Password Confirmation
+
+While building your application, you may occasionally have actions that should require the user to confirm their password before the action is performed. Typically, these routes are protected by built-in `password.confirm` middleware.
+
+To begin implementing password confirmation functionality, we need to instruct Citadel how to return our application's "password confirmation" view.
+
+```php
+use Citadel\Citadel\View;
+
+/**
+ * Bootstrap any application services.
+ *
+ * @return void
+ */
+public function boot()
+{
+    View::confirmPassword('auth.confirm-password');
+}
+```
+
+Citadel will take care of defining the `/user/confirm-password` endpoint that returns this view. Your confirm-password template should include a form that makes a POST request to the `/user/confirm-password` endpoint. The `/user/confirm-password` endpoint expects a password field that contains the user's current password.
+
+If the password matches the user's current password, Citadel will redirect the user to the route they were attempting to access. If the request was an XHR request, a 201 HTTP response will be returned.
+
+If the request was not successful, the user will be redirected back to the confirm password screen and the validation errors will be available to you via the shared `$errors` Blade template variable. Or, in the case of an XHR request, the validation errors will be returned with a 422 HTTP response.
+
+### Two Factor Authentication
+
+Most Citadel features can be customized via action classes. However, for security, Citadel's two-factor authentication services are encapsulated within Citadel and should not require customization.
+
+The two-factor authentication actions lack dedicated views and should be included on the `user profile` view.
+
+To enable two-factor authentication a user is required to send a `POST` request to `/two-factor-authentication`. Password should be confirmed before sending the request to enable two-factor authentication. Password confirmation should be done through a seperate end point and not by including a `password` parameter to the enable two-factor-authentication request.
+
+To disable two-factor-authentication a `DELETE` request must be sent to `/two-factor-authentication`. This also requires password to be confirmed but can be bypassed if password was confirmed previously.
 
 ## Contributing
 
