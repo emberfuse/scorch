@@ -3,8 +3,8 @@
 namespace Cratespace\Citadel\Tests;
 
 use Mockery as m;
-use Cratespace\Citadel\Providers\CitadelServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Cratespace\Citadel\Providers\CitadelServiceProvider;
 use Cratespace\Citadel\Tests\Fixtures\TestAuthenticationUser;
 
 abstract class TestCase extends BaseTestCase
