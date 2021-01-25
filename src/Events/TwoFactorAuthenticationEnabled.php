@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Events;
+namespace Cratespace\Citadel\Events;
 
 class TwoFactorAuthenticationEnabled extends TwoFactorAuthenticationEvent
 {

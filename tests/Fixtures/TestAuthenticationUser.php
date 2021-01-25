@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Tests\Fixtures;
+namespace Cratespace\Citadel\Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User;
 

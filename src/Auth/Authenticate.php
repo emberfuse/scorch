@@ -1,15 +1,15 @@
 <?php
 
-namespace Citadel\Auth;
+namespace Cratespace\Citadel\Auth;
 
-use Citadel\Citadel\Config;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
-use Citadel\Limiters\LoginRateLimiter;
+use Cratespace\Citadel\Limiters\LoginRateLimiter;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Citadel\Contracts\Auth\AuthenticatesUsers;
+use Cratespace\Citadel\Contracts\Auth\AuthenticatesUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Validation\ValidationException;
 

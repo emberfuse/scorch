@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Citadel\Contracts\Actions\CreatesNewUsers;
+use Cratespace\Citadel\Contracts\Actions\CreatesNewUsers;
 use Illuminate\Contracts\Auth\Authenticatable as User;
 
 class CreateNewUser implements CreatesNewUsers

@@ -1,9 +1,9 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
 use Mockery as m;
-use Citadel\Contracts\Actions\DeletesUsers;
+use Cratespace\Citadel\Contracts\Actions\DeletesUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class DeleteUserTest extends testCase

@@ -1,8 +1,8 @@
 <?php
 
-namespace Citadel\Events;
+namespace Cratespace\Citadel\Events;
 
-use Citadel\Events\Traits\HasUser;
+use Cratespace\Citadel\Events\Traits\HasUser;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Events\Dispatchable;
 

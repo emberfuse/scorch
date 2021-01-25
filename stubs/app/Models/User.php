@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Citadel\Models\Traits\HasProfilePhoto;
-use Citadel\Models\Traits\TwoFactorAuthenticatable;
+use Cratespace\Citadel\Models\Traits\HasProfilePhoto;
+use Cratespace\Citadel\Models\Traits\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

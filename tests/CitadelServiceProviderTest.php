@@ -1,8 +1,8 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
-use Citadel\Citadel\View;
+use Cratespace\Citadel\Citadel\View;
 
 class CitadelServiceProviderTest extends TestCase
 {

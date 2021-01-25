@@ -1,8 +1,8 @@
 <?php
 
-namespace Citadel\Http\Requests\Concerns;
+namespace Cratespace\Citadel\Http\Requests\Concerns;
 
-use Citadel\Citadel\Config;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Contracts\Responses;
+namespace Cratespace\Citadel\Contracts\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 

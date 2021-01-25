@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Http\Responses;
+namespace Cratespace\Citadel\Http\Responses;
 
 use Illuminate\Routing\Redirector;
 use Illuminate\View\Factory as ViewFactory;

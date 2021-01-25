@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Console;
+namespace Cratespace\Citadel\Console;
 
 use Illuminate\Console\Command;
 

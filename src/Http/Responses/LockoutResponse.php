@@ -1,9 +1,9 @@
 <?php
 
-namespace Citadel\Http\Responses;
+namespace Cratespace\Citadel\Http\Responses;
 
-use Citadel\Citadel\Config;
-use Citadel\Limiters\LoginRateLimiter;
+use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Citadel\Limiters\LoginRateLimiter;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,17 +1,17 @@
 <?php
 
-namespace Citadel\Http\Controllers;
+namespace Cratespace\Citadel\Http\Controllers;
 
-use Citadel\Citadel\Config;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
 use Symfony\Component\HttpFoundation\Response;
-use Citadel\Http\Requests\PasswordResetLinkRequest;
-use Citadel\Http\Responses\FailedPasswordResetLinkRequestResponse;
-use Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
-use Citadel\Http\Responses\SuccessfulPasswordResetLinkRequestResponse;
+use Cratespace\Citadel\Http\Requests\PasswordResetLinkRequest;
+use Cratespace\Citadel\Http\Responses\FailedPasswordResetLinkRequestResponse;
+use Cratespace\Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
+use Cratespace\Citadel\Http\Responses\SuccessfulPasswordResetLinkRequestResponse;
 
 class PasswordResetLinkController extends Controller
 {

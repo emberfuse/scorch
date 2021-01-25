@@ -1,13 +1,13 @@
 <?php
 
-namespace Citadel\Jobs;
+namespace Cratespace\Citadel\Jobs;
 
 use Throwable;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
-use Citadel\Contracts\Actions\DeletesUsers;
+use Cratespace\Citadel\Contracts\Actions\DeletesUsers;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 

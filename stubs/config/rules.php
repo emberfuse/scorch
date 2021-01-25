@@ -1,6 +1,6 @@
 <?php
 
-use Citadel\Rules\PasswordRule;
+use Cratespace\Citadel\Rules\PasswordRule;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Auth\User;
 

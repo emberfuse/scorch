@@ -1,11 +1,11 @@
 <?php
 
-namespace Citadel\Http\Controllers;
+namespace Cratespace\Citadel\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Citadel\Actions\EnableTwoFactorAuthentication;
-use Citadel\Actions\DisableTwoFactorAuthentication;
+use Cratespace\Citadel\Actions\EnableTwoFactorAuthentication;
+use Cratespace\Citadel\Actions\DisableTwoFactorAuthentication;
 
 class TwoFactorAuthenticationStatusController extends Controller
 {

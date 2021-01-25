@@ -2,10 +2,10 @@
 
 namespace App\Actions\Citadel;
 
-use Citadel\Citadel\Config;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Citadel\Contracts\Auth\AuthenticatesUsers;
+use Cratespace\Citadel\Contracts\Auth\AuthenticatesUsers;
 
 class AuthenticateUser implements AuthenticatesUsers
 {

@@ -5,7 +5,8 @@
     "keywords": [
         "php",
         "authentication",
-        "citadel"
+        "citadel",
+        "cratespace"
     ],
     "authors": [
         {
@@ -19,26 +20,26 @@
         "ext-json": "*",
         "bacon/bacon-qr-code": "^2.0",
         "jenssegers/agent": "^2.6",
-        "laravel/sanctum": "^2.8",
         "illuminate/support": "^8.0",
         "pragmarx/google2fa": "^8.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
+        "laravel/sanctum": "^2.8",
         "mockery/mockery": "^1.4.2",
         "orchestra/testbench": "^6.7",
-        "phpunit/phpunit": "^9.4",
+        "phpunit/phpunit": "^9.5",
         "symfony/var-dumper": "^5.2.1"
     },
     "autoload": {
         "psr-4": {
-            "Citadel\\": "src/",
+            "Cratespace\\Citadel\\": "src/",
             "App\\": "stubs/app/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Citadel\\Tests\\": "tests/"
+            "Cratespace\\Citadel\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -47,7 +48,7 @@
         },
         "laravel": {
             "providers": [
-                "Citadel\\Providers\\CitadelServiceProvider"
+                "Cratespace\\Citadel\\Providers\\CitadelServiceProvider"
             ]
         }
     },

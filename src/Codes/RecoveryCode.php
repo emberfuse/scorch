@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Codes;
+namespace Cratespace\Citadel\Codes;
 
 use Illuminate\Support\Str;
 
