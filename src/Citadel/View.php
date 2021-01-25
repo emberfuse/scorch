@@ -7,6 +7,9 @@ use Citadel\Http\Responses\ViewResponse;
 use Illuminate\Contracts\Foundation\Application;
 use Citadel\Contracts\Responses\LoginViewResponse;
 use Illuminate\Contracts\View\View as ViewContract;
+use Citadel\Contracts\Responses\RegisterViewResponse;
+use Citadel\Contracts\Responses\ResetPasswordViewResponse;
+use Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 
 class View
 {
@@ -20,6 +23,66 @@ class View
     public static function login($view): void
     {
         static::registerView(LoginViewResponse::class, $view);
+    }
+
+    /**
+     * Specify which view should be used as the register view.
+     *
+     * @param \Closure|string $view
+     *
+     * @return void
+     */
+    public static function register($view): void
+    {
+        static::registerView(RegisterViewResponse::class, $view);
+    }
+
+    /**
+     * Specify which view should be used as the reset password link request view.
+     *
+     * @param \Closure|string $view
+     *
+     * @return void
+     */
+    public static function requestPasswordResetLink($view): void
+    {
+        static::registerView(RequestPasswordResetLinkViewResponse::class, $view);
+    }
+
+    /**
+     * Specify which view should be used as the reset password view.
+     *
+     * @param \Closure|string $view
+     *
+     * @return void
+     */
+    public static function resetPassword($view): void
+    {
+        static::registerView(ResetPasswordViewResponse::class, $view);
+    }
+
+    /**
+     * Specify which view should be used as the verify email view.
+     *
+     * @param \Closure|string $view
+     *
+     * @return void
+     */
+    public static function verifyEmail($view): void
+    {
+        static::registerView(VerifyEmailViewResponse::class, $view);
+    }
+
+    /**
+     * Specify which view should be used as the user profile view.
+     *
+     * @param \Closure|string $view
+     *
+     * @return void
+     */
+    public static function userProfile($view): void
+    {
+        static::registerView(UserProfileViewResponse::class, $view);
     }
 
     /**
