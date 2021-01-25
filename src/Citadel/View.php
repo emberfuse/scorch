@@ -3,10 +3,10 @@
 namespace Cratespace\Citadel\Citadel;
 
 use Closure;
-use Cratespace\Citadel\Http\Responses\ViewResponse;
 use Illuminate\Contracts\Foundation\Application;
-use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
+use Cratespace\Citadel\Http\Responses\ViewResponse;
 use Illuminate\Contracts\View\View as ViewContract;
+use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
 use Cratespace\Citadel\Contracts\Responses\RegisterViewResponse;
 use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
 use Cratespace\Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
@@ -97,7 +97,7 @@ class View
     {
         app()->singleton($viewResponse, function ($app) use ($view) {
             if ($view instanceof Closure) {
-                return new ViewResponse(call_user_func($view));
+                return new ViewResponse($view);
             }
 
             return static::showView($app, $view);
