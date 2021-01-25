@@ -34,8 +34,16 @@ class ViewResponse implements Responsable
      */
     public function toResponse($request)
     {
-        return $request->wantsJson()
-            ? response()->json($this->content)
-            : $this->content;
+        if (! is_callable($this->content) || is_string($this->content)) {
+            return view($this->content, ['request' => $request]);
+        }
+
+        $response = call_user_func($this->content, $request);
+
+        if ($response instanceof Responsable) {
+            return $response->toResponse($request);
+        }
+
+        return $response;
     }
 }
