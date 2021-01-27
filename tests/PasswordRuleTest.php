@@ -1,9 +1,9 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
 use Illuminate\Support\Str;
-use Citadel\Rules\PasswordRule;
+use Cratespace\Citadel\Rules\PasswordRule;
 
 class PasswordRuleTest extends TestCase
 {

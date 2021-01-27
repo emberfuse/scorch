@@ -1,13 +1,13 @@
 <?php
 
-namespace Citadel\Http\Controllers;
+namespace Cratespace\Citadel\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Citadel\Actions\GenerateNewRecoveryCodes;
+use Cratespace\Citadel\Actions\GenerateNewRecoveryCodes;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Citadel\Http\Responses\GenerateRecoveryCodesResponse;
+use Cratespace\Citadel\Http\Responses\GenerateRecoveryCodesResponse;
 
 class RecoveryCodeController extends Controller
 {

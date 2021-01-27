@@ -1,16 +1,17 @@
 <?php
 
-namespace Citadel\Providers;
+namespace Cratespace\Citadel\Providers;
 
-use Citadel\Citadel\Config;
-use Citadel\Console\InstallCommand;
-use Citadel\Actions\ConfirmPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Citadel\Contracts\Actions\ConfirmsPasswords;
-use Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
+use Cratespace\Citadel\Console\InstallCommand;
+use Cratespace\Citadel\Actions\ConfirmPassword;
+use Cratespace\Citadel\Console\MakeResponseCommand;
+use Cratespace\Citadel\Contracts\Actions\ConfirmsPasswords;
+use Cratespace\Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
 
 class CitadelServiceProvider extends ServiceProvider
 {
@@ -123,7 +124,10 @@ class CitadelServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->commands([InstallCommand::class]);
+        $this->commands([
+            InstallCommand::class,
+            MakeResponseCommand::class,
+        ]);
     }
 
     /**

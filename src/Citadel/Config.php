@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Citadel;
+namespace Cratespace\Citadel\Citadel;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Config\Repository as ConfigContract;

@@ -1,17 +1,17 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
 use Mockery as m;
 use App\Models\User;
 use App\Policies\UserPolicy;
-use Citadel\Jobs\DeleteUserJob;
+use Cratespace\Citadel\Jobs\DeleteUserJob;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Queue;
-use Citadel\Tests\Traits\HasUserAttributes;
+use Cratespace\Citadel\Tests\Traits\HasUserAttributes;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Citadel\Contracts\Actions\UpdatesUserProfiles;
-use Citadel\Contracts\Responses\UserProfileViewResponse;
+use Cratespace\Citadel\Contracts\Actions\UpdatesUserProfiles;
+use Cratespace\Citadel\Contracts\Responses\UserProfileViewResponse;
 
 class UpdateProfileTest extends TestCase
 {

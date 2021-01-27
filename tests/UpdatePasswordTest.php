@@ -1,10 +1,10 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
 use Mockery as m;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Citadel\Contracts\Actions\UpdatesUserPasswords;
+use Cratespace\Citadel\Contracts\Actions\UpdatesUserPasswords;
 
 class UpdatePasswordTest extends TestCase
 {

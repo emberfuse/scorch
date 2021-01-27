@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Http\Requests;
+namespace Cratespace\Citadel\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

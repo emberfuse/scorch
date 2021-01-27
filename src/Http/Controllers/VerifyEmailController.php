@@ -1,11 +1,11 @@
 <?php
 
-namespace Citadel\Http\Controllers;
+namespace Cratespace\Citadel\Http\Controllers;
 
-use Citadel\Citadel\Config;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\RedirectResponse;
-use Citadel\Http\Requests\VerifyEmailRequest;
+use Cratespace\Citadel\Http\Requests\VerifyEmailRequest;
 
 class VerifyEmailController extends Controller
 {

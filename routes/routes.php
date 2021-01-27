@@ -1,22 +1,22 @@
 <?php
 
-use Citadel\Citadel\Config;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Route;
-use Citadel\Http\Controllers\PasswordController;
-use Citadel\Http\Controllers\UserProfileController;
-use Citadel\Http\Controllers\VerifyEmailController;
-use Citadel\Http\Controllers\RecoveryCodeController;
-use Citadel\Http\Controllers\RegisterUserController;
-use Citadel\Http\Controllers\PasswordResetController;
-use Citadel\Http\Controllers\AuthenticationController;
-use Citadel\Http\Controllers\ConfirmPasswordController;
-use Citadel\Http\Controllers\TwoFactorQrCodeController;
-use Citadel\Http\Controllers\PasswordResetLinkController;
-use Citadel\Http\Controllers\ConfirmPasswordStatusController;
-use Citadel\Http\Controllers\EmailVerificationPromptController;
-use Citadel\Http\Controllers\TwoFactorAuthenticationController;
-use Citadel\Http\Controllers\EmailVerificationNotificationController;
-use Citadel\Http\Controllers\TwoFactorAuthenticationStatusController;
+use Cratespace\Citadel\Http\Controllers\PasswordController;
+use Cratespace\Citadel\Http\Controllers\UserProfileController;
+use Cratespace\Citadel\Http\Controllers\VerifyEmailController;
+use Cratespace\Citadel\Http\Controllers\RecoveryCodeController;
+use Cratespace\Citadel\Http\Controllers\RegisterUserController;
+use Cratespace\Citadel\Http\Controllers\PasswordResetController;
+use Cratespace\Citadel\Http\Controllers\AuthenticationController;
+use Cratespace\Citadel\Http\Controllers\ConfirmPasswordController;
+use Cratespace\Citadel\Http\Controllers\TwoFactorQrCodeController;
+use Cratespace\Citadel\Http\Controllers\PasswordResetLinkController;
+use Cratespace\Citadel\Http\Controllers\ConfirmPasswordStatusController;
+use Cratespace\Citadel\Http\Controllers\EmailVerificationPromptController;
+use Cratespace\Citadel\Http\Controllers\TwoFactorAuthenticationController;
+use Cratespace\Citadel\Http\Controllers\EmailVerificationNotificationController;
+use Cratespace\Citadel\Http\Controllers\TwoFactorAuthenticationStatusController;
 
 Route::group([
     'middleware' => Config::middleware(['web']),

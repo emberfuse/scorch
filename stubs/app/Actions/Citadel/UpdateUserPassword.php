@@ -4,7 +4,7 @@ namespace App\Actions\Citadel;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use App\Actions\Citadel\Traits\PasswordUpdater;
-use Citadel\Contracts\Actions\UpdatesUserPasswords;
+use Cratespace\Citadel\Contracts\Actions\UpdatesUserPasswords;
 
 class UpdateUserPassword implements UpdatesUserPasswords
 {

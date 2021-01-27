@@ -1,15 +1,17 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
 use Mockery as m;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Citadel\Contracts\Responses\VerifyEmailViewResponse;
+use Cratespace\Citadel\Contracts\Responses\VerifyEmailViewResponse;
 
 class EmailVerificationPromptTest extends TestCase
 {
     public function testTheEmailVerificationPromptViewIsReturned()
     {
+        $this->withoutExceptionHandling();
+
         $this->mock(VerifyEmailViewResponse::class)
             ->shouldReceive('toResponse')
             ->andReturn(response('hello world'));

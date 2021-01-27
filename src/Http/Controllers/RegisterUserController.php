@@ -1,15 +1,14 @@
 <?php
 
-namespace Citadel\Http\Controllers;
+namespace Cratespace\Citadel\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
-use Citadel\Http\Requests\RegisterRequest;
-use Citadel\Http\Responses\RegisterResponse;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Citadel\Contracts\Actions\CreatesNewUsers;
-use Symfony\Component\HttpFoundation\Response;
-use Citadel\Contracts\Responses\RegisterViewResponse;
+use Illuminate\Contracts\Support\Responsable;
+use Cratespace\Citadel\Http\Requests\RegisterRequest;
+use Cratespace\Citadel\Http\Responses\RegisterResponse;
+use Cratespace\Citadel\Contracts\Actions\CreatesNewUsers;
+use Cratespace\Citadel\Contracts\Responses\RegisterViewResponse;
 
 class RegisterUserController extends Controller
 {
@@ -38,11 +37,11 @@ class RegisterUserController extends Controller
      * @param \Illuminate\Http\Request                          $request
      * @param \Citadel\Contracts\Responses\RegisterViewResponse $response
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function create(Request $request, RegisterViewResponse $response): Response
+    public function create(): Responsable
     {
-        return $response->toResponse($request);
+        return $this->app(RegisterViewResponse::class);
     }
 
     /**

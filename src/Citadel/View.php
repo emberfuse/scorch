@@ -1,15 +1,16 @@
 <?php
 
-namespace Citadel\Citadel;
+namespace Cratespace\Citadel\Citadel;
 
 use Closure;
-use Citadel\Http\Responses\ViewResponse;
 use Illuminate\Contracts\Foundation\Application;
-use Citadel\Contracts\Responses\LoginViewResponse;
+use Cratespace\Citadel\Http\Responses\ViewResponse;
 use Illuminate\Contracts\View\View as ViewContract;
-use Citadel\Contracts\Responses\RegisterViewResponse;
-use Citadel\Contracts\Responses\ResetPasswordViewResponse;
-use Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
+use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
+use Cratespace\Citadel\Contracts\Responses\RegisterViewResponse;
+use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
+use Cratespace\Citadel\Http\Responses\TwoFactorChallengeViewResponse;
+use Cratespace\Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 
 class View
 {
@@ -23,6 +24,18 @@ class View
     public static function login($view): void
     {
         static::registerView(LoginViewResponse::class, $view);
+    }
+
+    /**
+     * Specify which view should be used as the two-factor auth challenge view.
+     *
+     * @param \Closure|string $view
+     *
+     * @return void
+     */
+    public static function twoFactorChallenge($view): void
+    {
+        static::registerView(TwoFactorChallengeViewResponse::class, $view);
     }
 
     /**
@@ -97,7 +110,7 @@ class View
     {
         app()->singleton($viewResponse, function ($app) use ($view) {
             if ($view instanceof Closure) {
-                return new ViewResponse(call_user_func($view));
+                return new ViewResponse($view);
             }
 
             return static::showView($app, $view);

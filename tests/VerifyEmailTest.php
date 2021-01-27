@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
 use Mockery as m;
 use Illuminate\Support\Facades\URL;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Citadel\Http\Requests\Traits;
+namespace Cratespace\Citadel\Http\Requests\Traits;
 
-use Citadel\Rules\PasswordRule;
+use Cratespace\Citadel\Rules\PasswordRule;
 use Illuminate\Support\Facades\Config;
 
 trait InputValidationRules

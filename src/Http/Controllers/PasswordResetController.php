@@ -1,18 +1,16 @@
 <?php
 
-namespace Citadel\Http\Controllers;
+namespace Cratespace\Citadel\Http\Controllers;
 
-use Citadel\Citadel\Config;
-use Illuminate\Http\Request;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
-use Symfony\Component\HttpFoundation\Response;
-use Citadel\Http\Requests\PasswordResetRequest;
-use Citadel\Http\Responses\PasswordResetResponse;
-use Citadel\Contracts\Actions\ResetsUserPasswords;
-use Citadel\Http\Responses\FailedPasswordResetResponse;
-use Citadel\Contracts\Responses\ResetPasswordViewResponse;
+use Cratespace\Citadel\Http\Requests\PasswordResetRequest;
+use Cratespace\Citadel\Http\Responses\PasswordResetResponse;
+use Cratespace\Citadel\Contracts\Actions\ResetsUserPasswords;
+use Cratespace\Citadel\Http\Responses\FailedPasswordResetResponse;
+use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
 
 class PasswordResetController extends Controller
 {
@@ -41,11 +39,11 @@ class PasswordResetController extends Controller
      * @param \Illuminate\Http\Request                               $request
      * @param \Citadel\Contracts\Responses\ResetPasswordViewResponse $response
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function create(Request $request, ResetPasswordViewResponse $response): Response
+    public function create(): Responsable
     {
-        return $response->toResponse($request);
+        return $this->app(ResetPasswordViewResponse::class);
     }
 
     /**

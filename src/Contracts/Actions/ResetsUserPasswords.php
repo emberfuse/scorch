@@ -1,6 +1,6 @@
 <?php
 
-namespace Citadel\Contracts\Actions;
+namespace Cratespace\Citadel\Contracts\Actions;
 
 interface ResetsUserPasswords
 {

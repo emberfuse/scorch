@@ -1,9 +1,9 @@
 <?php
 
-namespace Citadel\Actions;
+namespace Cratespace\Citadel\Actions;
 
 use Illuminate\Foundation\Auth\User;
-use Citadel\Events\TwoFactorAuthenticationDisabled;
+use Cratespace\Citadel\Events\TwoFactorAuthenticationDisabled;
 
 class DisableTwoFactorAuthentication
 {

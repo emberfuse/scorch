@@ -1,13 +1,13 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
 use Illuminate\Support\Facades\Event;
-use Citadel\Tests\Traits\HasUserAttributes;
-use Citadel\Events\TwoFactorAuthenticationEnabled;
-use Citadel\Events\TwoFactorAuthenticationDisabled;
+use Cratespace\Citadel\Tests\Traits\HasUserAttributes;
+use Cratespace\Citadel\Events\TwoFactorAuthenticationEnabled;
+use Cratespace\Citadel\Events\TwoFactorAuthenticationDisabled;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Citadel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
+use Cratespace\Citadel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class TwoFactorAuthenticationTest extends TestCase
 {

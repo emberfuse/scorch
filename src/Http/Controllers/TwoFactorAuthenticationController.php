@@ -1,12 +1,13 @@
 <?php
 
-namespace Citadel\Http\Controllers;
+namespace Cratespace\Citadel\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Citadel\Http\Requests\TwoFactorLoginRequest;
-use Citadel\Http\Responses\TwoFactorLoginResponse;
-use Citadel\Http\Responses\FailedTwoFactorLoginResponse;
+use Cratespace\Citadel\Http\Requests\TwoFactorLoginRequest;
+use Cratespace\Citadel\Http\Responses\TwoFactorLoginResponse;
+use Cratespace\Citadel\Http\Responses\FailedTwoFactorLoginResponse;
+use Cratespace\Citadel\Http\Responses\TwoFactorChallengeViewResponse;
 
 class TwoFactorAuthenticationController extends Controller
 {
@@ -38,7 +39,7 @@ class TwoFactorAuthenticationController extends Controller
      */
     public function create(): Responsable
     {
-        return app(TwoFactorChallengeViewResponse::class);
+        return $this->app(TwoFactorChallengeViewResponse::class);
     }
 
     /**

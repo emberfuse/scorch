@@ -1,18 +1,16 @@
 <?php
 
-namespace Citadel\Http\Controllers;
+namespace Cratespace\Citadel\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Citadel\Jobs\DeleteUserJob;
-use Citadel\Http\Requests\DeleteUserRequest;
+use Cratespace\Citadel\Jobs\DeleteUserJob;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Citadel\Http\Responses\DeleteUserResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Citadel\Contracts\Actions\UpdatesUserProfiles;
-use Citadel\Http\Requests\UpdateUserProfileRequest;
-use Citadel\Http\Responses\UpdateUserProfileResponse;
-use Citadel\Contracts\Responses\UserProfileViewResponse;
+use Cratespace\Citadel\Http\Requests\DeleteUserRequest;
+use Cratespace\Citadel\Http\Responses\DeleteUserResponse;
+use Cratespace\Citadel\Contracts\Actions\UpdatesUserProfiles;
+use Cratespace\Citadel\Http\Requests\UpdateUserProfileRequest;
+use Cratespace\Citadel\Http\Responses\UpdateUserProfileResponse;
+use Cratespace\Citadel\Contracts\Responses\UserProfileViewResponse;
 
 class UserProfileController extends Controller
 {
@@ -22,11 +20,11 @@ class UserProfileController extends Controller
      * @param \Illuminate\Http\Request                             $request
      * @param \Citadel\Contracts\Responses\UserProfileViewResponse $response
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function show(Request $request, UserProfileViewResponse $response): Response
+    public function show(): Responsable
     {
-        return $response->toResponse($request);
+        return $this->app(UserProfileViewResponse::class);
     }
 
     /**

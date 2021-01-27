@@ -1,11 +1,11 @@
 <?php
 
-namespace Citadel\Tests;
+namespace Cratespace\Citadel\Tests;
 
 use Mockery as m;
-use Citadel\Providers\CitadelServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Citadel\Tests\Fixtures\TestAuthenticationUser;
+use Cratespace\Citadel\Providers\CitadelServiceProvider;
+use Cratespace\Citadel\Tests\Fixtures\TestAuthenticationUser;
 
 abstract class TestCase extends BaseTestCase
 {
