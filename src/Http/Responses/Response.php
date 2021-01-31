@@ -39,6 +39,6 @@ abstract class Response extends ResponseFactory
      */
     public function back($status = 302, $headers = [], $fallback = false): RedirectResponse
     {
-        $this->redirect()->back($status, $headers, $fallback)
+        $this->redirect()->back($status, $headers, $fallback);
     }
 }
