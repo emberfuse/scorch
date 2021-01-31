@@ -5,9 +5,10 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Cratespace\Citadel\Models\Traits\HasProfilePhoto;
-use Cratespace\Citadel\Models\Traits\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cratespace\Citadel\Models\Concerns\InteractsWithSessions;
+use Cratespace\Citadel\Models\Traits\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
 {
@@ -15,6 +16,7 @@ class User extends Authenticatable
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
+    use InteractsWithSessions;
     use TwoFactorAuthenticatable;
 
     /**
@@ -64,5 +66,6 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'sessions',
     ];
 }

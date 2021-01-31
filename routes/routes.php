@@ -1,7 +1,7 @@
 <?php
 
-use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Support\Facades\Route;
+use Cratespace\Citadel\Citadel\Config;
 use Cratespace\Citadel\Http\Controllers\PasswordController;
 use Cratespace\Citadel\Http\Controllers\UserProfileController;
 use Cratespace\Citadel\Http\Controllers\VerifyEmailController;
@@ -11,8 +11,10 @@ use Cratespace\Citadel\Http\Controllers\PasswordResetController;
 use Cratespace\Citadel\Http\Controllers\AuthenticationController;
 use Cratespace\Citadel\Http\Controllers\ConfirmPasswordController;
 use Cratespace\Citadel\Http\Controllers\TwoFactorQrCodeController;
+use Cratespace\Citadel\Http\Controllers\UserProfilePhotoController;
 use Cratespace\Citadel\Http\Controllers\PasswordResetLinkController;
 use Cratespace\Citadel\Http\Controllers\ConfirmPasswordStatusController;
+use Cratespace\Preflight\Http\Controllers\OtherBrowserSessionsController;
 use Cratespace\Citadel\Http\Controllers\EmailVerificationPromptController;
 use Cratespace\Citadel\Http\Controllers\TwoFactorAuthenticationController;
 use Cratespace\Citadel\Http\Controllers\EmailVerificationNotificationController;
@@ -50,6 +52,7 @@ Route::group([
             Route::get('/profile', [UserProfileController::class, 'show'])->name('user.show');
             Route::put('/profile', [UserProfileController::class, 'update'])->name('user.update');
             Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('user.destroy');
+            Route::delete('/profile-photo', [UserProfilePhotoController::class, '__invoke'])->name('current-user-photo.destroy');
 
             Route::group(['middleware' => 'password.confirm'], function (): void {
                 Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store']);
@@ -58,6 +61,8 @@ Route::group([
                 Route::get('/two-factor-recovery-codes', [RecoveryCodeController::class, 'index']);
                 Route::post('/two-factor-recovery-codes', [RecoveryCodeController::class, 'store']);
             });
+
+            Route::delete('/other-browser-sessions', [OtherBrowserSessionsController::class, '__invoke'])->name('other-browser-sessions.destroy');
         });
 
         Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
