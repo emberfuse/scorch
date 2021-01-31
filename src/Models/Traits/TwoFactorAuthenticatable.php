@@ -18,7 +18,7 @@ trait TwoFactorAuthenticatable
      *
      * @return bool
      */
-    public function getAttributeTwoFactorEnabled(): bool
+    public function getTwoFactorEnabledAttribute(): bool
     {
         return ! is_null($this->two_factor_secret);
     }
