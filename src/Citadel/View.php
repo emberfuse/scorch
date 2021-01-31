@@ -5,14 +5,16 @@ namespace Cratespace\Citadel\Citadel;
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
 use Cratespace\Citadel\Http\Responses\ViewResponse;
-use Illuminate\Contracts\View\View as ViewContract;
 use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
+use Illuminate\Contracts\View\View as IlluminateViewContract;
+use Cratespace\Citadel\Contracts\Support\View as ViewContract;
 use Cratespace\Citadel\Contracts\Responses\RegisterViewResponse;
+use Cratespace\Citadel\Contracts\Responses\UserProfileViewResponse;
 use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
 use Cratespace\Citadel\Http\Responses\TwoFactorChallengeViewResponse;
 use Cratespace\Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 
-class View
+class View implements ViewContract
 {
     /**
      * Specify which view should be used as the login view.
@@ -106,7 +108,7 @@ class View
      *
      * @return void
      */
-    protected static function registerView(string $viewResponse, $view): void
+    public static function registerView(string $viewResponse, $view): void
     {
         app()->singleton($viewResponse, function ($app) use ($view) {
             if ($view instanceof Closure) {
@@ -125,7 +127,7 @@ class View
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public static function showView(Application $app, string $view): ViewContract
+    public static function showView(Application $app, string $view): IlluminateViewContract
     {
         return view($view, ['request' => $app['request']]);
     }
