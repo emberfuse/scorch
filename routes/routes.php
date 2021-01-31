@@ -40,7 +40,7 @@ Route::group([
     });
 
     Route::group(['middleware' => ['auth']], function (): void {
-        Route::post('/logout', [AuthenticationController::class, 'destroy']);
+        Route::post('/logout', [AuthenticationController::class, 'destroy'])->name('logout');
 
         Route::group(['prefix' => 'user'], function (): void {
             Route::get('/confirm-password', [ConfirmPasswordController::class, 'show'])->name('password.confirm');
