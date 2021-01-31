@@ -13,8 +13,8 @@ use Cratespace\Citadel\Http\Controllers\ConfirmPasswordController;
 use Cratespace\Citadel\Http\Controllers\TwoFactorQrCodeController;
 use Cratespace\Citadel\Http\Controllers\UserProfilePhotoController;
 use Cratespace\Citadel\Http\Controllers\PasswordResetLinkController;
+use Cratespace\Citadel\Http\Controllers\OtherBrowserSessionsController;
 use Cratespace\Citadel\Http\Controllers\ConfirmPasswordStatusController;
-use Cratespace\Preflight\Http\Controllers\OtherBrowserSessionsController;
 use Cratespace\Citadel\Http\Controllers\EmailVerificationPromptController;
 use Cratespace\Citadel\Http\Controllers\TwoFactorAuthenticationController;
 use Cratespace\Citadel\Http\Controllers\EmailVerificationNotificationController;
@@ -40,7 +40,7 @@ Route::group([
     });
 
     Route::group(['middleware' => ['auth']], function (): void {
-        Route::post('/logout', [AuthenticationController::class, 'destroy']);
+        Route::post('/logout', [AuthenticationController::class, 'destroy'])->name('logout');
 
         Route::group(['prefix' => 'user'], function (): void {
             Route::get('/confirm-password', [ConfirmPasswordController::class, 'show'])->name('password.confirm');

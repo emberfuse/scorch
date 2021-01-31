@@ -3,9 +3,9 @@
 namespace Cratespace\Citadel\Models\Traits;
 
 use BaconQrCode\Writer;
-use Cratespace\Citadel\Codes\RecoveryCode;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\ImageRenderer;
+use Cratespace\Citadel\Codes\RecoveryCode;
 use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
@@ -13,6 +13,16 @@ use Cratespace\Citadel\Contracts\Providers\TwoFactorAuthenticationProvider;
 
 trait TwoFactorAuthenticatable
 {
+    /**
+     * Determine if two-factor authentication is enabled for this user.
+     *
+     * @return bool
+     */
+    public function getTwoFactorEnabledAttribute(): bool
+    {
+        return ! is_null($this->two_factor_secret);
+    }
+
     /**
      * Get the user's two factor authentication recovery codes.
      *
