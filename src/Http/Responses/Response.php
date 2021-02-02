@@ -2,8 +2,9 @@
 
 namespace Cratespace\Citadel\Http\Responses;
 
-use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Routing\ResponseFactory;
 
 abstract class Response extends ResponseFactory
@@ -26,5 +27,18 @@ abstract class Response extends ResponseFactory
     public function redirect(): Redirector
     {
         return $this->redirector;
+    }
+
+    /**
+     * Create a new redirect response to the previous location.
+     *
+     * @param  int  $status
+     * @param  array  $headers
+     * @param  mixed  $fallback
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function back($status = 302, $headers = [], $fallback = false): RedirectResponse
+    {
+        return $this->redirect()->back($status, $headers, $fallback);
     }
 }

@@ -59,7 +59,7 @@ class CitadelServiceProvider extends ServiceProvider
     protected function registerActions(): void
     {
         collect(static::$actions)->each(
-            fn ($abstract, $concrete) => $this->app->singleton($abstract, $concrete)
+            fn ($concrete, $abstract) => $this->app->singleton($abstract, $concrete)
         );
     }
 }
