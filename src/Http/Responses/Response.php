@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\View\Factory as ViewFactory;
+use Illuminate\Contracts\Support\Responsable;
 
 abstract class Response extends ResponseFactory
 {
@@ -31,9 +32,31 @@ abstract class Response extends ResponseFactory
         Redirector $redirector,
         $content = null
     ) {
-        $this->view = $view;
-        $this->redirector = $redirector;
+        parent::__construct($view, $redirector);
+
         $this->content = $content;
+    }
+
+    /**
+     * Dispatch response.
+     *
+     * @param mixed|null $content
+     *
+     * @return \Illuminate\Contracts\Support\Responsable|Illuminate\Routing\ResponseFactory
+     */
+    public static function dispatch($content = null)
+    {
+        $response = new self(
+            app(ViewFactory::class),
+            app(Redirector::class),
+            $content
+        );
+
+        if ($response instanceof Responsable) {
+            return $response->toResponse(request());
+        }
+
+        return $response;
     }
 
     /**
