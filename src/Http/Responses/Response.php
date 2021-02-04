@@ -46,7 +46,7 @@ abstract class Response extends ResponseFactory
      */
     public static function dispatch($content = null)
     {
-        $response = new self(
+        $response = new static(
             app(ViewFactory::class),
             app(Redirector::class),
             $content
