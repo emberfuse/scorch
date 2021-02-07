@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
-use Cratespace\Citadel\Http\Controllers\Concerns\InteractsWithContainer;
+use Cratespace\Sentinel\Http\Controllers\Concerns\InteractsWithContainer;
 
 abstract class Controller extends BaseController
 {

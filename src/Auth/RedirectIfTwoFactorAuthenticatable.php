@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Citadel\Auth;
+namespace Cratespace\Sentinel\Auth;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Citadel\Models\Traits\TwoFactorAuthenticatable;
-use Cratespace\Citadel\Http\Responses\TwoFactorChallengeResponse;
+use Cratespace\Sentinel\Models\Traits\TwoFactorAuthenticatable;
+use Cratespace\Sentinel\Http\Responses\TwoFactorChallengeResponse;
 
 class RedirectIfTwoFactorAuthenticatable extends Authenticate
 {

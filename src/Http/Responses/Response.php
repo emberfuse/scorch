@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Responses;
+namespace Cratespace\Sentinel\Http\Responses;
 
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\RedirectResponse;
-use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Contracts\Support\Responsable;

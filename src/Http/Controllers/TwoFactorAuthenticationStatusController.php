@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Cratespace\Citadel\Actions\EnableTwoFactorAuthentication;
-use Cratespace\Citadel\Actions\DisableTwoFactorAuthentication;
+use Cratespace\Sentinel\Actions\EnableTwoFactorAuthentication;
+use Cratespace\Sentinel\Actions\DisableTwoFactorAuthentication;
 
 class TwoFactorAuthenticationStatusController extends Controller
 {
@@ -13,7 +13,7 @@ class TwoFactorAuthenticationStatusController extends Controller
      * Enable two factor authentication for the user.
      *
      * @param \Illuminate\Http\Request                       $request
-     * @param \Citadel\Actions\EnableTwoFactorAuthentication $enable
+     * @param \Sentinel\Actions\EnableTwoFactorAuthentication $enable
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -28,7 +28,7 @@ class TwoFactorAuthenticationStatusController extends Controller
      * Disable two factor authentication for the user.
      *
      * @param \Illuminate\Http\Request                        $request
-     * @param \Citadel\Actions\DisableTwoFactorAuthentication $disable
+     * @param \Sentinel\Actions\DisableTwoFactorAuthentication $disable
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

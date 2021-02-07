@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Requests;
+namespace Cratespace\Sentinel\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Citadel\Http\Requests\Concerns\AuthorizesRequests;
-use Cratespace\Citadel\Http\Requests\Traits\InputValidationRules;
+use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
+use Cratespace\Sentinel\Http\Requests\Traits\InputValidationRules;
 
 class RegisterRequest extends FormRequest
 {

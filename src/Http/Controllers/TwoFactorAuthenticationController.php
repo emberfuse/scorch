@@ -1,13 +1,13 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Citadel\Http\Requests\TwoFactorLoginRequest;
-use Cratespace\Citadel\Http\Responses\TwoFactorLoginResponse;
-use Cratespace\Citadel\Http\Responses\FailedTwoFactorLoginResponse;
-use Cratespace\Citadel\Http\Responses\TwoFactorChallengeViewResponse;
+use Cratespace\Sentinel\Http\Requests\TwoFactorLoginRequest;
+use Cratespace\Sentinel\Http\Responses\TwoFactorLoginResponse;
+use Cratespace\Sentinel\Http\Responses\FailedTwoFactorLoginResponse;
+use Cratespace\Sentinel\Http\Responses\TwoFactorChallengeViewResponse;
 
 class TwoFactorAuthenticationController extends Controller
 {
@@ -45,7 +45,7 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * Attempt to authenticate a new session using the two factor authentication code.
      *
-     * @param \Citadel\Http\Requests\TwoFactorLoginRequest $request
+     * @param \Sentinel\Http\Requests\TwoFactorLoginRequest $request
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */

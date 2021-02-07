@@ -1,19 +1,19 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Session\Store;
-use Cratespace\Citadel\Auth\AttemptToAuthenticate;
-use Cratespace\Citadel\Http\Requests\LoginRequest;
-use Cratespace\Citadel\Http\Requests\LogoutRequest;
-use Cratespace\Citadel\Http\Responses\LoginResponse;
-use Cratespace\Citadel\Http\Responses\LogoutResponse;
-use Cratespace\Citadel\Auth\EnsureLoginIsNotThrottled;
+use Cratespace\Sentinel\Auth\AttemptToAuthenticate;
+use Cratespace\Sentinel\Http\Requests\LoginRequest;
+use Cratespace\Sentinel\Http\Requests\LogoutRequest;
+use Cratespace\Sentinel\Http\Responses\LoginResponse;
+use Cratespace\Sentinel\Http\Responses\LogoutResponse;
+use Cratespace\Sentinel\Auth\EnsureLoginIsNotThrottled;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Citadel\Auth\PrepareAuthenticatedSession;
+use Cratespace\Sentinel\Auth\PrepareAuthenticatedSession;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
-use Cratespace\Citadel\Auth\RedirectIfTwoFactorAuthenticatable;
+use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
+use Cratespace\Sentinel\Auth\RedirectIfTwoFactorAuthenticatable;
 
 class AuthenticationController extends Controller
 {
@@ -33,7 +33,7 @@ class AuthenticationController extends Controller
      * Show the login view.
      *
      * @param \Illuminate\Http\Request                       $request
-     * @param \Citadel\Contracts\Responses\LoginViewResponse $response
+     * @param \Sentinel\Contracts\Responses\LoginViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
@@ -45,7 +45,7 @@ class AuthenticationController extends Controller
     /**
      * Attempt to authenticate a new session.
      *
-     * @param \Citadel\Http\Requests\LoginRequest $request
+     * @param \Sentinel\Http\Requests\LoginRequest $request
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
@@ -60,7 +60,7 @@ class AuthenticationController extends Controller
     /**
      * Destroy an authenticated session.
      *
-     * @param \Citadel\Http\Requests\LogoutRequest     $request
+     * @param \Sentinel\Http\Requests\LogoutRequest     $request
      * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
      *
      * @return \Illuminate\Contracts\Support\Responsable

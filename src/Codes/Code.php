@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Codes;
+namespace Cratespace\Sentinel\Codes;
 
 abstract class Code
 {

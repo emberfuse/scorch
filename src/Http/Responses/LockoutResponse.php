@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Responses;
+namespace Cratespace\Sentinel\Http\Responses;
 
-use Cratespace\Citadel\Citadel\Config;
-use Cratespace\Citadel\Limiters\LoginRateLimiter;
+use Cratespace\Sentinel\Sentinel\Config;
+use Cratespace\Sentinel\Limiters\LoginRateLimiter;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,14 +13,14 @@ class LockoutResponse extends Response implements Responsable
     /**
      * The login rate limiter instance.
      *
-     * @var \Citadel\Limiters\LoginRateLimiter
+     * @var \Sentinel\Limiters\LoginRateLimiter
      */
     protected $limiter;
 
     /**
      * Create a new response instance.
      *
-     * @param \Citadel\Limiters\LoginRateLimiter $limiter
+     * @param \Sentinel\Limiters\LoginRateLimiter $limiter
      *
      * @return void
      */

@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Citadel\Tests;
+namespace Cratespace\Sentinel\Tests;
 
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Citadel\Http\Responses\Response;
+use Cratespace\Sentinel\Http\Responses\Response;
 
 class ResponseTest extends TestCase
 {

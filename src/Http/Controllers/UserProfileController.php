@@ -1,16 +1,16 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
-use Cratespace\Citadel\Jobs\DeleteUserJob;
+use Cratespace\Sentinel\Jobs\DeleteUserJob;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Citadel\Http\Requests\DeleteUserRequest;
-use Cratespace\Citadel\Http\Responses\DeleteUserResponse;
-use Cratespace\Citadel\Contracts\Actions\UpdatesUserProfiles;
-use Cratespace\Citadel\Http\Requests\UpdateUserProfileRequest;
-use Cratespace\Citadel\Http\Responses\UpdateUserProfileResponse;
-use Cratespace\Citadel\Contracts\Responses\UserProfileViewResponse;
+use Cratespace\Sentinel\Http\Requests\DeleteUserRequest;
+use Cratespace\Sentinel\Http\Responses\DeleteUserResponse;
+use Cratespace\Sentinel\Contracts\Actions\UpdatesUserProfiles;
+use Cratespace\Sentinel\Http\Requests\UpdateUserProfileRequest;
+use Cratespace\Sentinel\Http\Responses\UpdateUserProfileResponse;
+use Cratespace\Sentinel\Contracts\Responses\UserProfileViewResponse;
 
 class UserProfileController extends Controller
 {
@@ -18,7 +18,7 @@ class UserProfileController extends Controller
      * Show user profile view.
      *
      * @param \Illuminate\Http\Request                             $request
-     * @param \Citadel\Contracts\Responses\UserProfileViewResponse $response
+     * @param \Sentinel\Contracts\Responses\UserProfileViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
@@ -30,8 +30,8 @@ class UserProfileController extends Controller
     /**
      * Update the user's profile information.
      *
-     * @param \Citadel\Http\Requests\UpdateUserProfileRequest $request
-     * @param \Citadel\Contracts\Actions\UpdatesUserProfiles  $updater
+     * @param \Sentinel\Http\Requests\UpdateUserProfileRequest $request
+     * @param \Sentinel\Contracts\Actions\UpdatesUserProfiles  $updater
      *
      * @return \Illuminate\Http\Response
      */

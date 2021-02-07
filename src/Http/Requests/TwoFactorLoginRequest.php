@@ -1,12 +1,12 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Requests;
+namespace Cratespace\Sentinel\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Cratespace\Citadel\Http\Requests\Concerns\AuthorizesRequests;
-use Cratespace\Citadel\Contracts\Providers\TwoFactorAuthenticationProvider;
+use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
+use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider;
 use Laravel\Fortify\Http\Responses\FailedTwoFactorLoginResponse;
 
 class TwoFactorLoginRequest extends FormRequest

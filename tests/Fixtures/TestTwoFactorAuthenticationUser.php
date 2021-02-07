@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Citadel\Tests\Fixtures;
+namespace Cratespace\Sentinel\Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Citadel\Models\Traits\TwoFactorAuthenticatable;
+use Cratespace\Sentinel\Models\Traits\TwoFactorAuthenticatable;
 
 class TestTwoFactorAuthenticationUser extends User
 {

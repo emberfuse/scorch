@@ -1,12 +1,12 @@
 <?php
 
-namespace Cratespace\Citadel\Tests;
+namespace Cratespace\Sentinel\Tests;
 
 use Mockery as m;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Citadel\Contracts\Actions\CreatesNewUsers;
+use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Citadel\Contracts\Responses\RegisterViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
 
 class RegisterUserTest extends TestCase
 {

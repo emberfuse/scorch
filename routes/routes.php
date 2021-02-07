@@ -1,24 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Cratespace\Citadel\Citadel\Config;
-use Cratespace\Citadel\Http\Controllers\PasswordController;
-use Cratespace\Citadel\Http\Controllers\UserProfileController;
-use Cratespace\Citadel\Http\Controllers\VerifyEmailController;
-use Cratespace\Citadel\Http\Controllers\RecoveryCodeController;
-use Cratespace\Citadel\Http\Controllers\RegisterUserController;
-use Cratespace\Citadel\Http\Controllers\PasswordResetController;
-use Cratespace\Citadel\Http\Controllers\AuthenticationController;
-use Cratespace\Citadel\Http\Controllers\ConfirmPasswordController;
-use Cratespace\Citadel\Http\Controllers\TwoFactorQrCodeController;
-use Cratespace\Citadel\Http\Controllers\UserProfilePhotoController;
-use Cratespace\Citadel\Http\Controllers\PasswordResetLinkController;
-use Cratespace\Citadel\Http\Controllers\OtherBrowserSessionsController;
-use Cratespace\Citadel\Http\Controllers\ConfirmPasswordStatusController;
-use Cratespace\Citadel\Http\Controllers\EmailVerificationPromptController;
-use Cratespace\Citadel\Http\Controllers\TwoFactorAuthenticationController;
-use Cratespace\Citadel\Http\Controllers\EmailVerificationNotificationController;
-use Cratespace\Citadel\Http\Controllers\TwoFactorAuthenticationStatusController;
+use Cratespace\Sentinel\Sentinel\Config;
+use Cratespace\Sentinel\Http\Controllers\PasswordController;
+use Cratespace\Sentinel\Http\Controllers\UserProfileController;
+use Cratespace\Sentinel\Http\Controllers\VerifyEmailController;
+use Cratespace\Sentinel\Http\Controllers\RecoveryCodeController;
+use Cratespace\Sentinel\Http\Controllers\RegisterUserController;
+use Cratespace\Sentinel\Http\Controllers\PasswordResetController;
+use Cratespace\Sentinel\Http\Controllers\AuthenticationController;
+use Cratespace\Sentinel\Http\Controllers\ConfirmPasswordController;
+use Cratespace\Sentinel\Http\Controllers\TwoFactorQrCodeController;
+use Cratespace\Sentinel\Http\Controllers\UserProfilePhotoController;
+use Cratespace\Sentinel\Http\Controllers\PasswordResetLinkController;
+use Cratespace\Sentinel\Http\Controllers\OtherBrowserSessionsController;
+use Cratespace\Sentinel\Http\Controllers\ConfirmPasswordStatusController;
+use Cratespace\Sentinel\Http\Controllers\EmailVerificationPromptController;
+use Cratespace\Sentinel\Http\Controllers\TwoFactorAuthenticationController;
+use Cratespace\Sentinel\Http\Controllers\EmailVerificationNotificationController;
+use Cratespace\Sentinel\Http\Controllers\TwoFactorAuthenticationStatusController;
 
 Route::group([
     'middleware' => Config::middleware(['web']),

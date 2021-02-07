@@ -4,7 +4,7 @@ namespace App\Actions\Auth;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Cratespace\Citadel\Contracts\Actions\DeletesUsers;
+use Cratespace\Sentinel\Contracts\Actions\DeletesUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class DeleteUser implements DeletesUsers

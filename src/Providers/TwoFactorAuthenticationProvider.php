@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Citadel\Providers;
+namespace Cratespace\Sentinel\Providers;
 
 use PragmaRX\Google2FA\Google2FA;
-use Cratespace\Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
+use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
 
 class TwoFactorAuthenticationProvider implements TwoFactorAuthenticationProviderContract
 {

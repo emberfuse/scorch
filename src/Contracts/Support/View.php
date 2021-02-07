@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Contracts\Support;
+namespace Cratespace\Sentinel\Contracts\Support;
 
 interface View
 {

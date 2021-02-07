@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Cratespace\Citadel\Citadel\Config;
-use Cratespace\Citadel\Contracts\Responses\VerifyEmailViewResponse;
+use Cratespace\Sentinel\Sentinel\Config;
+use Cratespace\Sentinel\Contracts\Responses\VerifyEmailViewResponse;
 
 class EmailVerificationPromptController extends Controller
 {
@@ -12,7 +12,7 @@ class EmailVerificationPromptController extends Controller
      * Display the email verification prompt.
      *
      * @param \Illuminate\Http\Request                             $request
-     * @param \Citadel\Contracts\Responses\VerifyEmailViewResponse $response
+     * @param \Sentinel\Contracts\Responses\VerifyEmailViewResponse $response
      *
      * @return \Symfony\Component\HttpFoundation\Response|Illuminate\Contracts\Support\Responsable
      */

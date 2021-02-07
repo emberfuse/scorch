@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Console;
+namespace Cratespace\Sentinel\Console;
 
 use Illuminate\Console\Command;
 
@@ -11,14 +11,14 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'citadel:install';
+    protected $signature = 'sentinel:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install the Citadel package';
+    protected $description = 'Install the Sentinel package';
 
     /**
      * Execute the console command.
@@ -28,12 +28,12 @@ class InstallCommand extends Command
     public function handle()
     {
         // Publish...
-        $this->callSilent('vendor:publish', ['--tag' => 'citadel-config', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'sentinel-config', '--force' => true]);
         $this->callSilent('vendor:publish', ['--tag' => 'rules-config', '--force' => true]);
-        $this->callSilent('vendor:publish', ['--tag' => 'citadel-support', '--force' => true]);
-        $this->callSilent('vendor:publish', ['--tag' => 'citadel-migrations', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'sentinel-support', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'sentinel-migrations', '--force' => true]);
 
         // Finish message...
-        $this->info('Citadel installed successfully!');
+        $this->info('Sentinel installed successfully!');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Rules;
+namespace Cratespace\Sentinel\Rules;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Validation\Rule;

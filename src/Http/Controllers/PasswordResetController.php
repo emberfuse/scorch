@@ -1,16 +1,16 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
-use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Citadel\Http\Requests\PasswordResetRequest;
-use Cratespace\Citadel\Http\Responses\PasswordResetResponse;
-use Cratespace\Citadel\Contracts\Actions\ResetsUserPasswords;
-use Cratespace\Citadel\Http\Responses\FailedPasswordResetResponse;
-use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
+use Cratespace\Sentinel\Http\Requests\PasswordResetRequest;
+use Cratespace\Sentinel\Http\Responses\PasswordResetResponse;
+use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
+use Cratespace\Sentinel\Http\Responses\FailedPasswordResetResponse;
+use Cratespace\Sentinel\Contracts\Responses\ResetPasswordViewResponse;
 
 class PasswordResetController extends Controller
 {
@@ -37,7 +37,7 @@ class PasswordResetController extends Controller
      * Show the new password view.
      *
      * @param \Illuminate\Http\Request                               $request
-     * @param \Citadel\Contracts\Responses\ResetPasswordViewResponse $response
+     * @param \Sentinel\Contracts\Responses\ResetPasswordViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
@@ -50,7 +50,7 @@ class PasswordResetController extends Controller
      * Reset the user's password.
      *
      * @param \Illuminate\Http\Request                       $request
-     * @param \Citadel\Contracts\Actions\ResetsUserPasswords $reseter
+     * @param \Sentinel\Contracts\Actions\ResetsUserPasswords $reseter
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */

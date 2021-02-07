@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Citadel\Tests;
+namespace Cratespace\Sentinel\Tests;
 
-use Cratespace\Citadel\Tests\Traits\HasUserAttributes;
-use Cratespace\Citadel\Tests\Fixtures\TestAuthenticationUser;
+use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
+use Cratespace\Sentinel\Tests\Fixtures\TestAuthenticationUser;
 
 class BrowserSessionsTest extends TestCase
 {

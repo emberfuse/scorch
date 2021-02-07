@@ -1,19 +1,19 @@
 <?php
 
-namespace Cratespace\Citadel\Providers;
+namespace Cratespace\Sentinel\Providers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Citadel\Console\InstallCommand;
-use Cratespace\Citadel\Actions\ConfirmPassword;
-use Cratespace\Citadel\Console\MakeResponseCommand;
-use Cratespace\Citadel\Contracts\Actions\ConfirmsPasswords;
-use Cratespace\Citadel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
+use Cratespace\Sentinel\Console\InstallCommand;
+use Cratespace\Sentinel\Actions\ConfirmPassword;
+use Cratespace\Sentinel\Console\MakeResponseCommand;
+use Cratespace\Sentinel\Contracts\Actions\ConfirmsPasswords;
+use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
 
-class CitadelServiceProvider extends ServiceProvider
+class SentinelServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -22,7 +22,7 @@ class CitadelServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/citadel.php', 'citadel');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/sentinel.php', 'sentinel');
 
         $this->registerAuthGuard();
         $this->registerTwoFactorAuthProvider();
@@ -68,7 +68,7 @@ class CitadelServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register all citadel internal action classes.
+     * Register all sentinel internal action classes.
      *
      * @return void
      */
@@ -86,8 +86,8 @@ class CitadelServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../../stubs/config/citadel.php' => config_path('citadel.php'),
-            ], 'citadel-config');
+                __DIR__ . '/../../stubs/config/sentinel.php' => config_path('sentinel.php'),
+            ], 'sentinel-config');
 
             $this->publishes([
                 __DIR__ . '/../../stubs/config/rules.php' => config_path('rules.php'),
@@ -101,15 +101,15 @@ class CitadelServiceProvider extends ServiceProvider
                 __DIR__ . '/../../stubs/app/Actions/Auth/UpdateUserPassword.php' => app_path('Actions/Auth/UpdateUserPassword.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/UpdateUserProfile.php' => app_path('Actions/Auth/UpdateUserProfile.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/Traits/PasswordUpdater.php' => app_path('Actions/Auth/Traits/PasswordUpdater.php'),
-                __DIR__ . '/../../stubs/app/Providers/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
+                __DIR__ . '/../../stubs/app/Providers/SentinelServiceProvider.php' => app_path('Providers/SentinelServiceProvider.php'),
                 __DIR__ . '/../../stubs/app/Providers/AuthServiceProvider.php' => app_path('Providers/AuthServiceProvider.php'),
                 __DIR__ . '/../../stubs/app/Policies/UserPolicy.php' => app_path('Policies/UserPolicy.php'),
                 __DIR__ . '/../../stubs/app/Models/User.php' => app_path('Models/User.php'),
-            ], 'citadel-support');
+            ], 'sentinel-support');
 
             $this->publishes([
                 __DIR__ . '/../../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
-            ], 'citadel-migrations');
+            ], 'sentinel-migrations');
         }
     }
 
@@ -138,7 +138,7 @@ class CitadelServiceProvider extends ServiceProvider
     protected function configureRoutes(): void
     {
         Route::group([
-            'namespace' => 'Citadel\Http\Controllers',
+            'namespace' => 'Sentinel\Http\Controllers',
             'domain' => Config::domain([null]),
             'prefix' => Config::prefix(),
         ], function (): void {

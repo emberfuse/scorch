@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Events;
+namespace Cratespace\Sentinel\Events;
 
 class TwoFactorAuthenticationDisabled extends TwoFactorAuthenticationEvent
 {

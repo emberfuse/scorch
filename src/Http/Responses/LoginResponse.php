@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Responses;
+namespace Cratespace\Sentinel\Http\Responses;
 
 use Illuminate\Routing\Redirector;
-use Cratespace\Citadel\Limiters\LoginRateLimiter;
+use Cratespace\Sentinel\Limiters\LoginRateLimiter;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Contracts\Support\Responsable;
 
@@ -12,7 +12,7 @@ class LoginResponse extends Response implements Responsable
     /**
      * The login rate limiter instance.
      *
-     * @var \Citadel\Limiters\LoginRateLimiter
+     * @var \Sentinel\Limiters\LoginRateLimiter
      */
     protected $limiter;
 
@@ -21,7 +21,7 @@ class LoginResponse extends Response implements Responsable
      *
      * @param \Illuminate\Contracts\View\Factory $view
      * @param \Illuminate\Routing\Redirector     $redirector
-     * @param \Citadel\Limiters\LoginRateLimiter $limiter
+     * @param \Sentinel\Limiters\LoginRateLimiter $limiter
      *
      * @return void
      */

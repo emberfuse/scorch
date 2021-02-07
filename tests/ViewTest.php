@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Citadel;
+namespace Cratespace\Sentinel;
 
 use Illuminate\Http\JsonResponse;
-use Cratespace\Citadel\Citadel\View;
-use Cratespace\Citadel\Tests\TestCase;
+use Cratespace\Sentinel\Sentinel\View;
+use Cratespace\Sentinel\Tests\TestCase;
 use Illuminate\Contracts\Support\Responsable;
 
 class ViewTest extends TestCase

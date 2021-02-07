@@ -1,16 +1,16 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Citadel\Http\Requests\PasswordResetLinkRequest;
-use Cratespace\Citadel\Http\Responses\FailedPasswordResetLinkRequestResponse;
-use Cratespace\Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
-use Cratespace\Citadel\Http\Responses\SuccessfulPasswordResetLinkRequestResponse;
+use Cratespace\Sentinel\Http\Requests\PasswordResetLinkRequest;
+use Cratespace\Sentinel\Http\Responses\FailedPasswordResetLinkRequestResponse;
+use Cratespace\Sentinel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
+use Cratespace\Sentinel\Http\Responses\SuccessfulPasswordResetLinkRequestResponse;
 
 class PasswordResetLinkController extends Controller
 {

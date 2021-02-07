@@ -1,8 +1,8 @@
 <?php
 
-namespace Cratespace\Citadel\Limiters;
+namespace Cratespace\Sentinel\Limiters;
 
-use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Cache\RateLimiter;

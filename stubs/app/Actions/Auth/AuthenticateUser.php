@@ -3,9 +3,9 @@
 namespace App\Actions\Auth;
 
 use Illuminate\Http\Request;
-use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Citadel\Contracts\Actions\AuthenticatesUsers;
+use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
 
 class AuthenticateUser implements AuthenticatesUsers
 {

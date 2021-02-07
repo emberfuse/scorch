@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Events\Traits;
+namespace Cratespace\Sentinel\Events\Traits;
 
 use Illuminate\Foundation\Auth\User;
 

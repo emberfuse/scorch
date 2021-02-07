@@ -9,17 +9,17 @@ use App\Actions\Auth\ResetUserPassword;
 use App\Actions\Auth\UpdateUserProfile;
 use Illuminate\Support\ServiceProvider;
 use App\Actions\Auth\UpdateUserPassword;
-use Cratespace\Citadel\Contracts\Actions\DeletesUsers;
-use Cratespace\Citadel\Contracts\Actions\CreatesNewUsers;
-use Cratespace\Citadel\Contracts\Actions\AuthenticatesUsers;
-use Cratespace\Citadel\Contracts\Actions\ResetsUserPasswords;
-use Cratespace\Citadel\Contracts\Actions\UpdatesUserProfiles;
-use Cratespace\Citadel\Contracts\Actions\UpdatesUserPasswords;
+use Cratespace\Sentinel\Contracts\Actions\DeletesUsers;
+use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
+use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
+use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
+use Cratespace\Sentinel\Contracts\Actions\UpdatesUserProfiles;
+use Cratespace\Sentinel\Contracts\Actions\UpdatesUserPasswords;
 
-class CitadelServiceProvider extends ServiceProvider
+class SentinelServiceProvider extends ServiceProvider
 {
     /**
-     * The citadel action classes.
+     * The sentinel action classes.
      *
      * @var array
      */
@@ -52,7 +52,7 @@ class CitadelServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register all citadel action classes to the service container.
+     * Register all sentinel action classes to the service container.
      *
      * @return void
      */
