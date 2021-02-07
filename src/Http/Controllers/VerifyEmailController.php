@@ -1,18 +1,18 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
-use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\RedirectResponse;
-use Cratespace\Citadel\Http\Requests\VerifyEmailRequest;
+use Cratespace\Sentinel\Http\Requests\VerifyEmailRequest;
 
 class VerifyEmailController extends Controller
 {
     /**
      * Mark the authenticated user's email address as verified.
      *
-     * @param \Citadel\Http\Requests\VerifyEmailRequest $request
+     * @param \Sentinel\Http\Requests\VerifyEmailRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */

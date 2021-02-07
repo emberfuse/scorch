@@ -1,12 +1,12 @@
 <?php
 
-namespace Cratespace\Citadel\Actions;
+namespace Cratespace\Sentinel\Actions;
 
-use Cratespace\Citadel\Codes\RecoveryCode;
+use Cratespace\Sentinel\Codes\RecoveryCode;
 use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Citadel\Events\TwoFactorAuthenticationEnabled;
-use Cratespace\Citadel\Contracts\Providers\TwoFactorAuthenticationProvider;
+use Cratespace\Sentinel\Events\TwoFactorAuthenticationEnabled;
+use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider;
 
 class EnableTwoFactorAuthentication
 {
@@ -20,14 +20,14 @@ class EnableTwoFactorAuthentication
     /**
      * The two factor authentication provider.
      *
-     * @var \Citadel\Contracts\Providers\TwoFactorAuthenticationProvider
+     * @var \Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider
      */
     protected $provider;
 
     /**
      * Create a new action instance.
      *
-     * @param \Citadel\Contracts\Providers\TwoFactorAuthenticationProvider $provider
+     * @param \Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider $provider
      *
      * @return void
      */

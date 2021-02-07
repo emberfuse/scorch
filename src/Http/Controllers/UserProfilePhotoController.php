@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Citadel\Http\Requests\DeleteProfilePhotoRequest;
-use Cratespace\Citadel\Http\Responses\DeleteProfilePhotoResponse;
+use Cratespace\Sentinel\Http\Requests\DeleteProfilePhotoRequest;
+use Cratespace\Sentinel\Http\Responses\DeleteProfilePhotoResponse;
 
 class UserProfilePhotoController extends Controller
 {

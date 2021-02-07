@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Requests;
+namespace Cratespace\Sentinel\Http\Requests;
 
-use Cratespace\Citadel\Citadel\Config;
-use Cratespace\Citadel\Rules\PasswordRule;
+use Cratespace\Sentinel\Sentinel\Config;
+use Cratespace\Sentinel\Rules\PasswordRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Citadel\Http\Requests\Concerns\AuthorizesRequests;
+use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
 
 class PasswordResetRequest extends FormRequest
 {

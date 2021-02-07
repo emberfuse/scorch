@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Tests;
+namespace Cratespace\Sentinel\Tests;
 
 use Mockery as m;
 use Illuminate\Contracts\Auth\Authenticatable;

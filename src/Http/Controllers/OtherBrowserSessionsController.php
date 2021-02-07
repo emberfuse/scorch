@@ -1,13 +1,13 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Citadel\Http\Requests\LogoutOtherBrowserSessionsRequest;
+use Cratespace\Sentinel\Http\Requests\LogoutOtherBrowserSessionsRequest;
 
 class OtherBrowserSessionsController extends Controller
 {

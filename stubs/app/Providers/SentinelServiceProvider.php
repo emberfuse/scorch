@@ -2,24 +2,24 @@
 
 namespace App\Providers;
 
-use App\Actions\Citadel\DeleteUser;
-use App\Actions\Citadel\CreateNewUser;
+use App\Actions\Auth\DeleteUser;
+use App\Actions\Auth\CreateNewUser;
+use App\Actions\Auth\AuthenticateUser;
+use App\Actions\Auth\ResetUserPassword;
+use App\Actions\Auth\UpdateUserProfile;
 use Illuminate\Support\ServiceProvider;
-use App\Actions\Citadel\AuthenticateUser;
-use App\Actions\Citadel\ResetUserPassword;
-use App\Actions\Citadel\UpdateUserProfile;
-use App\Actions\Citadel\UpdateUserPassword;
-use Cratespace\Citadel\Contracts\Actions\DeletesUsers;
-use Cratespace\Citadel\Contracts\Actions\CreatesNewUsers;
-use Cratespace\Citadel\Contracts\Auth\AuthenticatesUsers;
-use Cratespace\Citadel\Contracts\Actions\ResetsUserPasswords;
-use Cratespace\Citadel\Contracts\Actions\UpdatesUserProfiles;
-use Cratespace\Citadel\Contracts\Actions\UpdatesUserPasswords;
+use App\Actions\Auth\UpdateUserPassword;
+use Cratespace\Sentinel\Contracts\Actions\DeletesUsers;
+use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
+use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
+use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
+use Cratespace\Sentinel\Contracts\Actions\UpdatesUserProfiles;
+use Cratespace\Sentinel\Contracts\Actions\UpdatesUserPasswords;
 
-class CitadelServiceProvider extends ServiceProvider
+class SentinelServiceProvider extends ServiceProvider
 {
     /**
-     * The citadel action classes.
+     * The sentinel action classes.
      *
      * @var array
      */
@@ -52,7 +52,7 @@ class CitadelServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register all citadel action classes to the service container.
+     * Register all sentinel action classes to the service container.
      *
      * @return void
      */

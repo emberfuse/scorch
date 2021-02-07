@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Citadel\Traits;
+namespace App\Actions\Auth\Traits;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;

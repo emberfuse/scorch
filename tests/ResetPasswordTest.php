@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Tests;
+namespace Cratespace\Sentinel\Tests;
 
 use Mockery as m;
 use Illuminate\Support\Facades\Config;
@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Citadel\Contracts\Actions\ResetsUserPasswords;
-use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
+use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
+use Cratespace\Sentinel\Contracts\Responses\ResetPasswordViewResponse;
 
 class ResetPasswordTest extends TestCase
 {
@@ -103,7 +103,7 @@ class ResetPasswordTest extends TestCase
 
     public function testPasswordCanBeResetWithCustomizedEmailAddressField()
     {
-        Config::set('citadel.email', 'emailAddress');
+        Config::set('sentinel.email', 'emailAddress');
         Password::shouldReceive('broker')->andReturn(
             $broker = m::mock(PasswordBroker::class)
         );

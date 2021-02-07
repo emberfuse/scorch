@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
-use Cratespace\Citadel\Http\Requests\UpdatePasswordRequest;
-use Cratespace\Citadel\Contracts\Actions\UpdatesUserPasswords;
+use Cratespace\Sentinel\Http\Requests\UpdatePasswordRequest;
+use Cratespace\Sentinel\Contracts\Actions\UpdatesUserPasswords;
 
 class PasswordController extends Controller
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Actions\Citadel;
+namespace App\Actions\Auth;
 
 use Closure;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\PasswordBroker;
-use App\Actions\Citadel\Traits\PasswordUpdater;
-use Cratespace\Citadel\Contracts\Actions\ResetsUserPasswords;
+use App\Actions\Sentinel\Traits\PasswordUpdater;
+use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
 
 class ResetUserPassword implements ResetsUserPasswords
 {

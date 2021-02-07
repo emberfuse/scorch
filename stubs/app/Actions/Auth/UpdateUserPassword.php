@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Actions\Citadel;
+namespace App\Actions\Auth;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use App\Actions\Citadel\Traits\PasswordUpdater;
-use Cratespace\Citadel\Contracts\Actions\UpdatesUserPasswords;
+use App\Actions\Sentinel\Traits\PasswordUpdater;
+use Cratespace\Sentinel\Contracts\Actions\UpdatesUserPasswords;
 
 class UpdateUserPassword implements UpdatesUserPasswords
 {

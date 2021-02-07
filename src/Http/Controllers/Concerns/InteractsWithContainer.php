@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers\Concerns;
+namespace Cratespace\Sentinel\Http\Controllers\Concerns;
 
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Container\Container;

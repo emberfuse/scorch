@@ -1,14 +1,14 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Citadel\Contracts\Actions\ConfirmsPasswords;
-use Cratespace\Citadel\Http\Requests\ConfirmPasswordRequest;
-use Cratespace\Citadel\Http\Responses\PasswordConfirmedResponse;
-use Cratespace\Citadel\Contracts\Responses\ConfirmPasswordViewResponse;
-use Cratespace\Citadel\Http\Responses\FailedPasswordConfirmationResponse;
+use Cratespace\Sentinel\Contracts\Actions\ConfirmsPasswords;
+use Cratespace\Sentinel\Http\Requests\ConfirmPasswordRequest;
+use Cratespace\Sentinel\Http\Responses\PasswordConfirmedResponse;
+use Cratespace\Sentinel\Contracts\Responses\ConfirmPasswordViewResponse;
+use Cratespace\Sentinel\Http\Responses\FailedPasswordConfirmationResponse;
 
 class ConfirmPasswordController extends Controller
 {
@@ -35,7 +35,7 @@ class ConfirmPasswordController extends Controller
      * Show the confirm password view.
      *
      * @param \Illuminate\Http\Request                                 $request
-     * @param \Citadel\Contracts\Responses\ConfirmPasswordViewResponse $response
+     * @param \Sentinel\Contracts\Responses\ConfirmPasswordViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */

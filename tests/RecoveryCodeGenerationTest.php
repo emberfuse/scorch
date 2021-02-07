@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Citadel\Tests;
+namespace Cratespace\Sentinel\Tests;
 
 use Illuminate\Support\Facades\Event;
-use Cratespace\Citadel\Events\RecoveryCodesGenerated;
+use Cratespace\Sentinel\Events\RecoveryCodesGenerated;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Cratespace\Citadel\Tests\Fixtures\TestTwoFactorRecoveryCodeUser;
+use Cratespace\Sentinel\Tests\Fixtures\TestTwoFactorRecoveryCodeUser;
 
 class RecoveryCodeGenerationTest extends TestCase
 {

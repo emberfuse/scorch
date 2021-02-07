@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Responses;
+namespace Cratespace\Sentinel\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Validation\ValidationException;

@@ -10,7 +10,7 @@ return [
     'guard' => 'web',
 
     /*
-     * Citadel Password Broker.
+     * Sentinel Password Broker.
      */
     'passwords' => 'users',
 
@@ -26,13 +26,13 @@ return [
     'home' => RouteServiceProvider::HOME,
 
     /*
-     * Citadel Routes Prefix / Subdomain.
+     * Sentinel Routes Prefix / Subdomain.
      */
     'prefix' => '',
     'domain' => null,
 
     /*
-     * Citadel Routes Middleware
+     * Sentinel Routes Middleware
      */
     'middleware' => ['web'],
 

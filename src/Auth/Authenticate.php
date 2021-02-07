@@ -1,17 +1,17 @@
 <?php
 
-namespace Cratespace\Citadel\Auth;
+namespace Cratespace\Sentinel\Auth;
 
-use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
-use Cratespace\Citadel\Limiters\LoginRateLimiter;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Citadel\Contracts\Auth\AuthenticatesUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Validation\ValidationException;
+use Cratespace\Sentinel\Limiters\LoginRateLimiter;
+use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
 
 abstract class Authenticate
 {
@@ -25,7 +25,7 @@ abstract class Authenticate
     /**
      * The login rate limiter instance.
      *
-     * @var \Citadel\Limiters\LoginRateLimiter
+     * @var \Sentinel\Limiters\LoginRateLimiter
      */
     protected $limiter;
 
@@ -33,7 +33,7 @@ abstract class Authenticate
      * Create a new controller instance.
      *
      * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
-     * @param \Citadel\Limiters\LoginRateLimiter       $limiter
+     * @param \Sentinel\Limiters\LoginRateLimiter       $limiter
      *
      * @return void
      */

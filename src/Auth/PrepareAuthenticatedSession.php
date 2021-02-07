@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Auth;
+namespace Cratespace\Sentinel\Auth;
 
 class PrepareAuthenticatedSession extends Authenticate
 {

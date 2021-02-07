@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Console;
+namespace Cratespace\Sentinel\Console;
 
 use Illuminate\Console\GeneratorCommand;
 

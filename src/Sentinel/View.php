@@ -1,18 +1,18 @@
 <?php
 
-namespace Cratespace\Citadel\Citadel;
+namespace Cratespace\Sentinel\Sentinel;
 
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
-use Cratespace\Citadel\Http\Responses\ViewResponse;
-use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
+use Cratespace\Sentinel\Http\Responses\ViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
 use Illuminate\Contracts\View\View as IlluminateViewContract;
-use Cratespace\Citadel\Contracts\Support\View as ViewContract;
-use Cratespace\Citadel\Contracts\Responses\RegisterViewResponse;
-use Cratespace\Citadel\Contracts\Responses\UserProfileViewResponse;
-use Cratespace\Citadel\Contracts\Responses\ResetPasswordViewResponse;
-use Cratespace\Citadel\Http\Responses\TwoFactorChallengeViewResponse;
-use Cratespace\Citadel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
+use Cratespace\Sentinel\Contracts\Support\View as ViewContract;
+use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\UserProfileViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\ResetPasswordViewResponse;
+use Cratespace\Sentinel\Http\Responses\TwoFactorChallengeViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 
 class View implements ViewContract
 {

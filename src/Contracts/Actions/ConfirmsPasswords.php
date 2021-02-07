@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Contracts\Actions;
+namespace Cratespace\Sentinel\Contracts\Actions;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\Authenticatable;

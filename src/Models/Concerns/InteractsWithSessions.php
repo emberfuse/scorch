@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Models\Concerns;
+namespace Cratespace\Sentinel\Models\Concerns;
 
 use Carbon\Carbon;
 use Jenssegers\Agent\Agent;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Citadel\Auth;
+namespace Cratespace\Sentinel\Auth;
 
 use Illuminate\Auth\Events\Lockout;
-use Cratespace\Citadel\Http\Responses\LockoutResponse;
+use Cratespace\Sentinel\Http\Responses\LockoutResponse;
 
 class EnsureLoginIsNotThrottled extends Authenticate
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Citadel;
+namespace Cratespace\Sentinel\Sentinel;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
@@ -15,7 +15,7 @@ class Config
     protected $config;
 
     /**
-     * Create new instance of citadel configuration repository.
+     * Create new instance of sentinel configuration repository.
      *
      * @param \Illuminate\Contracts\Config\Repository $config
      *
@@ -27,17 +27,17 @@ class Config
     }
 
     /**
-     * Get all citadel configurations.
+     * Get all sentinel configurations.
      *
      * @return array
      */
     public function all(): array
     {
-        return $this->config->get('citadel');
+        return $this->config->get('sentinel');
     }
 
     /**
-     * Get specified citadel configuration.
+     * Get specified sentinel configuration.
      *
      * @param string $key
      * @param mixed  $default
@@ -46,11 +46,11 @@ class Config
      */
     public function get(string $key, $default = null)
     {
-        return $this->config->get("citadel.{$key}", $default);
+        return $this->config->get("sentinel.{$key}", $default);
     }
 
     /**
-     * Get specified citadel configuration dynamically.
+     * Get specified sentinel configuration dynamically.
      *
      * @param string $name
      * @param mixed  $arguments

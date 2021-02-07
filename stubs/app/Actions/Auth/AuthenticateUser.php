@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Actions\Citadel;
+namespace App\Actions\Auth;
 
-use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Http\Request;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Citadel\Contracts\Auth\AuthenticatesUsers;
+use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
 
 class AuthenticateUser implements AuthenticatesUsers
 {

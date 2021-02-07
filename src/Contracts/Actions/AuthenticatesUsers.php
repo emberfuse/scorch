@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Contracts\Auth;
+namespace Cratespace\Sentinel\Contracts\Actions;
 
 use Illuminate\Http\Request;
 

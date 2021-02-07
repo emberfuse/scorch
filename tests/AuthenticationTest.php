@@ -1,17 +1,17 @@
 <?php
 
-namespace Cratespace\Citadel\Tests;
+namespace Cratespace\Sentinel\Tests;
 
-use Cratespace\Citadel\Citadel\Config;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Auth;
-use Cratespace\Citadel\Actions\AuthenticateUser;
-use Cratespace\Citadel\Limiters\LoginRateLimiter;
-use Cratespace\Citadel\Tests\Traits\HasUserAttributes;
-use Cratespace\Citadel\Contracts\Actions\AuthenticatesUsers;
-use Cratespace\Citadel\Contracts\Responses\LoginViewResponse;
-use Cratespace\Citadel\Tests\Fixtures\TestAuthenticationUser;
-use Cratespace\Citadel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
+use App\Actions\Auth\AuthenticateUser;
+use Cratespace\Sentinel\Sentinel\Config;
+use Cratespace\Sentinel\Limiters\LoginRateLimiter;
+use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
+use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
+use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
+use Cratespace\Sentinel\Tests\Fixtures\TestAuthenticationUser;
+use Cratespace\Sentinel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class AuthenticationTest extends TestCase
 {

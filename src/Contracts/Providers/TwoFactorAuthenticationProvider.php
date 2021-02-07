@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Contracts\Providers;
+namespace Cratespace\Sentinel\Contracts\Providers;
 
 interface TwoFactorAuthenticationProvider
 {

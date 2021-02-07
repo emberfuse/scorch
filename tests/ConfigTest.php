@@ -1,19 +1,19 @@
 <?php
 
-namespace Cratespace\Citadel\Tests;
+namespace Cratespace\Sentinel\Tests;
 
-use Cratespace\Citadel\Citadel\Config;
+use Cratespace\Sentinel\Sentinel\Config;
 
 class ConfigTest extends TestCase
 {
-    public function testGetsAllCitadelConfigs()
+    public function testGetsAllSentinelConfigs()
     {
-        $this->assertEquals(config('citadel'), $this->getConfigurations()->all());
+        $this->assertEquals(config('sentinel'), $this->getConfigurations()->all());
     }
 
     public function testDynamicallyGetSpecificConfig()
     {
-        config()->set('citadel.foo', 'bar');
+        config()->set('sentinel.foo', 'bar');
 
         $this->assertEquals('bar', Config::foo());
     }

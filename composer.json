@@ -1,11 +1,11 @@
 {
-    "name": "cratespace/citadel",
+    "name": "cratespace/sentinel",
     "type": "library",
     "description": "A frontend agnostic authentication backend for Laravel applications.",
     "keywords": [
         "php",
         "authentication",
-        "citadel",
+        "sentinel",
         "cratespace"
     ],
     "authors": [
@@ -33,13 +33,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Cratespace\\Citadel\\": "src/",
+            "Cratespace\\Sentinel\\": "src/",
             "App\\": "stubs/app/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Cratespace\\Citadel\\Tests\\": "tests/"
+            "Cratespace\\Sentinel\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -48,7 +48,7 @@
         },
         "laravel": {
             "providers": [
-                "Cratespace\\Citadel\\Providers\\CitadelServiceProvider"
+                "Cratespace\\Sentinel\\Providers\\SentinelServiceProvider"
             ]
         }
     },

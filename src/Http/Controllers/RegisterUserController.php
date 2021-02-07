@@ -1,14 +1,14 @@
 <?php
 
-namespace Cratespace\Citadel\Http\Controllers;
+namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Citadel\Http\Requests\RegisterRequest;
-use Cratespace\Citadel\Http\Responses\RegisterResponse;
-use Cratespace\Citadel\Contracts\Actions\CreatesNewUsers;
-use Cratespace\Citadel\Contracts\Responses\RegisterViewResponse;
+use Cratespace\Sentinel\Http\Requests\RegisterRequest;
+use Cratespace\Sentinel\Http\Responses\RegisterResponse;
+use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
+use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
 
 class RegisterUserController extends Controller
 {
@@ -35,7 +35,7 @@ class RegisterUserController extends Controller
      * Show the registration view.
      *
      * @param \Illuminate\Http\Request                          $request
-     * @param \Citadel\Contracts\Responses\RegisterViewResponse $response
+     * @param \Sentinel\Contracts\Responses\RegisterViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
@@ -47,10 +47,10 @@ class RegisterUserController extends Controller
     /**
      * Create a new registered user.
      *
-     * @param \Citadel\Http\Requests\RegisterRequest     $request
+     * @param \Sentinel\Http\Requests\RegisterRequest     $request
      * @param \Laravel\Fortify\Contracts\CreatesNewUsers $creator
      *
-     * @return \Citadel\Http\Responses\RegisterResponse
+     * @return \Sentinel\Http\Responses\RegisterResponse
      */
     public function store(RegisterRequest $request, CreatesNewUsers $creator): RegisterResponse
     {

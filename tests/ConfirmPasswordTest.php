@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Citadel;
+namespace Cratespace\Sentinel;
 
-use Cratespace\Citadel\Tests\TestCase;
-use Cratespace\Citadel\Tests\Traits\HasUserAttributes;
-use Cratespace\Citadel\Tests\Fixtures\TestConfirmPasswordUser;
-use Cratespace\Citadel\Contracts\Responses\ConfirmPasswordViewResponse;
+use Cratespace\Sentinel\Tests\TestCase;
+use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
+use Cratespace\Sentinel\Tests\Fixtures\TestConfirmPasswordUser;
+use Cratespace\Sentinel\Contracts\Responses\ConfirmPasswordViewResponse;
 
 class ConfirmPasswordTest extends TestCase
 {

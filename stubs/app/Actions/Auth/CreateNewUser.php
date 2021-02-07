@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Actions\Citadel;
+namespace App\Actions\Auth;
 
 use Closure;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Cratespace\Citadel\Contracts\Actions\CreatesNewUsers;
+use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
 use Illuminate\Contracts\Auth\Authenticatable as User;
 
 class CreateNewUser implements CreatesNewUsers

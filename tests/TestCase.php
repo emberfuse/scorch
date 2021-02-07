@@ -1,16 +1,18 @@
 <?php
 
-namespace Cratespace\Citadel\Tests;
+namespace Cratespace\Sentinel\Tests;
 
 use Mockery as m;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Cratespace\Citadel\Providers\CitadelServiceProvider;
-use Cratespace\Citadel\Tests\Fixtures\TestAuthenticationUser;
+use Cratespace\Sentinel\Providers\SentinelServiceProvider;
+use Cratespace\Sentinel\Tests\Fixtures\TestAuthenticationUser;
 
 abstract class TestCase extends BaseTestCase
 {
     public function tearDown(): void
     {
+        parent::tearDown();
+
         m::close();
     }
 
@@ -23,7 +25,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getPackageProviders($app)
     {
-        return [CitadelServiceProvider::class];
+        return [SentinelServiceProvider::class];
     }
 
     /**

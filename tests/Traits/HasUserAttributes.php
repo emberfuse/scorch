@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Citadel\Tests\Traits;
+namespace Cratespace\Sentinel\Tests\Traits;
 
 use Illuminate\Support\Facades\Hash;
 
