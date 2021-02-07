@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Citadel;
+namespace App\Actions\Auth;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Citadel;
+namespace App\Actions\Auth;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use App\Actions\Citadel\Traits\PasswordUpdater;

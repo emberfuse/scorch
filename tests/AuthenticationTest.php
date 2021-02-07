@@ -2,10 +2,10 @@
 
 namespace Cratespace\Citadel\Tests;
 
-use Cratespace\Citadel\Citadel\Config;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Auth;
-use Cratespace\Citadel\Actions\AuthenticateUser;
+use App\Actions\Auth\AuthenticateUser;
+use Cratespace\Citadel\Citadel\Config;
 use Cratespace\Citadel\Limiters\LoginRateLimiter;
 use Cratespace\Citadel\Tests\Traits\HasUserAttributes;
 use Cratespace\Citadel\Contracts\Actions\AuthenticatesUsers;

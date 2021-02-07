@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Citadel;
+namespace App\Actions\Auth;
 
 use Closure;
 use Illuminate\Auth\Events\PasswordReset;

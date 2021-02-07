@@ -94,13 +94,13 @@ class CitadelServiceProvider extends ServiceProvider
             ], 'rules-config');
 
             $this->publishes([
-                __DIR__ . '/../../stubs/app/Actions/Citadel/AuthenticateUser.php' => app_path('Actions/Citadel/AuthenticateUser.php'),
-                __DIR__ . '/../../stubs/app/Actions/Citadel/CreateNewUser.php' => app_path('Actions/Citadel/CreateNewUser.php'),
-                __DIR__ . '/../../stubs/app/Actions/Citadel/DeleteUser.php' => app_path('Actions/Citadel/DeleteUser.php'),
-                __DIR__ . '/../../stubs/app/Actions/Citadel/ResetUserPassword.php' => app_path('Actions/Citadel/ResetUserPassword.php'),
-                __DIR__ . '/../../stubs/app/Actions/Citadel/UpdateUserPassword.php' => app_path('Actions/Citadel/UpdateUserPassword.php'),
-                __DIR__ . '/../../stubs/app/Actions/Citadel/UpdateUserProfile.php' => app_path('Actions/Citadel/UpdateUserProfile.php'),
-                __DIR__ . '/../../stubs/app/Actions/Citadel/Traits/PasswordUpdater.php' => app_path('Actions/Citadel/Traits/PasswordUpdater.php'),
+                __DIR__ . '/../../stubs/app/Actions/Auth/AuthenticateUser.php' => app_path('Actions/Auth/AuthenticateUser.php'),
+                __DIR__ . '/../../stubs/app/Actions/Auth/CreateNewUser.php' => app_path('Actions/Auth/CreateNewUser.php'),
+                __DIR__ . '/../../stubs/app/Actions/Auth/DeleteUser.php' => app_path('Actions/Auth/DeleteUser.php'),
+                __DIR__ . '/../../stubs/app/Actions/Auth/ResetUserPassword.php' => app_path('Actions/Auth/ResetUserPassword.php'),
+                __DIR__ . '/../../stubs/app/Actions/Auth/UpdateUserPassword.php' => app_path('Actions/Auth/UpdateUserPassword.php'),
+                __DIR__ . '/../../stubs/app/Actions/Auth/UpdateUserProfile.php' => app_path('Actions/Auth/UpdateUserProfile.php'),
+                __DIR__ . '/../../stubs/app/Actions/Auth/Traits/PasswordUpdater.php' => app_path('Actions/Auth/Traits/PasswordUpdater.php'),
                 __DIR__ . '/../../stubs/app/Providers/CitadelServiceProvider.php' => app_path('Providers/CitadelServiceProvider.php'),
                 __DIR__ . '/../../stubs/app/Providers/AuthServiceProvider.php' => app_path('Providers/AuthServiceProvider.php'),
                 __DIR__ . '/../../stubs/app/Policies/UserPolicy.php' => app_path('Policies/UserPolicy.php'),

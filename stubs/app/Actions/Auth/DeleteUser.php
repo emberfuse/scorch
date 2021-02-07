@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Citadel;
+namespace App\Actions\Auth;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;

@@ -2,16 +2,16 @@
 
 namespace Cratespace\Citadel\Auth;
 
-use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
-use Cratespace\Citadel\Limiters\LoginRateLimiter;
+use Cratespace\Citadel\Citadel\Config;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Citadel\Contracts\Auth\AuthenticatesUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Validation\ValidationException;
+use Cratespace\Citadel\Limiters\LoginRateLimiter;
+use Cratespace\Citadel\Contracts\Actions\AuthenticatesUsers;
 
 abstract class Authenticate
 {
