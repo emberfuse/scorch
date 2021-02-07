@@ -11,6 +11,8 @@ abstract class TestCase extends BaseTestCase
 {
     public function tearDown(): void
     {
+        parent::tearDown();
+
         m::close();
     }
 
