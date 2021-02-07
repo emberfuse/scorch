@@ -1,7 +1,7 @@
 {
     "name": "cratespace/sentinel",
     "type": "library",
-    "description": "A back-end only authentication for web applications.",
+    "description": "A back-end only authentication for Laravel applications.",
     "keywords": [
         "php",
         "authentication",
