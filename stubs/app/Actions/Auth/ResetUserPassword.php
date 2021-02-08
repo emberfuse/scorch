@@ -4,9 +4,9 @@ namespace App\Actions\Auth;
 
 use Closure;
 use Illuminate\Auth\Events\PasswordReset;
+use App\Actions\Auth\Traits\PasswordUpdater;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\PasswordBroker;
-use App\Actions\Sentinel\Traits\PasswordUpdater;
 use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
 
 class ResetUserPassword implements ResetsUserPasswords
