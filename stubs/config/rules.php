@@ -1,8 +1,8 @@
 <?php
 
-use Cratespace\Sentinel\Rules\PasswordRule;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Auth\User;
+use Cratespace\Sentinel\Rules\PasswordRule;
 
 return [
     /*
