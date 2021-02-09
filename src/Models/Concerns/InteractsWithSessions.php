@@ -50,7 +50,9 @@ trait InteractsWithSessions
                 ],
                 'ip_address' => $session->ip_address,
                 'is_current_device' => $session->id === $request->session()->getId(),
-                'last_active' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
+                'last_active' => Carbon::createFromTimestamp(
+                    $session->last_activity
+                )->diffForHumans(),
             ];
         });
     }
