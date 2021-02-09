@@ -5,9 +5,9 @@ namespace Cratespace\Sentinel\Models\Traits;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Cratespace\Sentinel\Contracts\Auth\Access;
-use Cratespace\Sentinel\Auth\Tokens\NewAccessToken;
-use Cratespace\Sentinel\Models\PersonalAccessToken;
+use Cratespace\Sentinel\Actions\CreateAccessToken;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken;
 
 trait HasApiTokens
 {
@@ -46,9 +46,9 @@ trait HasApiTokens
      * @param string $name
      * @param array  $abilities
      *
-     * @return \Cratespace\Sentinel\Auth\Tokens\NewAccessToken
+     * @return \Cratespace\Sentinel\Actions\CreateAccessToken
      */
-    public function createToken(string $name, array $abilities = ['*']): NewAccessToken
+    public function createToken(string $name, array $abilities = ['*']): CreateAccessToken
     {
         $token = $this->tokens()->create([
             'name' => $name,
@@ -56,7 +56,7 @@ trait HasApiTokens
             'abilities' => $abilities,
         ]);
 
-        return new NewAccessToken($token, $token->id . '|' . $plainTextToken);
+        return new CreateAccessToken($token, $token->id . '|' . $plainTextToken);
     }
 
     /**

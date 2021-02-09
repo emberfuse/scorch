@@ -1,17 +1,17 @@
 <?php
 
-namespace Cratespace\Sentinel\Auth\Tokens;
+namespace Cratespace\Sentinel\Actions;
 
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
-use Cratespace\Sentinel\Models\PersonalAccessToken;
+use Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken;
 
-class NewAccessToken implements Arrayable, Jsonable
+class CreateAccessToken implements Arrayable, Jsonable
 {
     /**
      * The access token instance.
      *
-     * @var \Cratespace\Sentinel\Models\PersonalAccessToken
+     * @var \Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken
      */
     public $accessToken;
 
@@ -25,8 +25,8 @@ class NewAccessToken implements Arrayable, Jsonable
     /**
      * Create a new access token result.
      *
-     * @param \Cratespace\Sentinel\Models\PersonalAccessToken $accessToken
-     * @param string                                          $plainTextToken
+     * @param \Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken $accessToken
+     * @param string                                               $plainTextToken
      *
      * @return void
      */
