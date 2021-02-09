@@ -5,13 +5,13 @@ namespace Cratespace\Sentinel\Sentinel;
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
 use Cratespace\Sentinel\Http\Responses\ViewResponse;
-use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
 use Illuminate\Contracts\View\View as IlluminateViewContract;
+use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
 use Cratespace\Sentinel\Contracts\Support\View as ViewContract;
 use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\UserProfileViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\ResetPasswordViewResponse;
-use Cratespace\Sentinel\Http\Responses\TwoFactorChallengeViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\TwoFactorChallengeViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 
 class View implements ViewContract

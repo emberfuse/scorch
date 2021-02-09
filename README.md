@@ -288,6 +288,246 @@ To enable two-factor authentication a user is required to send a `POST` request 
 
 To disable two-factor-authentication a `DELETE` request must be sent to `/two-factor-authentication`. This also requires password to be confirmed but can be bypassed if password was confirmed previously.
 
+### API Token Authentication
+
+> API tokens are mainly used to authenticate third-party application making a request to your API from a different domain. Your own first-party SPA should use Sentinel's built-in [SPA authentication features](#spa-authentication).
+
+#### Issuing API Tokens
+
+Sentinel allows you to issue API tokens / personal access tokens that may be used to authenticate API requests to your application. When making requests using API tokens, the token should be included in the `Authorization` header as a `Bearer` token.
+
+To begin issuing tokens for users, your User model should use the `Cratespace\Sentinel\Models\Traits\HasApiTokens` trait:
+
+```php
+use c\HasApiTokens;
+
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
+}
+```
+
+To issue a token, you may use the `createToken` method. The `createToken` method returns a `Cratespace\Sentinel\Actions\CreateAccessToken` instance. API tokens are hashed using `SHA-256` hashing before being stored in your database, but you may access the plain-text value of the token using the `plainTextToken` property of the `CreateAccessToken` instance. You should display this value to the user immediately after the token has been created:
+
+```php
+use Illuminate\Http\Request;
+
+Route::post('/tokens/create', function (Request $request) {
+    $token = $request->user()->createToken($request->token_name);
+
+    return ['token' => $token->plainTextToken];
+});
+```
+
+You may access all of the user's `tokens` using the tokens Eloquent relationship provided by the `HasApiTokens` trait:
+
+```php
+foreach ($user->tokens as $token) {
+    //
+}
+```
+
+#### Token Abilities
+
+Sentinel allows you to assign "abilities" to tokens. Abilities serve a similar purpose as OAuth's "scopes". You may pass an array of string abilities as the second argument to the `createToken` method:
+
+```php
+return $user->createToken('token-name', ['server:update'])->plainTextToken;
+```
+
+When handling an incoming request authenticated by Sentinel, you may determine if the token has a given ability using the `tokenCan` method:
+
+```php
+if ($user->tokenCan('server:update')) {
+    //
+}
+```
+
+##### First-Party UI Initiated Requests
+
+For convenience, the `tokenCan` method will always return true if the incoming authenticated request was from your first-party SPA and you are using sentinel's built-in **SPA authentication**.
+
+However, this does not necessarily mean that your application has to allow the user to perform the action. Typically, your application's **authorization policies** will determine if the token has been granted the permission to perform the abilities as well as check that the user instance itself should be allowed to perform the action.
+
+For example, if we imagine an application that manages servers, this might mean checking that token is authorized to update servers and that the server belongs to the user:
+
+```php
+return $request->user()->id === $server->user_id &&
+    $request->user()->tokenCan('server:update')
+```
+
+At first, allowing the `tokenCan` method to be called and always return `true` for first-party UI initiated requests may seem strange; however, it is convenient to be able to always assume an API token is available and can be inspected via the `tokenCan` method. By taking this approach, you may always call the `tokenCan` method within your application's authorizations policies without worrying about whether the request was triggered from your application's UI or was initiated by one of your API's third-party consumers.
+
+#### Protecting Routes
+
+To protect routes so that all incoming requests must be authenticated, you should attach the **sentinel** authentication guard to your protected routes within your `routes/web.php` and `routes/api.php` route files. This guard will ensure that incoming requests are authenticated as either stateful, cookie authenticated requests or contain a valid API token header if the request is from a third party.
+
+You may be wondering why we suggest that you authenticate the routes within your application's `routes/web.php` file using the sentinel guard. Remember, sentinel will first attempt to authenticate incoming requests using Laravel's typical session authentication cookie. If that cookie is not present then sentinel will attempt to authenticate the request using a token in the request's Authorization header. In addition, authenticating all requests using sentinel ensures that we may always call the `tokenCan` method on the currently authenticated user instance:
+
+```php
+use Illuminate\Http\Request;
+
+Route::middleware('auth:sentinel')->get('/user', function (Request $request) {
+    return $request->user();
+});
+```
+
+#### Revoking Tokens
+
+You may "revoke" tokens by deleting them from your database using the tokens relationship that is provided by the `Cratespace\Sentinel\Models\Traits\HasApiTokens` trait:
+
+```php
+// Revoke all tokens...
+$user->tokens()->delete();
+
+// Revoke the token that was used to authenticate the current request...
+$request->user()->currentAccessToken()->delete();
+
+// Revoke a specific token...
+$user->tokens()->where('id', $tokenId)->delete();
+```
+
+### SPA Authentication
+
+Sentinel also exists to provide a simple method of authenticating single page applications (SPAs) that need to communicate with a Laravel powered API. These SPAs might exist in the same repository as your Laravel application or might be an entirely separate repository.
+
+For this feature, Sentinel does not use tokens of any kind. Instead, Sentinel uses Laravel's built-in cookie based session authentication services. This approach to authentication provides the benefits of CSRF protection, session authentication, as well as protects against leakage of the authentication credentials via XSS.
+
+> In order to authenticate, your SPA and API must share the same top-level domain. However, they may be placed on different subdomains.
+
+#### Configuration
+
+##### Configuring Your First-Party Domains
+
+First, you should configure which domains your SPA will be making requests from. You may configure these domains using the `stateful` configuration option in your sentinel configuration file. This configuration setting determines which domains will maintain "stateful" authentication using Laravel session cookies when making requests to your API.
+
+> If you are accessing your application via a URL that includes a port (127.0.0.1:8000), you should ensure that you include the port number with the domain.
+
+##### Sentinel Middleware
+
+Next, you should add Sentinel's middleware to your `api` middleware group within your `app/Http/Kernel.php` file. This middleware is responsible for ensuring that incoming requests from your SPA can authenticate using Laravel's session cookies, while still allowing requests from third parties or mobile applications to authenticate using API tokens:
+
+```php
+'api' => [
+    \Cratespace\Sentinel\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+    'throttle:api',
+    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+],
+```
+
+##### CORS & Cookies
+
+If you are having trouble authenticating with your application from an SPA that executes on a separate subdomain, you have likely misconfigured your CORS (Cross-Origin Resource Sharing) or session cookie settings.
+
+You should ensure that your application's CORS configuration is returning the `Access-Control-Allow-Credentials` header with a value of `True`. This may be accomplished by setting the `supports_credentials` option within your application's `config/cors.php` configuration file to true (cors.php found only in Laravel applications).
+
+In addition, you should enable the `withCredentials` option on your application's global `axios` instance. Typically, this should be performed in your `resources/js/bootstrap.js` file. If you are not using Axios to make HTTP requests from your frontend, you should perform the equivalent configuration on your own HTTP client:
+
+```javascript
+axios.defaults.withCredentials = true;
+```
+
+Finally, you should ensure your application's session cookie domain configuration supports any subdomain of your root domain. You may accomplish this by prefixing the domain with a leading `.` within your application's `config/session.php` configuration file:
+
+```php
+'domain' => '.domain.com',
+```
+
+#### Authenticating
+
+##### CSRF Protection
+
+To authenticate your SPA, your SPA's "login" page should first make a request to the `/csrf-cookie` endpoint to initialize CSRF protection for the application:
+
+```javascript
+axios.get('/csrf-cookie').then(response => {
+    // Login...
+});
+```
+
+During this request, Sentinel will set an `XSRF-TOKEN` cookie containing the current CSRF token. This token should then be passed in an `X-XSRF-TOKEN` header on subsequent requests, which some HTTP client libraries like Axios and the Angular HttpClient will do automatically for you. If your JavaScript HTTP library does not set the value for you, you will need to manually set the `X-XSRF-TOKEN` header to match the value of the `XSRF-TOKEN` cookie that is set by this route.
+
+##### Logging In
+
+Once CSRF protection has been initialized, you should make a `POST` request to your Laravel application's `/login` route.
+
+If the login request is successful, you will be authenticated and subsequent requests to your application's routes will automatically be authenticated via the session cookie that the Laravel application issued to your client. In addition, since your application already made a request to the `/csrf-cookie` route, subsequent requests should automatically receive CSRF protection as long as your JavaScript HTTP client sends the value of the `XSRF-TOKEN` cookie in the `X-XSRF-TOKEN` header.
+
+Of course, if your user's session expires due to lack of activity, subsequent requests to the Laravel application may receive `401` or `419` HTTP error response. In this case, you should redirect the user to your SPA's login page.
+
+#### Protecting Routes
+
+To protect routes so that all incoming requests must be authenticated, you should attach the `sentinel` authentication guard to your API routes within your `routes/api.php` file. This guard will ensure that incoming requests are authenticated as either a stateful authenticated requests from your SPA or contain a valid API token header if the request is from a third party:
+
+```php
+use Illuminate\Http\Request;
+
+Route::middleware('auth:sentinel')->get('/user', function (Request $request) {
+    return $request->user();
+});
+```
+
+### Mobile Application Authentication
+
+You may also use Sentinel tokens to authenticate your mobile application's requests to your API. The process for authenticating mobile application requests is similar to authenticating third-party API requests; however, there are small differences in how you will issue the API tokens.
+
+#### Issuing API Tokens
+
+To get started, create a route that accepts the user's email / username, password, and device name, then exchanges those credentials for a new Sentinel token. The "device name" given to this endpoint is for informational purposes and may be any value you wish. In general, the device name value should be a name the user would recognize, such as "John's Nokia".
+
+Typically, you will make a request to the token endpoint from your mobile application's "login" screen. The endpoint will return the plain-text API token which may then be stored on the mobile device and used to make additional API requests:
+
+```php
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+
+Route::post('/create/token', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+        'device_name' => 'required',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (! $user || ! Hash::check($request->password, $user->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+
+    return $user->createToken($request->device_name)->plainTextToken;
+});
+```
+
+When the mobile application uses the token to make an API request to your application, it should pass the token in the `Authorization` header as a `Bearer` token.
+
+> When issuing tokens for a mobile application, you can also specify token abilities.
+
+#### Protecting Routes
+
+As previously documented, you may protect routes so that all incoming requests must be authenticated by attaching the sentinel authentication guard to the routes:
+
+```php
+Route::middleware('auth:sentinel')->get('/user', function (Request $request) {
+    return $request->user();
+});
+```
+
+#### Revoking Tokens
+
+To allow users to revoke API tokens issued to mobile devices, you may list them by name, along with a "Revoke" button, within an "account settings" portion of your web application's UI. When the user clicks the "Revoke" button, you can delete the token from the database. Remember, you can access a user's API tokens via the tokens relationship provided by the `Cratespace\Sentinel\Models\Traits\HasApiTokens` trait:
+
+```php
+// Revoke all tokens...
+$user->tokens()->delete();
+
+// Revoke a specific token...
+$user->tokens()->where('id', $tokenId)->delete();
+```
+
 ## Contributing
 
 Thank you for considering contributing to Sentinel! You can read the contribution guide [here](.github/CONTRIBUTING.md).

@@ -2,8 +2,8 @@
 
 namespace App\Actions\Auth;
 
+use App\Actions\Auth\Traits\PasswordUpdater;
 use Illuminate\Contracts\Auth\Authenticatable;
-use App\Actions\Sentinel\Traits\PasswordUpdater;
 use Cratespace\Sentinel\Contracts\Actions\UpdatesUserPasswords;
 
 class UpdateUserPassword implements UpdatesUserPasswords

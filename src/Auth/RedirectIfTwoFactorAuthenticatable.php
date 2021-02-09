@@ -2,6 +2,8 @@
 
 namespace Cratespace\Sentinel\Auth;
 
+use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Cratespace\Sentinel\Models\Traits\TwoFactorAuthenticatable;
 use Cratespace\Sentinel\Http\Responses\TwoFactorChallengeResponse;
@@ -12,11 +14,11 @@ class RedirectIfTwoFactorAuthenticatable extends Authenticate
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param callable                 $next
+     * @param \Closure                 $next
      *
      * @return mixed
      */
-    public function handle($request, $next)
+    public function handle(Request $request, Closure $next)
     {
         $user = $this->validateCredentials($request);
 

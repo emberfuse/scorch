@@ -2,9 +2,9 @@
 
 namespace Cratespace\Sentinel\Actions;
 
-use Cratespace\Sentinel\Codes\RecoveryCode;
 use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\User;
+use Cratespace\Sentinel\Codes\RecoveryCode;
 use Cratespace\Sentinel\Events\TwoFactorAuthenticationEnabled;
 use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider;
 
@@ -43,7 +43,7 @@ class EnableTwoFactorAuthentication
      *
      * @return void
      */
-    public function __invoke(User $user)
+    public function __invoke(User $user): void
     {
         $user->forceFill([
             'two_factor_secret' => encrypt($this->provider->generateSecretKey()),

@@ -39,6 +39,8 @@ abstract class TestCase extends BaseTestCase
     {
         $app['migrator']->path(__DIR__ . '/../database/migrations');
 
+        $app['config']->set('sentinel.stateful', ['test.com', '*.test.com']);
+
         $app['config']->set('auth.providers.users.model', TestAuthenticationUser::class);
 
         $app['config']->set('database.default', 'testbench');

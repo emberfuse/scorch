@@ -45,11 +45,12 @@ class PasswordRule implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed  $value
+     *
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         if ($this->requireUppercase && Str::lower($value) === $value) {
             return false;
@@ -71,7 +72,7 @@ class PasswordRule implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         if ($this->message) {
             return $this->message;
@@ -130,10 +131,11 @@ class PasswordRule implements Rule
     /**
      * Set the minimum length of the password.
      *
-     * @param  int  $length
-     * @return $this
+     * @param int $length
+     *
+     * @return \Cratespace\Sentinel\Rules\PasswordRule
      */
-    public function length(int $length)
+    public function length(int $length): PasswordRule
     {
         $this->length = $length;
 
@@ -143,9 +145,9 @@ class PasswordRule implements Rule
     /**
      * Indicate that at least one uppercase character is required.
      *
-     * @return $this
+     * @return \Cratespace\Sentinel\Rules\PasswordRule
      */
-    public function requireUppercase()
+    public function requireUppercase(): PasswordRule
     {
         $this->requireUppercase = true;
 
@@ -155,9 +157,9 @@ class PasswordRule implements Rule
     /**
      * Indicate that at least one numeric digit is required.
      *
-     * @return $this
+     * @return \Cratespace\Sentinel\Rules\PasswordRule
      */
-    public function requireNumeric()
+    public function requireNumeric(): PasswordRule
     {
         $this->requireNumeric = true;
 
@@ -167,9 +169,9 @@ class PasswordRule implements Rule
     /**
      * Indicate that at least one special character is required.
      *
-     * @return $this
+     * @return \Cratespace\Sentinel\Rules\PasswordRule
      */
-    public function requireSpecialCharacter()
+    public function requireSpecialCharacter(): PasswordRule
     {
         $this->requireSpecialCharacter = true;
 
@@ -179,10 +181,11 @@ class PasswordRule implements Rule
     /**
      * Set the message that should be used when the rule fails.
      *
-     * @param  string  $message
-     * @return $this
+     * @param string $message
+     *
+     * @return \Cratespace\Sentinel\Rules\PasswordRule
      */
-    public function withMessage(string $message)
+    public function withMessage(string $message): PasswordRule
     {
         $this->message = $message;
 

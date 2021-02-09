@@ -14,18 +14,23 @@
             "email": "tjthavarshan@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/cratespace/sentinel/issues",
+        "source": "https://github.com/cratespace/sentinel"
+    },
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
         "ext-json": "*",
         "bacon/bacon-qr-code": "^2.0",
         "jenssegers/agent": "^2.6",
+        "illuminate/contracts": "^8.0",
+        "illuminate/database": "^8.0",
         "illuminate/support": "^8.0",
         "pragmarx/google2fa": "^8.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
-        "laravel/sanctum": "^2.8",
         "mockery/mockery": "^1.4.2",
         "orchestra/testbench": "^6.7",
         "phpunit/phpunit": "^9.5",

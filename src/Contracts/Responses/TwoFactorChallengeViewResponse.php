@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Responses;
+namespace Cratespace\Sentinel\Contracts\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 

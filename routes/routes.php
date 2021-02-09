@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Cratespace\Sentinel\Sentinel\Config;
 use Cratespace\Sentinel\Http\Controllers\PasswordController;
+use Cratespace\Sentinel\Http\Controllers\CsrfCookieController;
 use Cratespace\Sentinel\Http\Controllers\UserProfileController;
 use Cratespace\Sentinel\Http\Controllers\VerifyEmailController;
 use Cratespace\Sentinel\Http\Controllers\RecoveryCodeController;
@@ -73,4 +74,6 @@ Route::group([
             ->middleware(['throttle:6,1'])
             ->name('verification.send');
     });
+
+    Route::get('/csrf-cookie', [CsrfCookieController::class, '@show'])->name('api.auth');
 });

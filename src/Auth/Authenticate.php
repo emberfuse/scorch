@@ -117,7 +117,7 @@ abstract class Authenticate
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function throwFailedAuthenticationException(Request $request)
+    protected function throwFailedAuthenticationException(Request $request): void
     {
         $this->limiter->increment($request);
 
@@ -132,7 +132,7 @@ abstract class Authenticate
      *
      * @return void
      */
-    protected function fireFailedEvent(Request $request, ?Authenticatable $user = null)
+    protected function fireFailedEvent(Request $request, ?Authenticatable $user = null): void
     {
         event(new Failed(Config::guard(), $user, [
             $this->username() => $request->{$this->username()},
