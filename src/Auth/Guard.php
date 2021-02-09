@@ -4,7 +4,10 @@ namespace Cratespace\Sentinel\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Cratespace\Sentinel\Sentinel\Config;
+use Cratespace\Sentinel\Auth\Tokens\TransientToken;
 use Cratespace\Sentinel\Models\PersonalAccessToken;
+use Cratespace\Sentinel\Models\Traits\HasApiTokens;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 
 class Guard
@@ -55,7 +58,7 @@ class Guard
      */
     public function __invoke(Request $request)
     {
-        if ($user = $this->auth->guard(config('sanctum.guard', 'web'))->user()) {
+        if ($user = $this->auth->guard(Config::guard(['web']))->user()) {
             return $this->supportsTokens($user)
                 ? $user->withAccessToken(new TransientToken())
                 : $user;

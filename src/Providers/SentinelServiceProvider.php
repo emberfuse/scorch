@@ -59,10 +59,10 @@ class SentinelServiceProvider extends ServiceProvider
     protected function mergeAuthConfig(): void
     {
         config([
-            'auth.guards.api' => array_merge([
-                'driver' => 'api',
+            'auth.guards.sentinel' => array_merge([
+                'driver' => 'sentinel',
                 'provider' => null,
-            ], config('auth.guards.api', [])),
+            ], config('auth.guards.sentinel', [])),
         ]);
     }
 
@@ -124,11 +124,8 @@ class SentinelServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../../stubs/config/sentinel.php' => config_path('sentinel.php'),
-            ], 'sentinel-config');
-
-            $this->publishes([
                 __DIR__ . '/../../stubs/config/rules.php' => config_path('rules.php'),
-            ], 'rules-config');
+            ], 'sentinel-config');
 
             $this->publishes([
                 __DIR__ . '/../../stubs/app/Actions/Auth/AuthenticateUser.php' => app_path('Actions/Auth/AuthenticateUser.php'),
@@ -197,14 +194,14 @@ class SentinelServiceProvider extends ServiceProvider
     }
 
     /**
-     * Configure the API authentication guard.
+     * Configure the Sentinel authentication guard.
      *
      * @return void
      */
     protected function configureGuard(): void
     {
         Auth::resolved(function ($auth) {
-            $auth->extend('api', function ($app, $name, array $config) use ($auth) {
+            $auth->extend('sentinel', function ($app, $name, array $config) use ($auth) {
                 return tap($this->createGuard($auth, $config), function ($guard) {
                     $this->app->refresh('request', $guard, 'setRequest');
                 });
@@ -223,7 +220,7 @@ class SentinelServiceProvider extends ServiceProvider
     protected function createGuard(AuthFactory $auth, array $config): RequestGuard
     {
         return new RequestGuard(
-            new Guard($auth, config('sanctum.expiration'), $config['provider']),
+            new Guard($auth, Config::expiration(), $config['provider']),
             $this->app['request'],
             $auth->createUserProvider($config['provider'] ?? null)
         );

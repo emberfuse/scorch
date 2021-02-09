@@ -2,6 +2,7 @@
 
 namespace Cratespace\Sentinel\Tests\Traits;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 trait HasUserAttributes
@@ -20,6 +21,7 @@ trait HasUserAttributes
             'username' => 'SilverJames',
             'email' => 'james.silverman@monster.com',
             'password' => Hash::make('cthuluEmployee'),
+            'remember_token' => Str::random(10),
         ], $overrides);
     }
 }

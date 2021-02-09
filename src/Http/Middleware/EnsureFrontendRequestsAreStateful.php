@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Support\Collection;
+use Cratespace\Sentinel\Sentinel\Config;
 
 class EnsureFrontendRequestsAreStateful
 {
@@ -24,14 +25,14 @@ class EnsureFrontendRequestsAreStateful
 
         return (new Pipeline(app()))->send($request)->through(static::fromFrontend($request) ? [
             function ($request, $next) {
-                $request->attributes->set('sanctum', true);
+                $request->attributes->set('sentinel', true);
 
                 return $next($request);
             },
-            config('sanctum.middleware.encrypt_cookies', \Illuminate\Cookie\Middleware\EncryptCookies::class),
+            config('sentinel.middleware.encrypt_cookies', \Illuminate\Cookie\Middleware\EncryptCookies::class),
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            config('sanctum.middleware.verify_csrf_token', \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class),
+            config('sentinel.middleware.verify_csrf_token', \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class),
         ] : [])->then(function (Request $request) use ($next) {
             return $next($request);
         });
@@ -65,7 +66,7 @@ class EnsureFrontendRequestsAreStateful
         $domain = Str::replaceFirst('http://', '', $domain);
         $domain = Str::endsWith($domain, '/') ? $domain : "{$domain}/";
 
-        $stateful = array_filter(config('sanctum.stateful', []));
+        $stateful = array_filter(Config::stateful([[]]));
 
         return Str::is(Collection::make($stateful)->map(function ($uri) {
             return trim($uri) . '/*';
