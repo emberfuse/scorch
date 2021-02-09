@@ -2,8 +2,8 @@
 
 namespace Cratespace\Sentinel\Events;
 
-use Cratespace\Sentinel\Events\Traits\HasUser;
 use Illuminate\Foundation\Auth\User;
+use Cratespace\Sentinel\Support\HasUser;
 use Illuminate\Foundation\Events\Dispatchable;
 
 abstract class TwoFactorAuthenticationEvent

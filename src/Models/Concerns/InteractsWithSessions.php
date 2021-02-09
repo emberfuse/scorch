@@ -5,6 +5,7 @@ namespace Cratespace\Sentinel\Models\Concerns;
 use Carbon\Carbon;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,7 @@ trait InteractsWithSessions
      */
     public function getSessionsAttribute(): array
     {
-        return $this->sessions(app('request'))->all();
+        return $this->sessions(request())->all();
     }
 
     /**
@@ -38,7 +39,7 @@ trait InteractsWithSessions
                 ->where('user_id', $request->user()->getAuthIdentifier())
                 ->orderBy('last_activity', 'desc')
                 ->get()
-        )->map(function ($session) use ($request) {
+        )->map(function (Store $session) use ($request) {
             $agent = $this->createAgent($session);
 
             return (object) [

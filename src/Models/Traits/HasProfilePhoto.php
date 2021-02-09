@@ -14,7 +14,7 @@ trait HasProfilePhoto
      *
      * @return void
      */
-    public function updateProfilePhoto(UploadedFile $photo)
+    public function updateProfilePhoto(UploadedFile $photo): void
     {
         tap($this->profile_photo_path, function ($previous) use ($photo) {
             $this->forceFill([
@@ -35,7 +35,7 @@ trait HasProfilePhoto
      *
      * @return void
      */
-    public function deleteProfilePhoto()
+    public function deleteProfilePhoto(): void
     {
         Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
 
@@ -47,7 +47,7 @@ trait HasProfilePhoto
      *
      * @return string
      */
-    public function getProfilePhotoUrlAttribute()
+    public function getProfilePhotoUrlAttribute(): string
     {
         return $this->profile_photo_path
             ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
@@ -59,7 +59,7 @@ trait HasProfilePhoto
      *
      * @return string
      */
-    protected function defaultProfilePhotoUrl()
+    protected function defaultProfilePhotoUrl(): string
     {
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
     }
@@ -69,7 +69,7 @@ trait HasProfilePhoto
      *
      * @return string
      */
-    protected function profilePhotoDisk()
+    protected function profilePhotoDisk(): string
     {
         return isset($_ENV['CLOUD_ARTIFACT_NAME']) ? 's3' : 'public';
     }

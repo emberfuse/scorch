@@ -2,6 +2,8 @@
 
 namespace Cratespace\Sentinel\Auth;
 
+use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Lockout;
 use Cratespace\Sentinel\Http\Responses\LockoutResponse;
 
@@ -11,11 +13,11 @@ class EnsureLoginIsNotThrottled extends Authenticate
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param callable                 $next
+     * @param \Closure                 $next
      *
      * @return mixed
      */
-    public function handle($request, $next)
+    public function handle(Request $request, Closure $next)
     {
         if (! $this->limiter->tooManyAttempts($request)) {
             return $next($request);

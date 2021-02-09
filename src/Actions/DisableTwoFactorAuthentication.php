@@ -14,7 +14,7 @@ class DisableTwoFactorAuthentication
      *
      * @return void
      */
-    public function __invoke(User $user)
+    public function __invoke(User $user): void
     {
         $user->forceFill([
             'two_factor_secret' => null,

@@ -4,11 +4,12 @@ namespace Cratespace\Sentinel\Providers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Support\ServiceProvider;
+use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Cratespace\Sentinel\Console\InstallCommand;
 use Cratespace\Sentinel\Actions\ConfirmPassword;
+use Illuminate\Contracts\Foundation\Application;
 use Cratespace\Sentinel\Console\MakeResponseCommand;
 use Cratespace\Sentinel\Contracts\Actions\ConfirmsPasswords;
 use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
@@ -27,6 +28,7 @@ class SentinelServiceProvider extends ServiceProvider
         $this->registerAuthGuard();
         $this->registerTwoFactorAuthProvider();
         $this->registerInternalActions();
+        $this->registerInternalConfig();
     }
 
     /**
@@ -75,6 +77,18 @@ class SentinelServiceProvider extends ServiceProvider
     protected function registerInternalActions(): void
     {
         $this->app->singleton(ConfirmsPasswords::class, ConfirmPassword::class);
+    }
+
+    /**
+     * Register Sentinel config class.
+     *
+     * @return void
+     */
+    protected function registerInternalConfig(): void
+    {
+        $this->app->singleton(Config::class, function (Application $app): Config {
+            return new Config($app['config']);
+        });
     }
 
     /**
