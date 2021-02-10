@@ -3,11 +3,12 @@
 namespace App\Actions\Auth;
 
 use Closure;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
-use Illuminate\Contracts\Auth\Authenticatable as User;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableUser;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -25,10 +26,10 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @return \Illuminate\Contracts\Auth\Authenticatable
      */
-    public function create(array $data): User
+    public function create(array $data): AuthenticatableUser
     {
         return DB::transaction(function () use ($data) {
-            return tap($this->createUser($data), function (User $user) use ($data) {
+            return tap($this->createUser($data), function (AuthenticatableUser $user) use ($data) {
                 if (static::$afterCreatingUser) {
                     call_user_func_array(static::$afterCreatingUser, [$user, $data]);
                 }
