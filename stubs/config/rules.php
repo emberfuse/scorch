@@ -31,7 +31,7 @@ return [
             'max:255',
             Rule::unique(User::class),
         ],
-        'password' => ['required', 'string', new PasswordRule(), 'confirmed'],
+        'password' => ['required', 'string', new PasswordRule()],
     ],
 
     /*
