@@ -39,7 +39,7 @@ trait InteractsWithSessions
                 ->where('user_id', $request->user()->getAuthIdentifier())
                 ->orderBy('last_activity', 'desc')
                 ->get()
-        )->map(function (Store $session) use ($request) {
+        )->map(function ($session) use ($request) {
             $agent = $this->createAgent($session);
 
             return (object) [
