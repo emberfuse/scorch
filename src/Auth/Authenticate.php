@@ -33,7 +33,7 @@ abstract class Authenticate
      * Create a new controller instance.
      *
      * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
-     * @param \Sentinel\Limiters\LoginRateLimiter       $limiter
+     * @param \Sentinel\Limiters\LoginRateLimiter      $limiter
      *
      * @return void
      */
@@ -88,9 +88,9 @@ abstract class Authenticate
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Foundation\Auth\User
+     * @return \Illuminate\Foundation\Auth\User|null
      */
-    protected function getAttemptingUser(Request $request): User
+    protected function getAttemptingUser(Request $request): ?User
     {
         return ($this->getAuthModel())::where(
             $this->username(),
