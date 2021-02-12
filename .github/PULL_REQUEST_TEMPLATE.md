@@ -1,9 +1,17 @@
-<!--
-Please only send a pull request to branches which are currently supported: https://laravel.com/docs/releases#support-policy 
+## Purpose
 
-If you are unsure which branch your pull request should be sent to, please read: https://laravel.com/docs/contributions#which-branch
+_Describe the problem or feature in addition to a link to the issues._
 
-Pull requests without a descriptive title, thorough description, or tests will be closed.
+## Approach
 
-In addition, please describe the benefit to end users; the reasons it does not break any existing features; how it makes building web applications easier, etc.
--->
+_How does this change address the problem?_
+
+#### Open Questions and Pre-Merge TODOs
+
+-   [ ] Use github checklists. When solved, check the box and explain the answer.
+
+## Learning
+
+_Describe the research stage_
+
+_Links to blog posts, patterns, libraries or addons used to solve this problem_
