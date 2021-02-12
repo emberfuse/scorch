@@ -22,6 +22,6 @@ class FailedPasswordConfirmationResponse extends Response implements Responsable
             throw ValidationException::withMessages(['password' => [$message]]);
         }
 
-        return $this->redirect()->back()->withErrors(['password' => $message]);
+        return $this->back()->withErrors(['password' => $message]);
     }
 }

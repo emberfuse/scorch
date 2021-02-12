@@ -4,9 +4,9 @@ namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Cratespace\Sentinel\Actions\GenerateNewRecoveryCodes;
-use Illuminate\Contracts\Support\Responsable;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Cratespace\Sentinel\Actions\GenerateNewRecoveryCodes;
 use Cratespace\Sentinel\Http\Responses\GenerateRecoveryCodesResponse;
 
 class RecoveryCodeController extends Controller
@@ -37,12 +37,12 @@ class RecoveryCodeController extends Controller
      * @param \Illuminate\Http\Request                          $request
      * @param \Laravel\Fortify\Actions\GenerateNewRecoveryCodes $generate
      *
-     * @return \Illuminate\Contracts\Support\Responsable
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function store(Request $request, GenerateNewRecoveryCodes $generate): Responsable
+    public function store(Request $request, GenerateNewRecoveryCodes $generate): Response
     {
         $generate($request->user());
 
-        return $this->app(GenerateRecoveryCodesResponse::class);
+        return GenerateRecoveryCodesResponse::dispatch();
     }
 }

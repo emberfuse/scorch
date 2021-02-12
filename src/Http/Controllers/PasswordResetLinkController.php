@@ -11,6 +11,7 @@ use Cratespace\Sentinel\Http\Requests\PasswordResetLinkRequest;
 use Cratespace\Sentinel\Http\Responses\FailedPasswordResetLinkRequestResponse;
 use Cratespace\Sentinel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 use Cratespace\Sentinel\Http\Responses\SuccessfulPasswordResetLinkRequestResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class PasswordResetLinkController extends Controller
 {
@@ -50,14 +51,14 @@ class PasswordResetLinkController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Contracts\Support\Responsable
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function store(PasswordResetLinkRequest $request): Responsable
+    public function store(PasswordResetLinkRequest $request): Response
     {
         $status = $this->broker->sendResetLink($request->only(Config::email()));
 
         return $status == Password::RESET_LINK_SENT
-            ? $this->app(SuccessfulPasswordResetLinkRequestResponse::class, ['status' => $status])
-            : $this->app(FailedPasswordResetLinkRequestResponse::class, ['status' => $status]);
+            ? SuccessfulPasswordResetLinkRequestResponse::dispatch($status)
+            : FailedPasswordResetLinkRequestResponse::dispatch($status);
     }
 }

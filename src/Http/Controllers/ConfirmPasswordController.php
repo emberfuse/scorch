@@ -4,6 +4,7 @@ namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
+use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Contracts\Actions\ConfirmsPasswords;
 use Cratespace\Sentinel\Http\Requests\ConfirmPasswordRequest;
 use Cratespace\Sentinel\Http\Responses\PasswordConfirmedResponse;
@@ -34,7 +35,7 @@ class ConfirmPasswordController extends Controller
     /**
      * Show the confirm password view.
      *
-     * @param \Illuminate\Http\Request                                 $request
+     * @param \Illuminate\Http\Request                                  $request
      * @param \Sentinel\Contracts\Responses\ConfirmPasswordViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
@@ -49,9 +50,9 @@ class ConfirmPasswordController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Contracts\Support\Responsable
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function store(ConfirmPasswordRequest $request, ConfirmsPasswords $confirmer)
+    public function store(ConfirmPasswordRequest $request, ConfirmsPasswords $confirmer): Response
     {
         $confirmed = $confirmer->confirm(
             $this->guard,
@@ -60,7 +61,7 @@ class ConfirmPasswordController extends Controller
         );
 
         return $confirmed
-            ? $this->app(PasswordConfirmedResponse::class)
-            : $this->app(FailedPasswordConfirmationResponse::class);
+            ? PasswordConfirmedResponse::dispatch()
+            : FailedPasswordConfirmationResponse::dispatch();
     }
 }

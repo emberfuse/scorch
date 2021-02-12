@@ -5,6 +5,7 @@ namespace Cratespace\Sentinel\Http\Controllers;
 use Cratespace\Sentinel\Jobs\DeleteUserJob;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
+use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Http\Requests\DeleteUserRequest;
 use Cratespace\Sentinel\Http\Responses\DeleteUserResponse;
 use Cratespace\Sentinel\Contracts\Actions\UpdatesUserProfiles;
@@ -17,7 +18,7 @@ class UserProfileController extends Controller
     /**
      * Show user profile view.
      *
-     * @param \Illuminate\Http\Request                             $request
+     * @param \Illuminate\Http\Request                              $request
      * @param \Sentinel\Contracts\Responses\UserProfileViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
@@ -33,13 +34,13 @@ class UserProfileController extends Controller
      * @param \Sentinel\Http\Requests\UpdateUserProfileRequest $request
      * @param \Sentinel\Contracts\Actions\UpdatesUserProfiles  $updater
      *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function update(UpdateUserProfileRequest $request, UpdatesUserProfiles $updater)
+    public function update(UpdateUserProfileRequest $request, UpdatesUserProfiles $updater): Response
     {
         $updater->update($request->user(), $request->validated());
 
-        return $this->app(UpdateUserProfileResponse::class);
+        return UpdateUserProfileResponse::dispatch();
     }
 
     /**
@@ -49,14 +50,14 @@ class UserProfileController extends Controller
      * @param \App\Auth\Contracts\DeletesUsers         $deletor
      * @param \Illuminate\Contracts\Auth\StatefulGuard $auth
      *
-     * @return \Illuminate\Contracts\Support\Responsable
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function destroy(DeleteUserRequest $request, StatefulGuard $auth): Responsable
+    public function destroy(DeleteUserRequest $request, StatefulGuard $auth): Response
     {
         DeleteUserJob::dispatch($request->user()->fresh());
 
         $auth->logout();
 
-        return $this->app(DeleteUserResponse::class);
+        return DeleteUserResponse::dispatch();
     }
 }

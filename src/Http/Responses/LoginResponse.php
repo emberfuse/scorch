@@ -10,29 +10,6 @@ use Illuminate\Contracts\Support\Responsable;
 class LoginResponse extends Response implements Responsable
 {
     /**
-     * The login rate limiter instance.
-     *
-     * @var \Sentinel\Limiters\LoginRateLimiter
-     */
-    protected $limiter;
-
-    /**
-     * Create a new class instance.
-     *
-     * @param \Illuminate\Contracts\View\Factory $view
-     * @param \Illuminate\Routing\Redirector     $redirector
-     * @param \Sentinel\Limiters\LoginRateLimiter $limiter
-     *
-     * @return void
-     */
-    public function __construct(ViewFactory $view, Redirector $redirector, LoginRateLimiter $limiter)
-    {
-        parent::__construct($view, $redirector);
-
-        $this->limiter = $limiter;
-    }
-
-    /**
      * Create an HTTP response that represents the object.
      *
      * @param \Illuminate\Http\Request $request
@@ -43,6 +20,6 @@ class LoginResponse extends Response implements Responsable
     {
         return $request->expectsJson()
             ? $this->json(['two_factor' => false])
-            : $this->redirectToIntended($this->home(), 302);
+            : $this->redirectToIntended($this->home());
     }
 }

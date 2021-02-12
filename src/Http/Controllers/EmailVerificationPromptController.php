@@ -11,12 +11,11 @@ class EmailVerificationPromptController extends Controller
     /**
      * Display the email verification prompt.
      *
-     * @param \Illuminate\Http\Request                             $request
-     * @param \Sentinel\Contracts\Responses\VerifyEmailViewResponse $response
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response|Illuminate\Contracts\Support\Responsable
      */
-    public function __invoke(Request $request, VerifyEmailViewResponse $response)
+    public function __invoke(Request $request)
     {
         return $request->user()->hasVerifiedEmail()
             ? redirect()->intended(Config::home())
