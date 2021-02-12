@@ -2,7 +2,7 @@
 
 namespace Cratespace\Sentinel\Http\Controllers;
 
-use Illuminate\Contracts\Support\Responsable;
+use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Http\Requests\DeleteProfilePhotoRequest;
 use Cratespace\Sentinel\Http\Responses\DeleteProfilePhotoResponse;
 
@@ -13,9 +13,9 @@ class UserProfilePhotoController extends Controller
      *
      * @param \App\Http\App\Http\Requests\DeleteProfilePhotoRequest $request
      *
-     * @return \App\Http\Responses\DeleteProfilePhotoResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function __invoke(DeleteProfilePhotoRequest $request): Responsable
+    public function __invoke(DeleteProfilePhotoRequest $request): Response
     {
         $request->user()->deleteProfilePhoto();
 

@@ -6,6 +6,7 @@ use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
+use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Http\Requests\PasswordResetRequest;
 use Cratespace\Sentinel\Http\Responses\PasswordResetResponse;
 use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
@@ -36,7 +37,7 @@ class PasswordResetController extends Controller
     /**
      * Show the new password view.
      *
-     * @param \Illuminate\Http\Request                               $request
+     * @param \Illuminate\Http\Request                                $request
      * @param \Sentinel\Contracts\Responses\ResetPasswordViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
@@ -49,12 +50,12 @@ class PasswordResetController extends Controller
     /**
      * Reset the user's password.
      *
-     * @param \Illuminate\Http\Request                       $request
+     * @param \Illuminate\Http\Request                        $request
      * @param \Sentinel\Contracts\Actions\ResetsUserPasswords $reseter
      *
-     * @return \Illuminate\Contracts\Support\Responsable
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function store(PasswordResetRequest $request, ResetsUserPasswords $reseter): Responsable
+    public function store(PasswordResetRequest $request, ResetsUserPasswords $reseter): Response
     {
         $status = $reseter->reset($request->only(
             Config::email(),
@@ -64,7 +65,7 @@ class PasswordResetController extends Controller
         ));
 
         return $status == Password::PASSWORD_RESET
-            ? $this->app(PasswordResetResponse::class, ['status' => $status])
-            : $this->app(FailedPasswordResetResponse::class, ['status' => $status]);
+            ? PasswordResetResponse::dispatch($status)
+            : FailedPasswordResetResponse::dispatch($status);
     }
 }

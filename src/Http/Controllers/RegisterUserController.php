@@ -5,6 +5,7 @@ namespace Cratespace\Sentinel\Http\Controllers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
+use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Http\Requests\RegisterRequest;
 use Cratespace\Sentinel\Http\Responses\RegisterResponse;
 use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
@@ -34,7 +35,7 @@ class RegisterUserController extends Controller
     /**
      * Show the registration view.
      *
-     * @param \Illuminate\Http\Request                          $request
+     * @param \Illuminate\Http\Request                           $request
      * @param \Sentinel\Contracts\Responses\RegisterViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
@@ -47,17 +48,17 @@ class RegisterUserController extends Controller
     /**
      * Create a new registered user.
      *
-     * @param \Sentinel\Http\Requests\RegisterRequest     $request
+     * @param \Sentinel\Http\Requests\RegisterRequest    $request
      * @param \Laravel\Fortify\Contracts\CreatesNewUsers $creator
      *
-     * @return \Sentinel\Http\Responses\RegisterResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function store(RegisterRequest $request, CreatesNewUsers $creator): RegisterResponse
+    public function store(RegisterRequest $request, CreatesNewUsers $creator): Response
     {
         event(new Registered($user = $creator->create($request->validated())));
 
         $this->guard->login($user);
 
-        return $this->app(RegisterResponse::class);
+        return RegisterResponse::dispatch();
     }
 }

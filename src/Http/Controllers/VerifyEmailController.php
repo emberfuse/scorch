@@ -2,9 +2,9 @@
 
 namespace Cratespace\Sentinel\Http\Controllers;
 
-use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Auth\Events\Verified;
-use Illuminate\Http\RedirectResponse;
+use Cratespace\Sentinel\Sentinel\Config;
+use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Http\Requests\VerifyEmailRequest;
 
 class VerifyEmailController extends Controller
@@ -14,9 +14,9 @@ class VerifyEmailController extends Controller
      *
      * @param \Sentinel\Http\Requests\VerifyEmailRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function __invoke(VerifyEmailRequest $request): RedirectResponse
+    public function __invoke(VerifyEmailRequest $request): Response
     {
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->intended(Config::home() . '?verified=1');

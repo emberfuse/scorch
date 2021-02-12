@@ -15,6 +15,6 @@ class DeleteProfilePhotoResponse extends Response implements Responsable
      */
     public function toResponse($request)
     {
-        return $request->expectsJson() ? $this->json('', 204) : $this->back(303);
+        return $request->expectsJson() ? $this->json('', 204) : $this->back(302);
     }
 }

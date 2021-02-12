@@ -5,11 +5,11 @@ namespace Cratespace\Sentinel\Tests;
 use Mockery as m;
 use App\Models\User;
 use App\Policies\UserPolicy;
-use Cratespace\Sentinel\Jobs\DeleteUserJob;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Queue;
-use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
+use Cratespace\Sentinel\Jobs\DeleteUserJob;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
 use Cratespace\Sentinel\Contracts\Actions\UpdatesUserProfiles;
 use Cratespace\Sentinel\Contracts\Responses\UserProfileViewResponse;
 
@@ -59,6 +59,8 @@ class UpdateProfileTest extends TestCase
 
     public function testUserAccountsCanBeDeleted()
     {
+        $this->withoutExceptionHandling();
+
         $this->migrate();
 
         Queue::fake();

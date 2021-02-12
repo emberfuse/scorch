@@ -10,7 +10,9 @@ use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
 use Cratespace\Sentinel\Contracts\Support\View as ViewContract;
 use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\UserProfileViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\VerifyEmailViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\ResetPasswordViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\ConfirmPasswordViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\TwoFactorChallengeViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 
@@ -74,6 +76,18 @@ class View implements ViewContract
     public static function resetPassword($view): void
     {
         static::registerView(ResetPasswordViewResponse::class, $view);
+    }
+
+    /**
+     * Specify which view should be used as the password confirmation prompt.
+     *
+     * @param \Closure|string $view
+     *
+     * @return void
+     */
+    public static function confirmPassword($view): void
+    {
+        static::registerView(ConfirmPasswordViewResponse::class, $view);
     }
 
     /**

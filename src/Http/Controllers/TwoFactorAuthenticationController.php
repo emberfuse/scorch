@@ -4,6 +4,7 @@ namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
+use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Http\Requests\TwoFactorLoginRequest;
 use Cratespace\Sentinel\Http\Responses\TwoFactorLoginResponse;
 use Cratespace\Sentinel\Http\Responses\FailedTwoFactorLoginResponse;
@@ -47,22 +48,22 @@ class TwoFactorAuthenticationController extends Controller
      *
      * @param \Sentinel\Http\Requests\TwoFactorLoginRequest $request
      *
-     * @return \Illuminate\Contracts\Support\Responsable
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function store(TwoFactorLoginRequest $request): Responsable
+    public function store(TwoFactorLoginRequest $request): Response
     {
         $user = $request->challengedUser();
 
         if ($code = $request->validRecoveryCode()) {
             $user->replaceRecoveryCode($code);
         } elseif (! $request->hasValidCode()) {
-            return app(FailedTwoFactorLoginResponse::class);
+            return FailedTwoFactorLoginResponse::dispatch();
         }
 
         $this->guard->login($user, $request->remember());
 
         $request->session()->regenerate();
 
-        return app(TwoFactorLoginResponse::class);
+        return TwoFactorLoginResponse::dispatch();
     }
 }
