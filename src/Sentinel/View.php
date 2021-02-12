@@ -10,6 +10,7 @@ use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
 use Cratespace\Sentinel\Contracts\Support\View as ViewContract;
 use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\UserProfileViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\VerifyEmailViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\ResetPasswordViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\TwoFactorChallengeViewResponse;
 use Cratespace\Sentinel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
