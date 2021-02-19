@@ -2,21 +2,21 @@
 
 namespace Cratespace\Sentinel\Actions;
 
-use Cratespace\Sentinel\Codes\RecoveryCode;
 use Illuminate\Support\Collection;
+use Illuminate\Foundation\Auth\User;
+use Cratespace\Sentinel\Codes\RecoveryCode;
 use Cratespace\Sentinel\Events\RecoveryCodesGenerated;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 class GenerateNewRecoveryCodes
 {
     /**
      * Generate new recovery codes for the user.
      *
-     * @param \Illuminate\Contracts\Auth\Authenticatable $user
+     * @param \Illuminate\Foundation\Auth\User $user
      *
      * @return void
      */
-    public function __invoke(Authenticatable $user): void
+    public function __invoke(User $user): void
     {
         $user->forceFill(['two_factor_recovery_codes' => $this->generateCode()])->save();
 

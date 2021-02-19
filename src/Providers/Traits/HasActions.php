@@ -16,7 +16,9 @@ trait HasActions
         }
 
         collect($this->actions)->each(
-            fn ($concrete, $abstract) => $this->app->singleton($abstract, $concrete)
+            function (string $concrete, string $abstract): void {
+                $this->app->singleton($abstract, $concrete);
+            }
         );
     }
 }

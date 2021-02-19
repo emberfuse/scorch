@@ -45,6 +45,11 @@ return [
     ],
 
     /*
+     * Additional middelware type classes to run when attempting to authenticate user.
+     */
+    'login_pipeline' => [],
+
+    /*
      * Register View Routes.
      */
     'views' => true,

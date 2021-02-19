@@ -18,8 +18,11 @@ class ConfirmPassword implements ConfirmsPasswords
      *
      * @return bool
      */
-    public function confirm(StatefulGuard $guard, Authenticatable $user, ?string $password = null): bool
-    {
+    public function confirm(
+        StatefulGuard $guard,
+        Authenticatable $user,
+        ?string $password = null
+    ): bool {
         $username = Config::username(['email']);
 
         return $guard->validate([

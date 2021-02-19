@@ -5,9 +5,9 @@ namespace Cratespace\Sentinel\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
-use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider;
 use Laravel\Fortify\Http\Responses\FailedTwoFactorLoginResponse;
+use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
+use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
 class TwoFactorLoginRequest extends FormRequest
 {
@@ -55,9 +55,9 @@ class TwoFactorLoginRequest extends FormRequest
      *
      * @return bool
      */
-    public function hasValidCode()
+    public function hasValidCode(): bool
     {
-        return $this->code && app(TwoFactorAuthenticationProvider::class)->verify(
+        return $this->code && app(ProvidesTwoFactorAuthentication::class)->verify(
             decrypt($this->challengedUser()->two_factor_secret),
             $this->code
         );
@@ -68,15 +68,16 @@ class TwoFactorLoginRequest extends FormRequest
      *
      * @return string|null
      */
-    public function validRecoveryCode()
+    public function validRecoveryCode(): ?string
     {
         if (! $this->recovery_code) {
-            return;
+            return null;
         }
 
-        return collect($this->challengedUser()->recoveryCodes())->first(function ($code) {
-            return hash_equals($this->recovery_code, $code) ? $code : null;
-        });
+        return collect($this->challengedUser()->recoveryCodes())
+            ->first(function (string $code): ?string {
+                return hash_equals($this->recovery_code, $code) ? $code : null;
+            });
     }
 
     /**
@@ -105,7 +106,7 @@ class TwoFactorLoginRequest extends FormRequest
      *
      * @return bool
      */
-    public function remember()
+    public function remember(): bool
     {
         if (! $this->remember) {
             $this->remember = $this->session()->pull('login.remember', false);

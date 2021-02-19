@@ -2,7 +2,8 @@
 
 namespace Cratespace\Sentinel\Http\Controllers;
 
-use Illuminate\Session\Store;
+use Cratespace\Sentinel\Sentinel\Config;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,8 +55,21 @@ class AuthenticationController extends Controller
     {
         return $this->pipeline()
             ->send($request)
-            ->through(array_filter(static::$loginPipeline))
-            ->then(fn ($request) => LoginResponse::dispatch());
+            ->through(array_filter(static::loginPipeline()))
+            ->then(fn () => LoginResponse::dispatch());
+    }
+
+    /**
+     * Get array of authentication middlware.
+     *
+     * @return array
+     */
+    public static function loginPipeline(): array
+    {
+        return array_filter(array_merge(
+            static::$loginPipeline,
+            Config::loginPipeline()
+        ));
     }
 
     /**
@@ -70,7 +84,7 @@ class AuthenticationController extends Controller
     {
         $guard->logout();
 
-        tap($request->session(), function ($session): void {
+        tap($request->session(), function (Session $session): void {
             $session->invalidate();
 
             $session->regenerateToken();

@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\User;
 use Cratespace\Sentinel\Codes\RecoveryCode;
 use Cratespace\Sentinel\Events\TwoFactorAuthenticationEnabled;
-use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider;
+use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
 class EnableTwoFactorAuthentication
 {
@@ -20,18 +20,18 @@ class EnableTwoFactorAuthentication
     /**
      * The two factor authentication provider.
      *
-     * @var \Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider
+     * @var \Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication
      */
     protected $provider;
 
     /**
      * Create a new action instance.
      *
-     * @param \Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider $provider
+     * @param \Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication $provider
      *
      * @return void
      */
-    public function __construct(TwoFactorAuthenticationProvider $provider)
+    public function __construct(ProvidesTwoFactorAuthentication $provider)
     {
         $this->provider = $provider;
     }
