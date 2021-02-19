@@ -2,7 +2,6 @@
 
 namespace App\Actions\Auth;
 
-use Closure;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -13,13 +12,6 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableUser;
 class CreateNewUser implements CreatesNewUsers
 {
     /**
-     * Callback that will be executed after a user has been created.
-     *
-     * @var \Closure|null
-     */
-    protected static $afterCreatingUser;
-
-    /**
      * Create a newly registered user.
      *
      * @param array $data
@@ -29,11 +21,7 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $data): AuthenticatableUser
     {
         return DB::transaction(function () use ($data) {
-            return tap($this->createUser($data), function (AuthenticatableUser $user) use ($data) {
-                if (static::$afterCreatingUser) {
-                    call_user_func_array(static::$afterCreatingUser, [$user, $data]);
-                }
-
+            return tap($this->createUser($data), function (AuthenticatableUser $user) {
                 return $user;
             });
         });
@@ -72,17 +60,5 @@ class CreateNewUser implements CreatesNewUsers
         }
 
         return Str::studly($name);
-    }
-
-    /**
-     * Register a callback that will be executed after a user has been created.
-     *
-     * @param \Closure|null $callback
-     *
-     * @return void
-     */
-    public static function afterCreatingUser(?Closure $callback = null): void
-    {
-        static::$afterCreatingUser = $callback;
     }
 }
