@@ -14,7 +14,7 @@ use Cratespace\Sentinel\Console\InstallCommand;
 use Cratespace\Sentinel\Actions\ConfirmPassword;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Auth\Guard as AuthGuard;
-use Cratespace\Sentinel\Console\MakeResponseCommand;
+use Cratespace\Sentinel\Console\ResponseMakeCommand;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Cratespace\Sentinel\Contracts\Actions\ConfirmsPasswords;
 use Cratespace\Sentinel\Actions\ProvideTwoFactorAuthentication;
@@ -153,7 +153,7 @@ class SentinelServiceProvider extends ServiceProvider
 
         $this->commands([
             InstallCommand::class,
-            MakeResponseCommand::class,
+            ResponseMakeCommand::class,
         ]);
     }
 

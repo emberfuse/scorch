@@ -4,7 +4,7 @@ namespace Cratespace\Sentinel\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class MakeResponseCommand extends GeneratorCommand
+class ResponseMakeCommand extends GeneratorCommand
 {
     /**
      * The console command name.
