@@ -1,8 +1,8 @@
 <?php
 
-namespace Cratespace\Sentinel\Contracts\Providers;
+namespace Cratespace\Sentinel\Contracts\Actions;
 
-interface TwoFactorAuthenticationProvider
+interface ProvidesTwoFactorAuthentication
 {
     /**
      * Generate a new secret key.

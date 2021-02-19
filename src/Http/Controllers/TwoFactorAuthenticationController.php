@@ -48,9 +48,9 @@ class TwoFactorAuthenticationController extends Controller
      *
      * @param \Sentinel\Http\Requests\TwoFactorLoginRequest $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
-    public function store(TwoFactorLoginRequest $request): Response
+    public function store(TwoFactorLoginRequest $request)
     {
         $user = $request->challengedUser();
 

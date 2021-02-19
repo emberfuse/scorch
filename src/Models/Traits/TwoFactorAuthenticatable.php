@@ -9,7 +9,7 @@ use Cratespace\Sentinel\Codes\RecoveryCode;
 use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider;
+use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
 trait TwoFactorAuthenticatable
 {
@@ -75,7 +75,7 @@ trait TwoFactorAuthenticatable
      */
     public function twoFactorQrCodeUrl(): string
     {
-        return app(TwoFactorAuthenticationProvider::class)->qrCodeUrl(
+        return app(ProvidesTwoFactorAuthentication::class)->qrCodeUrl(
             config('app.name'),
             $this->email,
             decrypt($this->two_factor_secret)

@@ -3,15 +3,20 @@
 namespace Cratespace\Sentinel\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Auth\GuardHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Cratespace\Sentinel\Sentinel\Config;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Guard as AuthGuard;
 use Cratespace\Sentinel\Auth\Tokens\TransientToken;
 use Cratespace\Sentinel\Models\Traits\HasApiTokens;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken;
 
-class Guard
+class Guard implements AuthGuard
 {
+    use GuardHelpers;
+
     /**
      * The authentication factory implementation.
      *
@@ -58,7 +63,7 @@ class Guard
      */
     public function __invoke(Request $request)
     {
-        if ($user = $this->auth->guard(Config::guard(['web']))->user()) {
+        if ($user = $this->user()) {
             return $this->supportsTokens($user)
                 ? $user->withAccessToken(new TransientToken())
                 : $user;
@@ -68,8 +73,7 @@ class Guard
             $accessToken = PersonalAccessToken::findToken($token);
 
             if (! $accessToken ||
-                ($this->expiration &&
-                 $accessToken->created_at->lte(now()->subMinutes($this->expiration))) ||
+                $this->validate(compact('accessToken')) ||
                 ! $this->hasValidProvider($accessToken->tokenable)) {
                 return;
             }
@@ -78,6 +82,29 @@ class Guard
                 tap($accessToken->forceFill(['last_used_at' => now()]))->save()
             ) : null;
         }
+    }
+
+    /**
+     * Get the currently authenticated user.
+     *
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function user(): ?Authenticatable
+    {
+        return $this->auth->guard(Config::guard(['web']))->user();
+    }
+
+    /**
+     * Validate a user's credentials.
+     *
+     * @param array $credentials
+     *
+     * @return bool
+     */
+    public function validate(array $credentials = []): bool
+    {
+        return $this->expiration && $credentials['accessToken']->created_at
+            ->lte(now()->subMinutes($this->expiration));
     }
 
     /**

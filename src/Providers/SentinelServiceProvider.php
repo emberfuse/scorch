@@ -13,11 +13,13 @@ use Illuminate\Contracts\Auth\StatefulGuard;
 use Cratespace\Sentinel\Console\InstallCommand;
 use Cratespace\Sentinel\Actions\ConfirmPassword;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Auth\Guard as AuthGuard;
 use Cratespace\Sentinel\Console\MakeResponseCommand;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Cratespace\Sentinel\Contracts\Actions\ConfirmsPasswords;
+use Cratespace\Sentinel\Actions\ProvideTwoFactorAuthentication;
+use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
 use Cratespace\Sentinel\Http\Middleware\EnsureFrontendRequestsAreStateful;
-use Cratespace\Sentinel\Contracts\Providers\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
 
 class SentinelServiceProvider extends ServiceProvider
 {
@@ -32,7 +34,6 @@ class SentinelServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../config/sentinel.php', 'sentinel');
 
         $this->registerAuthGuard();
-        $this->registerTwoFactorAuthProvider();
         $this->registerInternalActions();
         $this->registerInternalConfig();
     }
@@ -75,20 +76,7 @@ class SentinelServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             StatefulGuard::class,
-            fn () => Auth::guard(Config::guard(['null']))
-        );
-    }
-
-    /**
-     * Register two factor authentication provider.
-     *
-     * @return void
-     */
-    protected function registerTwoFactorAuthProvider(): void
-    {
-        $this->app->singleton(
-            TwoFactorAuthenticationProviderContract::class,
-            TwoFactorAuthenticationProvider::class
+            fn () => Auth::guard(Config::guard(['sentinel']))
         );
     }
 
@@ -100,6 +88,10 @@ class SentinelServiceProvider extends ServiceProvider
     protected function registerInternalActions(): void
     {
         $this->app->singleton(ConfirmsPasswords::class, ConfirmPassword::class);
+        $this->app->singleton(
+            ProvidesTwoFactorAuthentication::class,
+            ProvideTwoFactorAuthentication::class
+        );
     }
 
     /**
@@ -174,7 +166,9 @@ class SentinelServiceProvider extends ServiceProvider
     {
         $kernel = $this->app->make(Kernel::class);
 
-        $kernel->prependToMiddlewarePriority(EnsureFrontendRequestsAreStateful::class);
+        $kernel->prependToMiddlewarePriority(
+            EnsureFrontendRequestsAreStateful::class
+        );
     }
 
     /**
@@ -200,9 +194,9 @@ class SentinelServiceProvider extends ServiceProvider
      */
     protected function configureGuard(): void
     {
-        Auth::resolved(function ($auth) {
-            $auth->extend('sentinel', function ($app, $name, array $config) use ($auth) {
-                return tap($this->createGuard($auth, $config), function ($guard) {
+        Auth::resolved(function (AuthFactory $auth) {
+            $auth->extend('sentinel', function (Application $app, string $name, array $config) use ($auth): AuthGuard {
+                return tap($this->createGuard($auth, $config), function (AuthGuard $guard): void {
                     $this->app->refresh('request', $guard, 'setRequest');
                 });
             });

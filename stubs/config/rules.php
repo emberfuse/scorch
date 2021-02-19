@@ -14,7 +14,7 @@ return [
      * User Login Validation Rules.
      */
     'login' => [
-        'email' => ['required', 'string', 'email'],
+        'email' => ['sometimes', 'string', 'email'],
         'password' => ['required', 'string'],
         'remember' => ['sometimes'],
     ],
