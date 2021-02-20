@@ -4,11 +4,10 @@ namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Http\Requests\TwoFactorLoginRequest;
 use Cratespace\Sentinel\Http\Responses\TwoFactorLoginResponse;
 use Cratespace\Sentinel\Http\Responses\FailedTwoFactorLoginResponse;
-use Cratespace\Sentinel\Http\Responses\TwoFactorChallengeViewResponse;
+use Cratespace\Sentinel\Contracts\Responses\TwoFactorChallengeViewResponse;
 
 class TwoFactorAuthenticationController extends Controller
 {
