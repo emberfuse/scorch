@@ -4,8 +4,8 @@ namespace Cratespace\Sentinel\Tests;
 
 use Mockery as m;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
 use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
 
 class RegisterUserTest extends TestCase
@@ -37,5 +37,21 @@ class RegisterUserTest extends TestCase
         $response = $this->post('/register', []);
 
         $response->assertRedirect('/home');
+    }
+
+    public function testUsersCanBeCreatedAndRedirectedToIntendedUrl()
+    {
+        $this->mock(CreatesNewUsers::class)
+            ->shouldReceive('create')
+            ->andReturn(m::mock(Authenticatable::class));
+
+        $this->mock(StatefulGuard::class)
+            ->shouldReceive('login')
+            ->once();
+
+        $response = $this->withSession(['url.intended' => 'http://foo.com/bar'])
+            ->post('/register', []);
+
+        $response->assertRedirect('http://foo.com/bar');
     }
 }
