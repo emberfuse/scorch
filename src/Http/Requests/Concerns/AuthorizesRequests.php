@@ -2,10 +2,10 @@
 
 namespace Cratespace\Sentinel\Http\Requests\Concerns;
 
-use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Cratespace\Sentinel\Sentinel\Config;
 
 trait AuthorizesRequests
 {
@@ -37,9 +37,9 @@ trait AuthorizesRequests
      *
      * @return bool
      */
-    public function isAllowed(string $ability, $arguments = []): bool
+    public function isAllowed(string $ability, $arguments = [], bool $withoutAuthentication = true): bool
     {
-        if ($this->isAuthenticated()) {
+        if ($this->isAuthenticated() || $withoutAuthentication) {
             return Gate::allows($ability, $arguments);
         }
 
