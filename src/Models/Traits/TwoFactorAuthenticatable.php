@@ -45,7 +45,7 @@ trait TwoFactorAuthenticatable
         $this->forceFill([
             'two_factor_recovery_codes' => encrypt(str_replace(
                 $code,
-                RecoveryCode::generate(),
+                (new RecoveryCode())->generate(),
                 decrypt($this->two_factor_recovery_codes)
             )),
         ])->save();

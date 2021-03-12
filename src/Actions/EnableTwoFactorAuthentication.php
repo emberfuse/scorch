@@ -63,7 +63,7 @@ class EnableTwoFactorAuthentication
         return encrypt(json_encode(
             Collection::times(
                 $this->numberOfCodes,
-                fn () => RecoveryCode::generate()
+                fn () => (new RecoveryCode())->generate()
             )->all()
         ));
     }

@@ -31,7 +31,7 @@ class GenerateNewRecoveryCodes
     protected function generateCode(): string
     {
         return encrypt(json_encode(
-            Collection::times(8, fn () => RecoveryCode::generate())->all()
+            Collection::times(8, fn () => (new RecoveryCode())->generate())->all()
         ));
     }
 }
