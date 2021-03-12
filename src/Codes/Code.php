@@ -5,9 +5,14 @@ namespace Cratespace\Sentinel\Codes;
 abstract class Code
 {
     /**
-     * Generate a new and unique code.
+     * String of acceptable characters.
      *
-     * @return string
+     * @var string
      */
-    abstract public static function generate(): string;
+    protected static $characterPool = 'ABCDEFGHJKLMNOPQRSTUVWXYZ23456789';
+
+    /**
+     * Default UID character length.
+     */
+    public const CHARACTER_LENGTH = 24;
 }
