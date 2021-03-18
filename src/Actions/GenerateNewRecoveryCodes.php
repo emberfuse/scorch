@@ -4,7 +4,7 @@ namespace Cratespace\Sentinel\Actions;
 
 use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Codes\RecoveryCode;
+use Cratespace\Sentinel\Support\RecoveryCode;
 use Cratespace\Sentinel\Events\RecoveryCodesGenerated;
 
 class GenerateNewRecoveryCodes
@@ -31,7 +31,7 @@ class GenerateNewRecoveryCodes
     protected function generateCode(): string
     {
         return encrypt(json_encode(
-            Collection::times(8, fn () => (new RecoveryCode())->generate())->all()
+            Collection::times(8, fn () => RecoveryCode::generate())->all()
         ));
     }
 }

@@ -4,7 +4,7 @@ namespace Cratespace\Sentinel\Actions;
 
 use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Codes\RecoveryCode;
+use Cratespace\Sentinel\Support\RecoveryCode;
 use Cratespace\Sentinel\Events\TwoFactorAuthenticationEnabled;
 use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
@@ -63,7 +63,7 @@ class EnableTwoFactorAuthentication
         return encrypt(json_encode(
             Collection::times(
                 $this->numberOfCodes,
-                fn () => (new RecoveryCode())->generate()
+                fn () => RecoveryCode::generate()
             )->all()
         ));
     }
