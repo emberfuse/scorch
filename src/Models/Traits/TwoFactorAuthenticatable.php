@@ -5,8 +5,8 @@ namespace Cratespace\Sentinel\Models\Traits;
 use BaconQrCode\Writer;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\ImageRenderer;
-use Cratespace\Sentinel\Codes\RecoveryCode;
 use BaconQrCode\Renderer\RendererStyle\Fill;
+use Cratespace\Sentinel\Support\RecoveryCode;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
@@ -45,7 +45,7 @@ trait TwoFactorAuthenticatable
         $this->forceFill([
             'two_factor_recovery_codes' => encrypt(str_replace(
                 $code,
-                (new RecoveryCode())->generate(),
+                RecoveryCode::generate(),
                 decrypt($this->two_factor_recovery_codes)
             )),
         ])->save();

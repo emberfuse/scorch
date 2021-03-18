@@ -1,18 +1,17 @@
 <?php
 
-namespace Cratespace\Sentinel\Codes;
+namespace Cratespace\Sentinel\Support;
 
 use Illuminate\Support\Str;
-use Cratespace\Sentinel\Contracts\Codes\CodeGenerator;
 
-class RecoveryCode extends Code implements CodeGenerator
+class RecoveryCode
 {
     /**
      * Generate a new and unique code.
      *
      * @return string
      */
-    public function generate(): string
+    public static function generate(): string
     {
         return Str::random(10) . '-' . Str::random(10);
     }
