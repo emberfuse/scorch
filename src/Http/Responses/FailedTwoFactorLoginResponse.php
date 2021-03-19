@@ -22,6 +22,6 @@ class FailedTwoFactorLoginResponse extends Response implements Responsable
             throw ValidationException::withMessages(['code' => [$message]]);
         }
 
-        return $this->redirectToRoute('login')->withErrors(['email' => $message]);
+        return $this->redirectToRoute('login')->withErrors(['code' => $message]);
     }
 }

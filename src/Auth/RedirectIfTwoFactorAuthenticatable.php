@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Cratespace\Sentinel\Models\Traits\TwoFactorAuthenticatable;
+use Cratespace\Sentinel\Events\TwoFactorAuthenticationChallenged;
 use Cratespace\Sentinel\Http\Responses\TwoFactorChallengeResponse;
 
 class RedirectIfTwoFactorAuthenticatable extends Authenticate
@@ -27,6 +28,8 @@ class RedirectIfTwoFactorAuthenticatable extends Authenticate
                 'login.id' => $user->getKey(),
                 'login.remember' => $request->filled('remember'),
             ]);
+
+            TwoFactorAuthenticationChallenged::dispatch($user);
 
             return app(TwoFactorChallengeResponse::class);
         }

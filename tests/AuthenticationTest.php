@@ -4,6 +4,7 @@ namespace Cratespace\Sentinel\Tests;
 
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use App\Actions\Auth\AuthenticateUser;
 use Cratespace\Sentinel\Sentinel\Config;
 use Cratespace\Sentinel\Limiters\LoginRateLimiter;
@@ -11,6 +12,7 @@ use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
 use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
 use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
 use Cratespace\Sentinel\Tests\Fixtures\TestAuthenticationUser;
+use Cratespace\Sentinel\Events\TwoFactorAuthenticationChallenged;
 use Cratespace\Sentinel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class AuthenticationTest extends TestCase
@@ -110,6 +112,8 @@ class AuthenticationTest extends TestCase
 
     public function testUserIsRedirectedToChallengeWhenUsingTwoFactorAuthentication()
     {
+        Event::fake();
+
         app('config')->set('auth.providers.users.model', TestTwoFactorAuthenticationUser::class);
 
         $this->migrate();
@@ -124,6 +128,8 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertRedirect('/two-factor-challenge');
+
+        Event::assertDispatched(TwoFactorAuthenticationChallenged::class);
     }
 
     public function testTwoFactorChallengeCanBePassedViaCode()
