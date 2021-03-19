@@ -4,6 +4,7 @@ namespace Cratespace\Sentinel\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Cratespace\Sentinel\Http\Requests\TwoFactorLoginRequest;
 use Cratespace\Sentinel\Http\Responses\TwoFactorLoginResponse;
 use Cratespace\Sentinel\Http\Responses\FailedTwoFactorLoginResponse;
@@ -33,12 +34,16 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * Show the two factor authentication challenge view.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Cratespace\Sentinel\Http\Requests\TwoFactorLoginRequest $request
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function create(): Responsable
+    public function create(TwoFactorLoginRequest $request): Responsable
     {
+        if (! $request->hasChallengedUser()) {
+            throw new HttpResponseException(redirect()->route('login'));
+        }
+
         return $this->app(TwoFactorChallengeViewResponse::class);
     }
 
