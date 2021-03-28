@@ -2,8 +2,8 @@
 
 namespace App\Actions\Auth;
 
+use App\Models\User;
 use App\Actions\Auth\Traits\PasswordUpdater;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Cratespace\Sentinel\Contracts\Actions\UpdatesUserPasswords;
 
 class UpdateUserPassword implements UpdatesUserPasswords
@@ -13,12 +13,12 @@ class UpdateUserPassword implements UpdatesUserPasswords
     /**
      * Update the user's password.
      *
-     * @param \Illuminate\Contracts\Auth\Authenticatable $user
-     * @param array                                      $data
+     * @param \App\Models\User $user
+     * @param array            $data
      *
      * @return void
      */
-    public function update(Authenticatable $user, array $data): void
+    public function update(User $user, array $data): void
     {
         $this->updatePassword($user, $data['password'], true);
     }

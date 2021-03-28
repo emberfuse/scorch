@@ -40,7 +40,7 @@ class UpdateProfileTest extends TestCase
 
     public function testContactInformationCanBeUpdated()
     {
-        $user = m::mock(Authenticatable::class);
+        $user = m::mock(User::class);
 
         $updater = $this->mock(UpdatesUserProfiles::class);
 
