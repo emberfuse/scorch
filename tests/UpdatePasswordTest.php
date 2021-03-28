@@ -3,14 +3,14 @@
 namespace Cratespace\Sentinel\Tests;
 
 use Mockery as m;
-use Illuminate\Contracts\Auth\Authenticatable;
+use App\Models\User;
 use Cratespace\Sentinel\Contracts\Actions\UpdatesUserPasswords;
 
 class UpdatePasswordTest extends TestCase
 {
     public function testPasswordsCanBeUpdated()
     {
-        $user = m::mock(Authenticatable::class);
+        $user = m::mock(User::class);
 
         $updater = $this->mock(UpdatesUserPasswords::class);
         $updater->shouldReceive('update')

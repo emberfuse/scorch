@@ -2,7 +2,7 @@
 
 namespace App\Actions\Auth;
 
-use Illuminate\Contracts\Auth\Authenticatable;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Cratespace\Sentinel\Contracts\Actions\UpdatesUserProfiles;
 
@@ -11,12 +11,12 @@ class UpdateUserProfile implements UpdatesUserProfiles
     /**
      * Validate and update the given user's profile information.
      *
-     * @param \Illuminate\Contracts\Auth\Authenticatable $user
-     * @param array                                      $data
+     * @param \App\Models\User $user
+     * @param array            $data
      *
      * @return void
      */
-    public function update(Authenticatable $user, array $data): void
+    public function update(User $user, array $data): void
     {
         if (isset($data['photo'])) {
             $user->updateProfilePhoto($data['photo']);
@@ -34,13 +34,13 @@ class UpdateUserProfile implements UpdatesUserProfiles
     /**
      * Update the given user's profile information.
      *
-     * @param \Illuminate\Contracts\Auth\Authenticatable $user
-     * @param array                                      $data
-     * @param bool                                       $verified
+     * @param \App\Models\User $user
+     * @param array            $data
+     * @param bool             $verified
      *
      * @return void
      */
-    protected function updateInformation(Authenticatable $user, array $data, bool $verified = true): void
+    protected function updateInformation(User $user, array $data, bool $verified = true): void
     {
         $user->forceFill(array_merge([
             'name' => $data['name'],
