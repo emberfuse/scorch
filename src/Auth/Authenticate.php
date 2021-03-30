@@ -75,8 +75,6 @@ abstract class Authenticate
             $this->getAttemptingUser($request),
             function (?Authenticatable $user = null) use ($request) {
                 if (! $user || ! Hash::check($request->password, $user->password)) {
-                    $this->fireFailedEvent($request, $user);
-
                     $this->throwFailedAuthenticationException($request);
                 }
             }
@@ -111,15 +109,20 @@ abstract class Authenticate
     /**
      * Throw a failed authentication validation exception.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request              $request
+     * @param \Illuminate\Auth\Authenticatable|null $user
      *
      * @return void
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function throwFailedAuthenticationException(Request $request): void
-    {
+    protected function throwFailedAuthenticationException(
+        Request $request,
+        ?Authenticatable $user = null
+    ): void {
         $this->limiter->increment($request);
+
+        $this->fireFailedEvent($request, $user);
 
         throw ValidationException::withMessages([$this->username() => [trans('auth.failed')]]);
     }
