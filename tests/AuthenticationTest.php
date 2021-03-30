@@ -82,6 +82,23 @@ class AuthenticationTest extends TestCase
         $response->assertJsonValidationErrors(['email']);
     }
 
+    public function testLockedUserAccountsAreDenied()
+    {
+        $this->migrate();
+
+        TestAuthenticationUser::forceCreate($this->userDetails([
+            'locked' => true,
+        ]));
+
+        $response = $this->post('/login', [
+            'email' => 'james.silverman@monster.com',
+            'password' => 'cthuluEmployee',
+        ]);
+
+        $response->assertStatus(302);
+        $response->assertRedirect('/');
+    }
+
     public function testTheUserCanLogoutOfTheApplication()
     {
         $this->migrate();
