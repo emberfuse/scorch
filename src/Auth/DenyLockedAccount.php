@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Cratespace\Sentinel\Auth;
 
 use Closure;
 use Illuminate\Http\Request;
-use Cratespace\Sentinel\Auth\Authenticate;
 
 class DenyLockedAccount extends Authenticate
 {

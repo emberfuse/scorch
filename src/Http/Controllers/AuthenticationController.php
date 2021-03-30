@@ -3,10 +3,10 @@
 namespace Cratespace\Sentinel\Http\Controllers;
 
 use Cratespace\Sentinel\Sentinel\Config;
-use Illuminate\Contracts\Session\Session;
-use App\Http\Middleware\DenyLockedAccount;
+use Cratespace\Sentinel\Actions\LogoutUser;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
+use Cratespace\Sentinel\Auth\DenyLockedAccount;
 use Cratespace\Sentinel\Auth\AttemptToAuthenticate;
 use Cratespace\Sentinel\Http\Requests\LoginRequest;
 use Cratespace\Sentinel\Http\Requests\LogoutRequest;
