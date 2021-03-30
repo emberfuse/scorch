@@ -3,10 +3,10 @@
 namespace Cratespace\Sentinel\Http\Controllers;
 
 use Cratespace\Sentinel\Sentinel\Config;
-use Illuminate\Contracts\Session\Session;
+use Cratespace\Sentinel\Actions\LogoutUser;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Symfony\Component\HttpFoundation\Response;
+use Cratespace\Sentinel\Auth\DenyLockedAccount;
 use Cratespace\Sentinel\Auth\AttemptToAuthenticate;
 use Cratespace\Sentinel\Http\Requests\LoginRequest;
 use Cratespace\Sentinel\Http\Requests\LogoutRequest;
@@ -27,6 +27,7 @@ class AuthenticationController extends Controller
     protected static $loginPipeline = [
         EnsureLoginIsNotThrottled::class,
         RedirectIfTwoFactorAuthenticatable::class,
+        DenyLockedAccount::class,
         AttemptToAuthenticate::class,
         PrepareAuthenticatedSession::class,
     ];
@@ -80,15 +81,9 @@ class AuthenticationController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function destroy(LogoutRequest $request, StatefulGuard $guard): Response
+    public function destroy(LogoutRequest $request, StatefulGuard $guard)
     {
-        $guard->logout();
-
-        tap($request->session(), function (Session $session): void {
-            $session->invalidate();
-
-            $session->regenerateToken();
-        });
+        $this->app(LogoutUser::class)->logout($request, $guard);
 
         return LogoutResponse::dispatch();
     }
