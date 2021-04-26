@@ -2,21 +2,18 @@
 
 namespace Cratespace\Sentinel\Auth;
 
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use Illuminate\Auth\GuardHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Guard as AuthGuard;
 use Cratespace\Sentinel\Auth\Tokens\TransientToken;
 use Cratespace\Sentinel\Models\Traits\HasApiTokens;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken;
 
-class Guard implements AuthGuard
+class Guard
 {
-    use GuardHelpers;
-
     /**
      * The authentication factory implementation.
      *
@@ -42,8 +39,8 @@ class Guard implements AuthGuard
      * Create a new guard instance.
      *
      * @param \Illuminate\Contracts\Auth\Factory $auth
-     * @param int                                $expiration
-     * @param string                             $provider
+     * @param int|null                           $expiration
+     * @param string|null                        $provider
      *
      * @return void
      */
@@ -63,10 +60,12 @@ class Guard implements AuthGuard
      */
     public function __invoke(Request $request)
     {
-        if ($user = $this->user()) {
-            return $this->supportsTokens($user)
-                ? $user->withAccessToken(new TransientToken())
-                : $user;
+        foreach (Arr::wrap(config('sentinel.guard', 'web')) as $guard) {
+            if ($user = $this->auth->guard($guard)->user()) {
+                return $this->supportsTokens($user)
+                    ? $user->withAccessToken(new TransientToken())
+                    : $user;
+            }
         }
 
         if ($token = $request->bearerToken()) {
@@ -78,9 +77,11 @@ class Guard implements AuthGuard
                 return;
             }
 
-            return $this->supportsTokens($accessToken->tokenable) ? $accessToken->tokenable->withAccessToken(
-                tap($accessToken->forceFill(['last_used_at' => now()]))->save()
-            ) : null;
+            return $this->supportsTokens($accessToken->tokenable)
+                ? $accessToken->tokenable->withAccessToken(
+                    tap($accessToken->forceFill(['last_used_at' => now()]))->save()
+                )
+                : null;
         }
     }
 
@@ -103,8 +104,10 @@ class Guard implements AuthGuard
      */
     public function validate(array $credentials = []): bool
     {
-        return $this->expiration && $credentials['accessToken']->created_at
-            ->lte(now()->subMinutes($this->expiration));
+        return $this->expiration &&
+            $credentials['accessToken']->created_at->lte(
+                now()->subMinutes($this->expiration)
+            );
     }
 
     /**
@@ -116,9 +119,10 @@ class Guard implements AuthGuard
      */
     protected function supportsTokens($tokenable = null): bool
     {
-        return $tokenable && in_array(HasApiTokens::class, class_uses_recursive(
-            get_class($tokenable)
-        ));
+        return $tokenable && in_array(
+            HasApiTokens::class,
+            class_uses_recursive(get_class($tokenable))
+        );
     }
 
     /**
