@@ -22,11 +22,19 @@ trait AuthorizesRequests
     /**
      * Determine if the user making the request is authenticated and is the currently authenticated user.
      *
+     * @param mixed|null $role
+     *
      * @return bool
      */
-    public function isAuthenticated(): bool
+    public function isAuthenticated($role = null): bool
     {
-        return ! is_null($this->user()) && $this->user()->is(Auth::user());
+        $authenticated = ! is_null($this->user()) && $this->user()->is(Auth::user());
+
+        if (! is_null($role)) {
+            return $this->user()->hasRole($role) && $authenticated;
+        }
+
+        return $authenticated;
     }
 
     /**
