@@ -42,7 +42,7 @@ class ConfirmPasswordController extends Controller
      */
     public function show(): Responsable
     {
-        return $this->app(ConfirmPasswordViewResponse::class);
+        return $this->resolve(ConfirmPasswordViewResponse::class);
     }
 
     /**

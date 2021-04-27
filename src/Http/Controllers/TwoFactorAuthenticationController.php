@@ -44,7 +44,7 @@ class TwoFactorAuthenticationController extends Controller
             throw new HttpResponseException(redirect()->route('login'));
         }
 
-        return $this->app(TwoFactorChallengeViewResponse::class);
+        return $this->resolve(TwoFactorChallengeViewResponse::class);
     }
 
     /**

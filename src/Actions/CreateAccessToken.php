@@ -4,14 +4,14 @@ namespace Cratespace\Sentinel\Actions;
 
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
-use Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken;
+use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
 
 class CreateAccessToken implements Arrayable, Jsonable
 {
     /**
      * The access token instance.
      *
-     * @var \Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken
+     * @var \Cratespace\Sentinel\API\Tokens\PersonalAccessToken
      */
     public $accessToken;
 
@@ -25,8 +25,8 @@ class CreateAccessToken implements Arrayable, Jsonable
     /**
      * Create a new access token result.
      *
-     * @param \Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken $accessToken
-     * @param string                                               $plainTextToken
+     * @param \Cratespace\Sentinel\API\Tokens\PersonalAccessToken $accessToken
+     * @param string                                              $plainTextToken
      *
      * @return void
      */

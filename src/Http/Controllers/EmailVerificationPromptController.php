@@ -19,6 +19,6 @@ class EmailVerificationPromptController extends Controller
     {
         return $request->user()->hasVerifiedEmail()
             ? redirect()->intended(Config::home())
-            : $this->app(VerifyEmailViewResponse::class);
+            : $this->resolve(VerifyEmailViewResponse::class);
     }
 }

@@ -1,9 +1,8 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers\Concerns;
+namespace Cratespace\Sentinel\Support\Concerns;
 
 use Illuminate\Pipeline\Pipeline;
-use Illuminate\Container\Container;
 use Illuminate\Contracts\Pipeline\Pipeline as PipelineContract;
 
 trait InteractsWithContainer
@@ -16,13 +15,9 @@ trait InteractsWithContainer
      *
      * @return mixed|\Illuminate\Contracts\Foundation\Application
      */
-    public function app(?string $abstract = null, array $parameters = [])
+    public function resolve(?string $abstract = null, array $parameters = [])
     {
-        if (is_null($abstract)) {
-            return Container::getInstance();
-        }
-
-        return Container::getInstance()->make($abstract, $parameters);
+        return resolve($abstract, $parameters);
     }
 
     /**
@@ -32,6 +27,6 @@ trait InteractsWithContainer
      */
     public function pipeline(): PipelineContract
     {
-        return new Pipeline($this->app());
+        return new Pipeline($this->resolve());
     }
 }

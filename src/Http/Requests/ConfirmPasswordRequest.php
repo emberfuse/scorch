@@ -2,19 +2,16 @@
 
 namespace Cratespace\Sentinel\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
+use Cratespace\Sentinel\Http\Requests\Request;
 
-class ConfirmPasswordRequest extends FormRequest
+class ConfirmPasswordRequest extends Request
 {
-    use AuthorizesRequests;
-
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->isAuthenticated();
     }
@@ -24,7 +21,7 @@ class ConfirmPasswordRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return ['password' => ['required', 'string']];
     }

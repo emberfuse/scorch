@@ -3,7 +3,7 @@
 namespace Cratespace\Sentinel\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Cratespace\Sentinel\Auth\Tokens\TransientToken;
+use Cratespace\Sentinel\API\Tokens\TransientToken;
 
 class TransientTokenTest extends TestCase
 {

@@ -2,17 +2,14 @@
 
 namespace Cratespace\Sentinel\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Laravel\Fortify\Http\Responses\FailedTwoFactorLoginResponse;
 use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
 use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
-class TwoFactorLoginRequest extends FormRequest
+class TwoFactorLoginRequest extends Request
 {
-    use AuthorizesRequests;
-
     /**
      * The user attempting the two factor challenge.
      *
@@ -32,7 +29,7 @@ class TwoFactorLoginRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->isGuest();
     }
@@ -42,7 +39,7 @@ class TwoFactorLoginRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'code' => ['nullable', 'string'],

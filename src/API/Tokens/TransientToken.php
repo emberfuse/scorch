@@ -1,11 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel\Auth\Tokens;
+namespace Cratespace\Sentinel\API\Tokens;
 
 use Cratespace\Sentinel\Contracts\Auth\Access;
-use Cratespace\Sentinel\Models\PersonalAccessToken as PersonalAccessTokenModel;
 
-class PersonalAccessToken extends PersonalAccessTokenModel implements Access
+class TransientToken implements Access
 {
     /**
      * Determine if the token has a given ability.
@@ -16,8 +15,7 @@ class PersonalAccessToken extends PersonalAccessTokenModel implements Access
      */
     public function can(string $ability): bool
     {
-        return in_array('*', $this->abilities) ||
-            array_key_exists($ability, array_flip($this->abilities));
+        return true;
     }
 
     /**
@@ -29,6 +27,6 @@ class PersonalAccessToken extends PersonalAccessTokenModel implements Access
      */
     public function cant(string $ability): bool
     {
-        return ! $this->can($ability);
+        return false;
     }
 }

@@ -3,23 +3,15 @@
 namespace Cratespace\Sentinel\Http\Requests;
 
 use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Sentinel\Http\Requests\Traits\HasCustomValidator;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
-use Cratespace\Sentinel\Http\Requests\Traits\InputValidationRules;
 
-class UpdateUserProfileRequest extends FormRequest
+class UpdateUserProfileRequest extends Request
 {
-    use AuthorizesRequests;
-    use InputValidationRules;
-    use HasCustomValidator;
-
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->isAllowed('manage', $this->user());
     }
@@ -29,7 +21,7 @@ class UpdateUserProfileRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return $this->getRulesFor('update_profile', [
             'email' => [
@@ -46,7 +38,7 @@ class UpdateUserProfileRequest extends FormRequest
      *
      * @return void
      */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->setErrorBag('updateProfileInformation');
     }

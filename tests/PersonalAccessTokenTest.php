@@ -3,7 +3,7 @@
 namespace Cratespace\Sentinel\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken;
+use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
 
 class PersonalAccessTokenTest extends TestCase
 {

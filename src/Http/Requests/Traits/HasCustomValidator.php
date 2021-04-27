@@ -4,7 +4,6 @@ namespace Cratespace\Sentinel\Http\Requests\Traits;
 
 use Closure;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;

@@ -2,21 +2,14 @@
 
 namespace Cratespace\Sentinel\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
-use Cratespace\Sentinel\Http\Requests\Traits\InputValidationRules;
-
-class RegisterRequest extends FormRequest
+class RegisterRequest extends Request
 {
-    use AuthorizesRequests;
-    use InputValidationRules;
-
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->isGuest();
     }
@@ -26,7 +19,7 @@ class RegisterRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return $this->getRulesFor('register');
     }

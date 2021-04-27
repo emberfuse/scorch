@@ -44,7 +44,7 @@ class PasswordResetController extends Controller
      */
     public function create(): Responsable
     {
-        return $this->app(ResetPasswordViewResponse::class);
+        return $this->resolve(ResetPasswordViewResponse::class);
     }
 
     /**

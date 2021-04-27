@@ -42,7 +42,7 @@ class RegisterUserController extends Controller
      */
     public function create(): Responsable
     {
-        return $this->app(RegisterViewResponse::class);
+        return $this->resolve(RegisterViewResponse::class);
     }
 
     /**

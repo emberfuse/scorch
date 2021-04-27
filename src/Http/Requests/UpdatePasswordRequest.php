@@ -2,23 +2,14 @@
 
 namespace Cratespace\Sentinel\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Sentinel\Http\Requests\Traits\HasCustomValidator;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
-use Cratespace\Sentinel\Http\Requests\Traits\InputValidationRules;
-
-class UpdatePasswordRequest extends FormRequest
+class UpdatePasswordRequest extends Request
 {
-    use AuthorizesRequests;
-    use InputValidationRules;
-    use HasCustomValidator;
-
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->isAllowed('manage', $this->user());
     }
@@ -28,7 +19,7 @@ class UpdatePasswordRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return $this->getRulesFor('update_password');
     }
@@ -38,7 +29,7 @@ class UpdatePasswordRequest extends FormRequest
      *
      * @return void
      */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->afterValidation($this->validatePassword('current_password'));
 

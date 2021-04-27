@@ -42,7 +42,7 @@ class AuthenticationController extends Controller
      */
     public function create(): Responsable
     {
-        return $this->app(LoginViewResponse::class);
+        return $this->resolve(LoginViewResponse::class);
     }
 
     /**
@@ -83,7 +83,7 @@ class AuthenticationController extends Controller
      */
     public function destroy(LogoutRequest $request, StatefulGuard $guard)
     {
-        $this->app(LogoutUser::class)->logout($request, $guard);
+        $this->resolve(LogoutUser::class)->logout($request, $guard);
 
         return LogoutResponse::dispatch();
     }
