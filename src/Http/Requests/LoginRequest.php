@@ -3,21 +3,15 @@
 namespace Cratespace\Sentinel\Http\Requests;
 
 use Cratespace\Sentinel\Sentinel\Config;
-use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
-use Cratespace\Sentinel\Http\Requests\Traits\InputValidationRules;
 
-class LoginRequest extends FormRequest
+class LoginRequest extends Request
 {
-    use AuthorizesRequests;
-    use InputValidationRules;
-
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->isGuest();
     }
@@ -27,7 +21,7 @@ class LoginRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $username = Config::username();
 

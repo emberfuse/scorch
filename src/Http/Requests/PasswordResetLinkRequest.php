@@ -3,19 +3,15 @@
 namespace Cratespace\Sentinel\Http\Requests;
 
 use Cratespace\Sentinel\Sentinel\Config;
-use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
 
-class PasswordResetLinkRequest extends FormRequest
+class PasswordResetLinkRequest extends Request
 {
-    use AuthorizesRequests;
-
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->isGuest();
     }
@@ -25,7 +21,7 @@ class PasswordResetLinkRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [Config::email() => ['required', 'string', 'email']];
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests;
+namespace {{ namespace }};
 
-use Illuminate\Http\Request;
+use Cratespace\Sentinel\Http\Requests\Request;
 
-class DeleteProfilePhotoRequest extends Request
+class {{ class }} extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class DeleteProfilePhotoRequest extends Request
      */
     public function authorize(): bool
     {
-        return $this->isAllowed('manage', $this->user());
+        return false;
     }
 
     /**

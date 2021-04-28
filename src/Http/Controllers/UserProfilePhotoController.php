@@ -19,6 +19,6 @@ class UserProfilePhotoController extends Controller
     {
         $request->user()->deleteProfilePhoto();
 
-        return $this->app(DeleteProfilePhotoResponse::class);
+        return $this->resolve(DeleteProfilePhotoResponse::class);
     }
 }

@@ -4,9 +4,9 @@ namespace Cratespace\Sentinel\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Model;
-use Cratespace\Sentinel\Auth\Tokens\TransientToken;
+use Cratespace\Sentinel\API\Tokens\TransientToken;
 use Cratespace\Sentinel\Models\Traits\HasApiTokens;
-use Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken;
+use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
 
 class HasApiTokensTest extends TestCase
 {

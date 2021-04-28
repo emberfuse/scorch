@@ -3,7 +3,7 @@
 namespace Cratespace\Sentinel\Events;
 
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Support\HasUser;
+use Cratespace\Sentinel\Support\Traits\HasUser;
 use Illuminate\Foundation\Events\Dispatchable;
 
 class RecoveryCodesGenerated

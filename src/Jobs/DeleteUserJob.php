@@ -5,7 +5,7 @@ namespace Cratespace\Sentinel\Jobs;
 use Throwable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
-use Cratespace\Sentinel\Support\HasUser;
+use Cratespace\Sentinel\Support\Traits\HasUser;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

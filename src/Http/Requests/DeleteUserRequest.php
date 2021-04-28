@@ -2,25 +2,16 @@
 
 namespace Cratespace\Sentinel\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Sentinel\Http\Requests\Traits\HasCustomValidator;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
-use Cratespace\Sentinel\Http\Requests\Traits\InputValidationRules;
-
-class DeleteUserRequest extends FormRequest
+class DeleteUserRequest extends Request
 {
-    use AuthorizesRequests;
-    use HasCustomValidator;
-    use InputValidationRules;
-
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return $this->isAllowed('manage', $this->user());
+        return $this->isAllowed('manage', $this->user(), false);
     }
 
     /**
@@ -28,7 +19,7 @@ class DeleteUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return ['password' => ['required', 'string']];
     }

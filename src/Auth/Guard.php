@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Sentinel\Auth\Tokens\TransientToken;
+use Cratespace\Sentinel\API\Tokens\TransientToken;
 use Cratespace\Sentinel\Models\Traits\HasApiTokens;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
-use Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken;
+use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
 
 class Guard
 {

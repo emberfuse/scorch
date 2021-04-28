@@ -2,16 +2,14 @@
 
 namespace Cratespace\Sentinel\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class VerifyEmailRequest extends FormRequest
+class VerifyEmailRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         if (! hash_equals((string) $this->route('id'), (string) $this->user()->getKey())) {
             return false;
@@ -29,7 +27,7 @@ class VerifyEmailRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }

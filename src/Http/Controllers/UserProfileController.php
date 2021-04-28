@@ -25,7 +25,7 @@ class UserProfileController extends Controller
      */
     public function show(): Responsable
     {
-        return $this->app(UserProfileViewResponse::class);
+        return $this->resolve(UserProfileViewResponse::class);
     }
 
     /**
