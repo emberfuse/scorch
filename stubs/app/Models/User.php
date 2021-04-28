@@ -12,10 +12,10 @@ use Cratespace\Sentinel\Models\Traits\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
     use HasFactory;
-    use HasProfilePhoto;
     use Notifiable;
+    use HasApiTokens;
+    use HasProfilePhoto;
     use InteractsWithSessions;
     use TwoFactorAuthenticatable;
 
