@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cratespace\Sentinel\Contracts\Auth\Access;
 use Cratespace\Sentinel\Actions\CreateAccessToken;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Cratespace\Sentinel\Auth\Tokens\PersonalAccessToken;
+use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
 
 trait HasApiTokens
 {

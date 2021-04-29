@@ -3,11 +3,10 @@
 namespace App\Actions\Auth;
 
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Cratespace\Sentinel\Support\Util;
 use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableUser;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -16,14 +15,12 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @param array $data
      *
-     * @return \Illuminate\Contracts\Auth\Authenticatable
+     * @return mixed
      */
-    public function create(array $data): AuthenticatableUser
+    public function create(array $data)
     {
         return DB::transaction(function () use ($data) {
-            return tap($this->createUser($data), function (AuthenticatableUser $user) {
-                return $user;
-            });
+            return $this->createUser($data);
         });
     }
 
@@ -39,26 +36,9 @@ class CreateNewUser implements CreatesNewUsers
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'username' => $this->makeUsername($data['name']),
+            'phone' => $data['phone'],
+            'username' => Util::makeUsername($data['name']),
             'password' => Hash::make($data['password']),
         ]);
-    }
-
-    /**
-     * Generate unique username from first name.
-     *
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function makeUsername(string $name): string
-    {
-        $name = trim($name);
-
-        if (User::where('username', 'like', '%' . $name . '%')->count() !== 0) {
-            return Str::studly("{$name}-" . Str::random('5'));
-        }
-
-        return Str::studly($name);
     }
 }
