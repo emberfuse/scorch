@@ -55,6 +55,6 @@ class CreateNewUser implements CreatesNewUsers
      */
     protected function setDefaultSettings(): array
     {
-        return config('defaults.users.settings');
+        return config('defaults.users.settings', []);
     }
 }
