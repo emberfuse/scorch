@@ -47,5 +47,34 @@ class UpdateUserProfile implements UpdatesUserProfiles
             'username' => $data['username'],
             'email' => $data['email'],
         ], $verified ? ['email_verified_at' => null] : []))->save();
+
+        if ($this->hasAddressInformation($data)) {
+            $user->forceFill([
+                'address' => [
+                    'line1' => $data['line1'],
+                    'line2' => $data['line2'] ?? null,
+                    'city' => $data['city'],
+                    'state' => $data['state'],
+                    'country' => $data['country'],
+                    'postal_code' => $data['postal_code'],
+                ],
+            ])->saveQuietly();
+        }
+    }
+
+    /**
+     * Determine if the given keys are included in the data array.
+     *
+     * @param array $data
+     *
+     * @return bool
+     */
+    protected function hasAddressInformation(array $data): bool
+    {
+        return collect($data)->contains(function ($value, $key): bool {
+            return in_array($key, [
+                'line1', 'line2', 'city', 'state', 'country', 'postal_code',
+            ]);
+        });
     }
 }
