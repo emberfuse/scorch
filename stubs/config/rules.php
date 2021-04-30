@@ -31,7 +31,8 @@ return [
             'max:255',
             Rule::unique(User::class),
         ],
-        'password' => ['required', 'string', new PasswordRule()],
+        'phone' => ['sometimes', 'string', 'regex:/(07)[0-9]{8}/'],
+        'password' => ['required', 'string', new PasswordRule(), 'confirmed'],
     ],
 
     /*
@@ -41,7 +42,19 @@ return [
         'name' => ['required', 'string', 'max:255'],
         'username' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email'],
+        'phone' => ['sometimes', 'string', 'regex:/(07)[0-9]{8}/'],
         'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
+    ],
+
+    /*
+     * Address Inputs Validation Rules.
+     */
+    'address' => [
+        'line1' => ['required', 'string', 'max:255'],
+        'city' => ['required', 'string', 'max:255'],
+        'state' => ['required', 'string', 'max:255'],
+        'country' => ['required', 'string', 'max:255'],
+        'postal_code' => ['required', 'string', 'max:255'],
     ],
 
     /*

@@ -4,7 +4,7 @@ namespace Cratespace\Sentinel\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 
-class RegisterResponse extends Response implements Responsable
+class UpdateUserAddressResponse extends Response implements Responsable
 {
     /**
      * Create an HTTP response that represents the object.
@@ -15,8 +15,6 @@ class RegisterResponse extends Response implements Responsable
      */
     public function toResponse($request)
     {
-        return $request->expectsJson()
-            ? $this->json($this->content, 201)
-            : $this->redirectToIntended($this->home());
+        return $request->expectsJson() ? $this->json('', 204) : $this->back();
     }
 }

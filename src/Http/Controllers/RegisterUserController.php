@@ -5,7 +5,6 @@ namespace Cratespace\Sentinel\Http\Controllers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Http\Requests\RegisterRequest;
 use Cratespace\Sentinel\Http\Responses\RegisterResponse;
 use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
@@ -51,14 +50,16 @@ class RegisterUserController extends Controller
      * @param \Sentinel\Http\Requests\RegisterRequest    $request
      * @param \Laravel\Fortify\Contracts\CreatesNewUsers $creator
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
-    public function store(RegisterRequest $request, CreatesNewUsers $creator): Response
+    public function store(RegisterRequest $request, CreatesNewUsers $creator)
     {
-        event(new Registered($user = $creator->create($request->validated())));
+        event(new Registered(
+            $user = $creator->create($request->validated())
+        ));
 
         $this->guard->login($user);
 
-        return RegisterResponse::dispatch();
+        return RegisterResponse::dispatch($user);
     }
 }

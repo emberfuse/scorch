@@ -31,6 +31,7 @@ class User extends Authenticatable
         'password',
         'username',
         'settings',
+        'address',
         'locked',
         'profile_photo_path',
         'two_factor_secret',
@@ -58,7 +59,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'two_factor_enabled' => 'boolean',
         'settings' => 'array',
-        'settings' => 'array',
+        'address' => 'array',
     ];
 
     /**
