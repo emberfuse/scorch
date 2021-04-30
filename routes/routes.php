@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Cratespace\Sentinel\Sentinel\Config;
 use Cratespace\Sentinel\Http\Controllers\PasswordController;
 use Cratespace\Sentinel\Http\Controllers\CsrfCookieController;
+use Cratespace\Sentinel\Http\Controllers\UserAddressController;
 use Cratespace\Sentinel\Http\Controllers\UserProfileController;
 use Cratespace\Sentinel\Http\Controllers\VerifyEmailController;
 use Cratespace\Sentinel\Http\Controllers\RecoveryCodeController;
@@ -54,6 +55,7 @@ Route::group([
             Route::put('/profile', [UserProfileController::class, 'update'])->name('user.update');
             Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('user.destroy');
             Route::delete('/profile-photo', [UserProfilePhotoController::class, '__invoke'])->name('current-user-photo.destroy');
+            Route::put('/profile-address', [UserAddressController::class, 'update'])->name('user.address');
 
             Route::group(['middleware' => 'password.confirm'], function (): void {
                 Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store']);
