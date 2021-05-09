@@ -5,12 +5,14 @@ namespace Cratespace\Sentinel\Models\Concerns;
 use Carbon\Carbon;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
-use Illuminate\Session\Store;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Cratespace\Sentinel\Support\Concerns\InteractsWithContainer;
 
 trait InteractsWithSessions
 {
+    use InteractsWithContainer;
+
     /**
      * Get user sessions details.
      *
@@ -18,7 +20,7 @@ trait InteractsWithSessions
      */
     public function getSessionsAttribute(): array
     {
-        return $this->sessions(request())->all();
+        return $this->sessions($this->resolve('request'))->all();
     }
 
     /**
@@ -36,7 +38,7 @@ trait InteractsWithSessions
 
         return collect(
             DB::table(config('session.table', 'sessions'))
-                ->where('user_id', $request->user()->getAuthIdentifier())
+                ->where('user_id', $this->getAuthIdentifier())
                 ->orderBy('last_activity', 'desc')
                 ->get()
         )->map(function ($session) use ($request) {
