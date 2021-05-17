@@ -2,16 +2,16 @@
 
 namespace Cratespace\Sentinel\Contracts\Actions;
 
-use Illuminate\Contracts\Auth\Authenticatable;
+use App\Models\User;
 
 interface DeletesUsers
 {
     /**
      * Delete the given user.
      *
-     * @param \Illuminate\Contracts\Auth\Authenticatable $user
+     * @param \App\Models\User $user
      *
      * @return void
      */
-    public function delete(Authenticatable $user): void;
+    public function delete(User $user): void;
 }

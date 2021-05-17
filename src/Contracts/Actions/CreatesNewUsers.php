@@ -2,6 +2,6 @@
 
 namespace Cratespace\Sentinel\Contracts\Actions;
 
-interface CreatesNewUsers extends CreatesNewResource
+interface CreatesNewUsers extends CreatesNewResources
 {
 }
