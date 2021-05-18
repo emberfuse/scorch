@@ -3,38 +3,38 @@
 namespace Cratespace\Sentinel\Jobs;
 
 use Throwable;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
-use Cratespace\Sentinel\Support\Traits\HasUser;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Cratespace\Sentinel\Support\Traits\HasUser;
 use Cratespace\Sentinel\Contracts\Actions\DeletesUsers;
 
 class DeleteUserJob implements ShouldQueue
 {
     use HasUser;
-    use Dispatchable;
-    use InteractsWithQueue;
     use Queueable;
+    use Dispatchable;
     use SerializesModels;
+    use InteractsWithQueue;
 
     /**
      * Instance of user requested to be deleted.
      *
-     * @var \Illuminate\Contracts\Auth\Authenticatable
+     * @var \App\Models\User
      */
     protected $user;
 
     /**
      * Create a new job instance.
      *
-     * @param \Illuminate\Contracts\Auth\Authenticatable
+     * @param \App\Models\User
      *
      * @return void
      */
-    public function __construct(Authenticatable $user)
+    public function __construct(User $user)
     {
         $this->user = $user;
     }
@@ -51,9 +51,7 @@ class DeleteUserJob implements ShouldQueue
         try {
             $deletor->delete($this->user);
         } catch (Throwable $e) {
-            logger()->error($e->getMessage(), ['user' => $this->user]);
-
-            throw $e;
+            $this->fail($e);
         }
     }
 }

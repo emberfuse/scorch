@@ -3,14 +3,14 @@
 namespace Cratespace\Sentinel\Tests;
 
 use Mockery as m;
+use App\Models\User;
 use Cratespace\Sentinel\Contracts\Actions\DeletesUsers;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 class DeleteUserTest extends testCase
 {
     public function testUserCanBeDeleted()
     {
-        $user = m::mock(Authenticatable::class);
+        $user = m::mock(User::class);
         $deleter = $this->mock(DeletesUsers::class);
         $deleter->shouldReceive('delete')->with($user);
 
