@@ -196,10 +196,15 @@ class SentinelServiceProvider extends ServiceProvider
     protected function configureGuard(): void
     {
         Auth::resolved(function (AuthFactory $auth) {
-            $auth->extend('sentinel', function (Application $app, string $name, array $config) use ($auth): AuthGuard {
-                return tap($this->createGuard($auth, $config), function (AuthGuard $guard): void {
-                    $this->app->refresh('request', $guard, 'setRequest');
-                });
+            $auth->extend('sentinel', function (
+                Application $app, string $name, array $config
+            ) use ($auth): AuthGuard {
+                return tap(
+                    $this->createGuard($auth, $config),
+                    function (AuthGuard $guard) use ($app): void {
+                        $app->refresh('request', $guard, 'setRequest');
+                    }
+                );
             });
         });
     }
