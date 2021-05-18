@@ -60,7 +60,7 @@ class Guard
      */
     public function __invoke(Request $request)
     {
-        foreach (Arr::wrap(config('sentinel.guard', 'web')) as $guard) {
+        foreach (Arr::wrap($this->defaultGuard('web')) as $guard) {
             if ($user = $this->auth->guard($guard)->user()) {
                 return $this->supportsTokens($user)
                     ? $user->withAccessToken(new TransientToken())
@@ -92,7 +92,7 @@ class Guard
      */
     public function user(): ?Authenticatable
     {
-        return $this->auth->guard(Config::guard(['web']))->user();
+        return $this->auth->guard($this->defaultGuard('web'))->user();
     }
 
     /**
@@ -141,5 +141,17 @@ class Guard
         $model = config("auth.providers.{$this->provider}.model");
 
         return $tokenable instanceof $model;
+    }
+
+    /**
+     * Get default auth guard from configuration.
+     *
+     * @param string|null $default
+     *
+     * @return string|array
+     */
+    protected function defaultGuard(?string $default = null)
+    {
+        return Config::guard($default ?? 'web');
     }
 }

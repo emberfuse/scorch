@@ -2,12 +2,14 @@
 
 namespace Cratespace\Sentinel\Tests;
 
+use App\Actions\Auth\LogoutUser;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use App\Actions\Auth\AuthenticateUser;
 use Cratespace\Sentinel\Sentinel\Config;
 use Cratespace\Sentinel\Limiters\LoginRateLimiter;
+use Cratespace\Sentinel\Contracts\Actions\LogsoutUsers;
 use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
 use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
 use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
@@ -103,6 +105,8 @@ class AuthenticationTest extends TestCase
     {
         $this->migrate();
 
+        $this->app->singleton(LogsoutUsers::class, LogoutUser::class);
+
         Auth::guard()->setUser(
             $user = TestAuthenticationUser::forceCreate($this->userDetails())
         );
@@ -116,6 +120,8 @@ class AuthenticationTest extends TestCase
     public function testTheUserCanLogoutOfTheApplicationUsingJsonRequest()
     {
         $this->migrate();
+
+        $this->app->singleton(LogsoutUsers::class, LogoutUser::class);
 
         Auth::guard()->setUser(
             $user = TestAuthenticationUser::forceCreate($this->userDetails())

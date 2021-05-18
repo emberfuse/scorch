@@ -1,12 +1,13 @@
 <?php
 
-namespace Cratespace\Sentinel\Actions;
+namespace App\Actions\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Cratespace\Sentinel\Contracts\Actions\LogsoutUsers;
 
-class LogoutUser
+class LogoutUser implements LogsoutUsers
 {
     /**
      * Logout currently authenticated user.

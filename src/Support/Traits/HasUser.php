@@ -2,17 +2,17 @@
 
 namespace Cratespace\Sentinel\Support\Traits;
 
-use LogicException;
-use Illuminate\Contracts\Auth\Authenticatable as User;
+use App\Models\User;
+use InvalidArgumentException;
 
 trait HasUser
 {
     /**
      * Get the user instance.
      *
-     * @return \Illuminate\Contracts\Auth\Authenticatable
+     * @return \App\Models\User
      *
-     * @throws \LogicException
+     * @throws \InvalidArgumentException
      */
     public function getUser(): User
     {
@@ -20,6 +20,6 @@ trait HasUser
             return $this->user;
         }
 
-        throw new LogicException('Property `user` does not exist in this class');
+        throw new InvalidArgumentException('Property `user` does not exist in this class');
     }
 }

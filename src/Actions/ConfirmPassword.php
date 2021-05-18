@@ -23,7 +23,7 @@ class ConfirmPassword implements ConfirmsPasswords
         Authenticatable $user,
         ?string $password = null
     ): bool {
-        $username = Config::username(['email']);
+        $username = Config::username('email');
 
         return $guard->validate([
             $username => $user->{$username},
