@@ -3,7 +3,6 @@
 namespace Cratespace\Sentinel\Http\Controllers;
 
 use Cratespace\Sentinel\Sentinel\Config;
-use Cratespace\Sentinel\Actions\LogoutUser;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
 use Cratespace\Sentinel\Auth\DenyLockedAccount;
@@ -13,6 +12,7 @@ use Cratespace\Sentinel\Http\Requests\LogoutRequest;
 use Cratespace\Sentinel\Http\Responses\LoginResponse;
 use Cratespace\Sentinel\Http\Responses\LogoutResponse;
 use Cratespace\Sentinel\Auth\EnsureLoginIsNotThrottled;
+use Cratespace\Sentinel\Contracts\Actions\LogsoutUsers;
 use Cratespace\Sentinel\Auth\PrepareAuthenticatedSession;
 use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
 use Cratespace\Sentinel\Auth\RedirectIfTwoFactorAuthenticatable;
@@ -83,7 +83,7 @@ class AuthenticationController extends Controller
      */
     public function destroy(LogoutRequest $request, StatefulGuard $guard)
     {
-        $this->resolve(LogoutUser::class)->logout($request, $guard);
+        $this->resolve(LogsoutUsers::class)->logout($request, $guard);
 
         return LogoutResponse::dispatch();
     }
