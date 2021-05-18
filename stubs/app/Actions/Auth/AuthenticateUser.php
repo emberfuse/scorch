@@ -4,30 +4,10 @@ namespace App\Actions\Auth;
 
 use Illuminate\Http\Request;
 use Cratespace\Sentinel\Sentinel\Config;
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
 
-class AuthenticateUser implements AuthenticatesUsers
+class AuthenticateUser extends AuthAction implements AuthenticatesUsers
 {
-    /**
-     * The guard implementation.
-     *
-     * @var \Illuminate\Contracts\Auth\StatefulGuard
-     */
-    protected $guard;
-
-    /**
-     * Create new authenticate user action instance.
-     *
-     * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
-     *
-     * @return void
-     */
-    public function __construct(StatefulGuard $guard)
-    {
-        $this->guard = $guard;
-    }
-
     /**
      * Authenticate user making current request.
      *

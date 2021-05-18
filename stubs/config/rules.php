@@ -51,6 +51,7 @@ return [
      */
     'address' => [
         'line1' => ['required', 'string', 'max:255'],
+        'line2' => ['sometimes', 'string', 'max:255'],
         'city' => ['required', 'string', 'max:255'],
         'state' => ['required', 'string', 'max:255'],
         'country' => ['required', 'string', 'max:255'],

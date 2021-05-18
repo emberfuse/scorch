@@ -120,6 +120,7 @@ class SentinelServiceProvider extends ServiceProvider
             ], 'sentinel-config');
 
             $this->publishes([
+                __DIR__ . '/../../stubs/app/Actions/Auth/AuthAction.php' => app_path('Actions/Auth/AuthAction.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/AuthenticateUser.php' => app_path('Actions/Auth/AuthenticateUser.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/CreateNewUser.php' => app_path('Actions/Auth/CreateNewUser.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/DeleteUser.php' => app_path('Actions/Auth/DeleteUser.php'),
@@ -127,6 +128,7 @@ class SentinelServiceProvider extends ServiceProvider
                 __DIR__ . '/../../stubs/app/Actions/Auth/UpdateUserPassword.php' => app_path('Actions/Auth/UpdateUserPassword.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/UpdateUserProfile.php' => app_path('Actions/Auth/UpdateUserProfile.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/UpdateUserAddress.php' => app_path('Actions/Auth/UpdateUserAddress.php'),
+                __DIR__ . '/../../stubs/app/Actions/Auth/LogoutUser.php' => app_path('Actions/Auth/LogoutUser.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/Traits/PasswordUpdater.php' => app_path('Actions/Auth/Traits/PasswordUpdater.php'),
                 __DIR__ . '/../../stubs/app/Providers/SentinelServiceProvider.php' => app_path('Providers/SentinelServiceProvider.php'),
                 __DIR__ . '/../../stubs/app/Providers/AuthServiceProvider.php' => app_path('Providers/AuthServiceProvider.php'),
