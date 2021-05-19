@@ -3,7 +3,6 @@
 namespace Cratespace\Sentinel\Http\Controllers;
 
 use Cratespace\Sentinel\Sentinel\Config;
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
 use Cratespace\Sentinel\Auth\DenyLockedAccount;
 use Cratespace\Sentinel\Auth\AttemptToAuthenticate;
@@ -76,14 +75,14 @@ class AuthenticationController extends Controller
     /**
      * Destroy an authenticated session.
      *
-     * @param \Sentinel\Http\Requests\LogoutRequest    $request
-     * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
+     * @param \Cratespace\Sentinel\Http\Requests\LogoutRequest $request
+     * @param \Cratespace\Sentinel\Contracts\Auth\LogsoutUsers $logoutAction
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function destroy(LogoutRequest $request, StatefulGuard $guard)
+    public function destroy(LogoutRequest $request, LogsoutUsers $logoutAction)
     {
-        $this->resolve(LogsoutUsers::class)->logout($request, $guard);
+        $logoutAction->logout($request);
 
         return LogoutResponse::dispatch();
     }

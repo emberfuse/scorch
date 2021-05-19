@@ -12,9 +12,13 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Validation\ValidationException;
 use Cratespace\Sentinel\Limiters\LoginRateLimiter;
 use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
+use Cratespace\Sentinel\Support\Concerns\InteractsWithContainer;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 abstract class Authenticate
 {
+    use InteractsWithContainer;
+
     /**
      * The guard implementation.
      *
@@ -52,14 +56,14 @@ abstract class Authenticate
      */
     public function attempt(Request $request): bool
     {
-        if (app()->has(AuthenticatesUsers::class)) {
-            return app(AuthenticatesUsers::class)->authenticate($request);
+        try {
+            return $this->resolve(AuthenticatesUsers::class)->authenticate($request);
+        } catch (BindingResolutionException $e) {
+            return $this->guard->attempt(
+                $request->only($this->username(), 'password'),
+                $request->filled('remember')
+            );
         }
-
-        return $this->guard->attempt(
-            $request->only($this->username(), 'password'),
-            $request->filled('remember')
-        );
     }
 
     /**

@@ -31,7 +31,7 @@ class Util
         $name = trim(preg_replace('/\s+/', '', $name));
 
         if (User::where('username', 'like', '%' . $name . '%')->count() !== 0) {
-            return Str::studly($name . Str::random('5'));
+            return Str::studly($name . Str::random(7));
         }
 
         return Str::studly($name);
