@@ -16,7 +16,7 @@ class UpdateUserProfile implements UpdatesUserProfiles
      *
      * @return void
      */
-    public function update(User $user, array $data): void
+    public function update(User $user, array $data, ?array $options = null): void
     {
         if (isset($data['photo'])) {
             $user->updateProfilePhoto($data['photo']);
