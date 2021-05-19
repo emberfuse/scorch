@@ -20,7 +20,7 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @return mixed
      */
-    public function create(array $data)
+    public function create(array $data, ?array $options = null)
     {
         return DB::transaction(function () use ($data) {
             return $this->createUser(
