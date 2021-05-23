@@ -26,7 +26,7 @@ use Cratespace\Sentinel\Http\Controllers\TwoFactorAuthenticationStatusController
 Route::group([
     'middleware' => Config::middleware(['web']),
 ], function (): void {
-    Route::group(['middleware' => ['guest']], function (): void {
+    Route::group(['middleware' => ['guest:' . Config::guard('web')]], function (): void {
         if (SentinelRoute::isEnabled('register')) {
             Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
             Route::post('/register', [RegisterUserController::class, 'store']);
@@ -70,10 +70,10 @@ Route::group([
             Route::put('/profile-address', [UserAddressController::class, 'update'])->name('user.address');
 
             Route::group(['middleware' => 'password.confirm'], function (): void {
-                Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store']);
-                Route::delete('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'destroy']);
-                Route::get('/two-factor-qr-code', [TwoFactorQrCodeController::class, '__invoke']);
-                Route::get('/two-factor-recovery-codes', [RecoveryCodeController::class, 'index']);
+                Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store'])->name('two-factor.enable');
+                Route::delete('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'destroy'])->name('two-factor.disable');
+                Route::get('/two-factor-qr-code', [TwoFactorQrCodeController::class, '__invoke'])->name('two-factor.qr-code');
+                Route::get('/two-factor-recovery-codes', [RecoveryCodeController::class, 'index'])->name('two-factor.recovery-code');
                 Route::post('/two-factor-recovery-codes', [RecoveryCodeController::class, 'store']);
             });
 

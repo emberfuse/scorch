@@ -68,8 +68,6 @@ class ResetUserPassword implements ResetsUserPasswords
             $this->updatePassword($user, $password);
 
             event(new PasswordReset($user));
-
-            // $this->guard->login($user);
         };
     }
 }
