@@ -6,7 +6,6 @@ use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
-use Symfony\Component\HttpFoundation\Response;
 use Cratespace\Sentinel\Http\Requests\PasswordResetRequest;
 use Cratespace\Sentinel\Http\Responses\PasswordResetResponse;
 use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
@@ -53,9 +52,9 @@ class PasswordResetController extends Controller
      * @param \Illuminate\Http\Request                        $request
      * @param \Sentinel\Contracts\Actions\ResetsUserPasswords $reseter
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
-    public function store(PasswordResetRequest $request, ResetsUserPasswords $reseter): Response
+    public function store(PasswordResetRequest $request, ResetsUserPasswords $reseter)
     {
         $status = $reseter->reset($request->only(
             Config::email(),

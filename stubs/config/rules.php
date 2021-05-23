@@ -20,7 +20,7 @@ return [
     ],
 
     /*
-     * Use Registration Validation Rules.
+     * User Registration Validation Rules.
      */
     'register' => [
         'name' => ['required', 'string', 'max:255'],
@@ -36,7 +36,7 @@ return [
     ],
 
     /*
-     * Use Profile Information Validation Rules.
+     * User Profile Information Validation Rules.
      */
     'update_profile' => [
         'name' => ['required', 'string', 'max:255'],
@@ -59,7 +59,7 @@ return [
     ],
 
     /*
-     * Use Account Password Update Validation Rules.
+     * User Account Password Update Validation Rules.
      */
     'update_password' => [
         'current_password' => ['required', 'string'],

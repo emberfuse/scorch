@@ -5,15 +5,15 @@ namespace Cratespace\Sentinel\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Foundation\Auth\User;
-use Illuminate\Support\Facades\Hash;
 use Cratespace\Sentinel\Sentinel\Config;
+use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Validation\ValidationException;
 use Cratespace\Sentinel\Limiters\LoginRateLimiter;
 use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
-use Cratespace\Sentinel\Support\Concerns\InteractsWithContainer;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Cratespace\Sentinel\Support\Concerns\InteractsWithContainer;
 
 abstract class Authenticate
 {
@@ -78,7 +78,7 @@ abstract class Authenticate
         return tap(
             $this->getAttemptingUser($request),
             function (?Authenticatable $user = null) use ($request) {
-                if (! $user || ! Hash::check($request->password, $user->password)) {
+                if (! $user || ! $this->getProvider()->validateCredentials($user, ['password' => $request->password])) {
                     $this->throwFailedAuthenticationException($request);
                 }
             }
@@ -107,7 +107,17 @@ abstract class Authenticate
      */
     protected function getAuthModel(): string
     {
-        return $this->guard->getProvider()->getModel();
+        return $this->getProvider()->getModel();
+    }
+
+    /**
+     * Get the user provider used by the guard.
+     *
+     * @return \Illuminate\Contracts\Auth\UserProvider
+     */
+    protected function getProvider(): UserProvider
+    {
+        return $this->guard->getProvider();
     }
 
     /**

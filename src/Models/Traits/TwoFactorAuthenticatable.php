@@ -5,6 +5,7 @@ namespace Cratespace\Sentinel\Models\Traits;
 use BaconQrCode\Writer;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\ImageRenderer;
+use Cratespace\Sentinel\Sentinel\Config;
 use BaconQrCode\Renderer\RendererStyle\Fill;
 use Cratespace\Sentinel\Support\RecoveryCode;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
@@ -77,7 +78,7 @@ trait TwoFactorAuthenticatable
     {
         return app(ProvidesTwoFactorAuthentication::class)->qrCodeUrl(
             config('app.name'),
-            $this->email,
+            $this->{Config::username('email')},
             decrypt($this->two_factor_secret)
         );
     }

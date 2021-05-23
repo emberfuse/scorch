@@ -6,7 +6,6 @@ return [
     /*
      * Authentication Guard.
      */
-
     'guard' => 'web',
 
     /*
@@ -48,6 +47,14 @@ return [
      * Additional middelware type classes to run when attempting to authenticate user.
      */
     'login_pipeline' => [],
+
+    'auth_routes' => [
+        'login' => true,
+        'register' => true,
+        'forgot-password' => true,
+        'reset-password' => true,
+        'two-factor-challenge' => true,
+    ],
 
     /*
      * Register View Routes.

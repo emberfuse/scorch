@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Cratespace\Sentinel\Sentinel\Config;
+use Cratespace\Sentinel\Sentinel\Route as SentinelRoute;
 use Cratespace\Sentinel\Http\Controllers\PasswordController;
 use Cratespace\Sentinel\Http\Controllers\CsrfCookieController;
 use Cratespace\Sentinel\Http\Controllers\UserAddressController;
@@ -25,20 +26,31 @@ use Cratespace\Sentinel\Http\Controllers\TwoFactorAuthenticationStatusController
 Route::group([
     'middleware' => Config::middleware(['web']),
 ], function (): void {
-    Route::group(['middleware' => ['guest']], function (): void {
-        Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
-        Route::post('/register', [RegisterUserController::class, 'store']);
+    Route::group(['middleware' => ['guest:' . Config::guard('web')]], function (): void {
+        if (SentinelRoute::isEnabled('register')) {
+            Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
+            Route::post('/register', [RegisterUserController::class, 'store']);
+        }
 
-        Route::get('/login', [AuthenticationController::class, 'create'])->name('login');
-        Route::post('/login', [AuthenticationController::class, 'store']);
+        if (SentinelRoute::isEnabled('login')) {
+            Route::get('/login', [AuthenticationController::class, 'create'])->name('login');
+            Route::post('/login', [AuthenticationController::class, 'store']);
+        }
 
-        Route::get('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'create'])->name('two-factor.login');
-        Route::post('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'store']);
+        if (SentinelRoute::isEnabled('two-factor-challenge')) {
+            Route::get('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'create'])->name('two-factor.login');
+            Route::post('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'store']);
+        }
 
-        Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-        Route::get('/reset-password/{token}', [PasswordResetController::class, 'create'])->name('password.reset');
-        Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-        Route::post('/reset-password', [PasswordResetController::class, 'store'])->name('password.update');
+        if (SentinelRoute::isEnabled('forgot-password')) {
+            Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+            Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+        }
+
+        if (SentinelRoute::isEnabled('reset-password')) {
+            Route::get('/reset-password/{token}', [PasswordResetController::class, 'create'])->name('password.reset');
+            Route::post('/reset-password', [PasswordResetController::class, 'store'])->name('password.update');
+        }
     });
 
     Route::group(['middleware' => ['auth']], function (): void {
@@ -58,10 +70,10 @@ Route::group([
             Route::put('/profile-address', [UserAddressController::class, 'update'])->name('user.address');
 
             Route::group(['middleware' => 'password.confirm'], function (): void {
-                Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store']);
-                Route::delete('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'destroy']);
-                Route::get('/two-factor-qr-code', [TwoFactorQrCodeController::class, '__invoke']);
-                Route::get('/two-factor-recovery-codes', [RecoveryCodeController::class, 'index']);
+                Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store'])->name('two-factor.enable');
+                Route::delete('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'destroy'])->name('two-factor.disable');
+                Route::get('/two-factor-qr-code', [TwoFactorQrCodeController::class, '__invoke'])->name('two-factor.qr-code');
+                Route::get('/two-factor-recovery-codes', [RecoveryCodeController::class, 'index'])->name('two-factor.recovery-code');
                 Route::post('/two-factor-recovery-codes', [RecoveryCodeController::class, 'store']);
             });
 
