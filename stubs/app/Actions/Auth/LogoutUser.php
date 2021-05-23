@@ -19,10 +19,12 @@ class LogoutUser extends AuthAction implements LogsoutUsers
     {
         $this->guard->logout();
 
-        tap($request->session(), function (Session $session): void {
-            $session->invalidate();
+        if ($request->hasSession()) {
+            tap($request->session(), function (Session $session): void {
+                $session->invalidate();
 
-            $session->regenerateToken();
-        });
+                $session->regenerateToken();
+            });
+        }
     }
 }
