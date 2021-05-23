@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Cratespace\Sentinel\Sentinel\Config;
+use Cratespace\Sentinel\Sentinel\Route as SentinelRoute;
 use Cratespace\Sentinel\Http\Controllers\PasswordController;
 use Cratespace\Sentinel\Http\Controllers\CsrfCookieController;
 use Cratespace\Sentinel\Http\Controllers\UserAddressController;
@@ -26,19 +27,30 @@ Route::group([
     'middleware' => Config::middleware(['web']),
 ], function (): void {
     Route::group(['middleware' => ['guest']], function (): void {
-        Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
-        Route::post('/register', [RegisterUserController::class, 'store']);
+        if (SentinelRoute::isEnabled('register')) {
+            Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
+            Route::post('/register', [RegisterUserController::class, 'store']);
+        }
 
-        Route::get('/login', [AuthenticationController::class, 'create'])->name('login');
-        Route::post('/login', [AuthenticationController::class, 'store']);
+        if (SentinelRoute::isEnabled('login')) {
+            Route::get('/login', [AuthenticationController::class, 'create'])->name('login');
+            Route::post('/login', [AuthenticationController::class, 'store']);
+        }
 
-        Route::get('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'create'])->name('two-factor.login');
-        Route::post('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'store']);
+        if (SentinelRoute::isEnabled('two-factor-challenge')) {
+            Route::get('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'create'])->name('two-factor.login');
+            Route::post('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'store']);
+        }
 
-        Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-        Route::get('/reset-password/{token}', [PasswordResetController::class, 'create'])->name('password.reset');
-        Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-        Route::post('/reset-password', [PasswordResetController::class, 'store'])->name('password.update');
+        if (SentinelRoute::isEnabled('forgot-password')) {
+            Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+            Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+        }
+
+        if (SentinelRoute::isEnabled('reset-password')) {
+            Route::get('/reset-password/{token}', [PasswordResetController::class, 'create'])->name('password.reset');
+            Route::post('/reset-password', [PasswordResetController::class, 'store'])->name('password.update');
+        }
     });
 
     Route::group(['middleware' => ['auth']], function (): void {

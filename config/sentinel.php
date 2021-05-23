@@ -15,6 +15,13 @@ return [
         'login' => null,
         'two-factor' => null,
     ],
+    'auth_routes' => [
+        'login' => true,
+        'register' => true,
+        'forgot-password' => true,
+        'reset-password' => true,
+        'two-factor-challenge' => true,
+    ],
     'login_pipeline' => [],
     'stateful' => explode(',', env(
         'STATEFUL_DOMAINS',
