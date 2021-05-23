@@ -3,9 +3,7 @@
 namespace Cratespace\Sentinel\Http\Controllers;
 
 use Cratespace\Sentinel\Jobs\DeleteUserJob;
-use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Contracts\Support\Responsable;
-use Symfony\Component\HttpFoundation\Response;
+use Cratespace\Sentinel\Contracts\Actions\LogsoutUsers;
 use Cratespace\Sentinel\Http\Requests\DeleteUserRequest;
 use Cratespace\Sentinel\Http\Responses\DeleteUserResponse;
 use Cratespace\Sentinel\Contracts\Actions\UpdatesUserProfiles;
@@ -21,9 +19,9 @@ class UserProfileController extends Controller
      * @param \Illuminate\Http\Request                              $request
      * @param \Sentinel\Contracts\Responses\UserProfileViewResponse $response
      *
-     * @return \Illuminate\Contracts\Support\Responsable
+     * @return mixed
      */
-    public function show(): Responsable
+    public function show()
     {
         return $this->resolve(UserProfileViewResponse::class);
     }
@@ -34,9 +32,9 @@ class UserProfileController extends Controller
      * @param \Sentinel\Http\Requests\UpdateUserProfileRequest $request
      * @param \Sentinel\Contracts\Actions\UpdatesUserProfiles  $updater
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
-    public function update(UpdateUserProfileRequest $request, UpdatesUserProfiles $updater): Response
+    public function update(UpdateUserProfileRequest $request, UpdatesUserProfiles $updater)
     {
         $updater->update($request->user(), $request->validated());
 
@@ -46,17 +44,16 @@ class UserProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Http\Requests\DeleteUserRequest     $request
-     * @param \App\Auth\Contracts\DeletesUsers         $deletor
-     * @param \Illuminate\Contracts\Auth\StatefulGuard $auth
+     * @param \App\Http\Requests\DeleteUserRequest                $request
+     * @param \Cratespace\Sentinel\Contracts\Actions\LogsoutUsers $auth
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
-    public function destroy(DeleteUserRequest $request, StatefulGuard $auth): Response
+    public function destroy(DeleteUserRequest $request, LogsoutUsers $auth)
     {
         DeleteUserJob::dispatch($request->user()->fresh());
 
-        $auth->logout();
+        $auth->logout($request);
 
         return DeleteUserResponse::dispatch();
     }
