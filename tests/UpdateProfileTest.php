@@ -5,10 +5,12 @@ namespace Cratespace\Sentinel\Tests;
 use Mockery as m;
 use App\Models\User;
 use App\Policies\UserPolicy;
+use App\Actions\Auth\LogoutUser;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Queue;
 use Cratespace\Sentinel\Jobs\DeleteUserJob;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Cratespace\Sentinel\Contracts\Actions\LogsoutUsers;
 use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
 use Cratespace\Sentinel\Contracts\Actions\UpdatesUserProfiles;
 use Cratespace\Sentinel\Contracts\Responses\UserProfileViewResponse;
@@ -59,7 +61,7 @@ class UpdateProfileTest extends TestCase
 
     public function testUserAccountsCanBeDeleted()
     {
-        $this->withoutExceptionHandling();
+        $this->app->singleton(LogsoutUsers::class, LogoutUser::class);
 
         $this->migrate();
 
