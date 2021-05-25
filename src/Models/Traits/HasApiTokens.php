@@ -3,8 +3,8 @@
 namespace Cratespace\Sentinel\Models\Traits;
 
 use Illuminate\Support\Str;
+use Cratespace\Contracts\Auth\Access;
 use Illuminate\Database\Eloquent\Model;
-use Cratespace\Sentinel\Contracts\Auth\Access;
 use Cratespace\Sentinel\Actions\CreateAccessToken;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
@@ -14,7 +14,7 @@ trait HasApiTokens
     /**
      * The access token the user is using for the current request.
      *
-     * @var \Cratespace\Sentinel\Contracts\Auth\Access
+     * @var \Cratespace\Contracts\Auth\Access
      */
     protected $accessToken;
 
@@ -62,7 +62,7 @@ trait HasApiTokens
     /**
      * Get the access token currently associated with the user.
      *
-     * @return \Cratespace\Sentinel\Contracts\Auth\Access
+     * @return \Cratespace\Contracts\Auth\Access
      */
     public function currentAccessToken(): Access
     {
@@ -72,7 +72,7 @@ trait HasApiTokens
     /**
      * Set the current access token for the user.
      *
-     * @param \Cratespace\Sentinel\Contracts\Auth\Access $accessToken
+     * @param \Cratespace\Contracts\Auth\Access $accessToken
      *
      * @return $this
      */

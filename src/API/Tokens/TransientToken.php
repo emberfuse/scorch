@@ -2,7 +2,7 @@
 
 namespace Cratespace\Sentinel\API\Tokens;
 
-use Cratespace\Sentinel\Contracts\Auth\Access;
+use Cratespace\Contracts\Auth\Access;
 
 class TransientToken implements Access
 {

@@ -23,10 +23,11 @@
         "php": "^7.4|^8.0",
         "ext-json": "*",
         "bacon/bacon-qr-code": "^2.0",
-        "jenssegers/agent": "^2.6",
+        "cratespace/contracts": "^1.1",
         "illuminate/contracts": "^8.0",
         "illuminate/database": "^8.0",
         "illuminate/support": "^8.0",
+        "jenssegers/agent": "^2.6",
         "pragmarx/google2fa": "^8.0"
     },
     "require-dev": {
