@@ -2,7 +2,7 @@
 
 namespace Cratespace\Sentinel\API\Tokens;
 
-use Cratespace\Sentinel\Contracts\Auth\Access;
+use Cratespace\Contracts\Auth\Access;
 use Cratespace\Sentinel\Models\PersonalAccessToken as PersonalAccessTokenModel;
 
 class PersonalAccessToken extends PersonalAccessTokenModel implements Access
