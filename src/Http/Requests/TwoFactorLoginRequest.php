@@ -5,7 +5,6 @@ namespace Cratespace\Sentinel\Http\Requests;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Laravel\Fortify\Http\Responses\FailedTwoFactorLoginResponse;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
 use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
 class TwoFactorLoginRequest extends Request
@@ -78,6 +77,19 @@ class TwoFactorLoginRequest extends Request
     }
 
     /**
+     * Determine if there is a challenged user in the current session.
+     *
+     * @return bool
+     */
+    public function hasChallengedUser(): bool
+    {
+        $model = $this->getAuthModel();
+
+        return $this->session()->has('login.id') &&
+            $model::find($this->session()->get('login.id'));
+    }
+
+    /**
      * Get the user that is attempting the two factor challenge.
      *
      * @return mixed
@@ -88,7 +100,7 @@ class TwoFactorLoginRequest extends Request
             return $this->challengedUser;
         }
 
-        $model = app(StatefulGuard::class)->getProvider()->getModel();
+        $model = $this->getAuthModel();
 
         if (! $this->session()->has('login.id') ||
             ! $user = $model::find($this->session()->pull('login.id'))) {
@@ -96,6 +108,16 @@ class TwoFactorLoginRequest extends Request
         }
 
         return $this->challengedUser = $user;
+    }
+
+    /**
+     * Gets the name of the Eloquent user model.
+     *
+     * @return string
+     */
+    protected function getAuthModel(): string
+    {
+        return $this->resolve(StatefulGuard::class)->getProvider()->getModel();
     }
 
     /**
