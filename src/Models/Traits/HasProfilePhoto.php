@@ -16,7 +16,7 @@ trait HasProfilePhoto
      */
     public function updateProfilePhoto(UploadedFile $photo): void
     {
-        tap($this->profile_photo_path, function (string $previous) use ($photo): void {
+        tap($this->profile_photo_path, function (?string $previous = null) use ($photo): void {
             $this->forceFill([
                 'profile_photo_path' => $photo->storePublicly(
                     'profile-photos',
@@ -24,7 +24,7 @@ trait HasProfilePhoto
                 ),
             ])->save();
 
-            if ($previous) {
+            if (! is_null($previous)) {
                 Storage::disk($this->profilePhotoDisk())->delete($previous);
             }
         });
@@ -61,7 +61,7 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl(): string
     {
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=1F2937&background=F9FAFB';
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=64748B&background=F1F5F9';
     }
 
     /**
