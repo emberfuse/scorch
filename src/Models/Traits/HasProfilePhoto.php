@@ -16,7 +16,7 @@ trait HasProfilePhoto
      */
     public function updateProfilePhoto(UploadedFile $photo): void
     {
-        tap($this->profile_photo_path, function (string $previous) use ($photo): void {
+        tap($this->profile_photo_path, function (?string $previous = null) use ($photo): void {
             $this->forceFill([
                 'profile_photo_path' => $photo->storePublicly(
                     'profile-photos',
@@ -24,7 +24,7 @@ trait HasProfilePhoto
                 ),
             ])->save();
 
-            if ($previous) {
+            if (! is_null($previous)) {
                 Storage::disk($this->profilePhotoDisk())->delete($previous);
             }
         });
