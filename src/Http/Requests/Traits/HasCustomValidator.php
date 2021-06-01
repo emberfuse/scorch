@@ -132,7 +132,7 @@ trait HasCustomValidator
     protected function validatePassword(string $inputName = 'password'): Closure
     {
         return function (ValidatorContract $validator) use ($inputName) {
-            if (! $this->validateUserCredentials([$inputName => $this->{$inputName}])) {
+            if (! $this->validateUserCredentials(['password' => $this->{$inputName}])) {
                 $validator->errors()->add(
                     $inputName,
                     __('The provided password does not match your current password.')

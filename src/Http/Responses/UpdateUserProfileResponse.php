@@ -16,7 +16,7 @@ class UpdateUserProfileResponse extends Response implements Responsable
     public function toResponse($request)
     {
         return $request->expectsJson()
-            ? $this->json('', 200)
+            ? $this->json('', 204)
             : $this->back()->with('status', 'profile-information-updated');
     }
 }
