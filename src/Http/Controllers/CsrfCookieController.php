@@ -2,17 +2,19 @@
 
 namespace Emberfuse\Scorch\Http\Controllers;
 
-use Illuminate\Http\Response;
+use Illuminate\Contracts\Routing\ResponseFactory;
 
 class CsrfCookieController
 {
     /**
      * Return an empty response simply to trigger the storage of the CSRF cookie in the browser.
      *
+     * @param \Illuminate\Contracts\Routing\ResponseFactory
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(ResponseFactory $response)
     {
-        return new Response('', 204);
+        return $response->noContent();
     }
 }

@@ -77,7 +77,7 @@ class AuthenticationController extends Controller
      * @param \Emberfuse\Scorch\Http\Requests\LogoutRequest $request
      * @param \Emberfuse\Scorch\Contracts\Auth\LogsoutUsers $logoutAction
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
     public function destroy(LogoutRequest $request, LogsoutUsers $logoutAction)
     {

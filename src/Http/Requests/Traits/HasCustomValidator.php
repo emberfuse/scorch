@@ -3,13 +3,16 @@
 namespace Emberfuse\Scorch\Http\Requests\Traits;
 
 use Closure;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Validation\Factory;
+use Emberfuse\Scorch\Support\Concerns\InteractsWithContainer;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 
 trait HasCustomValidator
 {
+    use InteractsWithContainer;
+
     /**
      * Validator after hook functions.
      *
@@ -129,12 +132,26 @@ trait HasCustomValidator
     protected function validatePassword(string $inputName = 'password'): Closure
     {
         return function (ValidatorContract $validator) use ($inputName) {
-            if (! Hash::check($this->{$inputName}, $this->user()->password)) {
+            if (! $this->validateUserCredentials([$inputName => $this->{$inputName}])) {
                 $validator->errors()->add(
                     $inputName,
                     __('The provided password does not match your current password.')
                 );
             }
         };
+    }
+
+    /**
+     * Validate currently authenticated user's credentials.
+     *
+     * @param array $credentials
+     *
+     * @return bool
+     */
+    protected function validateUserCredentials(array $credentials): bool
+    {
+        return $this->resolve(StatefulGuard::class)
+            ->getProvider()
+            ->validateCredentials($this->user(), $credentials);
     }
 }

@@ -16,7 +16,7 @@ class UserProfileController extends Controller
     /**
      * Show user profile view.
      *
-     * @param \Illuminate\Http\Request                              $request
+     * @param \Illuminate\Http\Request                                      $request
      * @param \Emberfuse\Scorch\Contracts\Responses\UserProfileViewResponse $response
      *
      * @return mixed
@@ -44,7 +44,7 @@ class UserProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Http\Requests\DeleteUserRequest                $request
+     * @param \App\Http\Requests\DeleteUserRequest             $request
      * @param \Emberfuse\Scorch\Contracts\Actions\LogsoutUsers $auth
      *
      * @return mixed

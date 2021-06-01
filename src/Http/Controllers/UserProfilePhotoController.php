@@ -2,7 +2,6 @@
 
 namespace Emberfuse\Scorch\Http\Controllers;
 
-use Symfony\Component\HttpFoundation\Response;
 use Emberfuse\Scorch\Http\Requests\DeleteProfilePhotoRequest;
 use Emberfuse\Scorch\Http\Responses\DeleteProfilePhotoResponse;
 
@@ -13,9 +12,9 @@ class UserProfilePhotoController extends Controller
      *
      * @param \App\Http\App\Http\Requests\DeleteProfilePhotoRequest $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
-    public function __invoke(DeleteProfilePhotoRequest $request): Response
+    public function __invoke(DeleteProfilePhotoRequest $request)
     {
         $request->user()->deleteProfilePhoto();
 

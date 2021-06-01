@@ -13,8 +13,8 @@ class OtherBrowserSessionsController extends Controller
     /**
      * Logout from other browser sessions.
      *
-     * @param \Emberfuse\Preflight\Http\Requests\LogoutOtherBrowserSessionsRequest $request
-     * @param \Illuminate\Contracts\Auth\StatefulGuard                             $guard
+     * @param \Emberfuse\Scorch\Http\Requests\LogoutOtherBrowserSessionsRequest $request
+     * @param \Illuminate\Contracts\Auth\StatefulGuard                          $guard
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -24,7 +24,7 @@ class OtherBrowserSessionsController extends Controller
 
         $this->deleteOtherSessionRecords($request);
 
-        return back(303);
+        return back(302);
     }
 
     /**

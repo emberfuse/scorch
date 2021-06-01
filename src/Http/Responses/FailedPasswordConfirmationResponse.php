@@ -18,7 +18,7 @@ class FailedPasswordConfirmationResponse extends Response implements Responsable
     {
         $message = __('The provided password was incorrect.');
 
-        if ($request->wantsJson()) {
+        if ($request->expectsJson()) {
             throw ValidationException::withMessages(['password' => [$message]]);
         }
 
