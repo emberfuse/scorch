@@ -1,20 +1,20 @@
 <?php
 
-namespace Cratespace\Sentinel\Sentinel;
+namespace Emberfuse\Scorch\Scorch;
 
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
-use Cratespace\Sentinel\Http\Responses\ViewResponse;
+use Emberfuse\Scorch\Http\Responses\ViewResponse;
+use Emberfuse\Scorch\Contracts\Responses\LoginViewResponse;
+use Emberfuse\Scorch\Contracts\Support\View as ViewContract;
 use Illuminate\Contracts\View\View as IlluminateViewContract;
-use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
-use Cratespace\Sentinel\Contracts\Support\View as ViewContract;
-use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
-use Cratespace\Sentinel\Contracts\Responses\UserProfileViewResponse;
-use Cratespace\Sentinel\Contracts\Responses\VerifyEmailViewResponse;
-use Cratespace\Sentinel\Contracts\Responses\ResetPasswordViewResponse;
-use Cratespace\Sentinel\Contracts\Responses\ConfirmPasswordViewResponse;
-use Cratespace\Sentinel\Contracts\Responses\TwoFactorChallengeViewResponse;
-use Cratespace\Sentinel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
+use Emberfuse\Scorch\Contracts\Responses\RegisterViewResponse;
+use Emberfuse\Scorch\Contracts\Responses\UserProfileViewResponse;
+use Emberfuse\Scorch\Contracts\Responses\VerifyEmailViewResponse;
+use Emberfuse\Scorch\Contracts\Responses\ResetPasswordViewResponse;
+use Emberfuse\Scorch\Contracts\Responses\ConfirmPasswordViewResponse;
+use Emberfuse\Scorch\Contracts\Responses\TwoFactorChallengeViewResponse;
+use Emberfuse\Scorch\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 
 class View implements ViewContract
 {

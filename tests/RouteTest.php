@@ -1,14 +1,14 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
-use Cratespace\Sentinel\Sentinel\Route;
+use Emberfuse\Scorch\Scorch\Route;
 
 class RouteTest extends TestCase
 {
     public function testDetermineRouteIsEnabled()
     {
-        config()->set('sentinel.auth_routes.login', false);
+        config()->set('scorch.auth_routes.login', false);
 
         $this->assertFalse(Route::isEnabled('login'));
     }

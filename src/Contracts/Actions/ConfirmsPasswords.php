@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Contracts\Actions;
+namespace Emberfuse\Scorch\Contracts\Actions;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\Authenticatable;

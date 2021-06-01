@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Mockery as m;
 use Illuminate\Support\Facades\URL;

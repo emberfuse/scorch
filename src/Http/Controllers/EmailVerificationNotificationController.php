@@ -1,10 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
-use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Emberfuse\Scorch\Scorch\Config;
 
 class EmailVerificationNotificationController extends Controller
 {
@@ -15,7 +14,7 @@ class EmailVerificationNotificationController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
             return $request->wantsJson()

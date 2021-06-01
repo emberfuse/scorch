@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Responses;
+namespace Emberfuse\Scorch\Http\Responses;
 
-use Cratespace\Sentinel\Sentinel\Config;
-use Cratespace\Sentinel\Limiters\LoginRateLimiter;
+use Emberfuse\Scorch\Scorch\Config;
+use Emberfuse\Scorch\Limiters\LoginRateLimiter;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,14 +13,14 @@ class LockoutResponse extends Response implements Responsable
     /**
      * The login rate limiter instance.
      *
-     * @var \Sentinel\Limiters\LoginRateLimiter
+     * @var \Scorch\Limiters\LoginRateLimiter
      */
     protected $limiter;
 
     /**
      * Create a new response instance.
      *
-     * @param \Sentinel\Limiters\LoginRateLimiter $limiter
+     * @param \Emberfuse\Scorch\Limiters\LoginRateLimiter $limiter
      *
      * @return void
      */

@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Mockery as m;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Sentinel\Contracts\Responses\VerifyEmailViewResponse;
+use Emberfuse\Scorch\Contracts\Responses\VerifyEmailViewResponse;
 
 class EmailVerificationPromptTest extends TestCase
 {

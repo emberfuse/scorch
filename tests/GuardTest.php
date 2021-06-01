@@ -1,17 +1,17 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use stdClass;
 use Mockery as m;
 use DateTimeInterface;
 use Illuminate\Http\Request;
-use Cratespace\Sentinel\Auth\Guard;
+use Emberfuse\Scorch\Auth\Guard;
 use Illuminate\Auth\EloquentUserProvider;
-use Cratespace\Sentinel\Models\PersonalAccessToken;
+use Emberfuse\Scorch\Models\PersonalAccessToken;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
-use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
-use Cratespace\Sentinel\Tests\Fixtures\TestAuthenticationUser;
+use Emberfuse\Scorch\Tests\Traits\HasUserAttributes;
+use Emberfuse\Scorch\Tests\Fixtures\TestAuthenticationUser;
 
 class GuardTest extends TestCase
 {
@@ -134,11 +134,11 @@ class GuardTest extends TestCase
     {
         $this->migrate();
 
-        config(['auth.guards.sentinel.provider' => 'users']);
+        config(['auth.guards.scorch.provider' => 'users']);
         config(['auth.providers.users.model' => 'App\Models\User']);
 
         $factory = $this->app->make(AuthFactory::class);
-        $requestGuard = $factory->guard('sentinel');
+        $requestGuard = $factory->guard('scorch');
 
         $request = Request::create('/', 'GET');
         $request->headers->set('Authorization', 'Bearer test');
@@ -162,11 +162,11 @@ class GuardTest extends TestCase
     {
         $this->migrate();
 
-        config(['auth.guards.sentinel.provider' => 'users']);
+        config(['auth.guards.scorch.provider' => 'users']);
         config(['auth.providers.users.model' => TestAuthenticationUser::class]);
 
         $factory = $this->app->make(AuthFactory::class);
-        $requestGuard = $factory->guard('sentinel');
+        $requestGuard = $factory->guard('scorch');
 
         $request = Request::create('/', 'GET');
         $request->headers->set('Authorization', 'Bearer test');

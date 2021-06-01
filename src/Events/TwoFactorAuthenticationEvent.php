@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Events;
+namespace Emberfuse\Scorch\Events;
 
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Support\Traits\HasUser;
+use Emberfuse\Scorch\Support\Traits\HasUser;
 use Illuminate\Foundation\Events\Dispatchable;
 
 abstract class TwoFactorAuthenticationEvent

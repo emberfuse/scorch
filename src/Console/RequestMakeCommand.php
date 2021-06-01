@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Console;
+namespace Emberfuse\Scorch\Console;
 
 use Illuminate\Console\GeneratorCommand;
 

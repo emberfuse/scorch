@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests\Fixtures;
+namespace Emberfuse\Scorch\Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Models\Traits\HasApiTokens;
+use Emberfuse\Scorch\Models\Traits\HasApiTokens;
 
 class TestAuthenticationUser extends User
 {

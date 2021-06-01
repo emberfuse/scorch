@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Responses;
+namespace Emberfuse\Scorch\Http\Responses;
 
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\RedirectResponse;
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Contracts\Support\Responsable;

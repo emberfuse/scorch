@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Providers\Traits;
+namespace Emberfuse\Scorch\Providers\Traits;
 
 trait HasActions
 {

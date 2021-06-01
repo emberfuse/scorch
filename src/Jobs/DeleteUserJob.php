@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Jobs;
+namespace Emberfuse\Scorch\Jobs;
 
 use Throwable;
 use App\Models\User;
@@ -9,8 +9,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Cratespace\Sentinel\Support\Traits\HasUser;
-use Cratespace\Sentinel\Contracts\Actions\DeletesUsers;
+use Emberfuse\Scorch\Support\Traits\HasUser;
+use Emberfuse\Scorch\Contracts\Actions\DeletesUsers;
 
 class DeleteUserJob implements ShouldQueue
 {

@@ -1,25 +1,24 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Sentinel\Http\Requests\LogoutOtherBrowserSessionsRequest;
+use Emberfuse\Scorch\Http\Requests\LogoutOtherBrowserSessionsRequest;
 
 class OtherBrowserSessionsController extends Controller
 {
     /**
      * Logout from other browser sessions.
      *
-     * @param \Cratespace\Preflight\Http\Requests\LogoutOtherBrowserSessionsRequest $request
-     * @param \Illuminate\Contracts\Auth\StatefulGuard                              $guard
+     * @param \Emberfuse\Preflight\Http\Requests\LogoutOtherBrowserSessionsRequest $request
+     * @param \Illuminate\Contracts\Auth\StatefulGuard                             $guard
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function __invoke(LogoutOtherBrowserSessionsRequest $request, StatefulGuard $guard): RedirectResponse
+    public function __invoke(LogoutOtherBrowserSessionsRequest $request, StatefulGuard $guard)
     {
         $guard->logoutOtherDevices($request->password);
 

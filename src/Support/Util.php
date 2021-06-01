@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Support;
+namespace Emberfuse\Scorch\Support;
 
 use App\Models\User;
 use Illuminate\Support\Str;

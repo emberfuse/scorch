@@ -1,13 +1,13 @@
 <?php
 
-namespace Cratespace\Sentinel\Auth;
+namespace Emberfuse\Scorch\Auth;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Sentinel\Models\Traits\TwoFactorAuthenticatable;
-use Cratespace\Sentinel\Events\TwoFactorAuthenticationChallenged;
-use Cratespace\Sentinel\Http\Responses\TwoFactorChallengeResponse;
+use Emberfuse\Scorch\Models\Traits\TwoFactorAuthenticatable;
+use Emberfuse\Scorch\Events\TwoFactorAuthenticationChallenged;
+use Emberfuse\Scorch\Http\Responses\TwoFactorChallengeResponse;
 
 class RedirectIfTwoFactorAuthenticatable extends Authenticate
 {

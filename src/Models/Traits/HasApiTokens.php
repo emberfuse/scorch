@@ -1,20 +1,20 @@
 <?php
 
-namespace Cratespace\Sentinel\Models\Traits;
+namespace Emberfuse\Scorch\Models\Traits;
 
 use Illuminate\Support\Str;
-use Cratespace\Contracts\Auth\Access;
+use Emberfuse\Scorch\Contracts\Auth\Access;
 use Illuminate\Database\Eloquent\Model;
-use Cratespace\Sentinel\Actions\CreateAccessToken;
+use Emberfuse\Scorch\Actions\CreateAccessToken;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
+use Emberfuse\Scorch\API\Tokens\PersonalAccessToken;
 
 trait HasApiTokens
 {
     /**
      * The access token the user is using for the current request.
      *
-     * @var \Cratespace\Contracts\Auth\Access
+     * @var \Emberfuse\Scorch\Contracts\Auth\Access
      */
     protected $accessToken;
 
@@ -46,7 +46,7 @@ trait HasApiTokens
      * @param string $name
      * @param array  $abilities
      *
-     * @return \Cratespace\Sentinel\Actions\CreateAccessToken
+     * @return \Emberfuse\Scorch\Actions\CreateAccessToken
      */
     public function createToken(string $name, array $abilities = ['*']): CreateAccessToken
     {
@@ -62,7 +62,7 @@ trait HasApiTokens
     /**
      * Get the access token currently associated with the user.
      *
-     * @return \Cratespace\Contracts\Auth\Access
+     * @return \Emberfuse\Scorch\Contracts\Auth\Access
      */
     public function currentAccessToken(): Access
     {
@@ -72,7 +72,7 @@ trait HasApiTokens
     /**
      * Set the current access token for the user.
      *
-     * @param \Cratespace\Contracts\Auth\Access $accessToken
+     * @param \Emberfuse\Scorch\Contracts\Auth\Access $accessToken
      *
      * @return $this
      */

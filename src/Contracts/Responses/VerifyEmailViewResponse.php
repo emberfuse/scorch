@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Contracts\Responses;
+namespace Emberfuse\Scorch\Contracts\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 

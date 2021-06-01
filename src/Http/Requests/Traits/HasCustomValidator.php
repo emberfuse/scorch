@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests\Traits;
+namespace Emberfuse\Scorch\Http\Requests\Traits;
 
 use Closure;
 use Illuminate\Support\Facades\Hash;

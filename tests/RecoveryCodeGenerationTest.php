@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Illuminate\Support\Facades\Event;
-use Cratespace\Sentinel\Events\RecoveryCodesGenerated;
+use Emberfuse\Scorch\Events\RecoveryCodesGenerated;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Cratespace\Sentinel\Tests\Fixtures\TestTwoFactorRecoveryCodeUser;
+use Emberfuse\Scorch\Tests\Fixtures\TestTwoFactorRecoveryCodeUser;
 
 class RecoveryCodeGenerationTest extends TestCase
 {

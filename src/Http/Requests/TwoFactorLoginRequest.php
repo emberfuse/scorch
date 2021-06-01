@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests;
+namespace Emberfuse\Scorch\Http\Requests;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Laravel\Fortify\Http\Responses\FailedTwoFactorLoginResponse;
-use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
+use Emberfuse\Scorch\Http\Responses\FailedTwoFactorLoginResponse;
+use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
 class TwoFactorLoginRequest extends Request
 {

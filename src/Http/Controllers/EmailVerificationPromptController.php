@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Cratespace\Sentinel\Sentinel\Config;
-use Cratespace\Sentinel\Contracts\Responses\VerifyEmailViewResponse;
+use Emberfuse\Scorch\Scorch\Config;
+use Emberfuse\Scorch\Contracts\Responses\VerifyEmailViewResponse;
 
 class EmailVerificationPromptController extends Controller
 {

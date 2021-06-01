@@ -19,13 +19,12 @@ return [
         'login' => true,
         'register' => true,
         'forgot-password' => true,
-        'reset-password' => true,
         'two-factor-challenge' => true,
     ],
     'login_pipeline' => [],
     'stateful' => explode(',', env(
         'STATEFUL_DOMAINS',
-        'preflight.test,localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1'
+        'blaze.test,localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1'
     )),
 
     /*

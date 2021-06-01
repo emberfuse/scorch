@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Responses;
+namespace Emberfuse\Scorch\Http\Responses;
 
 use Illuminate\Routing\Redirector;
 use Illuminate\View\Factory as ViewFactory;

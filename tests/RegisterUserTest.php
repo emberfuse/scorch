@@ -1,12 +1,12 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Mockery as m;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
-use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
+use Emberfuse\Scorch\Contracts\Actions\CreatesNewUsers;
+use Emberfuse\Scorch\Contracts\Responses\RegisterViewResponse;
 
 class RegisterUserTest extends TestCase
 {

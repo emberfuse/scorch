@@ -1,18 +1,18 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use App\Actions\Auth\UpdateUserAddress;
-use Cratespace\Sentinel\Http\Requests\UpdateUserAddressRequest;
-use Cratespace\Sentinel\Http\Responses\UpdateUserAddressResponse;
+use Emberfuse\Scorch\Http\Requests\UpdateUserAddressRequest;
+use Emberfuse\Scorch\Http\Responses\UpdateUserAddressResponse;
 
 class UserAddressController extends Controller
 {
     /**
      * Update the user's profile information.
      *
-     * @param \Sentinel\Http\Requests\UpdateUserAddressRequest $request
-     * @param \Sentinel\Contracts\Actions\UpdateUserAddress    $updater
+     * @param \Emberfuse\Scorch\Http\Requests\UpdateUserAddressRequest $request
+     * @param \Emberfuse\Scorch\Contracts\Actions\UpdateUserAddress    $updater
      *
      * @return mixed
      */

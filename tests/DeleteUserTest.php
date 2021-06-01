@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Mockery as m;
 use App\Models\User;
-use Cratespace\Sentinel\Contracts\Actions\DeletesUsers;
+use Emberfuse\Scorch\Contracts\Actions\DeletesUsers;
 
 class DeleteUserTest extends testCase
 {

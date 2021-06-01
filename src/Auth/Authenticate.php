@@ -1,19 +1,19 @@
 <?php
 
-namespace Cratespace\Sentinel\Auth;
+namespace Emberfuse\Scorch\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Validation\ValidationException;
-use Cratespace\Sentinel\Limiters\LoginRateLimiter;
-use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
+use Emberfuse\Scorch\Limiters\LoginRateLimiter;
+use Emberfuse\Scorch\Contracts\Actions\AuthenticatesUsers;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Cratespace\Sentinel\Support\Concerns\InteractsWithContainer;
+use Emberfuse\Scorch\Support\Concerns\InteractsWithContainer;
 
 abstract class Authenticate
 {
@@ -29,7 +29,7 @@ abstract class Authenticate
     /**
      * The login rate limiter instance.
      *
-     * @var \Sentinel\Limiters\LoginRateLimiter
+     * @var \Scorch\Limiters\LoginRateLimiter
      */
     protected $limiter;
 
@@ -37,7 +37,7 @@ abstract class Authenticate
      * Create a new controller instance.
      *
      * @param \Illuminate\Contracts\Auth\StatefulGuard $guard
-     * @param \Sentinel\Limiters\LoginRateLimiter      $limiter
+     * @param \Emberfuse\Scorch\Limiters\LoginRateLimiter      $limiter
      *
      * @return void
      */

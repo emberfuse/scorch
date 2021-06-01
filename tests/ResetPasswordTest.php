@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Mockery as m;
 use Illuminate\Support\Facades\Config;
@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
-use Cratespace\Sentinel\Contracts\Responses\ResetPasswordViewResponse;
+use Emberfuse\Scorch\Contracts\Actions\ResetsUserPasswords;
+use Emberfuse\Scorch\Contracts\Responses\ResetPasswordViewResponse;
 
 class ResetPasswordTest extends TestCase
 {
@@ -103,7 +103,7 @@ class ResetPasswordTest extends TestCase
 
     public function testPasswordCanBeResetWithCustomizedEmailAddressField()
     {
-        Config::set('sentinel.email', 'emailAddress');
+        Config::set('scorch.email', 'emailAddress');
         Password::shouldReceive('broker')->andReturn(
             $broker = m::mock(PasswordBroker::class)
         );

@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Cratespace\Sentinel\Models\Traits\HasApiTokens;
-use Cratespace\Sentinel\Models\Traits\HasProfilePhoto;
+use Emberfuse\Scorch\Models\Traits\HasApiTokens;
+use Emberfuse\Scorch\Models\Traits\HasProfilePhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Cratespace\Sentinel\Models\Concerns\InteractsWithSessions;
-use Cratespace\Sentinel\Models\Traits\TwoFactorAuthenticatable;
+use Emberfuse\Scorch\Models\Concerns\InteractsWithSessions;
+use Emberfuse\Scorch\Models\Traits\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests\Fixtures;
+namespace Emberfuse\Scorch\Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User;
 

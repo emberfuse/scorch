@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Rules;
+namespace Emberfuse\Scorch\Rules;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Validation\Rule;
@@ -142,7 +142,7 @@ class PasswordRule implements Rule
      *
      * @param int $length
      *
-     * @return \Cratespace\Sentinel\Rules\PasswordRule
+     * @return \Emberfuse\Scorch\Rules\PasswordRule
      */
     public function length(int $length): PasswordRule
     {
@@ -154,7 +154,7 @@ class PasswordRule implements Rule
     /**
      * Indicate that at least one uppercase character is required.
      *
-     * @return \Cratespace\Sentinel\Rules\PasswordRule
+     * @return \Emberfuse\Scorch\Rules\PasswordRule
      */
     public function requireUppercase(): PasswordRule
     {
@@ -166,7 +166,7 @@ class PasswordRule implements Rule
     /**
      * Indicate that at least one numeric digit is required.
      *
-     * @return \Cratespace\Sentinel\Rules\PasswordRule
+     * @return \Emberfuse\Scorch\Rules\PasswordRule
      */
     public function requireNumeric(): PasswordRule
     {
@@ -178,7 +178,7 @@ class PasswordRule implements Rule
     /**
      * Indicate that at least one special character is required.
      *
-     * @return \Cratespace\Sentinel\Rules\PasswordRule
+     * @return \Emberfuse\Scorch\Rules\PasswordRule
      */
     public function requireSpecialCharacter(): PasswordRule
     {
@@ -192,7 +192,7 @@ class PasswordRule implements Rule
      *
      * @param string $message
      *
-     * @return \Cratespace\Sentinel\Rules\PasswordRule
+     * @return \Emberfuse\Scorch\Rules\PasswordRule
      */
     public function withMessage(string $message): PasswordRule
     {

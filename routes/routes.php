@@ -1,60 +1,59 @@
 <?php
 
+use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Support\Facades\Route;
-use Cratespace\Sentinel\Sentinel\Config;
-use Cratespace\Sentinel\Sentinel\Route as SentinelRoute;
-use Cratespace\Sentinel\Http\Controllers\PasswordController;
-use Cratespace\Sentinel\Http\Controllers\CsrfCookieController;
-use Cratespace\Sentinel\Http\Controllers\UserAddressController;
-use Cratespace\Sentinel\Http\Controllers\UserProfileController;
-use Cratespace\Sentinel\Http\Controllers\VerifyEmailController;
-use Cratespace\Sentinel\Http\Controllers\RecoveryCodeController;
-use Cratespace\Sentinel\Http\Controllers\RegisterUserController;
-use Cratespace\Sentinel\Http\Controllers\PasswordResetController;
-use Cratespace\Sentinel\Http\Controllers\AuthenticationController;
-use Cratespace\Sentinel\Http\Controllers\ConfirmPasswordController;
-use Cratespace\Sentinel\Http\Controllers\TwoFactorQrCodeController;
-use Cratespace\Sentinel\Http\Controllers\UserProfilePhotoController;
-use Cratespace\Sentinel\Http\Controllers\PasswordResetLinkController;
-use Cratespace\Sentinel\Http\Controllers\OtherBrowserSessionsController;
-use Cratespace\Sentinel\Http\Controllers\ConfirmPasswordStatusController;
-use Cratespace\Sentinel\Http\Controllers\EmailVerificationPromptController;
-use Cratespace\Sentinel\Http\Controllers\TwoFactorAuthenticationController;
-use Cratespace\Sentinel\Http\Controllers\EmailVerificationNotificationController;
-use Cratespace\Sentinel\Http\Controllers\TwoFactorAuthenticationStatusController;
+use Emberfuse\Scorch\Scorch\Route as ScorchRoute;
+use Emberfuse\Scorch\Http\Controllers\PasswordController;
+use Emberfuse\Scorch\Http\Controllers\CsrfCookieController;
+use Emberfuse\Scorch\Http\Controllers\UserAddressController;
+use Emberfuse\Scorch\Http\Controllers\UserProfileController;
+use Emberfuse\Scorch\Http\Controllers\VerifyEmailController;
+use Emberfuse\Scorch\Http\Controllers\RecoveryCodeController;
+use Emberfuse\Scorch\Http\Controllers\RegisterUserController;
+use Emberfuse\Scorch\Http\Controllers\PasswordResetController;
+use Emberfuse\Scorch\Http\Controllers\AuthenticationController;
+use Emberfuse\Scorch\Http\Controllers\ConfirmPasswordController;
+use Emberfuse\Scorch\Http\Controllers\TwoFactorQrCodeController;
+use Emberfuse\Scorch\Http\Controllers\UserProfilePhotoController;
+use Emberfuse\Scorch\Http\Controllers\PasswordResetLinkController;
+use Emberfuse\Scorch\Http\Controllers\OtherBrowserSessionsController;
+use Emberfuse\Scorch\Http\Controllers\ConfirmPasswordStatusController;
+use Emberfuse\Scorch\Http\Controllers\EmailVerificationPromptController;
+use Emberfuse\Scorch\Http\Controllers\TwoFactorAuthenticationController;
+use Emberfuse\Scorch\Http\Controllers\EmailVerificationNotificationController;
+use Emberfuse\Scorch\Http\Controllers\TwoFactorAuthenticationStatusController;
 
 Route::group([
     'middleware' => Config::middleware(['web']),
 ], function (): void {
     Route::group(['middleware' => ['guest:' . Config::guard('web')]], function (): void {
-        if (SentinelRoute::isEnabled('register')) {
+        if (ScorchRoute::isEnabled('register')) {
             Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
             Route::post('/register', [RegisterUserController::class, 'store']);
         }
 
-        if (SentinelRoute::isEnabled('login')) {
+        if (ScorchRoute::isEnabled('login')) {
             Route::get('/login', [AuthenticationController::class, 'create'])->name('login');
             Route::post('/login', [AuthenticationController::class, 'store']);
         }
 
-        if (SentinelRoute::isEnabled('two-factor-challenge')) {
+        if (ScorchRoute::isEnabled('two-factor-challenge')) {
             Route::get('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'create'])->name('two-factor.login');
             Route::post('/two-factor-challenge', [TwoFactorAuthenticationController::class, 'store']);
         }
 
-        if (SentinelRoute::isEnabled('forgot-password')) {
+        if (ScorchRoute::isEnabled('forgot-password')) {
             Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
             Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-        }
-
-        if (SentinelRoute::isEnabled('reset-password')) {
             Route::get('/reset-password/{token}', [PasswordResetController::class, 'create'])->name('password.reset');
             Route::post('/reset-password', [PasswordResetController::class, 'store'])->name('password.update');
         }
     });
 
     Route::group(['middleware' => ['auth']], function (): void {
-        Route::post('/logout', [AuthenticationController::class, 'destroy'])->name('logout');
+        if (ScorchRoute::isEnabled('login')) {
+            Route::post('/logout', [AuthenticationController::class, 'destroy'])->name('logout');
+        }
 
         Route::group(['prefix' => 'user'], function (): void {
             Route::get('/confirm-password', [ConfirmPasswordController::class, 'show'])->name('password.confirm');
@@ -66,8 +65,8 @@ Route::group([
             Route::get('/profile', [UserProfileController::class, 'show'])->name('user.show');
             Route::put('/profile', [UserProfileController::class, 'update'])->name('user.update');
             Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('user.destroy');
-            Route::delete('/profile-photo', [UserProfilePhotoController::class, '__invoke'])->name('current-user-photo.destroy');
-            Route::put('/profile-address', [UserAddressController::class, 'update'])->name('user.address');
+            Route::delete('/profile-photo', [UserProfilePhotoController::class, '__invoke'])->name('user-photo.destroy');
+            Route::put('/profile-address', [UserAddressController::class, 'update'])->name('user-address.update');
 
             Route::group(['middleware' => 'password.confirm'], function (): void {
                 Route::post('/two-factor-authentication', [TwoFactorAuthenticationStatusController::class, 'store'])->name('two-factor.enable');

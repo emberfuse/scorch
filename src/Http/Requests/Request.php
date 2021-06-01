@@ -1,13 +1,13 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests;
+namespace Emberfuse\Scorch\Http\Requests;
 
 use Illuminate\Support\Traits\Tappable;
 use Illuminate\Foundation\Http\FormRequest;
-use Cratespace\Sentinel\Http\Requests\Traits\HasCustomValidator;
-use Cratespace\Sentinel\Support\Concerns\InteractsWithContainer;
-use Cratespace\Sentinel\Http\Requests\Concerns\AuthorizesRequests;
-use Cratespace\Sentinel\Http\Requests\Traits\InputValidationRules;
+use Emberfuse\Scorch\Http\Requests\Traits\HasCustomValidator;
+use Emberfuse\Scorch\Support\Concerns\InteractsWithContainer;
+use Emberfuse\Scorch\Http\Requests\Concerns\AuthorizesRequests;
+use Emberfuse\Scorch\Http\Requests\Traits\InputValidationRules;
 
 abstract class Request extends FormRequest
 {

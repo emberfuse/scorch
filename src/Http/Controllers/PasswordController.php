@@ -1,22 +1,22 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
-use Cratespace\Sentinel\Http\Requests\UpdatePasswordRequest;
-use Cratespace\Sentinel\Contracts\Actions\UpdatesUserPasswords;
+use Emberfuse\Scorch\Http\Requests\UpdatePasswordRequest;
+use Emberfuse\Scorch\Contracts\Actions\UpdatesUserPasswords;
 
 class PasswordController extends Controller
 {
     /**
      * Update the user's password.
      *
-     * @param \Illuminate\Http\Request                        $request
-     * @param \Laravel\Fortify\Contracts\UpdatesUserPasswords $updater
+     * @param \Illuminate\Http\Request                                 $request
+     * @param \Emberfuse\Scorch\Contracts\Actions\UpdatesUserPasswords $updater
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
-    public function __invoke(UpdatePasswordRequest $request, UpdatesUserPasswords $updater): Response
+    public function __invoke(UpdatePasswordRequest $request, UpdatesUserPasswords $updater)
     {
         $updater->update($request->user(), $request->all());
 

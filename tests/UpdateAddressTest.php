@@ -1,13 +1,13 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Mockery as m;
 use App\Models\User;
 use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
 use App\Actions\Auth\UpdateUserAddress;
-use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
+use Emberfuse\Scorch\Tests\Traits\HasUserAttributes;
 
 class UpdateAddressTest extends TestCase
 {

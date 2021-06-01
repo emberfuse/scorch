@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Cratespace\Sentinel\API\Tokens\TransientToken;
+use Emberfuse\Scorch\API\Tokens\TransientToken;
 
 class TransientTokenTest extends TestCase
 {

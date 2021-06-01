@@ -1,17 +1,17 @@
 <?php
 
-namespace Cratespace\Sentinel\Actions;
+namespace Emberfuse\Scorch\Actions;
 
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
-use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
+use Emberfuse\Scorch\API\Tokens\PersonalAccessToken;
 
 class CreateAccessToken implements Arrayable, Jsonable
 {
     /**
      * The access token instance.
      *
-     * @var \Cratespace\Sentinel\API\Tokens\PersonalAccessToken
+     * @var \Emberfuse\Scorch\API\Tokens\PersonalAccessToken
      */
     public $accessToken;
 
@@ -25,7 +25,7 @@ class CreateAccessToken implements Arrayable, Jsonable
     /**
      * Create a new access token result.
      *
-     * @param \Cratespace\Sentinel\API\Tokens\PersonalAccessToken $accessToken
+     * @param \Emberfuse\Scorch\API\Tokens\PersonalAccessToken $accessToken
      * @param string                                              $plainTextToken
      *
      * @return void

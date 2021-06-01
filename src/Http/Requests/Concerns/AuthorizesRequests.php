@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests\Concerns;
+namespace Emberfuse\Scorch\Http\Requests\Concerns;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 
 trait AuthorizesRequests
 {

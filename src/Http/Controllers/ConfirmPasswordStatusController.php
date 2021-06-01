@@ -1,9 +1,8 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class ConfirmPasswordStatusController extends Controller
 {
@@ -14,7 +13,7 @@ class ConfirmPasswordStatusController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request)
     {
         return response()->json([
             'confirmed' => (time() - $request->session()->get('auth.password_confirmed_at', 0)) < $request->input('seconds', config('auth.password_timeout', 900)),

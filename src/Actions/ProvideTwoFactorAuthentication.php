@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Actions;
+namespace Emberfuse\Scorch\Actions;
 
 use PragmaRX\Google2FA\Google2FA;
-use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
+use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
 class ProvideTwoFactorAuthentication implements ProvidesTwoFactorAuthentication
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests\Fixtures;
+namespace Emberfuse\Scorch\Tests\Fixtures;
 
 use Illuminate\Database\Eloquent\Model;
-use Cratespace\Sentinel\Models\Traits\Redirectable;
+use Emberfuse\Scorch\Models\Traits\Redirectable;
 
 class MockModel extends Model
 {

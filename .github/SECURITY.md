@@ -6,23 +6,11 @@
 
 | Version | Security Fixes Until |
 | ------- | -------------------- |
-| 3.0.1   | April 30th, 2021     |
-| ------- | -------------------- |
-| 2.9.0   | April 28th, 2021     |
-| ------- | -------------------- |
-| 2.8.1   | April 26th, 2021     |
-| ------- | -------------------- |
-| 2.7.1   | March 19th, 2021     |
-| ------- | -------------------- |
-| 2.6.0   | March 4th, 2021      |
-| ------- | -------------------- |
-| 2.5.0   | February 19th, 2021  |
-| ------- | -------------------- |
-| 2.0.1   | February 12th, 2021  |
+| 1.0.1   | Jun 1st, 2021        |
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within Sentinel, please send an email to <Thavarshan Thayananthajothy> (tjthavarshan@gmail.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Scorch, please send an email to <Thavarshan Thayananthajothy> (tjthavarshan@gmail.com). All security vulnerabilities will be promptly addressed.
 
 ### Public PGP Key
 

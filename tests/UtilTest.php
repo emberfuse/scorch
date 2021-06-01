@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel;
+namespace Emberfuse\Scorch;
 
-use Cratespace\Sentinel\Support\Util;
-use Cratespace\Sentinel\Tests\TestCase;
-use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
-use Cratespace\Sentinel\Tests\Fixtures\TestAuthenticationUser;
+use Emberfuse\Scorch\Support\Util;
+use Emberfuse\Scorch\Tests\TestCase;
+use Emberfuse\Scorch\Tests\Traits\HasUserAttributes;
+use Emberfuse\Scorch\Tests\Fixtures\TestAuthenticationUser;
 
 class UtilTest extends TestCase
 {

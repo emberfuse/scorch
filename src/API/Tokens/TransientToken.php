@@ -1,8 +1,8 @@
 <?php
 
-namespace Cratespace\Sentinel\API\Tokens;
+namespace Emberfuse\Scorch\API\Tokens;
 
-use Cratespace\Contracts\Auth\Access;
+use Emberfuse\Scorch\Contracts\Auth\Access;
 
 class TransientToken implements Access
 {

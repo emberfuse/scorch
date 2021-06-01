@@ -1,27 +1,27 @@
 <?php
 
-namespace Cratespace\Sentinel\Providers;
+namespace Emberfuse\Scorch\Providers;
 
+use Emberfuse\Scorch\Auth\Guard;
 use Illuminate\Auth\RequestGuard;
-use Cratespace\Sentinel\Auth\Guard;
+use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Console\InstallCommand;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Cratespace\Sentinel\Console\InstallCommand;
-use Cratespace\Sentinel\Actions\ConfirmPassword;
+use Emberfuse\Scorch\Actions\ConfirmPassword;
 use Illuminate\Contracts\Foundation\Application;
+use Emberfuse\Scorch\Console\ResponseMakeCommand;
 use Illuminate\Contracts\Auth\Guard as AuthGuard;
-use Cratespace\Sentinel\Console\ResponseMakeCommand;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
-use Cratespace\Sentinel\Contracts\Actions\ConfirmsPasswords;
-use Cratespace\Sentinel\Actions\ProvideTwoFactorAuthentication;
-use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
-use Cratespace\Sentinel\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Emberfuse\Scorch\Contracts\Actions\ConfirmsPasswords;
+use Emberfuse\Scorch\Actions\ProvideTwoFactorAuthentication;
+use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
+use Emberfuse\Scorch\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
-class SentinelServiceProvider extends ServiceProvider
+class ScorchServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -31,11 +31,10 @@ class SentinelServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeAuthConfig();
-        $this->mergeConfigFrom(__DIR__ . '/../../config/sentinel.php', 'sentinel');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/scorch.php', 'scorch');
 
         $this->registerAuthGuard();
         $this->registerInternalActions();
-        $this->registerInternalConfig();
     }
 
     /**
@@ -60,10 +59,10 @@ class SentinelServiceProvider extends ServiceProvider
     protected function mergeAuthConfig(): void
     {
         config([
-            'auth.guards.sentinel' => array_merge([
-                'driver' => 'sentinel',
+            'auth.guards.scorch' => array_merge([
+                'driver' => 'scorch',
                 'provider' => null,
-            ], config('auth.guards.sentinel', [])),
+            ], config('auth.guards.scorch', [])),
         ]);
     }
 
@@ -76,12 +75,12 @@ class SentinelServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             StatefulGuard::class,
-            fn () => Auth::guard(Config::guard(['sentinel']))
+            fn () => Auth::guard(Config::guard('scorch'))
         );
     }
 
     /**
-     * Register all sentinel internal action classes.
+     * Register all scorch internal action classes.
      *
      * @return void
      */
@@ -95,18 +94,6 @@ class SentinelServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register Sentinel config class.
-     *
-     * @return void
-     */
-    protected function registerInternalConfig(): void
-    {
-        $this->app->singleton(Config::class, function (Application $app): Config {
-            return new Config($app['config']);
-        });
-    }
-
-    /**
      * Configure the publishable resources offered by the package.
      *
      * @return void
@@ -115,9 +102,9 @@ class SentinelServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../../stubs/config/sentinel.php' => config_path('sentinel.php'),
+                __DIR__ . '/../../stubs/config/scorch.php' => config_path('scorch.php'),
                 __DIR__ . '/../../stubs/config/rules.php' => config_path('rules.php'),
-            ], 'sentinel-config');
+            ], 'scorch-config');
 
             $this->publishes([
                 __DIR__ . '/../../stubs/app/Actions/Auth/AuthAction.php' => app_path('Actions/Auth/AuthAction.php'),
@@ -130,16 +117,16 @@ class SentinelServiceProvider extends ServiceProvider
                 __DIR__ . '/../../stubs/app/Actions/Auth/UpdateUserAddress.php' => app_path('Actions/Auth/UpdateUserAddress.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/LogoutUser.php' => app_path('Actions/Auth/LogoutUser.php'),
                 __DIR__ . '/../../stubs/app/Actions/Auth/Traits/PasswordUpdater.php' => app_path('Actions/Auth/Traits/PasswordUpdater.php'),
-                __DIR__ . '/../../stubs/app/Providers/SentinelServiceProvider.php' => app_path('Providers/SentinelServiceProvider.php'),
+                __DIR__ . '/../../stubs/app/Providers/ScorchServiceProvider.php' => app_path('Providers/ScorchServiceProvider.php'),
                 __DIR__ . '/../../stubs/app/Providers/AuthServiceProvider.php' => app_path('Providers/AuthServiceProvider.php'),
                 __DIR__ . '/../../stubs/app/Policies/UserPolicy.php' => app_path('Policies/UserPolicy.php'),
                 __DIR__ . '/../../stubs/app/Models/User.php' => app_path('Models/User.php'),
-            ], 'sentinel-support');
+            ], 'scorch-support');
 
             $this->publishes([
                 __DIR__ . '/../../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
                 __DIR__ . '/../../database/migrations/2019_12_14_000001_create_personal_access_tokens_table.php' => database_path('migrations/2019_12_14_000001_create_personal_access_tokens_table.php'),
-            ], 'sentinel-migrations');
+            ], 'scorch-migrations');
         }
     }
 
@@ -182,8 +169,8 @@ class SentinelServiceProvider extends ServiceProvider
     protected function configureRoutes(): void
     {
         Route::group([
-            'namespace' => 'Sentinel\Http\Controllers',
-            'domain' => Config::domain([null]),
+            'namespace' => 'Scorch\Http\Controllers',
+            'domain' => Config::domain(null),
             'prefix' => Config::prefix(),
         ], function (): void {
             $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
@@ -191,14 +178,14 @@ class SentinelServiceProvider extends ServiceProvider
     }
 
     /**
-     * Configure the Sentinel authentication guard.
+     * Configure the Scorch authentication guard.
      *
      * @return void
      */
     protected function configureGuard(): void
     {
         Auth::resolved(function (AuthFactory $auth) {
-            $auth->extend('sentinel', function (
+            $auth->extend('scorch', function (
                 Application $app, string $name, array $config
             ) use ($auth): AuthGuard {
                 return tap(

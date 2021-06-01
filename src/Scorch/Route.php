@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Sentinel;
+namespace Emberfuse\Scorch\Scorch;
 
 use Illuminate\Support\Arr;
 

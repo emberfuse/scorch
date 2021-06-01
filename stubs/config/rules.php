@@ -2,7 +2,7 @@
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Rules\PasswordRule;
+use Emberfuse\Scorch\Rules\PasswordRule;
 
 return [
     /*

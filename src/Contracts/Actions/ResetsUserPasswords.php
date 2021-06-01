@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Contracts\Actions;
+namespace Emberfuse\Scorch\Contracts\Actions;
 
 interface ResetsUserPasswords
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests;
+namespace Emberfuse\Scorch\Http\Requests;
 
-use Cratespace\Sentinel\Http\Requests\Request;
+use Emberfuse\Scorch\Http\Requests\Request;
 
 class ConfirmPasswordRequest extends Request
 {

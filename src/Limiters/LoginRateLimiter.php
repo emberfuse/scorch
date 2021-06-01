@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel\Limiters;
+namespace Emberfuse\Scorch\Limiters;
 
-use Cratespace\Sentinel\Sentinel\Config;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Cache\RateLimiter;
+use Emberfuse\Scorch\Scorch\Config;
 
 class LoginRateLimiter
 {

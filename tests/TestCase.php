@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Mockery as m;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Cratespace\Sentinel\Providers\SentinelServiceProvider;
-use Cratespace\Sentinel\Tests\Fixtures\TestAuthenticationUser;
+use Emberfuse\Scorch\Providers\ScorchServiceProvider;
+use Emberfuse\Scorch\Tests\Fixtures\TestAuthenticationUser;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -25,7 +25,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getPackageProviders($app)
     {
-        return [SentinelServiceProvider::class];
+        return [ScorchServiceProvider::class];
     }
 
     /**
@@ -39,7 +39,7 @@ abstract class TestCase extends BaseTestCase
     {
         $app['migrator']->path(__DIR__ . '/../database/migrations');
 
-        $app['config']->set('sentinel.stateful', ['test.com', '*.test.com']);
+        $app['config']->set('scorch.stateful', ['test.com', '*.test.com']);
 
         $app['config']->set('auth.providers.users.model', TestAuthenticationUser::class);
 
