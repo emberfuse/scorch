@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests\Traits;
+namespace Emberfuse\Scorch\Tests\Traits;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
-use Cratespace\Sentinel\Http\Requests\DeleteProfilePhotoRequest;
-use Cratespace\Sentinel\Http\Responses\DeleteProfilePhotoResponse;
+use Emberfuse\Scorch\Http\Requests\DeleteProfilePhotoRequest;
+use Emberfuse\Scorch\Http\Responses\DeleteProfilePhotoResponse;
 
 class UserProfilePhotoController extends Controller
 {

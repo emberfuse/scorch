@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Models\Traits;
+namespace Emberfuse\Scorch\Models\Traits;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +16,7 @@ trait HasProfilePhoto
      */
     public function updateProfilePhoto(UploadedFile $photo): void
     {
-        tap($this->profile_photo_path, function ($previous) use ($photo) {
+        tap($this->profile_photo_path, function (string $previous) use ($photo): void {
             $this->forceFill([
                 'profile_photo_path' => $photo->storePublicly(
                     'profile-photos',
@@ -61,7 +61,7 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl(): string
     {
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=1F2937&background=F9FAFB';
     }
 
     /**

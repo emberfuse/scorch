@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use Cratespace\Sentinel\Http\Requests\Request;
+use Emberfuse\Scorch\Http\Requests\Request;
 
 class {{ class }} extends Request
 {

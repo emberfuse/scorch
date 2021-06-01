@@ -1,13 +1,13 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Middleware;
+namespace Emberfuse\Scorch\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Support\Collection;
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 
 class EnsureFrontendRequestsAreStateful
 {
@@ -25,14 +25,14 @@ class EnsureFrontendRequestsAreStateful
 
         return (new Pipeline(app()))->send($request)->through(static::fromFrontend($request) ? [
             function ($request, $next) {
-                $request->attributes->set('sentinel', true);
+                $request->attributes->set('scorch', true);
 
                 return $next($request);
             },
-            config('sentinel.middleware.encrypt_cookies', \Illuminate\Cookie\Middleware\EncryptCookies::class),
+            config('scorch.middleware.encrypt_cookies', \Illuminate\Cookie\Middleware\EncryptCookies::class),
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            config('sentinel.middleware.verify_csrf_token', \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class),
+            config('scorch.middleware.verify_csrf_token', \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class),
         ] : [])->then(function (Request $request) use ($next) {
             return $next($request);
         });

@@ -1,13 +1,13 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Illuminate\Support\Facades\Event;
-use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
-use Cratespace\Sentinel\Events\TwoFactorAuthenticationEnabled;
-use Cratespace\Sentinel\Events\TwoFactorAuthenticationDisabled;
+use Emberfuse\Scorch\Tests\Traits\HasUserAttributes;
+use Emberfuse\Scorch\Events\TwoFactorAuthenticationEnabled;
+use Emberfuse\Scorch\Events\TwoFactorAuthenticationDisabled;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Cratespace\Sentinel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
+use Emberfuse\Scorch\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class TwoFactorAuthenticationTest extends TestCase
 {

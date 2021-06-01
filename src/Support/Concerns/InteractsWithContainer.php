@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Support\Concerns;
+namespace Emberfuse\Scorch\Support\Concerns;
 
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Contracts\Pipeline\Pipeline as PipelineContract;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Model;
-use Cratespace\Sentinel\API\Tokens\TransientToken;
-use Cratespace\Sentinel\Models\Traits\HasApiTokens;
-use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
+use Emberfuse\Scorch\API\Tokens\TransientToken;
+use Emberfuse\Scorch\Models\Traits\HasApiTokens;
+use Emberfuse\Scorch\API\Tokens\PersonalAccessToken;
 
 class HasApiTokensTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Http\Response;
 
@@ -11,7 +11,7 @@ class CsrfCookieController
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(): Response
+    public function show()
     {
         return new Response('', 204);
     }

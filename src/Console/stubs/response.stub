@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use Cratespace\Sentinel\Http\Responses\Response;
+use Emberfuse\Scorch\Http\Responses\Response;
 use Illuminate\Contracts\Support\Responsable;
 
 class {{ class }} extends Response implements Responsable

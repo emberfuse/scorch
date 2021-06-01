@@ -1,20 +1,19 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
-use Cratespace\Sentinel\Sentinel\Config;
-use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Sentinel\Auth\DenyLockedAccount;
-use Cratespace\Sentinel\Auth\AttemptToAuthenticate;
-use Cratespace\Sentinel\Http\Requests\LoginRequest;
-use Cratespace\Sentinel\Http\Requests\LogoutRequest;
-use Cratespace\Sentinel\Http\Responses\LoginResponse;
-use Cratespace\Sentinel\Http\Responses\LogoutResponse;
-use Cratespace\Sentinel\Auth\EnsureLoginIsNotThrottled;
-use Cratespace\Sentinel\Contracts\Actions\LogsoutUsers;
-use Cratespace\Sentinel\Auth\PrepareAuthenticatedSession;
-use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
-use Cratespace\Sentinel\Auth\RedirectIfTwoFactorAuthenticatable;
+use Emberfuse\Scorch\Scorch\Config;
+use Emberfuse\Scorch\Auth\DenyLockedAccount;
+use Emberfuse\Scorch\Auth\AttemptToAuthenticate;
+use Emberfuse\Scorch\Http\Requests\LoginRequest;
+use Emberfuse\Scorch\Http\Requests\LogoutRequest;
+use Emberfuse\Scorch\Http\Responses\LoginResponse;
+use Emberfuse\Scorch\Http\Responses\LogoutResponse;
+use Emberfuse\Scorch\Auth\EnsureLoginIsNotThrottled;
+use Emberfuse\Scorch\Contracts\Actions\LogsoutUsers;
+use Emberfuse\Scorch\Auth\PrepareAuthenticatedSession;
+use Emberfuse\Scorch\Contracts\Responses\LoginViewResponse;
+use Emberfuse\Scorch\Auth\RedirectIfTwoFactorAuthenticatable;
 
 class AuthenticationController extends Controller
 {
@@ -34,12 +33,12 @@ class AuthenticationController extends Controller
     /**
      * Show the login view.
      *
-     * @param \Illuminate\Http\Request                        $request
-     * @param \Sentinel\Contracts\Responses\LoginViewResponse $response
+     * @param \Illuminate\Http\Request                               $request
+     * @param \Emberfue\Scorch\Contracts\Responses\LoginViewResponse $response
      *
      * @return mixed
      */
-    public function create(): Responsable
+    public function create()
     {
         return $this->resolve(LoginViewResponse::class);
     }
@@ -47,7 +46,7 @@ class AuthenticationController extends Controller
     /**
      * Attempt to authenticate a new session.
      *
-     * @param \Sentinel\Http\Requests\LoginRequest $request
+     * @param \Emberfuse\Scorch\Http\Requests\LoginRequest $request
      *
      * @return mixed
      */
@@ -75,8 +74,8 @@ class AuthenticationController extends Controller
     /**
      * Destroy an authenticated session.
      *
-     * @param \Cratespace\Sentinel\Http\Requests\LogoutRequest $request
-     * @param \Cratespace\Sentinel\Contracts\Auth\LogsoutUsers $logoutAction
+     * @param \Emberfuse\Scorch\Http\Requests\LogoutRequest $request
+     * @param \Emberfuse\Scorch\Contracts\Auth\LogsoutUsers $logoutAction
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

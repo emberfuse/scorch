@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel;
+namespace Emberfuse\Scorch;
 
-use Cratespace\Sentinel\Tests\TestCase;
-use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
-use Cratespace\Sentinel\Tests\Fixtures\TestConfirmPasswordUser;
-use Cratespace\Sentinel\Contracts\Responses\ConfirmPasswordViewResponse;
+use Emberfuse\Scorch\Tests\TestCase;
+use Emberfuse\Scorch\Tests\Traits\HasUserAttributes;
+use Emberfuse\Scorch\Tests\Fixtures\TestConfirmPasswordUser;
+use Emberfuse\Scorch\Contracts\Responses\ConfirmPasswordViewResponse;
 
 class ConfirmPasswordTest extends TestCase
 {

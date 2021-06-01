@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Mockery as m;
 use App\Models\User;
-use Cratespace\Sentinel\Contracts\Actions\UpdatesUserPasswords;
+use Emberfuse\Scorch\Contracts\Actions\UpdatesUserPasswords;
 
 class UpdatePasswordTest extends TestCase
 {

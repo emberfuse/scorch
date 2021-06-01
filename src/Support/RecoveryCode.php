@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Support;
+namespace Emberfuse\Scorch\Support;
 
 use Illuminate\Support\Str;
 

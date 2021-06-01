@@ -1,13 +1,14 @@
 <?php
 
-namespace Cratespace\Sentinel\Models\Concerns;
+namespace Emberfuse\Scorch\Models\Concerns;
 
 use Carbon\Carbon;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Cratespace\Sentinel\Support\Concerns\InteractsWithContainer;
+use Illuminate\Contracts\Session\Session;
+use Emberfuse\Scorch\Support\Concerns\InteractsWithContainer;
 
 trait InteractsWithSessions
 {
@@ -41,7 +42,7 @@ trait InteractsWithSessions
                 ->where('user_id', $this->getAuthIdentifier())
                 ->orderBy('last_activity', 'desc')
                 ->get()
-        )->map(function ($session) use ($request) {
+        )->map(function ($session) use ($request): object {
             $agent = $this->createAgent($session);
 
             return (object) [
@@ -68,7 +69,7 @@ trait InteractsWithSessions
      */
     protected function createAgent($session): Agent
     {
-        return tap(new Agent(), function (Agent $agent) use ($session) {
+        return tap(new Agent(), function (Agent $agent) use ($session): void {
             $agent->setUserAgent($session->user_agent);
         });
     }

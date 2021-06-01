@@ -1,8 +1,8 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests;
+namespace Emberfuse\Scorch\Http\Requests;
 
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 
 class LoginRequest extends Request
 {

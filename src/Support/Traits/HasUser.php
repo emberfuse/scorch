@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Support\Traits;
+namespace Emberfuse\Scorch\Support\Traits;
 
 use App\Models\User;
 use InvalidArgumentException;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Sentinel\Http\Requests\RegisterRequest;
-use Cratespace\Sentinel\Http\Responses\RegisterResponse;
-use Cratespace\Sentinel\Contracts\Actions\CreatesNewUsers;
-use Cratespace\Sentinel\Contracts\Responses\RegisterViewResponse;
+use Emberfuse\Scorch\Http\Requests\RegisterRequest;
+use Emberfuse\Scorch\Http\Responses\RegisterResponse;
+use Emberfuse\Scorch\Contracts\Actions\CreatesNewUsers;
+use Emberfuse\Scorch\Contracts\Responses\RegisterViewResponse;
 
 class RegisterUserController extends Controller
 {
@@ -35,11 +35,11 @@ class RegisterUserController extends Controller
      * Show the registration view.
      *
      * @param \Illuminate\Http\Request                           $request
-     * @param \Sentinel\Contracts\Responses\RegisterViewResponse $response
+     * @param \Emberfuse\Scorch\Contracts\Responses\RegisterViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function create(): Responsable
+    public function create()
     {
         return $this->resolve(RegisterViewResponse::class);
     }
@@ -47,8 +47,8 @@ class RegisterUserController extends Controller
     /**
      * Create a new registered user.
      *
-     * @param \Sentinel\Http\Requests\RegisterRequest    $request
-     * @param \Laravel\Fortify\Contracts\CreatesNewUsers $creator
+     * @param \Emberfuse\Scorch\Http\Requests\RegisterRequest    $request
+     * @param \Emberfuse\Scorch\Contracts\CreatesNewUsers $creator
      *
      * @return mixed
      */

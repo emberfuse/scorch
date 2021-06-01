@@ -1,14 +1,14 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Cratespace\Sentinel\Http\Requests\TwoFactorLoginRequest;
-use Cratespace\Sentinel\Http\Responses\TwoFactorLoginResponse;
-use Cratespace\Sentinel\Http\Responses\FailedTwoFactorLoginResponse;
-use Cratespace\Sentinel\Contracts\Responses\TwoFactorChallengeViewResponse;
+use Emberfuse\Scorch\Http\Requests\TwoFactorLoginRequest;
+use Emberfuse\Scorch\Http\Responses\TwoFactorLoginResponse;
+use Emberfuse\Scorch\Http\Responses\FailedTwoFactorLoginResponse;
+use Emberfuse\Scorch\Contracts\Responses\TwoFactorChallengeViewResponse;
 
 class TwoFactorAuthenticationController extends Controller
 {
@@ -34,11 +34,11 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * Show the two factor authentication challenge view.
      *
-     * @param \Cratespace\Sentinel\Http\Requests\TwoFactorLoginRequest $request
+     * @param \Emberfuse\Scorch\Http\Requests\TwoFactorLoginRequest $request
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function create(TwoFactorLoginRequest $request): Responsable
+    public function create(TwoFactorLoginRequest $request)
     {
         if (! $request->hasChallengedUser()) {
             throw new HttpResponseException(redirect()->route('login'));
@@ -50,7 +50,7 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * Attempt to authenticate a new session using the two factor authentication code.
      *
-     * @param \Sentinel\Http\Requests\TwoFactorLoginRequest $request
+     * @param \Emberfuse\Scorch\Http\Requests\TwoFactorLoginRequest $request
      *
      * @return mixed
      */

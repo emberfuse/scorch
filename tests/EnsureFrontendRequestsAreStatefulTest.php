@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Illuminate\Http\Request;
-use Cratespace\Sentinel\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Emberfuse\Scorch\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 class EnsureFrontendRequestsAreStatefulTest extends TestCase
 {
@@ -60,7 +60,7 @@ class EnsureFrontendRequestsAreStatefulTest extends TestCase
 
     public function testRequestsAreNotStatefulWithoutReferer()
     {
-        $this->app['config']->set('sentinel.stateful', ['']);
+        $this->app['config']->set('scorch.stateful', ['']);
 
         $request = Request::create('/');
 

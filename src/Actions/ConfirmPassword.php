@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel\Actions;
+namespace Emberfuse\Scorch\Actions;
 
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Sentinel\Contracts\Actions\ConfirmsPasswords;
+use Emberfuse\Scorch\Contracts\Actions\ConfirmsPasswords;
 
 class ConfirmPassword implements ConfirmsPasswords
 {

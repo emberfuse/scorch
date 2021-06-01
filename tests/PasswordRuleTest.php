@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Illuminate\Support\Str;
-use Cratespace\Sentinel\Rules\PasswordRule;
+use Emberfuse\Scorch\Rules\PasswordRule;
 
 class PasswordRuleTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Auth;
+namespace Emberfuse\Scorch\Auth;
 
 use Closure;
 use Illuminate\Http\Request;

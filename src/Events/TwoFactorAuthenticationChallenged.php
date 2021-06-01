@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Events;
+namespace Emberfuse\Scorch\Events;
 
 class TwoFactorAuthenticationChallenged extends TwoFactorAuthenticationEvent
 {

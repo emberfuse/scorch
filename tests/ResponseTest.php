@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Sentinel\Http\Responses\Response;
+use Emberfuse\Scorch\Http\Responses\Response;
 
 class ResponseTest extends TestCase
 {

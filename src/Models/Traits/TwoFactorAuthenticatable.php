@@ -1,16 +1,16 @@
 <?php
 
-namespace Cratespace\Sentinel\Models\Traits;
+namespace Emberfuse\Scorch\Models\Traits;
 
 use BaconQrCode\Writer;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\ImageRenderer;
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 use BaconQrCode\Renderer\RendererStyle\Fill;
-use Cratespace\Sentinel\Support\RecoveryCode;
+use Emberfuse\Scorch\Support\RecoveryCode;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
+use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
 trait TwoFactorAuthenticatable
 {

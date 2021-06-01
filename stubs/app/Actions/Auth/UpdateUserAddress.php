@@ -3,7 +3,7 @@
 namespace App\Actions\Auth;
 
 use App\Models\User;
-use Cratespace\Sentinel\Contracts\Actions\UpdateUserInformation;
+use Emberfuse\Scorch\Contracts\Actions\UpdateUserInformation;
 
 class UpdateUserAddress implements UpdateUserInformation
 {

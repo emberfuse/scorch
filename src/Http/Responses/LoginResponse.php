@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Responses;
+namespace Emberfuse\Scorch\Http\Responses;
 
 use Illuminate\Routing\Redirector;
-use Cratespace\Sentinel\Limiters\LoginRateLimiter;
+use Emberfuse\Scorch\Limiters\LoginRateLimiter;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Contracts\Support\Responsable;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Contracts\Support;
+namespace Emberfuse\Scorch\Contracts\Support;
 
 interface View
 {

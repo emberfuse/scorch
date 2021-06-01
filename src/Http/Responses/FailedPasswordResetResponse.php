@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Responses;
+namespace Emberfuse\Scorch\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Validation\ValidationException;

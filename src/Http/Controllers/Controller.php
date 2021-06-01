@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
-use Cratespace\Sentinel\Support\Concerns\InteractsWithContainer;
+use Emberfuse\Scorch\Support\Concerns\InteractsWithContainer;
 
 abstract class Controller extends BaseController
 {

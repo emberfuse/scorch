@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Cratespace\Sentinel\Actions\EnableTwoFactorAuthentication;
-use Cratespace\Sentinel\Actions\DisableTwoFactorAuthentication;
+use Emberfuse\Scorch\Actions\EnableTwoFactorAuthentication;
+use Emberfuse\Scorch\Actions\DisableTwoFactorAuthentication;
 
 class TwoFactorAuthenticationStatusController extends Controller
 {
@@ -13,7 +13,7 @@ class TwoFactorAuthenticationStatusController extends Controller
      * Enable two factor authentication for the user.
      *
      * @param \Illuminate\Http\Request                       $request
-     * @param \Sentinel\Actions\EnableTwoFactorAuthentication $enable
+     * @param \Emberfuse\Scorch\Actions\EnableTwoFactorAuthentication $enable
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -28,7 +28,7 @@ class TwoFactorAuthenticationStatusController extends Controller
      * Disable two factor authentication for the user.
      *
      * @param \Illuminate\Http\Request                        $request
-     * @param \Sentinel\Actions\DisableTwoFactorAuthentication $disable
+     * @param \Emberfuse\Scorch\Actions\DisableTwoFactorAuthentication $disable
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

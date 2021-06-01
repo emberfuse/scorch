@@ -1,21 +1,21 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use App\Actions\Auth\LogoutUser;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use App\Actions\Auth\AuthenticateUser;
-use Cratespace\Sentinel\Sentinel\Config;
-use Cratespace\Sentinel\Limiters\LoginRateLimiter;
-use Cratespace\Sentinel\Contracts\Actions\LogsoutUsers;
-use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
-use Cratespace\Sentinel\Contracts\Actions\AuthenticatesUsers;
-use Cratespace\Sentinel\Contracts\Responses\LoginViewResponse;
-use Cratespace\Sentinel\Tests\Fixtures\TestAuthenticationUser;
-use Cratespace\Sentinel\Events\TwoFactorAuthenticationChallenged;
-use Cratespace\Sentinel\Tests\Fixtures\TestTwoFactorAuthenticationUser;
+use Emberfuse\Scorch\Scorch\Config;
+use Emberfuse\Scorch\Limiters\LoginRateLimiter;
+use Emberfuse\Scorch\Contracts\Actions\LogsoutUsers;
+use Emberfuse\Scorch\Tests\Traits\HasUserAttributes;
+use Emberfuse\Scorch\Contracts\Actions\AuthenticatesUsers;
+use Emberfuse\Scorch\Contracts\Responses\LoginViewResponse;
+use Emberfuse\Scorch\Tests\Fixtures\TestAuthenticationUser;
+use Emberfuse\Scorch\Events\TwoFactorAuthenticationChallenged;
+use Emberfuse\Scorch\Tests\Fixtures\TestTwoFactorAuthenticationUser;
 
 class AuthenticationTest extends TestCase
 {

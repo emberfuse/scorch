@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
 use Mockery as m;
 use App\Models\User;
@@ -8,12 +8,12 @@ use App\Policies\UserPolicy;
 use App\Actions\Auth\LogoutUser;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Queue;
-use Cratespace\Sentinel\Jobs\DeleteUserJob;
+use Emberfuse\Scorch\Jobs\DeleteUserJob;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Sentinel\Contracts\Actions\LogsoutUsers;
-use Cratespace\Sentinel\Tests\Traits\HasUserAttributes;
-use Cratespace\Sentinel\Contracts\Actions\UpdatesUserProfiles;
-use Cratespace\Sentinel\Contracts\Responses\UserProfileViewResponse;
+use Emberfuse\Scorch\Contracts\Actions\LogsoutUsers;
+use Emberfuse\Scorch\Tests\Traits\HasUserAttributes;
+use Emberfuse\Scorch\Contracts\Actions\UpdatesUserProfiles;
+use Emberfuse\Scorch\Contracts\Responses\UserProfileViewResponse;
 
 class UpdateProfileTest extends TestCase
 {

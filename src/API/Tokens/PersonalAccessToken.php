@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\API\Tokens;
+namespace Emberfuse\Scorch\API\Tokens;
 
-use Cratespace\Contracts\Auth\Access;
-use Cratespace\Sentinel\Models\PersonalAccessToken as PersonalAccessTokenModel;
+use Emberfuse\Scorch\Contracts\Auth\Access;
+use Emberfuse\Scorch\Models\PersonalAccessToken as PersonalAccessTokenModel;
 
 class PersonalAccessToken extends PersonalAccessTokenModel implements Access
 {

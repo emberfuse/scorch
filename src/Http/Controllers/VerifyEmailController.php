@@ -1,18 +1,18 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
-use Cratespace\Sentinel\Sentinel\Config;
-use Cratespace\Sentinel\Http\Requests\VerifyEmailRequest;
+use Emberfuse\Scorch\Scorch\Config;
+use Emberfuse\Scorch\Http\Requests\VerifyEmailRequest;
 
 class VerifyEmailController extends Controller
 {
     /**
      * Mark the authenticated user's email address as verified.
      *
-     * @param \Sentinel\Http\Requests\VerifyEmailRequest $request
+     * @param \Emberfuse\Scorch\Http\Requests\VerifyEmailRequest $request
      *
      * @return mixed
      */

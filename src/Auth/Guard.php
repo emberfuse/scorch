@@ -1,16 +1,16 @@
 <?php
 
-namespace Cratespace\Sentinel\Auth;
+namespace Emberfuse\Scorch\Auth;
 
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Cratespace\Sentinel\API\Tokens\TransientToken;
-use Cratespace\Sentinel\Models\Traits\HasApiTokens;
+use Emberfuse\Scorch\API\Tokens\TransientToken;
+use Emberfuse\Scorch\Models\Traits\HasApiTokens;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
-use Cratespace\Sentinel\API\Tokens\PersonalAccessToken;
+use Emberfuse\Scorch\API\Tokens\PersonalAccessToken;
 
 class Guard
 {

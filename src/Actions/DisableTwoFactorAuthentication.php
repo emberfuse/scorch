@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Actions;
+namespace Emberfuse\Scorch\Actions;
 
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Events\TwoFactorAuthenticationDisabled;
+use Emberfuse\Scorch\Events\TwoFactorAuthenticationDisabled;
 
 class DisableTwoFactorAuthentication
 {

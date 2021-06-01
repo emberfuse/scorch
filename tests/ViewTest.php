@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel;
+namespace Emberfuse\Scorch;
 
 use Illuminate\Http\JsonResponse;
-use Cratespace\Sentinel\Sentinel\View;
-use Cratespace\Sentinel\Tests\TestCase;
+use Emberfuse\Scorch\Scorch\View;
+use Emberfuse\Scorch\Tests\TestCase;
 use Illuminate\Contracts\Support\Responsable;
 
 class ViewTest extends TestCase

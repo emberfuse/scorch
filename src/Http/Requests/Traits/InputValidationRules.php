@@ -1,10 +1,10 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests\Traits;
+namespace Emberfuse\Scorch\Http\Requests\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
-use Cratespace\Sentinel\Rules\PasswordRule;
+use Emberfuse\Scorch\Rules\PasswordRule;
 
 trait InputValidationRules
 {

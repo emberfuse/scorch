@@ -1,15 +1,14 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Contracts\Support\Responsable;
 use Symfony\Component\HttpFoundation\Response;
-use Cratespace\Sentinel\Contracts\Actions\ConfirmsPasswords;
-use Cratespace\Sentinel\Http\Requests\ConfirmPasswordRequest;
-use Cratespace\Sentinel\Http\Responses\PasswordConfirmedResponse;
-use Cratespace\Sentinel\Contracts\Responses\ConfirmPasswordViewResponse;
-use Cratespace\Sentinel\Http\Responses\FailedPasswordConfirmationResponse;
+use Emberfuse\Scorch\Contracts\Actions\ConfirmsPasswords;
+use Emberfuse\Scorch\Http\Requests\ConfirmPasswordRequest;
+use Emberfuse\Scorch\Http\Responses\PasswordConfirmedResponse;
+use Emberfuse\Scorch\Contracts\Responses\ConfirmPasswordViewResponse;
+use Emberfuse\Scorch\Http\Responses\FailedPasswordConfirmationResponse;
 
 class ConfirmPasswordController extends Controller
 {
@@ -35,12 +34,12 @@ class ConfirmPasswordController extends Controller
     /**
      * Show the confirm password view.
      *
-     * @param \Illuminate\Http\Request                                  $request
-     * @param \Sentinel\Contracts\Responses\ConfirmPasswordViewResponse $response
+     * @param \Illuminate\Http\Request                                $request
+     * @param \Emberfuse\Scorch\Contracts\Responses\ConfirmPasswordViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function show(): Responsable
+    public function show()
     {
         return $this->resolve(ConfirmPasswordViewResponse::class);
     }

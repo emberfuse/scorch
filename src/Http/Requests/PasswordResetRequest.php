@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests;
+namespace Emberfuse\Scorch\Http\Requests;
 
-use Cratespace\Sentinel\Sentinel\Config;
-use Cratespace\Sentinel\Rules\PasswordRule;
+use Emberfuse\Scorch\Scorch\Config;
+use Emberfuse\Scorch\Rules\PasswordRule;
 
 class PasswordResetRequest extends Request
 {

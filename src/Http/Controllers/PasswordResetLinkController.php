@@ -1,16 +1,16 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Sentinel\Http\Requests\PasswordResetLinkRequest;
-use Cratespace\Sentinel\Http\Responses\FailedPasswordResetLinkRequestResponse;
-use Cratespace\Sentinel\Contracts\Responses\RequestPasswordResetLinkViewResponse;
-use Cratespace\Sentinel\Http\Responses\SuccessfulPasswordResetLinkRequestResponse;
+use Emberfuse\Scorch\Http\Requests\PasswordResetLinkRequest;
+use Emberfuse\Scorch\Http\Responses\FailedPasswordResetLinkRequestResponse;
+use Emberfuse\Scorch\Contracts\Responses\RequestPasswordResetLinkViewResponse;
+use Emberfuse\Scorch\Http\Responses\SuccessfulPasswordResetLinkRequestResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class PasswordResetLinkController extends Controller
@@ -41,7 +41,7 @@ class PasswordResetLinkController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function create(): Responsable
+    public function create()
     {
         return $this->resolve(RequestPasswordResetLinkViewResponse::class);
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Cratespace\Sentinel\Actions;
+namespace Emberfuse\Scorch\Actions;
 
 use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Support\RecoveryCode;
-use Cratespace\Sentinel\Events\TwoFactorAuthenticationEnabled;
-use Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication;
+use Emberfuse\Scorch\Support\RecoveryCode;
+use Emberfuse\Scorch\Events\TwoFactorAuthenticationEnabled;
+use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
 class EnableTwoFactorAuthentication
 {
@@ -20,14 +20,14 @@ class EnableTwoFactorAuthentication
     /**
      * The two factor authentication provider.
      *
-     * @var \Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication
+     * @var \Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication
      */
     protected $provider;
 
     /**
      * Create a new action instance.
      *
-     * @param \Cratespace\Sentinel\Contracts\Actions\ProvidesTwoFactorAuthentication $provider
+     * @param \Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication $provider
      *
      * @return void
      */

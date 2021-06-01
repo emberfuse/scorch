@@ -1,19 +1,19 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests;
+namespace Emberfuse\Scorch\Tests;
 
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 
 class ConfigTest extends TestCase
 {
-    public function testGetsAllSentinelConfigs()
+    public function testGetsAllScorchConfigs()
     {
-        $this->assertEquals(config('sentinel'), $this->getConfigurations()->all());
+        $this->assertEquals(config('scorch'), $this->getConfigurations()->all());
     }
 
     public function testDynamicallyGetSpecificConfig()
     {
-        config()->set('sentinel.foo', 'bar');
+        config()->set('scorch.foo', 'bar');
 
         $this->assertEquals('bar', Config::foo());
     }

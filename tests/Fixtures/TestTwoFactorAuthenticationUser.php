@@ -1,9 +1,9 @@
 <?php
 
-namespace Cratespace\Sentinel\Tests\Fixtures;
+namespace Emberfuse\Scorch\Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Models\Traits\TwoFactorAuthenticatable;
+use Emberfuse\Scorch\Models\Traits\TwoFactorAuthenticatable;
 
 class TestTwoFactorAuthenticationUser extends User
 {

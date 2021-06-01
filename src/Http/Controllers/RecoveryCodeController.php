@@ -1,13 +1,13 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Cratespace\Sentinel\Actions\GenerateNewRecoveryCodes;
-use Cratespace\Sentinel\Http\Responses\GenerateRecoveryCodesResponse;
+use Emberfuse\Scorch\Actions\GenerateNewRecoveryCodes;
+use Emberfuse\Scorch\Http\Responses\GenerateRecoveryCodesResponse;
 
 class RecoveryCodeController extends Controller
 {
@@ -35,7 +35,7 @@ class RecoveryCodeController extends Controller
      * Generate a fresh set of two factor authentication recovery codes.
      *
      * @param \Illuminate\Http\Request                          $request
-     * @param \Laravel\Fortify\Actions\GenerateNewRecoveryCodes $generate
+     * @param \Emberfuse\Scorch\Actions\GenerateNewRecoveryCodes $generate
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

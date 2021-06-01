@@ -1,16 +1,16 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Controllers;
+namespace Emberfuse\Scorch\Http\Controllers;
 
-use Cratespace\Sentinel\Sentinel\Config;
+use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
-use Cratespace\Sentinel\Http\Requests\PasswordResetRequest;
-use Cratespace\Sentinel\Http\Responses\PasswordResetResponse;
-use Cratespace\Sentinel\Contracts\Actions\ResetsUserPasswords;
-use Cratespace\Sentinel\Http\Responses\FailedPasswordResetResponse;
-use Cratespace\Sentinel\Contracts\Responses\ResetPasswordViewResponse;
+use Emberfuse\Scorch\Http\Requests\PasswordResetRequest;
+use Emberfuse\Scorch\Http\Responses\PasswordResetResponse;
+use Emberfuse\Scorch\Contracts\Actions\ResetsUserPasswords;
+use Emberfuse\Scorch\Http\Responses\FailedPasswordResetResponse;
+use Emberfuse\Scorch\Contracts\Responses\ResetPasswordViewResponse;
 
 class PasswordResetController extends Controller
 {
@@ -37,11 +37,11 @@ class PasswordResetController extends Controller
      * Show the new password view.
      *
      * @param \Illuminate\Http\Request                                $request
-     * @param \Sentinel\Contracts\Responses\ResetPasswordViewResponse $response
+     * @param \Emberfuse\Scorch\Contracts\Responses\ResetPasswordViewResponse $response
      *
      * @return \Illuminate\Contracts\Support\Responsable
      */
-    public function create(): Responsable
+    public function create()
     {
         return $this->resolve(ResetPasswordViewResponse::class);
     }
@@ -50,7 +50,7 @@ class PasswordResetController extends Controller
      * Reset the user's password.
      *
      * @param \Illuminate\Http\Request                        $request
-     * @param \Sentinel\Contracts\Actions\ResetsUserPasswords $reseter
+     * @param \Emberfuse\Scorch\Contracts\Actions\ResetsUserPasswords $reseter
      *
      * @return mixed
      */

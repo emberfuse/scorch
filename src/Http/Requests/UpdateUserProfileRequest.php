@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Http\Requests;
+namespace Emberfuse\Scorch\Http\Requests;
 
 use Illuminate\Validation\Rule;
 

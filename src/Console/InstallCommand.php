@@ -1,6 +1,6 @@
 <?php
 
-namespace Cratespace\Sentinel\Console;
+namespace Emberfuse\Scorch\Console;
 
 use Illuminate\Console\Command;
 
@@ -11,14 +11,14 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'sentinel:install';
+    protected $signature = 'scorch:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install the Sentinel package';
+    protected $description = 'Install the Scorch package';
 
     /**
      * Execute the console command.
@@ -28,12 +28,12 @@ class InstallCommand extends Command
     public function handle()
     {
         // Publish...
-        $this->callSilent('vendor:publish', ['--tag' => 'sentinel-config', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'scorch-config', '--force' => true]);
         $this->callSilent('vendor:publish', ['--tag' => 'rules-config', '--force' => true]);
-        $this->callSilent('vendor:publish', ['--tag' => 'sentinel-support', '--force' => true]);
-        $this->callSilent('vendor:publish', ['--tag' => 'sentinel-migrations', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'scorch-support', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'scorch-migrations', '--force' => true]);
 
         // Finish message...
-        $this->info('Sentinel installed successfully!');
+        $this->info('Scorch installed successfully!');
     }
 }

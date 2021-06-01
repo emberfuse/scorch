@@ -1,11 +1,11 @@
 <?php
 
-namespace Cratespace\Sentinel\Actions;
+namespace Emberfuse\Scorch\Actions;
 
 use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\User;
-use Cratespace\Sentinel\Support\RecoveryCode;
-use Cratespace\Sentinel\Events\RecoveryCodesGenerated;
+use Emberfuse\Scorch\Support\RecoveryCode;
+use Emberfuse\Scorch\Events\RecoveryCodesGenerated;
 
 class GenerateNewRecoveryCodes
 {
