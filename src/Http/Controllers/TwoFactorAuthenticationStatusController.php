@@ -12,7 +12,7 @@ class TwoFactorAuthenticationStatusController extends Controller
     /**
      * Enable two factor authentication for the user.
      *
-     * @param \Illuminate\Http\Request                       $request
+     * @param \Illuminate\Http\Request                                $request
      * @param \Emberfuse\Scorch\Actions\EnableTwoFactorAuthentication $enable
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -27,7 +27,7 @@ class TwoFactorAuthenticationStatusController extends Controller
     /**
      * Disable two factor authentication for the user.
      *
-     * @param \Illuminate\Http\Request                        $request
+     * @param \Illuminate\Http\Request                                 $request
      * @param \Emberfuse\Scorch\Actions\DisableTwoFactorAuthentication $disable
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -49,6 +49,8 @@ class TwoFactorAuthenticationStatusController extends Controller
      */
     protected function response(Request $request, string $status): Response
     {
-        return $request->wantsJson() ? response()->json() : back()->with('status', $status);
+        return $request->expectsJson()
+            ? response()->json()
+            : back()->with('status', $status);
     }
 }

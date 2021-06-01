@@ -3,7 +3,6 @@
 namespace Emberfuse\Scorch\Http\Controllers;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Symfony\Component\HttpFoundation\Response;
 use Emberfuse\Scorch\Contracts\Actions\ConfirmsPasswords;
 use Emberfuse\Scorch\Http\Requests\ConfirmPasswordRequest;
 use Emberfuse\Scorch\Http\Responses\PasswordConfirmedResponse;
@@ -34,10 +33,10 @@ class ConfirmPasswordController extends Controller
     /**
      * Show the confirm password view.
      *
-     * @param \Illuminate\Http\Request                                $request
+     * @param \Illuminate\Http\Request                                          $request
      * @param \Emberfuse\Scorch\Contracts\Responses\ConfirmPasswordViewResponse $response
      *
-     * @return \Illuminate\Contracts\Support\Responsable
+     * @return mixed
      */
     public function show()
     {
@@ -47,14 +46,19 @@ class ConfirmPasswordController extends Controller
     /**
      * Confirm the user's password.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Emberfuse\Scorch\Http\Requests\ConfirmPasswordRequest $request
+     * @param \Emberfuse\Scorch\Contracts\Actions\ConfirmsPasswords  $confirmer
+     * @param \Illuminate\Contracts\Auth\StatefulGuard               $guard
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
-    public function store(ConfirmPasswordRequest $request, ConfirmsPasswords $confirmer): Response
-    {
+    public function store(
+        ConfirmPasswordRequest $request,
+        ConfirmsPasswords $confirmer,
+        StatefulGuard $guard
+    ) {
         $confirmed = $confirmer->confirm(
-            $this->guard,
+            $guard,
             $request->user(),
             $request->input('password')
         );

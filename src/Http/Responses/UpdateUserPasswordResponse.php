@@ -4,7 +4,7 @@ namespace Emberfuse\Scorch\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 
-class UpdateUserProfileResponse extends Response implements Responsable
+class UpdateUserPasswordResponse extends Response implements Responsable
 {
     /**
      * Create an HTTP response that represents the object.
@@ -17,6 +17,6 @@ class UpdateUserProfileResponse extends Response implements Responsable
     {
         return $request->expectsJson()
             ? $this->json('', 200)
-            : $this->back()->with('status', 'profile-information-updated');
+            : $this->back()->with('status', 'password-updated');
     }
 }

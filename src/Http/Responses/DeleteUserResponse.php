@@ -15,6 +15,8 @@ class DeleteUserResponse extends Response implements Responsable
      */
     public function toResponse($request)
     {
-        return $request->expectsJson() ? $this->noContent() : $this->redirectTo('/');
+        return $request->expectsJson()
+            ? $this->json('', 205)
+            : $this->redirectTo('/');
     }
 }

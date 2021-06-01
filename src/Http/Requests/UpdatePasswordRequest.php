@@ -11,7 +11,7 @@ class UpdatePasswordRequest extends Request
      */
     public function authorize(): bool
     {
-        return $this->isAllowed('manage', $this->user());
+        return $this->isAllowed('manage', $this->user(), false);
     }
 
     /**

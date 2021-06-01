@@ -2,9 +2,9 @@
 
 namespace Emberfuse\Scorch\Http\Controllers;
 
-use Symfony\Component\HttpFoundation\Response;
 use Emberfuse\Scorch\Http\Requests\UpdatePasswordRequest;
 use Emberfuse\Scorch\Contracts\Actions\UpdatesUserPasswords;
+use Emberfuse\Scorch\Http\Responses\UpdateUserPasswordResponse;
 
 class PasswordController extends Controller
 {
@@ -18,10 +18,8 @@ class PasswordController extends Controller
      */
     public function __invoke(UpdatePasswordRequest $request, UpdatesUserPasswords $updater)
     {
-        $updater->update($request->user(), $request->all());
+        $updater->update($request->user(), $request->validated());
 
-        return $request->wantsJson()
-            ? response()->json()
-            : back()->with('status', 'password-updated');
+        return UpdateUserPasswordResponse::dispatch();
     }
 }

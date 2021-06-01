@@ -15,7 +15,7 @@ class GenerateRecoveryCodesResponse extends Response implements Responsable
      */
     public function toResponse($request)
     {
-        return $request->wantsJson()
+        return $request->expectsJson()
             ? $this->json()
             : $this->back()->with('status', 'recovery-codes-generated');
     }

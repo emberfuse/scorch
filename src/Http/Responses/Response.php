@@ -3,8 +3,8 @@
 namespace Emberfuse\Scorch\Http\Responses;
 
 use Illuminate\Routing\Redirector;
-use Illuminate\Http\RedirectResponse;
 use Emberfuse\Scorch\Scorch\Config;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Contracts\Support\Responsable;
@@ -42,7 +42,7 @@ abstract class Response extends ResponseFactory
      *
      * @param mixed|null $content
      *
-     * @return \Illuminate\Contracts\Support\Responsable|Illuminate\Routing\ResponseFactory
+     * @return mixed
      */
     public static function dispatch($content = null)
     {
@@ -66,7 +66,7 @@ abstract class Response extends ResponseFactory
      */
     public function home(): string
     {
-        return url(Config::home(['/home']));
+        return url(Config::home('/home'));
     }
 
     /**

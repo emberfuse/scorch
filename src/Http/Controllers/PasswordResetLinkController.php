@@ -6,12 +6,10 @@ use Illuminate\Http\Request;
 use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
-use Illuminate\Contracts\Support\Responsable;
 use Emberfuse\Scorch\Http\Requests\PasswordResetLinkRequest;
 use Emberfuse\Scorch\Http\Responses\FailedPasswordResetLinkRequestResponse;
 use Emberfuse\Scorch\Contracts\Responses\RequestPasswordResetLinkViewResponse;
 use Emberfuse\Scorch\Http\Responses\SuccessfulPasswordResetLinkRequestResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 class PasswordResetLinkController extends Controller
 {
@@ -51,9 +49,9 @@ class PasswordResetLinkController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return mixed
      */
-    public function store(PasswordResetLinkRequest $request): Response
+    public function store(PasswordResetLinkRequest $request)
     {
         $status = $this->broker->sendResetLink($request->only(Config::email()));
 

@@ -75,7 +75,7 @@ class ScorchServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             StatefulGuard::class,
-            fn () => Auth::guard(Config::guard('scorch'))
+            fn () => Auth::guard(Config::guard(null))
         );
     }
 

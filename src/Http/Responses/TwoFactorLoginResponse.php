@@ -15,7 +15,7 @@ class TwoFactorLoginResponse extends Response implements Responsable
      */
     public function toResponse($request)
     {
-        return $request->wantsJson()
+        return $request->expectsJson()
             ? $this->json('', 204)
             : $this->redirectToIntended($this->home(), 302);
     }
