@@ -4,7 +4,6 @@
 
 Scorch is a frontend agnostic authentication backend implementation for Laravel. Scorch registers the routes and controllers needed to implement all of Laravel's authentication features, including login, registration, password reset, email verification, and more.
 
-
 ## Official Documentation
 
 Documentation for Scorch is still in progress.
