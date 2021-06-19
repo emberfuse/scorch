@@ -1,6 +1,6 @@
 # Release Notes
 
-## [v1.1.1 (2020-01-28)](https://github.com/emberfuse/scorch/compare/v1.0.0...v1.1.1)
+## [v1.1.0 (2020-01-28)](https://github.com/emberfuse/scorch/compare/v1.0.0...v1.1.0)
 
 ### Added
 - Add `HasApiTokens` contract to complement trait
