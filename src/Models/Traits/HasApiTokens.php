@@ -3,11 +3,11 @@
 namespace Emberfuse\Scorch\Models\Traits;
 
 use Illuminate\Support\Str;
-use Emberfuse\Scorch\Contracts\Auth\Access;
 use Illuminate\Database\Eloquent\Model;
+use Emberfuse\Scorch\Contracts\Auth\Access;
 use Emberfuse\Scorch\Actions\CreateAccessToken;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Emberfuse\Scorch\API\Tokens\PersonalAccessToken;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasApiTokens
 {
@@ -37,7 +37,7 @@ trait HasApiTokens
      */
     public function tokenCan(string $ability): bool
     {
-        return $this->accessToken ? $this->accessToken->can($ability) : false;
+        return $this->accessToken && $this->accessToken->can($ability);
     }
 
     /**
@@ -46,9 +46,9 @@ trait HasApiTokens
      * @param string $name
      * @param array  $abilities
      *
-     * @return \Emberfuse\Scorch\Actions\CreateAccessToken
+     * @return mixed
      */
-    public function createToken(string $name, array $abilities = ['*']): CreateAccessToken
+    public function createToken(string $name, array $abilities = ['*'])
     {
         $token = $this->tokens()->create([
             'name' => $name,
@@ -76,7 +76,7 @@ trait HasApiTokens
      *
      * @return $this
      */
-    public function withAccessToken($accessToken): Model
+    public function withAccessToken(Access $accessToken): Model
     {
         $this->accessToken = $accessToken;
 

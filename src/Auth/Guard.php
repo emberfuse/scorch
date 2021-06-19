@@ -4,13 +4,13 @@ namespace Emberfuse\Scorch\Auth;
 
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Model;
 use Emberfuse\Scorch\Scorch\Config;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Emberfuse\Scorch\API\Tokens\TransientToken;
 use Emberfuse\Scorch\Models\Traits\HasApiTokens;
-use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Emberfuse\Scorch\API\Tokens\PersonalAccessToken;
+use Illuminate\Contracts\Auth\Factory as AuthFactory;
 
 class Guard
 {
@@ -71,17 +71,23 @@ class Guard
         if ($token = $request->bearerToken()) {
             $accessToken = PersonalAccessToken::findToken($token);
 
-            if (! $accessToken ||
-                $this->validate(compact('accessToken')) ||
-                ! $this->hasValidProvider($accessToken->tokenable)) {
+            if (! $this->isValidAccessToken($accessToken) ||
+                ! $this->supportsTokens($accessToken->tokenable)) {
                 return;
             }
 
-            return $this->supportsTokens($accessToken->tokenable)
-                ? $accessToken->tokenable->withAccessToken(
-                    tap($accessToken->forceFill(['last_used_at' => now()]))->save()
-                )
-                : null;
+            if (method_exists($accessToken->getConnection(), 'hasModifiedRecords') &&
+                method_exists($accessToken->getConnection(), 'setRecordModificationState')) {
+                tap($accessToken->getConnection()->hasModifiedRecords(), function ($hasModifiedRecords) use ($accessToken) {
+                    $accessToken->forceFill(['last_used_at' => now()])->save();
+
+                    $accessToken->getConnection()->setRecordModificationState($hasModifiedRecords);
+                });
+            } else {
+                $accessToken->forceFill(['last_used_at' => now()])->save();
+            }
+
+            return $accessToken->tokenable->withAccessToken($accessToken);
         }
     }
 
@@ -123,6 +129,26 @@ class Guard
             HasApiTokens::class,
             class_uses_recursive(get_class($tokenable))
         );
+    }
+
+    /**
+     * Determine if the provided access token is valid.
+     *
+     * @param mixed $accessToken
+     *
+     * @return bool
+     */
+    protected function isValidAccessToken($accessToken): bool
+    {
+        if (! $accessToken) {
+            return false;
+        }
+
+        $isValid = (! $this->expiration || $accessToken->created_at->gt(now()->subMinutes($this->expiration)))
+            && (! $accessToken->expires_at || ! $accessToken->expires_at->isPast())
+            && $this->hasValidProvider($accessToken->tokenable);
+
+        return $isValid;
     }
 
     /**

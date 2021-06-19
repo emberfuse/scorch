@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Emberfuse\Scorch\Models\Concerns\InteractsWithSessions;
 use Emberfuse\Scorch\Models\Traits\TwoFactorAuthenticatable;
+use Emberfuse\Scorch\Contracts\Auth\HasApiTokens as ApiTokenContract;
 
-class User extends Authenticatable
+class User extends Authenticatable implements ApiTokenContract
 {
     use HasFactory;
     use Notifiable;

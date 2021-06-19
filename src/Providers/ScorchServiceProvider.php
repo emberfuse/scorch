@@ -73,7 +73,7 @@ class ScorchServiceProvider extends ServiceProvider
      */
     protected function registerAuthGuard(): void
     {
-        $this->app->bind(
+        app()->bind(
             StatefulGuard::class,
             fn () => Auth::guard(Config::guard(null))
         );
@@ -86,8 +86,8 @@ class ScorchServiceProvider extends ServiceProvider
      */
     protected function registerInternalActions(): void
     {
-        $this->app->singleton(ConfirmsPasswords::class, ConfirmPassword::class);
-        $this->app->singleton(
+        app()->singleton(ConfirmsPasswords::class, ConfirmPassword::class);
+        app()->singleton(
             ProvidesTwoFactorAuthentication::class,
             ProvideTwoFactorAuthentication::class
         );
@@ -100,7 +100,7 @@ class ScorchServiceProvider extends ServiceProvider
      */
     protected function configurePublishing(): void
     {
-        if ($this->app->runningInConsole()) {
+        if (app()->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../../stubs/config/scorch.php' => config_path('scorch.php'),
                 __DIR__ . '/../../stubs/config/rules.php' => config_path('rules.php'),
@@ -137,7 +137,7 @@ class ScorchServiceProvider extends ServiceProvider
      */
     protected function configureCommands()
     {
-        if (! $this->app->runningInConsole()) {
+        if (! app()->runningInConsole()) {
             return;
         }
 
@@ -154,7 +154,7 @@ class ScorchServiceProvider extends ServiceProvider
      */
     protected function configureMiddleware(): void
     {
-        $kernel = $this->app->make(Kernel::class);
+        $kernel = app()->make(Kernel::class);
 
         $kernel->prependToMiddlewarePriority(
             EnsureFrontendRequestsAreStateful::class
@@ -188,12 +188,11 @@ class ScorchServiceProvider extends ServiceProvider
             $auth->extend('scorch', function (
                 Application $app, string $name, array $config
             ) use ($auth): AuthGuard {
-                return tap(
-                    $this->createGuard($auth, $config),
-                    function (AuthGuard $guard) use ($app): void {
-                        $app->refresh('request', $guard, 'setRequest');
-                    }
-                );
+                return tap($this->createGuard(
+                    $auth, $config
+                ), function (AuthGuard $guard): void {
+                    app()->refresh('request', $guard, 'setRequest');
+                });
             });
         });
     }
@@ -210,8 +209,7 @@ class ScorchServiceProvider extends ServiceProvider
     {
         return new RequestGuard(
             new Guard($auth, Config::expiration(), $config['provider']),
-            $this->app['request'],
-            $auth->createUserProvider($config['provider'] ?? null)
+            request(), $auth->createUserProvider($config['provider'] ?? null)
         );
     }
 }
