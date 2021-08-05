@@ -2,13 +2,13 @@
 
 namespace Emberfuse\Scorch\Http\Controllers;
 
-use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Emberfuse\Scorch\Http\Requests\TwoFactorLoginRequest;
-use Emberfuse\Scorch\Http\Responses\TwoFactorLoginResponse;
-use Emberfuse\Scorch\Http\Responses\FailedTwoFactorLoginResponse;
 use Emberfuse\Scorch\Contracts\Responses\TwoFactorChallengeViewResponse;
+use Emberfuse\Scorch\Events\RecoveryCodeReplaced;
+use Emberfuse\Scorch\Http\Requests\TwoFactorLoginRequest;
+use Emberfuse\Scorch\Http\Responses\FailedTwoFactorLoginResponse;
+use Emberfuse\Scorch\Http\Responses\TwoFactorLoginResponse;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class TwoFactorAuthenticationController extends Controller
 {
@@ -60,6 +60,8 @@ class TwoFactorAuthenticationController extends Controller
 
         if ($code = $request->validRecoveryCode()) {
             $user->replaceRecoveryCode($code);
+
+            event(new RecoveryCodeReplaced($user, $code));
         } elseif (! $request->hasValidCode()) {
             return FailedTwoFactorLoginResponse::dispatch();
         }
