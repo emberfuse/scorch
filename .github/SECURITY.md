@@ -6,6 +6,7 @@
 
 | Version | Security Fixes Until |
 | ------- | -------------------- |
+| 1.1.0   | Dec 1st, 2021        |
 | 1.0.1   | Jun 1st, 2021        |
 
 ## Reporting a Vulnerability
