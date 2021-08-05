@@ -1,4 +1,4 @@
-name: Static Code Analysis
+name: Code Sniffer
 on:
   push:
   pull_request:
@@ -11,15 +11,11 @@ jobs:
 
     strategy:
       matrix:
-        operating-system: [ubuntu-latest]
+        os: [ubuntu-latest]
         php: [7.4, 8.0]
-        dependency-stability: [prefer-stable]
-        laravel: ['^8.0']
-        include:
-          - laravel:  8.*
-            testbench: 6.*
+        stability: [prefer-stable]
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-stability }} - ${{ matrix.operating-system}}
+    name: PHP ${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os}}
 
     steps:
     - uses: actions/checkout@v2
@@ -44,15 +40,8 @@ jobs:
       with:
         path: vendor
         key: ${{ runner.OS }}-build-${{ hashFiles('**/composer.lock') }}
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-    - name: Install Laravel Dependencies
-      run: |
-        composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-        composer update --${{ matrix.dependency-stability }} --prefer-dist --no-interaction --no-suggest
-
-    - name: Generate key
-      run: php artisan key:generate
+    - name: Install Dependencies
+      run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-suggest
 
     - name: Show dir
       run: pwd
