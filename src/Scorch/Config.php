@@ -2,8 +2,8 @@
 
 namespace Emberfuse\Scorch\Scorch;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config as AppConfig;
+use Illuminate\Support\Str;
 
 class Config
 {
@@ -36,7 +36,7 @@ class Config
      * @param string $name
      * @param mixed  $arguments
      *
-     * @return void
+     * @return mixed
      */
     public static function __callStatic(string $name, $arguments)
     {
