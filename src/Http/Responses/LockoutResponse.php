@@ -39,7 +39,7 @@ class LockoutResponse extends Response implements Responsable
     public function toResponse($request)
     {
         return with($this->limiter->availableIn($request), function ($seconds) {
-            throw ValidationException::withMessages([Config::username() => [trans('auth.throttle', ['seconds' => $seconds, 'minutes' => ceil($seconds / 60)])]])->status(Response::HTTP_TOO_MANY_REQUESTS);
+            throw ValidationException::withMessages([Config::username() => [trans('auth.throttle', ['seconds' => $seconds, 'minutes' => ceil($seconds / 60)])]])->status(Response::HTTP_TOO_MANY_REQUESTS); // phpcs:ignore
         });
     }
 }
