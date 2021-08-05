@@ -2,15 +2,15 @@
 
 namespace Emberfuse\Scorch\Auth;
 
-use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
-use Emberfuse\Scorch\Scorch\Config;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Emberfuse\Scorch\API\Tokens\PersonalAccessToken;
 use Emberfuse\Scorch\API\Tokens\TransientToken;
 use Emberfuse\Scorch\Models\Traits\HasApiTokens;
-use Emberfuse\Scorch\API\Tokens\PersonalAccessToken;
+use Emberfuse\Scorch\Scorch\Config;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class Guard
 {
@@ -71,17 +71,27 @@ class Guard
         if ($token = $request->bearerToken()) {
             $accessToken = PersonalAccessToken::findToken($token);
 
-            if (! $this->isValidAccessToken($accessToken) ||
-                ! $this->supportsTokens($accessToken->tokenable)) {
+            if (
+                ! $this->isValidAccessToken($accessToken) ||
+                ! $this->supportsTokens($accessToken->tokenable)
+            ) {
                 return;
             }
 
-            if (method_exists($accessToken->getConnection(), 'hasModifiedRecords') &&
-                method_exists($accessToken->getConnection(), 'setRecordModificationState')) {
-                tap($accessToken->getConnection()->hasModifiedRecords(), function ($hasModifiedRecords) use ($accessToken) {
+            if (
+                method_exists($accessToken->getConnection(), 'hasModifiedRecords') &&
+                method_exists(
+                    $accessToken->getConnection(),
+                    'setRecordModificationState'
+                )
+            ) {
+                tap($accessToken->getConnection()->hasModifiedRecords(), function (
+                    bool $hasModifiedRecords
+                ) use ($accessToken): void {
                     $accessToken->forceFill(['last_used_at' => now()])->save();
 
-                    $accessToken->getConnection()->setRecordModificationState($hasModifiedRecords);
+                    $accessToken->getConnection()
+                        ->setRecordModificationState($hasModifiedRecords);
                 });
             } else {
                 $accessToken->forceFill(['last_used_at' => now()])->save();
@@ -144,9 +154,13 @@ class Guard
             return false;
         }
 
-        $isValid = (! $this->expiration || $accessToken->created_at->gt(now()->subMinutes($this->expiration)))
-            && (! $accessToken->expires_at || ! $accessToken->expires_at->isPast())
-            && $this->hasValidProvider($accessToken->tokenable);
+        $isValid = (
+            ! $this->expiration ||
+            $accessToken->created_at->gt(now()->subMinutes($this->expiration))
+        ) && (
+            ! $accessToken->expires_at ||
+            ! $accessToken->expires_at->isPast()
+        ) && $this->hasValidProvider($accessToken->tokenable);
 
         return $isValid;
     }

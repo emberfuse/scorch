@@ -23,9 +23,11 @@ trait Fillable
         }
 
         return array_filter(
-            $data, function (string $key) use ($resource): bool {
+            $data,
+            function (string $key) use ($resource): bool {
                 return in_array($key, $resource->getFillable());
-            }, \ARRAY_FILTER_USE_KEY
+            },
+            \ARRAY_FILTER_USE_KEY
         );
     }
 }

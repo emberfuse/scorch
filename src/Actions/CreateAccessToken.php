@@ -2,9 +2,9 @@
 
 namespace Emberfuse\Scorch\Actions;
 
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Contracts\Support\Arrayable;
 use Emberfuse\Scorch\API\Tokens\PersonalAccessToken;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 
 class CreateAccessToken implements Arrayable, Jsonable
 {
@@ -26,7 +26,7 @@ class CreateAccessToken implements Arrayable, Jsonable
      * Create a new access token result.
      *
      * @param \Emberfuse\Scorch\API\Tokens\PersonalAccessToken $accessToken
-     * @param string                                              $plainTextToken
+     * @param string                                           $plainTextToken
      *
      * @return void
      */

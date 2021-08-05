@@ -2,8 +2,8 @@
 
 namespace Emberfuse\Scorch\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Request;
 
 class ConfirmPasswordStatusController extends Controller
 {
@@ -18,7 +18,7 @@ class ConfirmPasswordStatusController extends Controller
     public function __invoke(Request $request, ResponseFactory $response)
     {
         return $response->json([
-            'confirmed' => (time() - $request->session()->get('auth.password_confirmed_at', 0)) < $request->input('seconds', config('auth.password_timeout', 900)),
+            'confirmed' => (time() - $request->session()->get('auth.password_confirmed_at', 0)) < $request->input('seconds', config('auth.password_timeout', 900)), // phpcs:ignore
         ]);
     }
 }

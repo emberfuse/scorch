@@ -2,8 +2,8 @@
 
 namespace Emberfuse\Scorch\Actions;
 
-use Illuminate\Foundation\Auth\User;
 use Emberfuse\Scorch\Events\TwoFactorAuthenticationDisabled;
+use Illuminate\Foundation\Auth\User;
 
 class DisableTwoFactorAuthentication
 {

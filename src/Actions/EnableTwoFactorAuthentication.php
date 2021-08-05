@@ -2,11 +2,11 @@
 
 namespace Emberfuse\Scorch\Actions;
 
-use Illuminate\Support\Collection;
-use Illuminate\Foundation\Auth\User;
-use Emberfuse\Scorch\Support\RecoveryCode;
-use Emberfuse\Scorch\Events\TwoFactorAuthenticationEnabled;
 use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
+use Emberfuse\Scorch\Events\TwoFactorAuthenticationEnabled;
+use Emberfuse\Scorch\Support\RecoveryCode;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Collection;
 
 class EnableTwoFactorAuthentication
 {

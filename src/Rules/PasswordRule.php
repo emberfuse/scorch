@@ -1,9 +1,11 @@
 <?php
 
+// phpcs:ignoreFile
+
 namespace Emberfuse\Scorch\Rules;
 
-use Illuminate\Support\Str;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Str;
 
 class PasswordRule implements Rule
 {

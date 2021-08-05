@@ -2,8 +2,8 @@
 
 namespace Emberfuse\Scorch\Actions;
 
-use PragmaRX\Google2FA\Google2FA;
 use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
+use PragmaRX\Google2FA\Google2FA;
 
 class ProvideTwoFactorAuthentication implements ProvidesTwoFactorAuthentication
 {

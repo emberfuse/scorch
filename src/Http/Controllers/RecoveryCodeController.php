@@ -2,10 +2,10 @@
 
 namespace Emberfuse\Scorch\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Emberfuse\Scorch\Actions\GenerateNewRecoveryCodes;
 use Emberfuse\Scorch\Http\Responses\GenerateRecoveryCodesResponse;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Request;
 
 class RecoveryCodeController extends Controller
 {
@@ -19,8 +19,10 @@ class RecoveryCodeController extends Controller
      */
     public function index(Request $request, ResponseFactory $response)
     {
-        if (! $request->user()->two_factor_secret ||
-            ! $request->user()->two_factor_recovery_codes) {
+        if (
+            ! $request->user()->two_factor_secret ||
+            ! $request->user()->two_factor_recovery_codes
+        ) {
             return $response->json([], 200);
         }
 

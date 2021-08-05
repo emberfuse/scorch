@@ -2,10 +2,10 @@
 
 namespace Emberfuse\Scorch\Http\Requests;
 
+use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
+use Emberfuse\Scorch\Http\Responses\FailedTwoFactorLoginResponse;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Emberfuse\Scorch\Http\Responses\FailedTwoFactorLoginResponse;
-use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
 
 class TwoFactorLoginRequest extends Request
 {
@@ -102,9 +102,13 @@ class TwoFactorLoginRequest extends Request
 
         $model = $this->getAuthModel();
 
-        if (! $this->session()->has('login.id') ||
-            ! $user = $model::find($this->session()->pull('login.id'))) {
-            throw new HttpResponseException(app(FailedTwoFactorLoginResponse::class)->toResponse($this));
+        if (
+            ! $this->session()->has('login.id') ||
+            ! $user = $model::find($this->session()->pull('login.id'))
+        ) {
+            throw new HttpResponseException(
+                app(FailedTwoFactorLoginResponse::class)->toResponse($this)
+            );
         }
 
         return $this->challengedUser = $user;

@@ -1,25 +1,27 @@
 <?php
 
+// phpcs:ignoreFile
+
 namespace Emberfuse\Scorch\Providers;
 
-use Emberfuse\Scorch\Auth\Guard;
-use Illuminate\Auth\RequestGuard;
-use Emberfuse\Scorch\Scorch\Config;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\ServiceProvider;
-use Emberfuse\Scorch\Console\InstallCommand;
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Emberfuse\Scorch\Actions\ConfirmPassword;
-use Illuminate\Contracts\Foundation\Application;
-use Emberfuse\Scorch\Console\ResponseMakeCommand;
-use Illuminate\Contracts\Auth\Guard as AuthGuard;
-use Illuminate\Contracts\Auth\Factory as AuthFactory;
-use Emberfuse\Scorch\Contracts\Actions\ConfirmsPasswords;
 use Emberfuse\Scorch\Actions\ProvideTwoFactorAuthentication;
+use Emberfuse\Scorch\Auth\Guard;
+use Emberfuse\Scorch\Console\InstallCommand;
+use Emberfuse\Scorch\Console\ResponseMakeCommand;
+use Emberfuse\Scorch\Contracts\Actions\ConfirmsPasswords;
 use Emberfuse\Scorch\Contracts\Actions\ProvidesTwoFactorAuthentication;
 use Emberfuse\Scorch\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Emberfuse\Scorch\Scorch\Config;
+use Illuminate\Auth\RequestGuard;
+use Illuminate\Contracts\Auth\Factory as AuthFactory;
+use Illuminate\Contracts\Auth\Guard as AuthGuard;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class ScorchServiceProvider extends ServiceProvider
 {
@@ -186,10 +188,13 @@ class ScorchServiceProvider extends ServiceProvider
     {
         Auth::resolved(function (AuthFactory $auth) {
             $auth->extend('scorch', function (
-                Application $app, string $name, array $config
+                Application $app,
+                string $name,
+                array $config
             ) use ($auth): AuthGuard {
                 return tap($this->createGuard(
-                    $auth, $config
+                    $auth,
+                    $config
                 ), function (AuthGuard $guard): void {
                     app()->refresh('request', $guard, 'setRequest');
                 });
@@ -209,7 +214,8 @@ class ScorchServiceProvider extends ServiceProvider
     {
         return new RequestGuard(
             new Guard($auth, Config::expiration(), $config['provider']),
-            request(), $auth->createUserProvider($config['provider'] ?? null)
+            request(),
+            $auth->createUserProvider($config['provider'] ?? null)
         );
     }
 }

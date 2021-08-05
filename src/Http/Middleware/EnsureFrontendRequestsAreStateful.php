@@ -3,11 +3,11 @@
 namespace Emberfuse\Scorch\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Str;
+use Emberfuse\Scorch\Scorch\Config;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Support\Collection;
-use Emberfuse\Scorch\Scorch\Config;
+use Illuminate\Support\Str;
 
 class EnsureFrontendRequestsAreStateful
 {
@@ -23,19 +23,28 @@ class EnsureFrontendRequestsAreStateful
     {
         $this->configureSecureCookieSessions();
 
-        return (new Pipeline(app()))->send($request)->through(static::fromFrontend($request) ? [
-            function ($request, $next) {
-                $request->attributes->set('scorch', true);
+        return (new Pipeline(app()))
+            ->send($request)
+            ->through(static::fromFrontend($request) ? [
+                    function ($request, $next) {
+                        $request->attributes->set('scorch', true);
 
+                        return $next($request);
+                    },
+                    config(
+                        'scorch.middleware.encrypt_cookies',
+                        \Illuminate\Cookie\Middleware\EncryptCookies::class
+                    ),
+                    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+                    \Illuminate\Session\Middleware\StartSession::class,
+                    config(
+                        'scorch.middleware.verify_csrf_token',
+                        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class
+                    ),
+                ] : [])
+            ->then(function (Request $request) use ($next) {
                 return $next($request);
-            },
-            config('scorch.middleware.encrypt_cookies', \Illuminate\Cookie\Middleware\EncryptCookies::class),
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            config('scorch.middleware.verify_csrf_token', \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class),
-        ] : [])->then(function (Request $request) use ($next) {
-            return $next($request);
-        });
+            });
     }
 
     /**
@@ -60,7 +69,7 @@ class EnsureFrontendRequestsAreStateful
      */
     public static function fromFrontend(Request $request): bool
     {
-        $domain = $request->headers->get('referer') ?: $request->headers->get('origin');
+        $domain = $request->headers->get('referer') ?: $request->headers->get('origin'); // phpcs:ignore
 
         $domain = Str::replaceFirst('https://', '', $domain);
         $domain = Str::replaceFirst('http://', '', $domain);

@@ -2,10 +2,10 @@
 
 namespace Emberfuse\Scorch\Actions;
 
-use Illuminate\Support\Collection;
-use Illuminate\Foundation\Auth\User;
-use Emberfuse\Scorch\Support\RecoveryCode;
 use Emberfuse\Scorch\Events\RecoveryCodesGenerated;
+use Emberfuse\Scorch\Support\RecoveryCode;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Collection;
 
 class GenerateNewRecoveryCodes
 {

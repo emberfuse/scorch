@@ -2,10 +2,10 @@
 
 namespace Emberfuse\Scorch\Actions;
 
-use Emberfuse\Scorch\Scorch\Config;
-use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Emberfuse\Scorch\Contracts\Actions\ConfirmsPasswords;
+use Emberfuse\Scorch\Scorch\Config;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\StatefulGuard;
 
 class ConfirmPassword implements ConfirmsPasswords
 {
