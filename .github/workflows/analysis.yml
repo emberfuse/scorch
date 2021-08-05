@@ -1,4 +1,4 @@
-name: Code Sniffer
+name: Static Code Analyssis
 on:
   push:
   pull_request:
